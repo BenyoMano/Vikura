@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "132019254112",
+    "project_id": "omnitalk-7d2dc",
+    "storage_bucket": "omnitalk-7d2dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132019254112:android:03f5368a50ab42b357a405",
+        "android_client_info": {
+          "package_name": "com.omnitalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132019254112-5jlaf205qqjeiciuh1bdae9v9n0eaknl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzHI6l61m7RhAoc4v-0Yt8sRoeyoLIL_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132019254112-5jlaf205qqjeiciuh1bdae9v9n0eaknl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

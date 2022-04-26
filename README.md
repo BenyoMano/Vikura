@@ -1,11 +1,4 @@
 # Vikura
-Chat app
-## Table of Contents
-### General info
-### Technologies
-### Setup 
-
-# Vikura
 > Simple chat app tool
 
 ## Table of Contents
@@ -17,7 +10,6 @@ Chat app
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 
 
@@ -59,7 +51,7 @@ Provide various use cases and code examples here.
 
 
 ## Project Status
-Project is: _in progress_ .
+Project is: _in progress_ 
 
 
 ## Room for Improvement
@@ -75,4 +67,4 @@ To do:
 
 
 ## Contact
-Created by [@flynerdpl](##) - feel free to contact me!
+Created by [@BenyoMano](https://github.com/BenyoMano) - feel free to contact me!

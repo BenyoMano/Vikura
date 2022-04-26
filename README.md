@@ -1,3 +1,6 @@
 # Vikura
-Armans projekt
-Chatt-app där Kurator och Klient möts
+Chat app
+## Table of Contents
+### General info
+### Technologies
+### Setup 

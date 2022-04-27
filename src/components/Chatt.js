@@ -26,7 +26,7 @@ const Chatt = ({ navigation }) => {
                     <View style={{flex: 1}}>
                         <ChattRuta />
                     </View>
-                        <View style={{ flexDirection: 'row', width: 360, marginBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', width: 360, marginBottom: 30 }}>
                             <View style={{ justifyContent: 'flex-start'}}>
                                 <InputBarChatt />
                             </View>

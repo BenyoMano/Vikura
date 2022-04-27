@@ -53,7 +53,7 @@ function Item({ text, value }) {
    // console.log('Value: ' + value)
     return (
             <View style={value === 'send' ? styles.bubblaSend : styles.bubblaRecieve} >
-                <Text style={styles.text}>{text}</Text>
+                <Text style={styles.text}>{text}</Text> 
             </View>
     );
 }
@@ -61,7 +61,7 @@ function Item({ text, value }) {
 const ChattRuta = () => {
     const { viewStyle } = styles;
 
-    const [data, setData] = useState("initial");
+   // const [data, setData] = useState("initial");
     const ref = firestore().collection('rooms').doc('room1').collection('messages');
 
     useEffect(() => {

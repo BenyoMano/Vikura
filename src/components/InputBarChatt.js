@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 const InputBarChatt = (props) => {
 const { viewStyle, barStyle } = styles;

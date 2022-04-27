@@ -18,7 +18,7 @@ const Kurator = ({ navigation }) => {
                     <BackButton onPress={() => navigation.goBack()} />
                 </View>
                 <View style={{ position: 'absolute', left: '50%', right: '50%' }}>
-                    <Logo style={{width: 48, height: 48, marginTop: 25}} />
+                    <Logo style={{width: 90, height: 35, marginTop: 32}} />
                 </View>
             </View>
             <View style={{flex: 1}}>

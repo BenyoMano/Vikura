@@ -10,12 +10,12 @@
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-- [Contact](#contact)
+* [Contact](#contact)
 
 
 ## General Information
 Simple and functional chat app intended to provide a platform for hosting conversations between client and [School Welfare Officer], an essential tool for Vikura Welfare Officers to conduct their work.  
-* Provide general information about your project here.
+- Provide general information about your project here.
 - What problem does it (intend to) solve?
 
 
@@ -26,7 +26,6 @@ Simple and functional chat app intended to provide a platform for hosting conver
 
 
 ## Features
-List the ready features here:
 - Direct messaging
 - Anonymous yet personal and distinguishable
 - Full conversation history available

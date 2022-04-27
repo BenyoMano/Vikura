@@ -6,7 +6,7 @@ const Logo = (props) => {
 
     return (
         <View style={ViewStyle}>
-            <Image source={require('./../assets/images/OTLogo.png')} style={props.style} />
+            <Image source={require('./../assets/images/vikuraCut.jpg')} style={props.style} />
         </View>
     )
 }

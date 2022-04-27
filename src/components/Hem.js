@@ -18,7 +18,7 @@ const Hem = ({ navigation }) => {
                     flexDirection: 'column'
                 }]}>
                     <View>
-                        <Logo style={{ width: 145, height: 145, marginTop: 50 }}/>
+                        <Logo style={{ width: 160, height: 62, marginTop: 90 }}/>
                     </View>
                     <View style={{flex: 1}}>
                         <Welcome title='Välkommen!' style={{ fontSize: 42, marginTop:-10 }} />

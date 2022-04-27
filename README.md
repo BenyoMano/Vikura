@@ -33,7 +33,7 @@ Simple and functional chat app intended to provide a platform for hosting conver
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](./../assets/images/vikuraCut.jpg)
 
 
 ## Setup

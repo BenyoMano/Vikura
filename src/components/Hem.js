@@ -4,6 +4,33 @@ import Button from "./Button";
 import InputBar from "./InputBar";
 import Logo from "./Logo";
 import Welcome from './Welcome';
+//import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+
+
+/* //const phoneNumber = getPhoneNumberFromUserInput();
+const appVerifier = window.recaptchaVerifier;
+const auth = getAuth();
+//auth.languageCode = 'it';
+firebase.auth().useDeviceLanguage();
+
+window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+    'size': 'invisible',
+    'callback': (response) => {
+        // reCATPCHA solved, allow signInWithPhoneNumber.
+        onSignInSubmit();
+    }
+}, auth);
+
+signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        window.confirmationResult = confirmationResult;
+    }).catch((error) => {
+        //Error, sms not sent
+        //...
+    }); */
+
 
 const Hem = ({ navigation }) => {
 

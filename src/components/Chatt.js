@@ -8,6 +8,8 @@ import ButtonSend from "./ButtonSend";
 
 const Chatt = ({ navigation }) => {
 
+    
+
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>

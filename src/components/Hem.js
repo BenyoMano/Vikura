@@ -10,11 +10,13 @@ function Initiate() {
     // Set an initializing state whilst Firebase connects
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
+    console.log('Initiate');
 
     // Handle user state changes
     function onAuthStateChanged(user) {
         setUser(user);
         if (initializing) setInitializing(false);
+        console.log(user.phoneNumber);
     }
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -37,10 +39,10 @@ function Initiate() {
     );
 }
 
-function PhoneSignIn() {
+function PhoneSignIn(user) {
     // If null, no SMS has been sent
     const [confirm, setConfirm] = useState(null);
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState('789454');
     console.log('PhoneSignIn');
     // Handle the button press
     async function signInWithPhoneNumber(phoneNumber) {
@@ -52,8 +54,10 @@ function PhoneSignIn() {
         try {
             console.log('await confirm.confirm(code)');
             await confirm.confirm(code);
-            
-        } catch (error) {
+            console.log('Code:',(code));
+            console.log(user);
+        } 
+        catch (error) {
             console.log('Invalid code.');
         }
     }
@@ -66,18 +70,15 @@ function PhoneSignIn() {
         );
     }
     return (
-        <>
-            <TextInput value={code} onChangeText={text => setCode(text)} />
+        <View style={{flex:1}}>
+            <TextInput style={{backgroundColor: 'green'}} value={code} onChangeText={text => setCode(text)} />
             <Button title='Confirm Code' onPress={() => confirmCode()} />
-        </>
+        </View>
     );
 }
 
 const Hem = ({ navigation }) => {
 
-    const onPress = () => {
-    alert('Pressed')
-}
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>

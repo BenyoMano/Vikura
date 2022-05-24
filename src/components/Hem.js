@@ -16,7 +16,8 @@ function Initiate() {
     function onAuthStateChanged(user) {
         setUser(user);
         if (initializing) setInitializing(false);
-        console.log(user.phoneNumber);
+        //console.log(user.phoneNumber);
+        //console.log('User id: ' + auth().currentUser.uid);
     }
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -54,11 +55,20 @@ function PhoneSignIn(user) {
         try {
             console.log('await confirm.confirm(code)');
             await confirm.confirm(code);
-            console.log('Code:',(code));
-            console.log(user);
+            console.log('Code: ' + (code));
         } 
         catch (error) {
             console.log('Invalid code.');
+        }
+    }
+    async function signOut() {
+        try {
+            console.log('Await sign out');
+            await auth().signOut();
+            //console.log('User id: ' + auth().currentUser.uid);
+        }
+        catch (error) {
+            console.log('Error signing out');
         }
     }
     if (!confirm) {
@@ -73,6 +83,7 @@ function PhoneSignIn(user) {
         <View style={{flex:1}}>
             <TextInput style={{backgroundColor: 'green'}} value={code} onChangeText={text => setCode(text)} />
             <Button title='Confirm Code' onPress={() => confirmCode()} />
+            <Button title='Sign Out' onPress={() => signOut()} />
         </View>
     );
 }
@@ -92,7 +103,7 @@ const Hem = ({ navigation }) => {
                    {/*  <View style={{flex: 1}}>
                         <Welcome title='Välkommen!' style={{ fontSize: 42, marginTop:-10 }} />
                     </View> */}
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 0}}>
                         <Initiate />
                     </View>
                     <View style={{flex:2}}>

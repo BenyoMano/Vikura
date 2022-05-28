@@ -56,6 +56,8 @@ function PhoneSignIn(user) {
             console.log('await confirm.confirm(code)');
             await confirm.confirm(code);
             console.log('Code: ' + (code));
+            console.log('UID: ',(auth().currentUser.uid));
+            console.log('ID Token', (auth().currentUser.getIdToken));
         } 
         catch (error) {
             console.log('Invalid code.');

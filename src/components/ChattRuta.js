@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 const usersCollection = firestore().collection('Users');
 const userDocument = firestore().collection('Users').doc('Kurator');
 
-const DATA = [
+const oldDATA = [
     {
         id: '1',
         text: 'a',
@@ -48,23 +48,63 @@ const DATA = [
         value: 'send',
     },
 ]
-
-
-
-function Item({ text, value }) {
-   // console.log('Value: ' + value)
-    return (
-            <View style={value === 'send' ? styles.bubblaSend : styles.bubblaRecieve} >
-                <Text style={styles.text}>{text}</Text> 
-            </View>
-    );
-}
+const sDATA = [
+    {
+        timestamp: '1',
+        text: 'a',
+        value: 'send',
+    },
+    {    
+        timestamp: '2',
+        text: 's',
+        value: 'recieve',
+    },
+    {
+        timestamp: '3',
+        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
+        value: 'send',
+    },
+]
 
 const ChattRuta = () => {
     const { viewStyle } = styles;
+    const [DATA, setDATA] = useState([]);
+   /*  const DATA = [
+        {
+            timestamp: [],
+            text: [],
+            author: [],
+        },
+    ]; */
 
-   // const [data, setData] = useState("initial");
+    // const [data, setData] = useState("initial");
     const ref = firestore().collection('rooms').doc('room1').collection('messages');
+
+    useEffect((DATA) => {
+        const openChat = async () => {
+            const chat = await firestore().collection('rooms').doc('room1').collection('messages').get();
+           
+            chat.forEach(doc => {
+                const timestamp = doc.data().timestamp;
+                const text = doc.data().msg;
+                const author = doc.data().author;
+                
+                 DATA = [
+                    {
+                        timestamp: {timestamp},
+                        text: {text},
+                        author: {author},
+                    },
+                ];
+                setDATA(DATA => [DATA]);
+                console.log('DATA1', DATA);
+           // console.log('=>', doc.data().msg, '=>', doc.data().timestamp, '=>', doc.data().author);
+            });
+            //return DATA;
+            
+        }
+        openChat();
+    }, [])
 
     useEffect(() => {
         const getUser = async () => {
@@ -82,7 +122,7 @@ const ChattRuta = () => {
             const chatRoom = await firestore().collection('rooms').doc('room1').get();
             console.log(chatRoom)
             console.log('--room loaded') */
-            console.log('Get chat')
+/*             console.log('Get chat')
             const chat = await firestore().collection('rooms').doc('room1').collection('messages').get();
             chat.forEach(doc => {
                 const bTimestamp = doc.data().timestamp+(1970*3600*24*365);
@@ -101,7 +141,7 @@ const ChattRuta = () => {
             allUsers.forEach(doc => {
                 console.log(doc.id, '=>', doc.data());
             });
-            console.log('--All users loaded')
+            console.log('--All users loaded') */
         }
         getRoom();
     }, [])
@@ -116,14 +156,23 @@ const ChattRuta = () => {
         addMessage();
     }, [])
     
+    function Item({ text, author }) {
+        return (
+                <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve} >
+                    <Text style={styles.text}>{text}</Text> 
+                </View>
+        );
+    }
+
     const renderItem = ({ item }) => (
         <Item 
+            timestamp={item.timestamp}
             text={item.text}
-            value={item.value} />
+            author={item.author}
+            />
     );
-    return (
+/*     return (
         <View style={viewStyle}>
-            {/* <Text>{data}</Text> */}
              <FlatList
             horizontal={false}
             numColumns={1}
@@ -132,7 +181,22 @@ const ChattRuta = () => {
             keyExtractor={item => item.id}
             />
         </View>
+    ); */
+
+    return (
+        <View style={viewStyle}>
+             <FlatList
+            horizontal={false}
+            numColumns={1}
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={item => item.timestamp}
+            />
+            
+        </View>
+        
     );
+    
 }
 
 const styles = {

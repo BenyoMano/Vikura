@@ -6,9 +6,6 @@ import BackButton from './BackButton';
 
 const Kurator = ({ navigation }) => {
 
-    const onPress = () => {
-    alert('Pressed')
-}
     return (
         <View style={[styles.container, {
             flexDirection: 'column'

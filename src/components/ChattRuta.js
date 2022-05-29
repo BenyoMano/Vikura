@@ -68,40 +68,23 @@ const sDATA = [
 
 const ChattRuta = () => {
     const { viewStyle } = styles;
-    const [DATA, setDATA] = useState([]);
-   /*  const DATA = [
-        {
-            timestamp: [],
-            text: [],
-            author: [],
-        },
-    ]; */
+    const [messages, setMessages] = useState([]);
 
-    // const [data, setData] = useState("initial");
     const ref = firestore().collection('rooms').doc('room1').collection('messages');
 
-    useEffect((DATA) => {
+    useEffect(() => {
         const openChat = async () => {
-            const chat = await firestore().collection('rooms').doc('room1').collection('messages').get();
+            const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
            
-            chat.forEach(doc => {
-                const timestamp = doc.data().timestamp;
-                const text = doc.data().msg;
-                const author = doc.data().author;
+            const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
+                    timestamp: firebaseMessage.data().timestamp,
+                    text: firebaseMessage.data().msg,
+                    author:firebaseMessage.data().author
+                })
                 
-                 DATA = [
-                    {
-                        timestamp: {timestamp},
-                        text: {text},
-                        author: {author},
-                    },
-                ];
-                setDATA(DATA => [DATA]);
-                console.log('DATA1', DATA);
            // console.log('=>', doc.data().msg, '=>', doc.data().timestamp, '=>', doc.data().author);
-            });
-            //return DATA;
-            
+            );
+            setMessages(newMessages)
         }
         openChat();
     }, [])
@@ -171,24 +154,13 @@ const ChattRuta = () => {
             author={item.author}
             />
     );
-/*     return (
-        <View style={viewStyle}>
-             <FlatList
-            horizontal={false}
-            numColumns={1}
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            />
-        </View>
-    ); */
 
     return (
         <View style={viewStyle}>
              <FlatList
             horizontal={false}
             numColumns={1}
-            data={DATA}
+            data={messages}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
             />
@@ -196,7 +168,6 @@ const ChattRuta = () => {
         </View>
         
     );
-    
 }
 
 const styles = {
@@ -211,6 +182,9 @@ const styles = {
         borderColor: 'gray',
         borderWidth: 2,
         borderRadius: 12,
+    },
+    text: {
+      color: 'black',
     },
     bubblaSend: {
         justifyContent: 'center',

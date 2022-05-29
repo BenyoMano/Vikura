@@ -6,66 +6,6 @@ import firestore from '@react-native-firebase/firestore';
 const usersCollection = firestore().collection('Users');
 const userDocument = firestore().collection('Users').doc('Kurator');
 
-const oldDATA = [
-    {
-        id: '1',
-        text: 'a',
-        value: 'send',
-    },
-    {    
-        id: '2',
-        text: 's',
-        value: 'recieve',
-    },
-    {
-        id: '3',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'send',
-    },
-    {
-        id: '4',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'send',
-    },
-    {
-        id: '5',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'recieve',
-    },
-    {
-        id: '6',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'send',
-    },
-    {
-        id: '7',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'recieve',
-    },
-    {
-        id: '8',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'send',
-    },
-]
-const sDATA = [
-    {
-        timestamp: '1',
-        text: 'a',
-        value: 'send',
-    },
-    {    
-        timestamp: '2',
-        text: 's',
-        value: 'recieve',
-    },
-    {
-        timestamp: '3',
-        text: 'Nej, blawd nsdbad gdyat fafd afdy tfaydtf yastdf yatfsyt fya fyafs yf yta',
-        value: 'send',
-    },
-]
-
 const ChattRuta = () => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
@@ -79,7 +19,7 @@ const ChattRuta = () => {
             const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
                     timestamp: firebaseMessage.data().timestamp,
                     text: firebaseMessage.data().msg,
-                    author:firebaseMessage.data().author
+                    author: firebaseMessage.data().author
                 })
                 
            // console.log('=>', doc.data().msg, '=>', doc.data().timestamp, '=>', doc.data().author);
@@ -139,10 +79,15 @@ const ChattRuta = () => {
         addMessage();
     }, [])
     
-    function Item({ text, author }) {
+    function Item({ text, author, timestamp }) {
         return (
-                <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve} >
-                    <Text style={styles.text}>{text}</Text> 
+                <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
+                    <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
+                        <Text style={styles.text.message}>{text}</Text> 
+                    </View>
+                    <View style={author === 'admin123' ? styles.bubblaSend.timestamp : styles.bubblaRecieve.timestamp}>
+                        <Text style={styles.text.author}>{author}</Text>
+                    </View>
                 </View>
         );
     }
@@ -184,31 +129,59 @@ const styles = {
         borderRadius: 12,
     },
     text: {
-      color: 'black',
+      message: {
+        color: 'black',
+        fontFamily: 'NunitoSans-Regular',
+        
+      },
+      author: {
+        color: 'grey',
+        fontFamily: 'NunitoSans-Light',
+        fontSize: 10,
+      },
     },
     bubblaSend: {
-        justifyContent: 'center',
+        flexDirection: 'row-reverse',
         alignSelf: 'flex-end',
-        marginTop: 5,
-        marginBottom: 5,
-        marginRight: 10,
-        padding: 9,
-        minWidth: 0,
-        maxWidth: '70%',
-        backgroundColor: '#C7D4F6',
-        borderRadius: 12,
+        bubbla: {
+            justifyContent: 'center',
+            marginTop: 5,
+            marginBottom: 5,
+            marginRight: 10,
+            padding: 9,
+            minWidth: 0,
+            maxWidth: '70%',
+            backgroundColor: '#C7D4F6',
+            borderRadius: 12,
+        },
+        timestamp: {
+            justifyContent: 'center',
+            alignSelf: 'flex-end',
+            marginBottom: 8,
+            marginRight: 10,
+        },
     },
     bubblaRecieve: {
-        justifyContent: 'center',
+        flexDirection: 'row',
         alignSelf: 'flex-start',
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
-        padding: 9,
-        minWidth: 0,
-        maxWidth: '70%',
-        backgroundColor: '#FCF789',
-        borderRadius: 12,
+        bubbla: {
+            justifyContent: 'center',
+            alignSelf: 'flex-start',
+            marginTop: 5,
+            marginBottom: 5,
+            marginLeft: 10,
+            padding: 9,
+            minWidth: 0,
+            maxWidth: '70%',
+            backgroundColor: '#FCF789',
+            borderRadius: 12,
+        },
+        timestamp: {
+            justifyContent: 'center',
+            alignSelf: 'flex-end',
+            marginBottom: 8,
+            marginLeft: 10,
+        },
     }
     }
 

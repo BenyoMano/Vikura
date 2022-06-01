@@ -1,85 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, FlatList } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { useNavigation } from "@react-navigation/native";
+import firestore from '@react-native-firebase/firestore';
 
-const DATA = [
-    {
-        id: '1',
-        title: 'First Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '2',
-        title: 'Second Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '3',
-        title: 'Third Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '4',
-        title: 'Fourth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '5',
-        title: 'Fifth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '6',
-        title: 'Sixth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '7',
-        title: 'Seventh Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '8',
-        title: 'Eighth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '9',
-        title: 'Ninth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '10',
-        title: 'Tenth Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-    {
-        id: '11',
-        title: 'Eleventh Item',
-        text: 'Hej, jag känner såhär bla bla bla bla bla bla bla bla bla bla bla bla bla',
-        timeStamp: '12 Jan'
-    },
-];
 
-function Item({ title, text, timeStamp }) {
+const Conv = () => {
+    const [convos, setConvos] = useState([]);
+
+    useEffect(() => {
+    const openConvo = async () => {
+        const firebaseConvos = await firestore().collection('rooms').get();
+        const newConvos = firebaseConvos.docs.map(firebaseConvos => ({
+            timestamp: firebaseConvos.data().userRef,
+            //text: firebaseConvos.data(),
+            alias: firebaseConvos.data().users.client.alias,
+        }));
+        setConvos(newConvos)
+    }
+openConvo();
+}, []) 
+
+function Item({ alias, text, timestamp }) {
     const navigation = useNavigation();
+    console.log('Alias:', timestamp)
     return (
         <Pressable onPress={() => navigation.navigate('Chatt')}>
             <View style={styles.item}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.timeStamp}>{timeStamp}</Text>
+                    <Text style={styles.title}>{alias}</Text>
+                    <Text style={styles.timestamp}>{timestamp}</Text>
                 </View>
                 <View>
                     <Text style={styles.text}>{text}</Text>
@@ -88,24 +38,22 @@ function Item({ title, text, timeStamp }) {
         </Pressable>
     );
 }
-
-const Conv = () => {
-
     const renderItem = ({ item }) => (
-        <Item title={item.title}
-        timeStamp={item.timeStamp}
-        text={item.text} />
+        <Item 
+        alias={item.alias}
+        timeStamp={item.timestamp}
+        text={item.text} 
+        />
     );
 
     return (
-
         <View style={styles.container}>
             <FlatList
             horizontal={false}
             numColumns={1}
-            data={DATA}
+            data={convos}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.timestamp}
             />
         </View>
     );
@@ -132,7 +80,7 @@ const styles = {
         fontFamily: 'NunitoSans-Regular',
         paddingBottom: 5,
     },
-    timeStamp: {
+    timestamp: {
         fontSize: 14,
         color: 'black',
         paddingTop: 5,

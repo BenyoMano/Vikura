@@ -15,7 +15,6 @@ const ChattRuta = () => {
     useEffect(() => {
         const openChat = async () => {
             const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
-           
             const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
                     timestamp: firebaseMessage.data().timestamp,
                     text: firebaseMessage.data().msg,
@@ -44,27 +43,21 @@ const ChattRuta = () => {
 /*             console.log('Get chat room')
             const chatRoom = await firestore().collection('rooms').doc('room1').get();
             console.log(chatRoom)
-            console.log('--room loaded') */
-/*             console.log('Get chat')
+            console.log('--room loaded') 
+             console.log('Get chat')
             const chat = await firestore().collection('rooms').doc('room1').collection('messages').get();
             chat.forEach(doc => {
-                const bTimestamp = doc.data().timestamp+(1970*3600*24*365);
-                const year = (bTimestamp)/(3600*24*365);
-                const month = (1-(year-Math.floor(year)))*12;
-                const day = (month-Math.floor(month))*(365/12);
-                const hour = (day-Math.floor(day))*24;
-                const minute = (hour-Math.floor(hour))*60;
-                const Rtimestamp = [Math.floor(year), Math.floor(month), Math.floor(day), Math.floor(hour), Math.floor(minute)]
+                
                 console.log('=>', doc.data().msg, Rtimestamp, '=>', doc.data().author);
             });
             //console.log(chat)
-            console.log('--chat loaded')
+             console.log('--chat loaded')
             console.log('Get all users')
             const allUsers = await firestore().collection('Users').get();
             allUsers.forEach(doc => {
                 console.log(doc.id, '=>', doc.data());
             });
-            console.log('--All users loaded') */
+            console.log('--All users loaded')  */
         }
         getRoom();
     }, [])
@@ -80,6 +73,9 @@ const ChattRuta = () => {
     }, [])
     
     function Item({ text, author, timestamp }) {
+        console.log(timestamp);
+
+       
         return (
                 <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
                     <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >

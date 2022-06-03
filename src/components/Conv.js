@@ -11,19 +11,22 @@ const Conv = () => {
     useEffect(() => {
     const openConvo = async () => {
         const firebaseConvos = await firestore().collection('rooms').get();
-        const newConvos = firebaseConvos.docs.map(firebaseConvos => ({
-            timestamp: firebaseConvos.data().userRef,
-            //text: firebaseConvos.data(),
-            alias: firebaseConvos.data().users.client.alias,
+        const queryLastMessageGet = await firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).get();
+      //  console.log('Query: ', queryLastMessageGet);
+        const firebaseLastMessage = queryLastMessageGet;
+         const newConvos = firebaseConvos.docs.map(doc => ({
+            timestamp: queryLastMessageGet,  //userRef
+            //text: firebaseLastMessage,
+            //alias: doc.data().users.client.alias,
         }));
-        setConvos(newConvos)
+        console.log(newConvos);
+        setConvos(newConvos) 
     }
 openConvo();
 }, []) 
 
 function Item({ alias, text, timestamp }) {
     const navigation = useNavigation();
-    console.log('Alias:', timestamp)
     return (
         <Pressable onPress={() => navigation.navigate('Chatt')}>
             <View style={styles.item}>
@@ -48,13 +51,13 @@ function Item({ alias, text, timestamp }) {
 
     return (
         <View style={styles.container}>
-            <FlatList
+           {/*  <FlatList
             horizontal={false}
             numColumns={1}
             data={convos}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            />
+            /> */}
         </View>
     );
 }

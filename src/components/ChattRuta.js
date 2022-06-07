@@ -16,7 +16,7 @@ const ChattRuta = () => {
         const openChat = async () => {
             const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
             const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-                    timestamp: firebaseMessage.data().timestamp,
+                    timestamp: firebaseMessage.data().timestamp.toDate().toString(),
                     text: firebaseMessage.data().msg,
                     author: firebaseMessage.data().author
                 })
@@ -75,14 +75,13 @@ const ChattRuta = () => {
     function Item({ text, author, timestamp }) {
         console.log(timestamp);
 
-       
         return (
                 <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
                     <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
                         <Text style={styles.text.message}>{text}</Text> 
                     </View>
                     <View style={author === 'admin123' ? styles.bubblaSend.timestamp : styles.bubblaRecieve.timestamp}>
-                        <Text style={styles.text.author}>{author}</Text>
+                        <Text style={styles.text.author}>{timestamp}</Text>
                     </View>
                 </View>
         );

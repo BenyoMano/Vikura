@@ -23,39 +23,6 @@ const ChattRuta = () => {
     }, [])
 
     useEffect(() => {
-        const getUser = async () => {
-  /*           console.log("Get user")
-            const userDocument = await firestore().collection('Users').doc('Kurator').get();
-            console.log(userDocument)
-          //  setData([userDocument])
-            console.log("-user loaded") */
-        }
-        getUser();
-    }, [])
-    useEffect(() => {
-        const getRoom = async () => {
-/*             console.log('Get chat room')
-            const chatRoom = await firestore().collection('rooms').doc('room1').get();
-            console.log(chatRoom)
-            console.log('--room loaded') 
-             console.log('Get chat')
-            const chat = await firestore().collection('rooms').doc('room1').collection('messages').get();
-            chat.forEach(doc => {
-                
-                console.log('=>', doc.data().msg, Rtimestamp, '=>', doc.data().author);
-            });
-            //console.log(chat)
-             console.log('--chat loaded')
-            console.log('Get all users')
-            const allUsers = await firestore().collection('Users').get();
-            allUsers.forEach(doc => {
-                console.log(doc.id, '=>', doc.data());
-            });
-            console.log('--All users loaded')  */
-        }
-        getRoom();
-    }, [])
-    useEffect(() => {
         const addMessage = async () => {
 /*             console.log('Add message')
             await ref.add({
@@ -68,7 +35,6 @@ const ChattRuta = () => {
     
     function Item({ text, author, timestamp }) {
         console.log(timestamp);
-
         return (
                 <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
                     <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
@@ -80,7 +46,6 @@ const ChattRuta = () => {
                 </View>
         );
     }
-
     const renderItem = ({ item }) => (
         <Item 
             timestamp={item.timestamp}
@@ -88,7 +53,6 @@ const ChattRuta = () => {
             author={item.author}
             />
     );
-
     return (
         <View style={viewStyle}>
              <FlatList
@@ -99,7 +63,6 @@ const ChattRuta = () => {
             keyExtractor={item => item.timestamp}
             />
         </View>
-        
     );
 }
 const styles = {

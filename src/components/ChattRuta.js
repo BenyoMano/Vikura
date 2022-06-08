@@ -3,25 +3,19 @@ import { Text, View, FlatList } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
 
-const usersCollection = firestore().collection('Users');
-const userDocument = firestore().collection('Users').doc('Kurator');
 
 const ChattRuta = () => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
 
-    const ref = firestore().collection('rooms').doc('room1').collection('messages');
-
     useEffect(() => {
         const openChat = async () => {
             const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
             const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-                    timestamp: firebaseMessage.data().timestamp.toDate().toString(),
+                    timestamp: firebaseMessage.data().timestamp.toDate().toLocaleString([], {hour: '2-digit', minute: '2-digit'}), //firebaseMessage.data().timestamp.toDate().toLocaleDateString() + ' ' + firebaseMessage.data().timestamp.toDate().toLocaleTimeString(),
                     text: firebaseMessage.data().msg,
                     author: firebaseMessage.data().author
-                })
-                
-           // console.log('=>', doc.data().msg, '=>', doc.data().timestamp, '=>', doc.data().author);
+                }),
             );
             setMessages(newMessages)
         }
@@ -104,12 +98,10 @@ const ChattRuta = () => {
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
             />
-            
         </View>
         
     );
 }
-
 const styles = {
     viewStyle: {
         flex: 1,

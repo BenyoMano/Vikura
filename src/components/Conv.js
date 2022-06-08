@@ -43,7 +43,7 @@ function Item({ alias, text, timestamp }) {
     const renderItem = ({ item }) => (
         <Item 
         alias={item.alias}
-        timestamp={item.timestamp.toString()}
+        timestamp={item.timestamp.toLocaleString()}
         text={item.text} 
         />
     );

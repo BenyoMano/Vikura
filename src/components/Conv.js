@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Text, View, FlatList } from 'react-native';
+import React, { useCallback, useEffect, useState } from "react";
+import { Text, View, FlatList, RefreshControl } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { useNavigation } from "@react-navigation/native";
 import firestore from '@react-native-firebase/firestore';
@@ -7,8 +7,8 @@ import firestore from '@react-native-firebase/firestore';
 
 const Conv = () => {
     const [convos, setConvos] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
 
-    useEffect(() => {
     const openConvo = async () => {
         const firebaseAlias = await firestore().collection('rooms').doc('room1').get();
         const queryLastMessageGet = await firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).get();
@@ -21,8 +21,17 @@ const Conv = () => {
         console.log(newConvos);
         setConvos(newConvos) 
     }
-openConvo();
-}, []) 
+    const onRefresh = useCallback(async () => {
+        setRefreshing(true);
+        console.log('Refreshing...')
+        openConvo()
+        setRefreshing(false);
+        console.log('--refreshed--')
+    }, [refreshing]);
+
+    useEffect(() => {
+        openConvo()
+    }, []) 
 
 function Item({ alias, text, timestamp }) {
     const navigation = useNavigation();
@@ -50,17 +59,16 @@ function Item({ alias, text, timestamp }) {
 
     return (
         <View style={styles.container}>
-           { <FlatList
-           /* refreshControl={<RefreshControl
-                        colors={["#9Bd35A", "#689F38"]}
-                        refreshing={props.refreshing}
-                        onRefresh={}/>} */
+            <FlatList
             horizontal={false}
             numColumns={1}
-            data={convos}
+            data={convos.sort((b, a) => a.timestamp.localeCompare(b.timestamp))}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            />}
+            refreshControl={<RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh} />}
+            />
         </View>
     );
 }

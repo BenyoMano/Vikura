@@ -1,25 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Text, View, FlatList, RefreshControl } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-
 
 
 const ChattRuta = () => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
+    
+    const openChat = async () => {
+        const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
+        const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
+                timestamp: firebaseMessage.data().timestamp.toDate().toLocaleString([], {hour: '2-digit', minute: '2-digit'}), //firebaseMessage.data().timestamp.toDate().toLocaleDateString() + ' ' + firebaseMessage.data().timestamp.toDate().toLocaleTimeString(),
+                text: firebaseMessage.data().msg,
+                author: firebaseMessage.data().author
+            }),
+        );
+        setMessages(newMessages)
+    }
+    const onRefresh = useCallback(async () => {
+        setRefreshing(true)
+        console.log('Refreshing...')
+        openChat()
+        setRefreshing(false)
+        console.log('--refreshed--')
+    }, [refreshing]);
 
     useEffect(() => {
-        const openChat = async () => {
-            const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
-            const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-                    timestamp: firebaseMessage.data().timestamp.toDate().toLocaleString([], {hour: '2-digit', minute: '2-digit'}), //firebaseMessage.data().timestamp.toDate().toLocaleDateString() + ' ' + firebaseMessage.data().timestamp.toDate().toLocaleTimeString(),
-                    text: firebaseMessage.data().msg,
-                    author: firebaseMessage.data().author
-                }),
-            );
-            setMessages(newMessages)
-        }
-        openChat();
+        openChat()
     }, [])
     
     function Item({ text, author, timestamp }) {
@@ -46,9 +54,12 @@ const ChattRuta = () => {
              <FlatList
             horizontal={false}
             numColumns={1}
-            data={messages}
+            data={messages.sort((a, b) => a.timestamp.localeCompare(b.timestamp))}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
+            refreshControl={<RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh} />}
             />
         </View>
     );

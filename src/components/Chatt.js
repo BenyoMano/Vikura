@@ -5,6 +5,7 @@ import BackButton from './BackButton';
 import ChattRuta from "./ChattRuta";
 import InputBarChatt from "./InputBarChatt";
 import ButtonSend from "./ButtonSend";
+import sendMessage from "./sendMessage";
 
 const Chatt = ({ navigation }) => {
 
@@ -33,7 +34,8 @@ const Chatt = ({ navigation }) => {
                                 <InputBarChatt />
                             </View>
                             <View style={{ position: 'absolute', right: '0%'}}>
-                                <ButtonSend title='Skicka' />
+                                <ButtonSend title='Skicka'
+                                 onPress={() => console.log() /* sendMessage(props) */} />
                             </View>
                         </View>
                     </View>

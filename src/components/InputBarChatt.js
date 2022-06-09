@@ -8,7 +8,7 @@ const [text, onChangeText] = useState();
     return (
         <View style={viewStyle}>
             <TextInput style={barStyle} 
-            onChangeText={onChangeText} 
+            onChangeText={text => onChangeText(text)} 
             value={text} 
             multiline
             placeholder="Skriv något..." 

@@ -51,6 +51,10 @@ function Item({ alias, text, timestamp }) {
     return (
         <View style={styles.container}>
            { <FlatList
+           /* refreshControl={<RefreshControl
+                        colors={["#9Bd35A", "#689F38"]}
+                        refreshing={props.refreshing}
+                        onRefresh={}/>} */
             horizontal={false}
             numColumns={1}
             data={convos}
@@ -72,7 +76,7 @@ const styles = {
         width: 'auto',
         marginTop: 55,
         marginBottom: 5,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         borderRadius: 25,
         overflow: 'hidden',
     },

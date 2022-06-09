@@ -21,20 +21,8 @@ const ChattRuta = () => {
         }
         openChat();
     }, [])
-
-    useEffect(() => {
-        const addMessage = async () => {
-/*             console.log('Add message')
-            await ref.add({
-                msg: 'messageAdded',
-            });
-            console.log('--msg added') */
-        }
-        addMessage();
-    }, [])
     
     function Item({ text, author, timestamp }) {
-        console.log(timestamp);
         return (
                 <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
                     <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
@@ -95,7 +83,7 @@ const styles = {
         alignSelf: 'flex-end',
         bubbla: {
             justifyContent: 'center',
-            marginTop: 5,
+            marginTop: 10,
             marginBottom: 5,
             marginRight: 10,
             padding: 9,
@@ -117,7 +105,7 @@ const styles = {
         bubbla: {
             justifyContent: 'center',
             alignSelf: 'flex-start',
-            marginTop: 5,
+            marginTop: 10,
             marginBottom: 5,
             marginLeft: 10,
             padding: 9,

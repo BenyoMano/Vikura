@@ -11,7 +11,7 @@ const ChattRuta = () => {
     const openChat = async () => {
         const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
         const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-                timestamp: firebaseMessage.data().timestamp.toDate().toLocaleString([], {hour: '2-digit', minute: '2-digit'}), //firebaseMessage.data().timestamp.toDate().toLocaleDateString() + ' ' + firebaseMessage.data().timestamp.toDate().toLocaleTimeString(),
+                timestamp: firebaseMessage.data().timestamp.toDate(),
                 text: firebaseMessage.data().msg,
                 author: firebaseMessage.data().author
             }),
@@ -37,7 +37,7 @@ const ChattRuta = () => {
                         <Text style={styles.text.message}>{text}</Text> 
                     </View>
                     <View style={author === 'admin123' ? styles.bubblaSend.timestamp : styles.bubblaRecieve.timestamp}>
-                        <Text style={styles.text.author}>{timestamp}</Text>
+                        <Text style={styles.text.author}>{timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}</Text>
                     </View>
                 </View>
         );
@@ -54,12 +54,14 @@ const ChattRuta = () => {
              <FlatList
             horizontal={false}
             numColumns={1}
-            data={messages.sort((a, b) => a.timestamp.localeCompare(b.timestamp))}
+            data={messages.sort((a, b) => a.timestamp > b.timestamp)} //a.timestamp.localeCompare(b.timestamp))}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            refreshControl={<RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh} />}
+            refreshControl={
+                <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh} />
+            }
             />
         </View>
     );

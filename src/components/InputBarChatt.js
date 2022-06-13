@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
-const InputBarChatt = (props) => {
+const InputBarChatt = ({ msgToSend, setMsgToSend }) => {
 const { viewStyle, barStyle } = styles;
-const [text, onChangeText] = useState();
-
+//const [text, onChangeText] = useState();
+console.log(msgToSend)
     return (
         <View style={viewStyle}>
             <TextInput style={barStyle} 
-            onChangeText={text => onChangeText(text)} 
-            value={text} 
+            /* onChangeText={text => onChangeText(text)} */ 
+            onChangeText={msgToSend => setMsgToSend(msgToSend)}
+            value={msgToSend}
+            autoFocus={true}
             multiline
             placeholder="Skriv något..." 
             placeholderTextColor="grey" 
@@ -20,7 +22,6 @@ const [text, onChangeText] = useState();
         </View>
     );
 }
-
 const styles = {
     viewStyle: {
         justifyContent: 'center',

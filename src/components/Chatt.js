@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Logo from "./Logo";
 import BackButton from './BackButton';
@@ -8,8 +8,7 @@ import ButtonSend from "./ButtonSend";
 import sendMessage from "./sendMessage";
 
 const Chatt = ({ navigation }) => {
-
-    
+    const [msgToSend, setMsgToSend] = useState();
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -31,11 +30,11 @@ const Chatt = ({ navigation }) => {
                     </View>
                         <View style={{ flexDirection: 'row', width: 360, marginBottom: 30 }}>
                             <View style={{ justifyContent: 'flex-start'}}>
-                                <InputBarChatt />
+                                <InputBarChatt msgToSend={msgToSend} setMsgToSend={setMsgToSend}/>
                             </View>
                             <View style={{ position: 'absolute', right: '0%'}}>
                                 <ButtonSend title='Skicka'
-                                 onPress={() => console.log() /* sendMessage(props) */} />
+                                 onPress={() => sendMessage({msgToSend}) } />
                             </View>
                         </View>
                     </View>

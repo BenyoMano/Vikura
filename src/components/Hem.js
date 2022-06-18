@@ -75,7 +75,7 @@ function PhoneSignIn(user) {
     }
     if (!confirm) {
         return (
-            <Button
+            <Button 
                 title='Phone Number Sign In'
                 onPress={() => signInWithPhoneNumber('+46725180309')}
                 />

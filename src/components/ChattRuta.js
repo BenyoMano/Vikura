@@ -1,13 +1,30 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { Text, View, FlatList, RefreshControl } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
 
 
 const ChattRuta = () => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
-    
+   // const scrollRef = useRef();
+
+   const listenMsg  = () => {
+        const firebaseMessages = firestore().collection('rooms').doc('room1').collection('messages').onSnapshot();
+   }
+
+   const LopenChat = async () => {
+    const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
+    const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
+            timestamp: firebaseMessage.data().timestamp.toDate(),
+            text: firebaseMessage.data().msg,
+            author: firebaseMessage.data().author
+        }),
+    );
+    setMessages(newMessages)
+}
+
     const openChat = async () => {
         const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
         const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
@@ -28,6 +45,7 @@ const ChattRuta = () => {
 
     useEffect(() => {
         openChat()
+
     }, [])
     
     function Item({ text, author, timestamp }) {
@@ -51,12 +69,14 @@ const ChattRuta = () => {
     );
     return (
         <View style={viewStyle}>
-             <FlatList
+             <AutoScrollFlatList
             horizontal={false}
             numColumns={1}
             data={messages.sort((a, b) => a.timestamp > b.timestamp)} //a.timestamp.localeCompare(b.timestamp))}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
+            
+            //onScrollEndDrag
             refreshControl={
                 <RefreshControl
                 refreshing={refreshing}

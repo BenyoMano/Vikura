@@ -34,7 +34,7 @@ const Chatt = ({ navigation }) => {
                             </View>
                             <View style={{ position: 'absolute', right: '0%'}}>
                                 <ButtonSend title='Skicka'
-                                 onPress={() => sendMessage({msgToSend}) } />
+                                 onPress={() => {sendMessage({msgToSend}); setMsgToSend(""); } } />
                             </View>
                         </View>
                     </View>

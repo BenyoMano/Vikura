@@ -4,7 +4,7 @@ import { TextInput, View } from 'react-native';
 const InputBarChatt = ({ msgToSend, setMsgToSend }) => {
 const { viewStyle, barStyle } = styles;
 //const [text, onChangeText] = useState();
-console.log(msgToSend)
+//console.log(msgToSend)
     return (
         <View style={viewStyle}>
             <TextInput style={barStyle} 

@@ -22,7 +22,7 @@ const styles = StyleSheet.create ({
     },
     btnTextStyle: {
        color: 'black',
-       fontSize: 28,
+       fontSize: 18,
        textAlign: 'center',
        textTransform: 'uppercase',
        fontFamily: 'NunitoSans-Regular'

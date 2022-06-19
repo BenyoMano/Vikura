@@ -8,24 +8,23 @@ const ChattRuta = () => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
-   // const scrollRef = useRef();
-
-   const listenMsg  = () => {
-        const firebaseMessages = firestore().collection('rooms').doc('room1').collection('messages').onSnapshot();
-   }
-
-   const LopenChat = async () => {
-    const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
-    const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-            timestamp: firebaseMessage.data().timestamp.toDate(),
-            text: firebaseMessage.data().msg,
-            author: firebaseMessage.data().author
-        }),
-    );
-    setMessages(newMessages)
-}
 
     const openChat = async () => {
+        const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get().then(querySnapshot => {
+           const newData = querySnapshot.docs.map(documentSnapshot => ({
+               timestamp: documentSnapshot.data().timestamp.toDate(),
+               text: documentSnapshot.data().msg,
+               author: documentSnapshot.data().author,
+           /* console.log('msg', documentSnapshot.data().msg)
+           console.log('author', documentSnapshot.data().author)
+           console.log('TS', documentSnapshot.data().timestamp.toDate()) */
+            }))
+            setMessages(newData)
+        })
+       
+    }
+
+/*     const aopenChat = async () => {
         const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
         const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
                 timestamp: firebaseMessage.data().timestamp.toDate(),
@@ -34,7 +33,7 @@ const ChattRuta = () => {
             }),
         );
         setMessages(newMessages)
-    }
+    } */
     const onRefresh = useCallback(async () => {
         setRefreshing(true)
         console.log('Refreshing...')

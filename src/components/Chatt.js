@@ -6,6 +6,8 @@ import ChattRuta from "./ChattRuta";
 import InputBarChatt from "./InputBarChatt";
 import ButtonSend from "./ButtonSend";
 import sendMessage from "./sendMessage";
+import ButtonClear from "./ButtonClear";
+import clearMessages from "./clearMessages";
 
 const Chatt = ({ navigation }) => {
     const [msgToSend, setMsgToSend] = useState();
@@ -23,6 +25,10 @@ const Chatt = ({ navigation }) => {
                         </View>
                         <View style={{ position: 'absolute', left: '50%', right: '50%' }}>
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
+                        </View>
+                        <View style={{ position: 'absolute', left: '83%'}}>
+                            <ButtonClear title='Clear'
+                            onPress={() => clearMessages()} />
                         </View>
                     </View>
                     <View style={{flex: 1}}>

@@ -9,16 +9,20 @@ const Conv = () => {
     const [convos, setConvos] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
-    const openConvo = async () => {
-        const firebaseAlias = await firestore().collection('rooms').doc('room1').get();
-        const queryLastMessageGet = await firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).get();
-        const newConvos = queryLastMessageGet.docs.map(doc => ({
-            timestamp: doc.data().timestamp.toDate(),
-            text: doc.data().msg,
-            alias: firebaseAlias.data().users.client.alias
-        }));
-        //console.log(newConvos);
-        setConvos(newConvos) 
+    const openConvo = () => {
+        firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
+            const alle = documentSnapshot.data().users.client.alias;
+         
+        });
+     
+        firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
+            const newConvos = querySnapshot.docs.map(doc => ({
+                timestamp: doc.data().timestamp.toDate(),
+                text: doc.data().msg,
+                alias: 'A'
+            }));
+            setConvos(newConvos)
+        });
     }
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
@@ -29,23 +33,8 @@ const Conv = () => {
     }, [refreshing]);
 
     useEffect(() => {
-        const test = firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
-            console.log('Data:', documentSnapshot.data());
-            console.log('Alias:', documentSnapshot.data().users.client.alias);
-            
-        })
-        const test2 = firestore().collection('rooms').doc('room1').collection('messages').get().then(querySnapshot => {
-            console.log('Total messegase', querySnapshot.size);
-            querySnapshot.forEach(documentSnapshot => {
-                console.log('Messages:', documentSnapshot.data());
-            })
-        })
-                
         openConvo()
-        return () => { 
-            test();
-           // test2();
-        }
+        return () => openConvo();
     }, []) 
 
 function Item({ alias, text, timestamp }) {

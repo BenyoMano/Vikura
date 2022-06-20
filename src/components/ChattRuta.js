@@ -9,31 +9,27 @@ const ChattRuta = () => {
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
-    const openChat = async () => {
-        const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get().then(querySnapshot => {
-           const newData = querySnapshot.docs.map(documentSnapshot => ({
-               timestamp: documentSnapshot.data().timestamp.toDate(),
-               text: documentSnapshot.data().msg,
-               author: documentSnapshot.data().author,
-           /* console.log('msg', documentSnapshot.data().msg)
-           console.log('author', documentSnapshot.data().author)
-           console.log('TS', documentSnapshot.data().timestamp.toDate()) */
+    
+        const openChat = () => {
+            
+            firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
+                const newData = querySnapshot.docs.map(documentSnapshot => ({
+                    timestamp: documentSnapshot.data().timestamp.toDate(),
+                    text: documentSnapshot.data().msg,
+                    author: documentSnapshot.data().author,
             }))
             setMessages(newData)
-        })
-       
-    }
+         })
+        
+        }
+        
+    
 
-/*     const aopenChat = async () => {
-        const firebaseMessages = await firestore().collection('rooms').doc('room1').collection('messages').get();
-        const newMessages = firebaseMessages.docs.map(firebaseMessage => ({
-                timestamp: firebaseMessage.data().timestamp.toDate(),
-                text: firebaseMessage.data().msg,
-                author: firebaseMessage.data().author
-            }),
-        );
-        setMessages(newMessages)
-    } */
+    useEffect(() => {
+        openChat();
+        return () => openChat();
+    }, [])
+
     const onRefresh = useCallback(async () => {
         setRefreshing(true)
         console.log('Refreshing...')
@@ -42,10 +38,7 @@ const ChattRuta = () => {
         console.log('--refreshed--')
     }, [refreshing]);
 
-    useEffect(() => {
-        openChat()
-
-    }, [])
+   
     
     function Item({ text, author, timestamp }) {
         return (

@@ -7,10 +7,10 @@ const Button = (props) => {
     return (
         <Pressable onPress={props.onPress}>
             <View style={btnContainerStyle}>
-                <Icon name='warning' type='antdesign' color='#d12304' size={28} />
+                <Icon name='copy' type='font-awesome' color='black' size={28} />
             </View>
         </Pressable>
-    );  
+    );
 }
 
 const styles = StyleSheet.create ({
@@ -18,11 +18,11 @@ const styles = StyleSheet.create ({
     btnContainerStyle: {
         width: 40,
         height: 40,
-        borderWidth: 1.5,
+        borderWidth: 2,
         borderRadius: 10,
-        marginTop: 33,
+        marginTop: 10,
         marginBottom: 0,
-        borderColor: 'black',
+        borderColor: 'lightblue',
         justifyContent: 'center',
     },
 })

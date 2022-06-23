@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import BackButton from './BackButton';
 import Welcome from "./Welcome";
 import Button from "./Button";
+import CopyButton from "./CopyButton";
 import { Icon } from "react-native-elements";
 
 const ReportConcern = ({ navigation }) => {
@@ -12,7 +13,7 @@ const ReportConcern = ({ navigation }) => {
         <View style={[styles.container, {
             flexDirection: 'column'
         }]}>
-            <View style={{ flexDirection: 'row', width: 360, borderWidth: 2 }}>
+            <View style={{ flexDirection: 'row', width: 360 }}>
                 <View>
                     <BackButton onPress={() => navigation.goBack()} />
                 </View>
@@ -20,7 +21,7 @@ const ReportConcern = ({ navigation }) => {
                     <Logo style={{width: 90, height: 35, marginTop: 32}} />
                 </View>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'center', borderWidth: 1, flex: 0.4, /* height: 100, */ width: 360 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'center', flex: 0.4, width: 360 }}>
                 <View>
                     <Welcome title="Orosanmälan" style={{ fontSize: 32, marginRight: 5, top: 40, color: 'black' }} />
                 </View>
@@ -34,8 +35,8 @@ const ReportConcern = ({ navigation }) => {
             <View style={ styles.viewStyle}>
                 
             </View>
-            <View>
-                <Icon name='copy' type='font-awesome' color='black' />
+            <View style={{ width: 360, alignItems: 'flex-end' }}>
+                <CopyButton />
             </View>
             <View style={{ flex: 0.5 }}>
                 <Button title='Gör något'/>

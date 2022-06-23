@@ -20,11 +20,8 @@ const ChattRuta = () => {
             }))
             setMessages(newData)
          })
-        
         }
         
-    
-
     useEffect(() => {
         openChat();
         return () => openChat();

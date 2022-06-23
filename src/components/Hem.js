@@ -108,7 +108,7 @@ const Hem = ({ navigation }) => {
                     <View style={{flex: 0}}>
                         <Initiate />
                     </View>
-                    <View style={{flex:2}}>
+                    <View style={{flex:1}}>
                         <PhoneSignIn />
                     </View>
                     <View style={{flex: 1}}>

@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Logo from "./Logo";
 import Conv from "./Conv";
 import BackButton from './BackButton';
+import AddUserButton from './AddUserButton';
 
 const Kurator = ({ navigation }) => {
 
@@ -16,6 +17,10 @@ const Kurator = ({ navigation }) => {
                 </View>
                 <View style={{ position: 'absolute', left: '50%', right: '50%' }}>
                     <Logo style={{width: 90, height: 35, marginTop: 32}} />
+                </View>
+                <View style={{ position: 'absolute', left: '80%' }}>
+                    <AddUserButton onPress={() => 
+                        navigation.navigate('AddUser')} />
                 </View>
             </View>
             <View style={{flex: 1}}>

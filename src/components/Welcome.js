@@ -14,17 +14,17 @@ const Welcome = (props) => {
 const styles = {
     textStyling: {
        // fontSize: 42,
-        color: 'black',
+        //color: 'black',
         fontFamily: 'NunitoSans-Regular',
     },
 
 viewStyle: {
-        flex: 1,
-        top: 90,
+        //flex: 1,
+        //top: 30,
         //justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 0,
-        marginBottom: 20,
+      //  marginTop: 0,
+      //  marginBottom: 20,
        // backgroundColor: 'grey'
     }
 };

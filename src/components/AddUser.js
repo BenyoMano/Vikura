@@ -1,20 +1,22 @@
 import React from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Button from "./Button";
-import InputBar from "./InputBar";
 import Logo from "./Logo";
-import Welcome from './Welcome';
 import BackButton from './BackButton';
+import InputBar from "./InputBar";
+import Button from "./Button";
 
-const Elev = ({ navigation }) => {
+const AddUser = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
+
                 <View style={[styles.container, {
                     flexDirection: 'column'
-                }]}>    
+                }]}>
+
                     <View style={{ flexDirection: 'row', width: 360 }}>
                         <View>
                             <BackButton onPress={() => navigation.goBack()} />
@@ -23,17 +25,18 @@ const Elev = ({ navigation }) => {
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
                         </View>
                     </View>
-                    <View style={{flex: 3}}>
-                        <Welcome title='Prata med kurator' style={{fontSize: 38, color: 'black', top: 100}} />
-                    </View> 
-                    <View style={{flex: 2}}>
-                        <InputBar title='Ange ett nickname:' />
+
+                    <View style={{flex: 1}}>
+                        <InputBar title='Kod:' />
                     </View>
-                    <View style={{flex: 2}}>
-                        <Button title='Starta chatt' onPress={() => 
-                        navigation.navigate('Kurator')} />
+                    <View style={{flex: 1}}>
+                        <Button title='Registrera' />
                     </View>
+
+
                 </View>
+
+
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
     );
@@ -48,4 +51,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Elev;
+export default AddUser;

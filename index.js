@@ -4,6 +4,8 @@ import Hem from './src/components/Hem';
 import Elev from './src/components/Elev';
 import Kurator from './src/components/Kurator';
 import Chatt from './src/components/Chatt';
+import AddUser from './src/components/AddUser';
+import ReportConcern from './src/components/ReportConcern';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -31,6 +33,8 @@ const App = () => {
                     <Stack.Screen name='Elev' component={Elev} />
                     <Stack.Screen name='Kurator' component={Kurator} />
                     <Stack.Screen name='Chatt' component={Chatt} />
+                    <Stack.Screen name='AddUser' component={AddUser} />
+                    <Stack.Screen name='ReportConcern' component={ReportConcern} />
 
                 </Stack.Navigator>
 

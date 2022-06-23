@@ -10,10 +10,15 @@ const Conv = () => {
     const [refreshing, setRefreshing] = useState(false);
 
     const openConvo = () => {
-        firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
-            const alle = documentSnapshot.data().users.client.alias;
-         
-        });
+         const ulle = firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
+             const alle = documentSnapshot.data().users.client.alias
+            /* const alle = documentSnapshot.data().users.client.alias; */
+            console.log('alle', alle )
+           
+            //console.log("Client alias:", ulle.data().users.client.alias);
+        }); 
+
+        console.log('Ulle Data', ulle)
      
         firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
             const newConvos = querySnapshot.docs.map(doc => ({

@@ -8,6 +8,7 @@ import ButtonSend from "./ButtonSend";
 import sendMessage from "./sendMessage";
 import ButtonClear from "./ButtonClear";
 import clearMessages from "./clearMessages";
+import ReportConcernButton from "./ReportConcernButton";
 
 const Chatt = ({ navigation }) => {
     const [msgToSend, setMsgToSend] = useState();
@@ -26,9 +27,13 @@ const Chatt = ({ navigation }) => {
                         <View style={{ position: 'absolute', left: '50%', right: '50%' }}>
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
                         </View>
-                        <View style={{ position: 'absolute', left: '83%'}}>
+                        <View style={{ position: 'absolute', left: '67%'}}>
                             <ButtonClear title='Clear'
                             onPress={() => clearMessages()} />
+                        </View>
+                        <View style={{ position: 'absolute', left: '88%'}}>
+                            <ReportConcernButton onPress={() => 
+                        navigation.navigate('ReportConcern')} />
                         </View>
                     </View>
                     <View style={{flex: 1}}>

@@ -6,6 +6,7 @@ import Welcome from "./Welcome";
 import Button from "./Button";
 import CopyButton from "./CopyButton";
 import { Icon } from "react-native-elements";
+import PersonalInfo from "./PersonalInfo";
 
 const ReportConcern = ({ navigation }) => {
 
@@ -23,17 +24,17 @@ const ReportConcern = ({ navigation }) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'center', flex: 0.4, width: 360 }}>
                 <View>
-                    <Welcome title="Orosanmälan" style={{ fontSize: 32, marginRight: 5, top: 40, color: 'black' }} />
+                    <Welcome title="Orosanmälan" style={{ fontSize: 32, marginRight: 10, top: 40, color: 'black' }} />
                 </View>
                 <>
-                    <Icon name='warning' type='antdesign' color='grey' size={35} />
+                    <Icon name='warning' type='antdesign' color='#db4035' size={35} />
                 </>
             </View>
             <View style={{flex: 0.4}}>
                 <Welcome title='Personuppgifter:' style={{ fontSize: 18, top: 0, color: 'grey'}} />
             </View>
             <View style={ styles.viewStyle}>
-                
+                <PersonalInfo />
             </View>
             <View style={{ width: 360, alignItems: 'flex-end' }}>
                 <CopyButton />

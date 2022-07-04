@@ -2,8 +2,9 @@ import React from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Logo from "./Logo";
 import BackButton from './BackButton';
-import InputBar from "./InputBar";
 import Button from "./Button";
+import Form from "./Form";
+import Welcome from "./Welcome";
 
 const AddUser = ({ navigation }) => {
 
@@ -11,7 +12,6 @@ const AddUser = ({ navigation }) => {
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
 
                 <View style={[styles.container, {
                     flexDirection: 'column'
@@ -25,15 +25,16 @@ const AddUser = ({ navigation }) => {
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
                         </View>
                     </View>
-
-                    <View style={{flex: 1}}>
-                        <InputBar title='Kod:' />
-                    </View>
-                    <View style={{flex: 1}}>
-                        <Button title='Registrera' />
-                    </View>
-
-
+                        <View style={{ flex: 1, justifyContent: 'center', }}>
+                            <Welcome title='Lägg till elev' style={{fontSize: 32, color: 'black', marginTop: 70}} />
+                            <Welcome title='Skapa konto:' style={{fontSize: 18, color: 'grey', marginTop: 40}} />
+                        </View>
+                        <View style={{flex: 2}}>
+                            <Form />
+                        </View>
+                            <View style={{ marginBottom: 30 }}>
+                                <Button title='Registrera' />
+                            </View>
                 </View>
 
 

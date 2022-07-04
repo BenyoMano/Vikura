@@ -23,7 +23,7 @@ const styles = {
     },
 
     textStyle: {
-        fontSize: 18,
+        fontSize: 14,
         color: 'black',
         paddingBottom: 5,
         justifyContent: 'flex-start',

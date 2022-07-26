@@ -2,7 +2,7 @@ import React, { } from "react";
 import { View } from 'react-native';
 import InputBar from "./InputBar";
 
-const Form = () => {
+const Form = ({ userToAdd, setUserToAdd }) => {
     
     const { viewStyle } = styles;
 
@@ -15,7 +15,10 @@ const Form = () => {
                 <InputBar title='Efternamn:' />
             </View>
             <View>
-                <InputBar title='Mejl:' />
+                <InputBar title='Mejl:' userToAdd={userToAdd} setUserToAdd={setUserToAdd} />
+            </View>
+            <View>
+                <InputBar title='Lösenord:' userToAdd={userToAdd} setUserToAdd={setUserToAdd} /> 
             </View>
             <View>
                 <InputBar title='Personnummer:' />

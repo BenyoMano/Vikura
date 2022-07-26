@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import auth from '@react-native-firebase/auth';
 import Logo from "./Logo";
 import BackButton from './BackButton';
 import Button from "./Button";
@@ -7,6 +8,22 @@ import Form from "./Form";
 import Welcome from "./Welcome";
 
 const AddUser = ({ navigation }) => {
+
+    const [userToAdd, setUserToAdd] = useState();
+
+    function createUser() {
+        auth().createUserWithEmailAndPassword('janesssss.doe@example.com', 'SuperSecretPassword').then(() => {
+            console.log('User account created & signed in!');
+        }).catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+                console.log('That email adress is already in use!');
+            }
+            if (error.code === 'auth/invalid-email') {
+                console.log('That email adress is invalid!');
+            }
+            console.error(error);
+        });
+    }
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -30,7 +47,7 @@ const AddUser = ({ navigation }) => {
                             <Welcome title='Skapa konto:' style={{fontSize: 18, color: 'grey', marginTop: 40}} />
                         </View>
                         <View style={{flex: 2}}>
-                            <Form />
+                            <Form userToAdd={userToAdd} setUserToAdd={setUserToAdd} />
                         </View>
                             <View style={{ marginBottom: 30 }}>
                                 <Button title='Registrera' />

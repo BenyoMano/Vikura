@@ -8,6 +8,8 @@ const { viewStyle, textStyle, barStyle } = styles;
         <View style={viewStyle}>
             <Text style={textStyle}>{props.title}</Text>
             <TextInput style={barStyle} 
+                onChangeText={userToAdd => setUserToAdd(userToAdd)}
+                value={userToAdd}
             />
         </View>
     );

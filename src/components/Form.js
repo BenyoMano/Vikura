@@ -1,8 +1,9 @@
-import React, { } from "react";
+import React, {  } from "react";
 import { View } from 'react-native';
 import InputBar from "./InputBar";
+import InputBarAddUser from "./InputBarAddUser";
 
-const Form = ({ userToAdd, setUserToAdd }) => {
+const Form = ({ userPropToAdd, setUserPropToAdd }) => {
     
     const { viewStyle } = styles;
 
@@ -15,10 +16,10 @@ const Form = ({ userToAdd, setUserToAdd }) => {
                 <InputBar title='Efternamn:' />
             </View>
             <View>
-                <InputBar title='Mejl:' userToAdd={userToAdd} setUserToAdd={setUserToAdd} />
+                <InputBarAddUser title='Mejl:' userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
             </View>
             <View>
-                <InputBar title='Lösenord:' userToAdd={userToAdd} setUserToAdd={setUserToAdd} /> 
+                <InputBar title='Lösenord:' /> 
             </View>
             <View>
                 <InputBar title='Personnummer:' />

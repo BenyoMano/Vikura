@@ -9,7 +9,7 @@ import Welcome from "./Welcome";
 
 const AddUser = ({ navigation }) => {
 
-    const [userToAdd, setUserToAdd] = useState();
+    const [userPropToAdd, setUserPropToAdd] = useState();
 
     function createUser() {
         auth().createUserWithEmailAndPassword('janesssss.doe@example.com', 'SuperSecretPassword').then(() => {
@@ -31,7 +31,7 @@ const AddUser = ({ navigation }) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
                 <View style={[styles.container, {
-                    flexDirection: 'column'
+                    flexDirection: 'column' 
                 }]}>
 
                     <View style={{ flexDirection: 'row', width: 360 }}>
@@ -47,7 +47,7 @@ const AddUser = ({ navigation }) => {
                             <Welcome title='Skapa konto:' style={{fontSize: 18, color: 'grey', marginTop: 40}} />
                         </View>
                         <View style={{flex: 2}}>
-                            <Form userToAdd={userToAdd} setUserToAdd={setUserToAdd} />
+                            <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
                         </View>
                             <View style={{ marginBottom: 30 }}>
                                 <Button title='Registrera' />

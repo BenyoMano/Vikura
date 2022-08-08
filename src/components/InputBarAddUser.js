@@ -1,16 +1,19 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-const InputBar = (props) => {
+const InputBarAddUser = ({title, userPropToAdd, setUserPropToAdd }) => {
 const { viewStyle, textStyle, barStyle } = styles;
+
+console.log(userPropToAdd);
 
     return (
         <View style={viewStyle}>
-            <Text style={textStyle}>{props.title}</Text>
+            <Text style={textStyle}>{title}</Text>
             <TextInput style={barStyle} 
-                onChangeText={userToAdd => setUserToAdd(userToAdd)}
-                value={userToAdd}
-            />
+                onChangeText={userPropToAdd => setUserPropToAdd(userPropToAdd)}
+                value={userPropToAdd}
+                >
+            </TextInput>
         </View>
     );
 }
@@ -46,4 +49,4 @@ const styles = {
     }
 }
 
-export default InputBar;
+export default InputBarAddUser;

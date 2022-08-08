@@ -9,10 +9,17 @@ import Welcome from "./Welcome";
 
 const AddUser = ({ navigation }) => {
 
-    const [userPropToAdd, setUserPropToAdd] = useState();
+    const [userPropToAdd, setUserPropToAdd] = useState({
+        fornamn: "",
+        efternamn: "",
+        mejl: "",
+        password: "",
+        personnummer: "",
+    });
+    
 
     function createUser() {
-        auth().createUserWithEmailAndPassword('janesssss.doe@example.com', 'SuperSecretPassword').then(() => {
+        auth().createUserWithEmailAndPassword(userPropToAdd.mejl, userPropToAdd.password).then(() => {
             console.log('User account created & signed in!');
         }).catch(error => {
             if (error.code === 'auth/email-already-in-use') {
@@ -50,7 +57,7 @@ const AddUser = ({ navigation }) => {
                             <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
                         </View>
                             <View style={{ marginBottom: 30 }}>
-                                <Button title='Registrera' />
+                                <Button title='Registrera' onPress={() => createUser()} />
                             </View>
                 </View>
 

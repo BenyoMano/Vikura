@@ -1,12 +1,12 @@
 import React from 'react'
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 
-const ButtonSend = (props) => {
+const ButtonSend = ({title, onPress}) => {
     const { btnContainerStyle, btnTextStyle, } = styles;
     return (
-        <Pressable onPress={props.onPress}>
+        <Pressable onPress={onPress}>
             <View style={btnContainerStyle}>
-                <Text style={btnTextStyle}>{props.title}</Text>
+                <Text style={btnTextStyle}>{title}</Text>
             </View>
         </Pressable>
     );

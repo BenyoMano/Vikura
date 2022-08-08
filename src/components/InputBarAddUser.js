@@ -1,17 +1,17 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-const InputBarAddUser = ({title, userPropToAdd, setUserPropToAdd }) => {
+const InputBarAddUser = ({title, keys, value, userPropToAdd, setUserPropToAdd }) => {
 const { viewStyle, textStyle, barStyle } = styles;
 
-console.log(userPropToAdd);
+console.log("value:", value);
 
     return (
         <View style={viewStyle}>
             <Text style={textStyle}>{title}</Text>
             <TextInput style={barStyle} 
-                onChangeText={userPropToAdd => setUserPropToAdd(userPropToAdd)}
-                value={userPropToAdd}
+                onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
+                value={value}
                 >
             </TextInput>
         </View>

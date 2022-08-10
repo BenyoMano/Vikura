@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {Text, View} from 'react-native';
 import { firestore } from "@react-native-firebase/firestore";
 
-const PersonalInfo = async () => {
+const PersonalInfo = () => {
     const { textStyling, viewStyle } = styles;
 
     

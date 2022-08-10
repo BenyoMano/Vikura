@@ -18,6 +18,7 @@ const AddUser = ({ navigation }) => {
         personnummer: "",
     });
     
+    // Get user ID, connect with more infodata in Firestore DB ==> 
 
     function createUser() {
         auth().createUserWithEmailAndPassword(userPropToAdd.mejl, userPropToAdd.password).then(() => {
@@ -43,14 +44,14 @@ const AddUser = ({ navigation }) => {
             })
         }
         addPersonalDetails();
-
-        //console.log('UID:', user.uid)
-        //console.log(' U MAIL:', user.email)
+        console.log('Förnamn:', userPropToAdd.fornamn)
+        console.log('Efternamn:', userPropToAdd.efternamn)
+        console.log('Mejl', userPropToAdd.mejl)
+        console.log('Lösenord', userPropToAdd.password)
+        console.log('Personnummer', userPropToAdd.personnummer)
+        console.log('UID:', user.uid)
        
-
-        // Get user ID, connect with more infodata in Firestore DB
-
-       // auth().signOut().then(() => console.log('User signed out!'));
+        auth().signOut().then(() => console.log('User signed out!'));
     }
 
     return (

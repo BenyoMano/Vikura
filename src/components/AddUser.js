@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import Logo from "./Logo";
 import BackButton from './BackButton';
 import Button from "./Button";
@@ -30,6 +31,26 @@ const AddUser = ({ navigation }) => {
             }
             console.error(error);
         });
+
+        const user = auth().currentUser;
+        const addPersonalDetails = async () => {
+            const refUID = firestore().collection('Users').doc(user.uid);
+            await refUID.set({
+                firstName: userPropToAdd.fornamn,
+                secondName: userPropToAdd.efternamn,
+                personNummer: userPropToAdd.personnummer,
+                alias:'',
+            })
+        }
+        addPersonalDetails();
+
+        //console.log('UID:', user.uid)
+        //console.log(' U MAIL:', user.email)
+       
+
+        // Get user ID, connect with more infodata in Firestore DB
+
+       // auth().signOut().then(() => console.log('User signed out!'));
     }
 
     return (

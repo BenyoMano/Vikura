@@ -4,8 +4,6 @@ import { Text, TextInput, View } from 'react-native';
 const InputBarAddUser = ({title, keys, value, userPropToAdd, setUserPropToAdd }) => {
 const { viewStyle, textStyle, barStyle } = styles;
 
-console.log("value:", value);
-
     return (
         <View style={viewStyle}>
             <Text style={textStyle}>{title}</Text>

@@ -1,26 +1,26 @@
 import React, {  } from "react";
 import { View } from 'react-native';
-import InputBar from "./InputBar";
 import InputBarAddUser from "./InputBarAddUser";
 
 const Form = ({ userPropToAdd, setUserPropToAdd }) => {
     const {
-        fornamn,
-        efternamn,
+        firstName,
+        secondName,
         mejl,
         password,
         personnummer
     } = userPropToAdd
+
     
     const { viewStyle } = styles;
 
     return (
         <View style={viewStyle.container}>
             <View>
-                <InputBarAddUser title='Förnamn:' keys={"fornamn"} value={fornamn} userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
+                <InputBarAddUser title='Förnamn:' keys={"firstName"} value={firstName} userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
             </View>
             <View>
-                <InputBarAddUser title='Efternamn:' keys={"efternamn"} value={efternamn} userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
+                <InputBarAddUser title='Efternamn:' keys={"secondName"} value={secondName} userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
             </View>
             <View>
                 <InputBarAddUser title='Mejl:' keys={"mejl"} value={mejl} userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />

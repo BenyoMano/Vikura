@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Button from "./Button";
-import InputBar from "./InputBar";
 import Logo from "./Logo";
 import Welcome from './Welcome';
 import auth from '@react-native-firebase/auth';
+import InputBarLogIn from "./InputBarLogIn";
 
 function Initiate() {
     // Set an initializing state whilst Firebase connects
@@ -40,57 +40,38 @@ function Initiate() {
     );
 }
 
-function PhoneSignIn(user) {
-    // If null, no SMS has been sent
-    const [confirm, setConfirm] = useState(null);
-    const [code, setCode] = useState('789454');
-    console.log('PhoneSignIn');
-    // Handle the button press
-    async function signInWithPhoneNumber(phoneNumber) {
-        console.log('await auth.signInWPN(pn)')
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-        setConfirm(confirmation);
-    }
-    async function confirmCode() {
-        try {
-            console.log('await confirm.confirm(code)');
-            await confirm.confirm(code);
-            console.log('Code: ' + (code));
-            console.log('UID: ',(auth().currentUser.uid));
-            console.log('ID Token', (auth().currentUser.getIdToken));
-        } 
-        catch (error) {
-            console.log('Invalid code.');
-        }
-    }
-    async function signOut() {
-        try {
-            console.log('Await sign out');
-            await auth().signOut();
-            //console.log('User id: ' + auth().currentUser.uid);
-        }
-        catch (error) {
-            console.log('Error signing out');
-        }
-    }
-    if (!confirm) {
-        return (
-            <Button 
-                title='Phone Number Sign In'
-                onPress={() => signInWithPhoneNumber('+46725180309')}
-                />
-        );
-    }
-    return (
-        <View style={{flex:1}}>
-            <TextInput style={{backgroundColor: 'green'}} value={code} onChangeText={text => setCode(text)} />
-            <Button title='Confirm Code' onPress={() => confirmCode()} />
-            <Button title='Sign Out' onPress={() => signOut()} />
-        </View>
-    );
-}
-
 const Hem = ({ navigation }) => {
+
+    const [loginDetails, setLoginDetails] = useState({});
+    const {
+        mejl,
+        password
+    } = loginDetails
+
+    async function signIn() {
+        await auth().signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password).then(() => {
+            console.log('User signed in!');
+        }).catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+                console.log('That email adress is already in use!');
+            }
+            if (error.code === 'auth/invalid-email') {
+                console.log('That email adress is invalid!');
+            }
+            console.error(error);
+        });
+        const user = auth().currentUser;
+
+        //Clear TextInput fields
+        setLoginDetails({           
+            mejl: "",
+            password: "",
+        })
+    }
+
+    function signOut() {
+        auth().signOut().then(() => console.log('User signed out!'))
+    }
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -102,22 +83,14 @@ const Hem = ({ navigation }) => {
                     <View>
                         <Logo style={{ width: 160, height: 62, marginTop: 90 }}/>
                     </View>
-                   {/*  <View style={{flex: 1}}>
-                        <Welcome title='Välkommen!' style={{ fontSize: 42, marginTop:-10 }} />
-                    </View> */}
-                    <View style={{flex: 0}}>
-                        <Initiate />
-                    </View>
-                    <View style={{flex:1}}>
-                        <PhoneSignIn />
+                    <View style={{flex: 1}}>
+                        <InputBarLogIn title='Mejl:' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                        <InputBarLogIn title='Kod:' keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
                     </View>
                     <View style={{flex: 1}}>
-                        <InputBar title='Mejl:' />
-                        <InputBar title='Kod:' />
-                    </View>
-                    <View style={{flex: 1}}>
-                        <Button title='Logga in' onPress={() => 
-                        navigation.navigate('Elev')} />
+                        <Button title='Logga in' onPress={() => signIn()} />
+                        <Button title='Logga ut' onPress={() => signOut()} />
+                        <Button title='Nästa' onPress={() => navigation.navigate('Elev')} />
                     </View>
                 </View>
             </TouchableWithoutFeedback>

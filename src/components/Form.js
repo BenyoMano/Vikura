@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import InputBarAddUser from "./InputBarAddUser";
 
 const Form = ({ userPropToAdd, setUserPropToAdd }) => {
+    const { viewStyle } = styles;
     const {
         firstName,
         secondName,
@@ -10,9 +11,6 @@ const Form = ({ userPropToAdd, setUserPropToAdd }) => {
         password,
         personnummer
     } = userPropToAdd
-
-    
-    const { viewStyle } = styles;
 
     return (
         <View style={viewStyle.container}>
@@ -36,7 +34,6 @@ const Form = ({ userPropToAdd, setUserPropToAdd }) => {
 }
 
 const styles = {
-
     viewStyle: {
         container: {
             flex: 1,

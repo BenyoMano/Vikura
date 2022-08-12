@@ -6,14 +6,42 @@ import Logo from "./Logo";
 import Welcome from './Welcome';
 import BackButton from './BackButton';
 import InputBarNewDetails from "./InputBarNewDetails";
+import auth from '@react-native-firebase/auth';
 
 const Elev = ({ navigation }) => {
     const [newDetails, setNewDetails] = useState({});
+    const security = false
+    const capitalize = 'none'
     const {
         password,
         rePassword,
         alias
     } = newDetails
+
+    async function renewDetails() {
+        if (rePassword === password) {
+            await auth().currentUser.updatePassword(newDetails.password).then(() => {
+                console.log('Password updated');
+            }).catch(error => {
+                if (error.code === 'auth/weak-password') {
+                    console.log('Weak password');
+                }
+                if (error.code === 'auth/requires-recent-login') {
+                    console.log('You have to reauthenticate');
+                }
+                console.error(error);
+            });
+
+            await auth().currentUser.updateProfile({
+                displayName: alias,
+            }).then(() => {
+                console.log('Nytt nickname', alias);
+            });
+        } else {
+        console.log('Lösenordet matchar inte!');
+        }
+    }
+    
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -41,11 +69,12 @@ const Elev = ({ navigation }) => {
                             />
                     </View>
                     <View style={{flex: 2}}>
-                        <InputBarNewDetails title='Ange nytt lösenord:' keys={"password"} value={password} newDetails={newDetails} setNewDetails={setNewDetails} />
-                        <InputBarNewDetails title='Repetera lösenord:' keys={"rePassword"} value={rePassword} newDetails={newDetails} setNewDetails={setNewDetails} />
-                        <InputBarNewDetails title='Ange ett nickname:' keys={"alias"} value={alias} newDetails={newDetails} setNewDetails={setNewDetails} />
+                        <InputBarNewDetails title='Ange nytt lösenord:' security={true} keys={"password"} value={password} newDetails={newDetails} setNewDetails={setNewDetails} />
+                        <InputBarNewDetails title='Repetera lösenord:' security={true} keys={"rePassword"} value={rePassword} newDetails={newDetails} setNewDetails={setNewDetails} />
+                        <InputBarNewDetails title='Ange ett nickname:' capitalize='words' keys={"alias"} value={alias} newDetails={newDetails} setNewDetails={setNewDetails} />
                     </View>
                     <View style={{flex: 1}}>
+                        <Button title='Bekräfta' onPress={() => renewDetails()} />
                         <Button title='Starta chatt' onPress={() => 
                         navigation.navigate('Kurator')} />
                     </View>

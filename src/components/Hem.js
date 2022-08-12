@@ -43,6 +43,7 @@ function Initiate() {
 const Hem = ({ navigation }) => {
 
     const [loginDetails, setLoginDetails] = useState({});
+    const security = false
     const {
         mejl,
         password
@@ -85,7 +86,7 @@ const Hem = ({ navigation }) => {
                     </View>
                     <View style={{flex: 1}}>
                         <InputBarLogIn title='Mejl:' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
-                        <InputBarLogIn title='Kod:' keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                        <InputBarLogIn title='Kod:' security={true} keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
                     </View>
                     <View style={{flex: 1}}>
                         <Button title='Logga in' onPress={() => signIn()} />

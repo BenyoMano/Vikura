@@ -1,13 +1,16 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-const InputBarLogIn = ({title, keys, value, loginDetails, setLoginDetails }) => {
+const InputBarLogIn = ({title, keys, value, loginDetails, setLoginDetails, security }) => {
 const { viewStyle, textStyle, barStyle } = styles;
 
     return (
         <View style={viewStyle}>
             <Text style={textStyle}>{title}</Text>
             <TextInput style={barStyle} 
+                autoCorrect={false}
+                autoCapitalize='none'
+                secureTextEntry={security}
                 onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
                 value={value}
                 >

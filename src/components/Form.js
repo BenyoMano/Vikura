@@ -42,7 +42,7 @@ const styles = {
             flex: 1,
             justifyContent: 'space-evenly',
             alignItems: 'center',
-            //overflow: 'hidden',
+            overflow: 'hidden',
         },
     }
 };

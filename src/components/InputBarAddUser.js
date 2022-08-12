@@ -21,11 +21,9 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         width: '80%',
-        marginTop: 60,
+        marginTop: 20,
        // backgroundColor: 'lightblue',
-        
     },
-
     textStyle: {
         fontSize: 14,
         color: 'black',
@@ -34,12 +32,11 @@ const styles = {
         alignSelf: 'flex-start',
         fontFamily: 'NunitoSans-Regular'
     },
-
     barStyle: {
         height: 52,
         width: 320,
         color: 'black',
-        backgroundColor: '#EEEEEE',
+        backgroundColor: '#FFFFFF',
         borderColor: 'gray',
         borderWidth: 2,
         borderRadius: 12,

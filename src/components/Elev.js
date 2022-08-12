@@ -23,13 +23,22 @@ const Elev = ({ navigation }) => {
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
                         </View>
                     </View>
-                    <View style={{flex: 3}}>
-                        <Welcome title='Prata med kurator' style={{fontSize: 38, color: 'black', top: 100}} />
+                    <View style={{ flex: 1 }}>
+                        <Welcome title='Välkommen!' style={{fontSize: 38, color: 'black', top: 40,}} />
                     </View> 
-                    <View style={{flex: 2}}>
-                        <InputBar title='Ange ett nickname:' />
+                    <View style={{ flex: 1 }}>
+                    <Welcome 
+                            title='Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
+                            Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig.'
+                            style={{fontSize: 18, color: '#7f7f7f', top: 0, paddingHorizontal: 40, }} 
+                            />
                     </View>
                     <View style={{flex: 2}}>
+                        <InputBar title='Ange nytt lösenord' />
+                        <InputBar title='Repetera lösenord' />
+                        <InputBar title='Ange ett nickname:' />
+                    </View>
+                    <View style={{flex: 1}}>
                         <Button title='Starta chatt' onPress={() => 
                         navigation.navigate('Kurator')} />
                     </View>

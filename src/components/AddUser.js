@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Text, View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert, Pressable } from 'react-native';
+import { Modal, Text, View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Pressable, ScrollView } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Logo from "./Logo";
@@ -33,7 +33,6 @@ const AddUser = ({ navigation }) => {
             }
             console.error(error);
         });
-
         const user = auth().currentUser;
         const addPersonalDetails = async () => {
             const refUID = firestore().collection('Users').doc(user.uid);
@@ -61,16 +60,13 @@ const AddUser = ({ navigation }) => {
             personnummer: "",
         })
     }
-
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
                 <View style={[styles.container, {
                     flexDirection: 'column' 
                 }]}>
-
                     <View style={{ flexDirection: 'row', width: 360 }}>
                         <View>
                             <BackButton onPress={() => navigation.goBack()} />
@@ -79,9 +75,9 @@ const AddUser = ({ navigation }) => {
                             <Logo style={{width: 90, height: 35, marginTop: 32}} />
                         </View>
                     </View>
-                        <View style={{ flex: 1, justifyContent: 'center', }}>
-                            <Welcome title='Lägg till elev' style={{fontSize: 32, color: 'black', marginTop: 70}} />
-                            <Welcome title='Skapa konto:' style={{fontSize: 18, color: 'grey', marginTop: 40}} />
+                        <View style={{ justifyContent: 'center', }}>
+                            <Welcome title='Lägg till elev' style={{fontSize: 32, color: 'black', marginTop: 20}} />
+                            <Welcome title='Skapa konto:' style={{fontSize: 18, color: 'grey', marginTop: 20, marginBottom: 10}} />
                         </View>
 
                         <View style={{justifyContent: 'center'}}>
@@ -89,68 +85,67 @@ const AddUser = ({ navigation }) => {
                                     transparent={true}
                                     visible={modalVisible}
                                     onRequestClose={() => {
-                                        Alert.alert("Modal has been closed.");
                                         setModalVisible(!modalVisible);
                                     }}>
-
-                                        <View style={viewStyle.container}>
-                                            <View style={viewStyle.label}>
-                                                <Text style={textStyling.label}>Namn:</Text>
-                                            </View>
-                                            <View style={viewStyle.info}>
-                                                <Text style={textStyling.info}>{userPropToAdd.firstName} {userPropToAdd.secondName}</Text>
-                                            </View>
-                                            <View style={viewStyle.label}>
-                                                <Text style={textStyling.label}>Mail:</Text>
-                                            </View>
-                                            <View style={viewStyle.info}>
-                                                <Text style={textStyling.info}>{userPropToAdd.mejl}</Text>
-                                            </View>
-                                            <View style={viewStyle.label}>
-                                                <Text style={textStyling.label}>Lösenord:</Text>
-                                            </View>
-                                            <View style={viewStyle.info}>
-                                                <Text style={textStyling.info}>{userPropToAdd.password}</Text>
-                                            </View>
-                                            <View style={viewStyle.label}>
-                                                <Text style={textStyling.label}>Personnummer:</Text>
-                                            </View>
-                                            <View style={viewStyle.info}>
-                                                <Text style={textStyling.info}>{userPropToAdd.personnummer}</Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
-                                            <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => setModalVisible(!modalVisible)}>
-                                                <Text style={textStyling.label}>Tillbaka</Text>
-                                            </Pressable>
-                                            <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => {createUser(); setModalVisible(!modalVisible);} }>
-                                                <Text style={textStyling.label}>Bekräfta</Text>
-                                            </Pressable>
-                                            </View>
+                                    <View style={viewStyle.container}>
+                                        <View style={viewStyle.label}>
+                                            <Text style={textStyling.label}>Namn:</Text>
                                         </View>
+                                        <View style={viewStyle.info}>
+                                            <Text style={textStyling.info}>{userPropToAdd.firstName} {userPropToAdd.secondName}</Text>
+                                        </View>
+                                        <View style={viewStyle.label}>
+                                            <Text style={textStyling.label}>Mail:</Text>
+                                        </View>
+                                        <View style={viewStyle.info}>
+                                            <Text style={textStyling.info}>{userPropToAdd.mejl}</Text>
+                                        </View>
+                                        <View style={viewStyle.label}>
+                                            <Text style={textStyling.label}>Lösenord:</Text>
+                                        </View>
+                                        <View style={viewStyle.info}>
+                                            <Text style={textStyling.info}>{userPropToAdd.password}</Text>
+                                        </View>
+                                        <View style={viewStyle.label}>
+                                            <Text style={textStyling.label}>Personnummer:</Text>
+                                        </View>
+                                        <View style={viewStyle.info}>
+                                            <Text style={textStyling.info}>{userPropToAdd.personnummer}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
+                                        <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => setModalVisible(!modalVisible)}>
+                                            <Text style={textStyling.label}>Tillbaka</Text>
+                                        </Pressable>
+                                        <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => {createUser(); setModalVisible(!modalVisible);} }>
+                                            <Text style={textStyling.label}>Bekräfta</Text>
+                                        </Pressable>
+                                        </View>
+                                    </View>
                                 </Modal>
                             </View>
-
-
-
-                        <View style={{flex: 2}}>
-                            <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
+                            
+                        <View style={{flex: 3 }}>
+                            <ScrollView contentContainerStyle={styles.contentContainer}>
+                                <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
+                            </ScrollView>
                         </View>
-                            <View style={{ marginBottom: 30 }}>
-                                <Button title='Registrera' onPress={() => setModalVisible(true)} />
-                            </View>
-
-                           
+                        
+                        <View style={{ marginBottom: 30 }}>
+                            <Button title='Registrera' onPress={() => setModalVisible(true)} />
+                        </View>
                 </View>
-
-
-
-
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
+    contentContainer: {
+        paddingHorizontal: 20,
+        paddingBottom: 15,
+        backgroundColor: '#F7F7F7',
+        borderRadius: 20,
+    },
     container: {
         flex: 1,
         justifyContent: "space-evenly",

@@ -112,6 +112,7 @@ const Hem = ({ navigation }) => {
                         <PhoneSignIn />
                     </View>
                     <View style={{flex: 1}}>
+                        <InputBar title='Mejl:' />
                         <InputBar title='Kod:' />
                     </View>
                     <View style={{flex: 1}}>

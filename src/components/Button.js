@@ -18,7 +18,7 @@ const styles = StyleSheet.create ({
         paddingVertical: 18,
         width: 230,
         borderRadius: 12,
-        marginTop: 80,
+        marginTop: 20,
     },
     btnTextStyle: {
        color: 'black',

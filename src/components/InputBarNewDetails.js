@@ -22,15 +22,15 @@ const { viewStyle, textStyle, barStyle } = styles;
 const styles = {
     viewStyle: {
         justifyContent: 'center',
-        alignItems: 'center',
+        //alignItems: 'center',
         width: '80%',
         marginTop: 20,
        // backgroundColor: 'lightblue',
     },
     textStyle: {
-        fontSize: 14,
+        fontSize: 12,
         color: 'black',
-        paddingBottom: 5,
+        paddingBottom: 2,
         justifyContent: 'flex-start',
         alignSelf: 'flex-start',
         fontFamily: 'NunitoSans-Regular'
@@ -39,7 +39,7 @@ const styles = {
         height: 52,
         width: 320,
         color: 'black',
-        backgroundColor: '#EEEEEE',
+        backgroundColor: '#FFFFFF',
         borderColor: 'gray',
         borderWidth: 2,
         borderRadius: 12,

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import Button from "./Button";
 import InputBar from "./InputBar";
 import Logo from "./Logo";
@@ -13,6 +13,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const Elev = ({ navigation }) => {
     const [newDetails, setNewDetails] = useState({});
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     const security = false
     const capitalize = 'none'
     const {
@@ -20,6 +21,26 @@ const Elev = ({ navigation }) => {
         rePassword,
         alias
     } = newDetails
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          () => {
+            setKeyboardVisible(true); // or some other action
+          }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setKeyboardVisible(false); // or some other action
+          }
+        );
+    
+        return () => {
+          keyboardDidHideListener.remove();
+          keyboardDidShowListener.remove();
+        };
+      }, []);
 
     async function renewDetails() {
         if (rePassword === password) {
@@ -51,7 +72,6 @@ const Elev = ({ navigation }) => {
                 ...currentData,
                 firstLogin: false,
                 alias: alias
-                
             }) 
      })
     }
@@ -73,21 +93,28 @@ const Elev = ({ navigation }) => {
                         </View>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Welcome title='Välkommen!' style={{fontSize: 38, color: 'black', top: 40,}} />
+                        <Welcome title='Välkommen!' style={{fontSize: 38, color: 'black', top: 40, }} />
                     </View> 
                     <View style={{ flex: 1 }}>
-                    <Welcome 
+                        {
+                            isKeyboardVisible === false
+                            ?  <Welcome  
                             title='Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
                             Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig.'
-                            style={{fontSize: 18, color: '#7f7f7f', top: 0, paddingHorizontal: 40, }} 
-                            />
+                            style={{fontSize: 16, color: '#7f7f7f', top: 0, paddingHorizontal: 40, }} 
+                            /> 
+                            : null
+                        }
+                   
                     </View>
                     <View style={{flex: 2}}>
+                        <ScrollView contentContainerStyle={styles.contentContainer}>
                         <InputBarNewDetails title='Ange nytt lösenord:' security={true} keys={"password"} value={password} newDetails={newDetails} setNewDetails={setNewDetails} />
                         <InputBarNewDetails title='Repetera lösenord:' security={true} keys={"rePassword"} value={rePassword} newDetails={newDetails} setNewDetails={setNewDetails} />
                         <InputBarNewDetails title='Ange ett nickname:' capitalize='words' keys={"alias"} value={alias} newDetails={newDetails} setNewDetails={setNewDetails} />
+                        </ScrollView>
                     </View>
-                    <View style={{flex: 1}}>
+                    <View style={{ marginBottom: 10 }}>
                         <Button title='Bekräfta' onPress={() => renewDetails()} />
                         <Button title='Starta chatt' onPress={() => 
                         navigation.navigate('Kurator')} />
@@ -99,6 +126,13 @@ const Elev = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    contentContainer: {
+        paddingHorizontal: 20,
+        paddingBottom: 15,
+        backgroundColor: '#F7F7F7',
+        borderRadius: 20,
+       // alignItems: 'center'
+    },
     container: {
         flex: 1,
         justifyContent: "space-evenly",

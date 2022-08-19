@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Welcome from './Welcome';
 import auth from '@react-native-firebase/auth';
 import InputBarLogIn from "./InputBarLogIn";
+import firestore from '@react-native-firebase/firestore';
 
 function Initiate() {
     // Set an initializing state whilst Firebase connects
@@ -62,12 +63,32 @@ const Hem = ({ navigation }) => {
             console.error(error);
         });
         const user = auth().currentUser;
+        firestore().collection('Users').doc(user.uid).onSnapshot(querySnapshot => {
+            const newUserStatus = querySnapshot.get('firstLogin')
+            const kuratorStatus = querySnapshot.get('kurator')
+            console.log('User status', newUserStatus)
+            if (newUserStatus === true && kurator == !true) {
+                navigation.navigate('Elev')
+            }
+            if (newUserStatus === false && kurator == !true) {
+                navigation.navigate('Chatt')
+            }
+/*             if (newUserStatus === true && kurator == true) {
+                navigation.navigate('NewKurator')
+            } */
+            if (newUserStatus === false && kurator == true) {
+                navigation.navigate('Kurator')
+            }
+         })
 
         //Clear TextInput fields
         setLoginDetails({           
             mejl: "",
             password: "",
         })
+
+
+        
     }
 
     function signOut() {

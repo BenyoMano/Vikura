@@ -11,12 +11,15 @@ import Welcome from "./Welcome";
 const AddUser = ({ navigation }) => {
     const { textStyling, viewStyle } = styles;
     const [modalVisible, setModalVisible] = useState(false);
+    const capitalize = 'none'
     const [userPropToAdd, setUserPropToAdd] = useState({
         firstName: "",
         secondName: "",
         mejl: "",
         password: "",
         personnummer: "",
+        firstLogin: true,
+        kurator: "",
     });
     
     // Get user ID, connect with more infodata in Firestore DB ==> 
@@ -41,6 +44,8 @@ const AddUser = ({ navigation }) => {
                 secondName: userPropToAdd.secondName,
                 personNummer: userPropToAdd.personnummer,
                 alias:'',
+                firstLogin: userPropToAdd.firstLogin,
+                kurator: userPropToAdd.kurator,
             })
         }
         addPersonalDetails().then(() => auth().signOut().then(() => console.log('User signed out!')));
@@ -49,6 +54,8 @@ const AddUser = ({ navigation }) => {
         console.log('Mejl', userPropToAdd.mejl)
         console.log('Lösenord', userPropToAdd.password)
         console.log('Personnummer', userPropToAdd.personnummer)
+        console.log('[first login]', userPropToAdd.firstLogin)
+        console.log('Kurator?:', userPropToAdd.kurator)
         console.log('UID:', user.uid)
 
         //Clear TextInput fields
@@ -58,6 +65,7 @@ const AddUser = ({ navigation }) => {
             mejl: "",
             password: "",
             personnummer: "",
+            kurator: "",
         })
     }
     return (
@@ -112,6 +120,12 @@ const AddUser = ({ navigation }) => {
                                         <View style={viewStyle.info}>
                                             <Text style={textStyling.info}>{userPropToAdd.personnummer}</Text>
                                         </View>
+                                        <View style={viewStyle.label}>
+                                            <Text style={textStyling.label}>Kurator:</Text>
+                                        </View>
+                                        <View style={viewStyle.info}>
+                                            <Text style={textStyling.info}> {userPropToAdd.kurator} </Text>
+                                        </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
                                         <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => setModalVisible(!modalVisible)}>
                                             <Text style={textStyling.label}>Tillbaka</Text>
@@ -130,7 +144,7 @@ const AddUser = ({ navigation }) => {
                             </ScrollView>
                         </View>
                         
-                        <View style={{ marginBottom: 30 }}>
+                        <View style={{ marginBottom: 10 }}>
                             <Button title='Registrera' onPress={() => setModalVisible(true)} />
                         </View>
                 </View>

@@ -7,6 +7,9 @@ import Welcome from './Welcome';
 import BackButton from './BackButton';
 import InputBarNewDetails from "./InputBarNewDetails";
 import auth from '@react-native-firebase/auth';
+//import { firestore } from "firebase-admin";
+import firestore from '@react-native-firebase/firestore';
+
 
 const Elev = ({ navigation }) => {
     const [newDetails, setNewDetails] = useState({});
@@ -40,6 +43,17 @@ const Elev = ({ navigation }) => {
         } else {
         console.log('Lösenordet matchar inte!');
         }
+
+        firestore().collection('Users').doc(auth().currentUser.uid).onSnapshot(querySnapshot => {
+            const currentData = querySnapshot.data()
+            console.log('Current Data:', currentData)
+             firestore().collection('Users').doc(auth().currentUser.uid).set({
+                ...currentData,
+                firstLogin: false,
+                alias: alias
+                
+            }) 
+     })
     }
     
 

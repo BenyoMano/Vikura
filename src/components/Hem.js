@@ -85,7 +85,7 @@ const Hem = ({ navigation }) => {
                         <Logo style={{ width: 160, height: 62, marginTop: 90 }}/>
                     </View>
                     <View style={{flex: 1}}>
-                        <InputBarLogIn title='Mejl:' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                        <InputBarLogIn title='Mejl:' keyType='email-address' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
                         <InputBarLogIn title='Kod:' security={true} keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
                     </View>
                     <View style={{flex: 1}}>

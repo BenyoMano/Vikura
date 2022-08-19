@@ -11,20 +11,19 @@ const Conv = () => {
 
     const openConvo = () => {
          const ulle = firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
-             const alle = documentSnapshot.data().users.client.alias
+            const alle = documentSnapshot.data().users.client.alias
             /* const alle = documentSnapshot.data().users.client.alias; */
             console.log('alle', alle )
            
             //console.log("Client alias:", ulle.data().users.client.alias);
         }); 
-
-        console.log('Ulle Data', ulle)
      
         firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
             const newConvos = querySnapshot.docs.map(doc => ({
                 timestamp: doc.data().timestamp.toDate(),
                 text: doc.data().msg,
                 alias: 'A'
+                
             }));
             setConvos(newConvos)
         });

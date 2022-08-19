@@ -1,13 +1,15 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-const InputBarAddUser = ({title, keys, value, userPropToAdd, setUserPropToAdd }) => {
+const InputBarAddUser = ({title, keys, value, userPropToAdd, setUserPropToAdd, capitalize, keyType }) => {
 const { viewStyle, textStyle, barStyle } = styles;
 
     return (
         <View style={viewStyle}>
             <Text style={textStyle}>{title}</Text>
             <TextInput style={barStyle} 
+                autoCapitalize={capitalize}
+                keyboardType={keyType}
                 onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
                 value={value}
                 >
@@ -25,9 +27,9 @@ const styles = {
        // backgroundColor: 'lightblue',
     },
     textStyle: {
-        fontSize: 14,
+        fontSize: 12,
         color: 'black',
-        paddingBottom: 5,
+        paddingBottom: 2,
         justifyContent: 'flex-start',
         alignSelf: 'flex-start',
         fontFamily: 'NunitoSans-Regular'

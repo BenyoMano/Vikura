@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-const InputBarLogIn = ({title, keys, value, loginDetails, setLoginDetails, security }) => {
+const InputBarLogIn = ({title, keys, value, loginDetails, setLoginDetails, security, keyType }) => {
 const { viewStyle, textStyle, barStyle } = styles;
 
     return (
@@ -10,6 +10,7 @@ const { viewStyle, textStyle, barStyle } = styles;
             <TextInput style={barStyle} 
                 autoCorrect={false}
                 autoCapitalize='none'
+                keyboardType={keyType}
                 secureTextEntry={security}
                 onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
                 value={value}

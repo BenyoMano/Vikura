@@ -67,16 +67,16 @@ const Hem = ({ navigation }) => {
             const newUserStatus = querySnapshot.get('firstLogin')
             const kuratorStatus = querySnapshot.get('kurator')
             console.log('User status', newUserStatus)
-            if (newUserStatus === true && kurator == !true) {
+            if (newUserStatus === true && kuratorStatus == !true) {
                 navigation.navigate('Elev')
             }
-            if (newUserStatus === false && kurator == !true) {
+            if (newUserStatus === false && kuratorStatus == !true) {
                 navigation.navigate('Chatt')
             }
 /*             if (newUserStatus === true && kurator == true) {
                 navigation.navigate('NewKurator')
             } */
-            if (newUserStatus === false && kurator == true) {
+            if (newUserStatus === false && kuratorStatus == true) {
                 navigation.navigate('Kurator')
             }
          })
@@ -102,12 +102,14 @@ const Hem = ({ navigation }) => {
                 <View style={[styles.container, {
                     flexDirection: 'column'
                 }]}>
-                    <View>
-                        <Logo style={{ width: 160, height: 62, marginTop: 90 }}/>
+                    <View style={{ flex: 0.5, justifyContent: 'flex-end', /* backgroundColor: 'lightpink' */ }}>
+                        <Logo style={{ width: 160, height: 62, marginTop: 30,  }}/>
                     </View>
-                    <View style={{flex: 1}}>
-                        <InputBarLogIn title='Mejl:' keyType='email-address' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
-                        <InputBarLogIn title='Kod:' security={true} keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                    <View style={styles.contcont}>
+                        <View style={ styles.logincontainer }>
+                            <InputBarLogIn title='Mejl:' keyType='email-address' keys={"mejl"} value={mejl} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                            <InputBarLogIn title='Kod:' security={true} keys={"password"} value={password} loginDetails={loginDetails} setLoginDetails={setLoginDetails} />
+                        </View>
                     </View>
                     <View style={{flex: 1}}>
                         <Button title='Logga in' onPress={() => signIn()} />
@@ -128,6 +130,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFFFFF'
     },
+    logincontainer: {
+       // flex: 1,
+        paddingHorizontal: 20,
+        margingBottom: 50,
+        paddingBottom: 20,
+        backgroundColor: '#F7F7F7',
+        borderRadius: 20,
+    },
+    contcont: {
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    }
 });
 
 export default Hem;

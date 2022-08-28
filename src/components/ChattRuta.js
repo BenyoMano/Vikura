@@ -1,18 +1,36 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { Text, View, FlatList, RefreshControl } from 'react-native';
+import { Text, View, RefreshControl } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
 
 
-const ChattRuta = () => {
+const ChattRuta = ({ user }) => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
     
         const openChat = () => {
-            
-            firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
+            console.log('uid', user.uid)
+            // Filtrera "room1" / doc.id med 'room1.client.uid'
+            const room = firestore().collection('rooms').where('uid', '==', user.uid).get().then(console.log('room', room.docs.data()))
+
+/*             const result = room.map((doc) => {
+                console.log( doc.data())
+            }) */
+
+            // console.log('room', room.get() );
+
+/*               room.collection('messages').onSnapshot(querySnapshot => {
+                const newData = querySnapshot.docs.map(documentSnapshot => ({
+                    timestamp: documentSnapshot.data().timestamp.toDate(),
+                    text: documentSnapshot.data().msg,
+                    author: documentSnapshot.data().author,
+            }))
+            setMessages(newData)
+         })   */
+         
+            /* firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
                 const newData = querySnapshot.docs.map(documentSnapshot => ({
                     timestamp: documentSnapshot.data().timestamp.toDate(),
                     text: documentSnapshot.data().msg,
@@ -20,7 +38,7 @@ const ChattRuta = () => {
             }))
             setMessages(newData)
          })
-        }
+ */        }
         
     useEffect(() => {
         openChat();

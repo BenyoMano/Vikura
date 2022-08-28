@@ -25,7 +25,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         width: '80%',
-        marginTop: 20,
+        marginTop: 15,
        // backgroundColor: 'lightblue',
     },
     textStyle: {

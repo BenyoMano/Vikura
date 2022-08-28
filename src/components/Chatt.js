@@ -9,9 +9,14 @@ import sendMessage from "./sendMessage";
 import ButtonClear from "./ButtonClear";
 import clearMessages from "./clearMessages";
 import ReportConcernButton from "./ReportConcernButton";
+import auth from '@react-native-firebase/auth';
 
 const Chatt = ({ navigation }) => {
     const [msgToSend, setMsgToSend] = useState();
+
+// Filtrera "room1" / doc.id med 'room1.client.uid'
+    const user = auth().currentUser;
+    // const room = 
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -37,7 +42,7 @@ const Chatt = ({ navigation }) => {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <ChattRuta />
+                        <ChattRuta user={user} />
                     </View>
                         <View style={{ flexDirection: 'row', width: 360, marginBottom: 30 }}>
                             <View style={{ justifyContent: 'flex-start'}}>
@@ -45,7 +50,7 @@ const Chatt = ({ navigation }) => {
                             </View>
                             <View style={{ position: 'absolute', right: '0%'}}>
                                 <ButtonSend title='Skicka'
-                                 onPress={() => {sendMessage({msgToSend}); setMsgToSend(""); } } />
+                                 onPress={() => {sendMessage({msgToSend, user}); setMsgToSend(""); } } />
                             </View>
                         </View>
                     </View>

@@ -10,35 +10,31 @@ const ChattRuta = ({ user }) => {
     const [refreshing, setRefreshing] = useState(false);
 
     
-        const openChat = () => {
+        const openChat = async () => {
             console.log('uid', user.uid)
-            // Filtrera "room1" / doc.id med 'room1.client.uid'
-            const room = firestore().collection('rooms').where('uid', '==', user.uid).get().then(console.log('room', room.docs.data()))
 
-/*             const result = room.map((doc) => {
-                console.log( doc.data())
-            }) */
-
-            // console.log('room', room.get() );
-
-/*               room.collection('messages').onSnapshot(querySnapshot => {
+             firestore().collection('rooms').where('docs.users.client.uid', 'array-contains', user.uid).onSnapshot(querySnapshot => {
                 const newData = querySnapshot.docs.map(documentSnapshot => ({
-                    timestamp: documentSnapshot.data().timestamp.toDate(),
-                    text: documentSnapshot.data().msg,
-                    author: documentSnapshot.data().author,
-            }))
-            setMessages(newData)
-         })   */
-         
-            /* firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
-                const newData = querySnapshot.docs.map(documentSnapshot => ({
-                    timestamp: documentSnapshot.data().timestamp.toDate(),
+                    timestamp: documentSnapshot.collection.data().timestamp.toDate(),
                     text: documentSnapshot.data().msg,
                     author: documentSnapshot.data().author,
             }))
             setMessages(newData)
          })
- */        }
+ 
+/*             // Filtrera "room1" / doc.id med 'room1.client.uid'
+            const room = await firestore().collection('rooms').where('docs.users.client.uid', 'array-contains', user.uid).get();
+
+
+/*             firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
+                const newData = querySnapshot.docs.map(documentSnapshot => ({
+                    timestamp: documentSnapshot.data().timestamp.toDate(),
+                    text: documentSnapshot.data().msg,
+                    author: documentSnapshot.data().author,
+            }))
+            setMessages(newData)
+         }) */
+        }
         
     useEffect(() => {
         openChat();

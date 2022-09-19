@@ -11,34 +11,21 @@ const ChattRuta = ({ user }) => {
 
     
         const openChat = async () => {
-            console.log('uid', user.uid)
-
-            firestore().collection('rooms').where('users.client.uid', '==', user.uid).onSnapshot((snapShot)=>{
-                console.log(snapShot.docs)
-             });
+             console.log('uid', user.uid)
              
-                          /* onSnapshot(querySnapshot => {
-                console.log(querySnapshot.docs.map(data=>data))
-              */   /* const newData = querySnapshot.docs.map(documentSnapshot => ({
-                    timestamp: documentSnapshot.collection.data().timestamp.toDate(),
-                    text: documentSnapshot.data().msg,
-                    author: documentSnapshot.data().author,
-            })) */
-            setMessages([])
-         
- 
-/*             // Filtrera "room1" / doc.id med 'room1.client.uid'
-            const room = await firestore().collection('rooms').where('docs.users.client.uid', 'array-contains', user.uid).get();
-
-
-/*             firestore().collection('rooms').doc('room1').collection('messages').onSnapshot(querySnapshot => {
-                const newData = querySnapshot.docs.map(documentSnapshot => ({
-                    timestamp: documentSnapshot.data().timestamp.toDate(),
-                    text: documentSnapshot.data().msg,
-                    author: documentSnapshot.data().author,
-            }))
-            setMessages(newData)
-         }) */
+            const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get()
+            getRoomName.docs.map(d => {
+                const splitRef = d.ref.path.split('/');
+                const last = splitRef[splitRef.length -1];
+                firestore().collection('rooms').doc(last).collection('messages').onSnapshot(querySnapshot => {
+                    const newData = querySnapshot.docs.map(documentSnapshot => ({
+                        timestamp: documentSnapshot.data().timestamp.toDate(),
+                        text: documentSnapshot.data().msg,
+                        author: documentSnapshot.data().author,
+                    }))
+                setMessages(newData)
+                })
+            })
         }
         
     useEffect(() => {

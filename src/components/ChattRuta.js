@@ -13,19 +13,24 @@ const ChattRuta = ({ user }) => {
         const openChat = async () => {
              console.log('uid', user.uid)
              
-            const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get()
-            getRoomName.docs.map(d => {
-                const splitRef = d.ref.path.split('/');
-                const last = splitRef[splitRef.length -1];
-                firestore().collection('rooms').doc(last).collection('messages').onSnapshot(querySnapshot => {
-                    const newData = querySnapshot.docs.map(documentSnapshot => ({
-                        timestamp: documentSnapshot.data().timestamp.toDate(),
-                        text: documentSnapshot.data().msg,
-                        author: documentSnapshot.data().author,
-                    }))
-                setMessages(newData)
-                })
-            })
+            const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
+            console.log('Empty:', getRoomName.empty)
+            if (!getRoomName.empty) {
+                getRoomName.docs.map(d => {
+                    const splitRef = d.ref.path.split('/');
+                    const last = splitRef[splitRef.length -1];
+                    firestore().collection('rooms').doc(last).collection('messages').onSnapshot(querySnapshot => {
+                        const newData = querySnapshot.docs.map(documentSnapshot => ({
+                            timestamp: documentSnapshot.data().timestamp.toDate(),
+                            text: documentSnapshot.data().msg,
+                            author: documentSnapshot.data().author,
+                        }))
+                    setMessages(newData)
+                    })
+                });
+            } else {
+                console.log('Room does not exist!');
+            }
         }
         
     useEffect(() => {

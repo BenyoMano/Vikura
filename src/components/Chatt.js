@@ -13,10 +13,10 @@ import auth from '@react-native-firebase/auth';
 
 const Chatt = ({ navigation }) => {
     const [msgToSend, setMsgToSend] = useState();
+    const [refPath, setRefPath] = useState();
 
 // Filtrera "room1" / doc.id med 'room1.client.uid'
     const user = auth().currentUser;
-    // const room = 
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -42,7 +42,7 @@ const Chatt = ({ navigation }) => {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <ChattRuta user={user} />
+                        <ChattRuta user={user} refPath={refPath} setRefPath={setRefPath} />
                     </View>
                         <View style={{ flexDirection: 'row', width: 360, marginBottom: 30 }}>
                             <View style={{ justifyContent: 'flex-start'}}>
@@ -50,7 +50,7 @@ const Chatt = ({ navigation }) => {
                             </View>
                             <View style={{ position: 'absolute', right: '0%'}}>
                                 <ButtonSend title='Skicka'
-                                 onPress={() => {sendMessage({msgToSend, user}); setMsgToSend(""); } } />
+                                 onPress={() => {sendMessage({msgToSend, user, refPath}); setMsgToSend(""); } } />
                             </View>
                         </View>
                     </View>

@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
 
 
-const ChattRuta = ({ user }) => {
+const ChattRuta = ({ user, refPath, setRefPath }) => {
     const { viewStyle } = styles;
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
@@ -19,7 +19,8 @@ const ChattRuta = ({ user }) => {
                 getRoomName.docs.map(d => {
                     const splitRef = d.ref.path.split('/');
                     const last = splitRef[splitRef.length -1];
-                    firestore().collection('rooms').doc(last).collection('messages').onSnapshot(querySnapshot => {
+                    const docPath = firestore().collection('rooms').doc(last).collection('messages');
+                    docPath.onSnapshot(querySnapshot => {
                         const newData = querySnapshot.docs.map(documentSnapshot => ({
                             timestamp: documentSnapshot.data().timestamp.toDate(),
                             text: documentSnapshot.data().msg,
@@ -27,9 +28,37 @@ const ChattRuta = ({ user }) => {
                         }))
                     setMessages(newData)
                     })
+                    setRefPath(docPath)
                 });
             } else {
                 console.log('Room does not exist!');
+                const createRoom = async () => {
+                    const roomRef = firestore().collection('rooms');
+                    console.log('Creating room')
+                    const getAlias = await firestore().collection('Users').doc(user.uid).get();
+                    console.log('Field Path', getAlias.get('alias'))
+
+                    await roomRef.add({
+                        users: {
+                            client: {
+                                alias: getAlias.get('alias'),
+                                uid: user.uid
+                            },
+                            kurator: {
+                                alias: 'Arman',
+                                id: 'admin123'
+                            }
+                        }
+                    });
+
+                    getRoomName.docs.map(d => {
+                        const splitRef = d.ref.path.split('/');
+                        const last = splitRef[splitRef.length -1];
+                        const docPath = firestore().collection('rooms').doc(last).collection('messages');
+                        setRefPath(docPath);
+                    });
+                }
+                createRoom();
             }
         }
         

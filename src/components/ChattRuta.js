@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Text, View, RefreshControl } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AutoScrollFlatList} from "react-native-autoscroll-flatlist";
@@ -43,10 +43,6 @@ const ChattRuta = ({ user, refPath, setRefPath }) => {
                             client: {
                                 alias: getAlias.get('alias'),
                                 uid: user.uid
-                            },
-                            kurator: {
-                                alias: 'Arman',
-                                id: 'admin123'
                             }
                         }
                     });

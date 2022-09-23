@@ -12,6 +12,8 @@ const AddUser = ({ navigation }) => {
     const { textStyling, viewStyle } = styles;
     const [modalVisible, setModalVisible] = useState(false);
     const capitalize = 'none'
+    const showIfKurator = checkboxState === true ? 'JA' : 'NEJ';
+    const [checkboxState, setCheckboxState] = React.useState(false);
     const [userPropToAdd, setUserPropToAdd] = useState({
         firstName: "",
         secondName: "",
@@ -19,7 +21,7 @@ const AddUser = ({ navigation }) => {
         password: "",
         personnummer: "",
         firstLogin: true,
-        kurator: "",
+        kurator: checkboxState,
     });
     
     // Get user ID, connect with more infodata in Firestore DB ==> 
@@ -45,7 +47,7 @@ const AddUser = ({ navigation }) => {
                 personNummer: userPropToAdd.personnummer,
                 alias:'',
                 firstLogin: userPropToAdd.firstLogin,
-                kurator: userPropToAdd.kurator,
+                kurator: checkboxState,
             })
         }
         addPersonalDetails().then(() => auth().signOut().then(() => console.log('User signed out!')));
@@ -55,7 +57,7 @@ const AddUser = ({ navigation }) => {
         console.log('Lösenord', userPropToAdd.password)
         console.log('Personnummer', userPropToAdd.personnummer)
         console.log('[first login]', userPropToAdd.firstLogin)
-        console.log('Kurator?:', userPropToAdd.kurator)
+        console.log('Kurator?:', checkboxState)
         console.log('UID:', user.uid)
 
         //Clear TextInput fields
@@ -124,7 +126,7 @@ const AddUser = ({ navigation }) => {
                                             <Text style={textStyling.label}>Kurator:</Text>
                                         </View>
                                         <View style={viewStyle.info}>
-                                            <Text style={textStyling.info}> {userPropToAdd.kurator} </Text>
+                                            <Text style={textStyling.info}> {showIfKurator} </Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
                                         <Pressable style={[viewStyle.button, {margin: 10}]} onPress={() => setModalVisible(!modalVisible)}>
@@ -140,7 +142,7 @@ const AddUser = ({ navigation }) => {
                             
                         <View style={{flex: 3 }}>
                             <ScrollView contentContainerStyle={styles.contentContainer}>
-                                <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} />
+                                <Form userPropToAdd={userPropToAdd} setUserPropToAdd={setUserPropToAdd} checkboxState={checkboxState} setCheckboxState={setCheckboxState} />
                             </ScrollView>
                         </View>
                         

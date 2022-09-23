@@ -1,9 +1,10 @@
-import React, {  } from "react";
+import React, { useState } from "react";
 import { View } from 'react-native';
 import InputBarAddUser from "./InputBarAddUser";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const Form = ({ userPropToAdd, setUserPropToAdd }) => {
+const Form = ({ userPropToAdd, setUserPropToAdd, checkboxState, setCheckboxState }) => {
+    /* const [checkboxState, setCheckboxState] = React.useState(false); */
     const { viewStyle } = styles;
     const capitalize = 'none'
     const {
@@ -13,12 +14,12 @@ const Form = ({ userPropToAdd, setUserPropToAdd }) => {
         password,
         personnummer,
         firstLogin,
-        kurator = false,
+        kurator,
     } = userPropToAdd
     
     function kuratorCheck() {
         console.log('firstname', firstName)
-        if (userPropToAdd.kurator === false && !true) {userPropToAdd.kurator = true}
+        if (!checkboxState) {userPropToAdd.kurator = true}
         else {userPropToAdd.kurator = false}
         setUserPropToAdd({...userPropToAdd, kurator})
         // setUserPropToAdd(userPropToAdd.kurator)
@@ -47,13 +48,13 @@ const Form = ({ userPropToAdd, setUserPropToAdd }) => {
                 size={36}
                 fillColor="#569253"
                 unfillColor="#FFFFFF"
+                isChecked={checkboxState}
                 text="KURATOR"
                 iconStyle={{ borderRadius: 10 }}
                 innerIconStyle={{ borderRadius: 10, borderWidth: 2}}
                 textStyle={{ fontFamily: "NunitoSans-SemiBold", fontSize: 24, textDecorationLine: "none" }}
-                onPress={() => {
-                    kuratorCheck();
-                }}
+                //disableBuiltInState
+                onPress={() => {setCheckboxState(!checkboxState); kuratorCheck()}}
                 keys={"kurator"}
                 /* value={kurator} */
                 userPropToAdd={userPropToAdd}

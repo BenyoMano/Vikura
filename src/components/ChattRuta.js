@@ -25,6 +25,7 @@ const ChattRuta = ({ user, refPath, setRefPath }) => {
                             timestamp: documentSnapshot.data().timestamp.toDate(),
                             text: documentSnapshot.data().msg,
                             author: documentSnapshot.data().author,
+                            uid: documentSnapshot.data().uid
                         }))
                     setMessages(newData)
                     })
@@ -73,13 +74,13 @@ const ChattRuta = ({ user, refPath, setRefPath }) => {
 
    
     
-    function Item({ text, author, timestamp }) {
+    function Item({ text, timestamp, uid }) {
         return (
-                <View style={author === 'admin123' ? styles.bubblaSend : styles.bubblaRecieve}>
-                    <View style={author === 'admin123' ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
+                <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+                    <View style={uid === user.uid ? styles.bubblaSend.bubbla : styles.bubblaRecieve.bubbla} >
                         <Text style={styles.text.message}>{text}</Text> 
                     </View>
-                    <View style={author === 'admin123' ? styles.bubblaSend.timestamp : styles.bubblaRecieve.timestamp}>
+                    <View style={uid === user.uid ? styles.bubblaSend.timestamp : styles.bubblaRecieve.timestamp}>
                         <Text style={styles.text.author}>{timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}</Text>
                     </View>
                 </View>
@@ -90,6 +91,7 @@ const ChattRuta = ({ user, refPath, setRefPath }) => {
             timestamp={item.timestamp}
             text={item.text}
             author={item.author}
+            uid={item.uid}
             />
     );
     return (

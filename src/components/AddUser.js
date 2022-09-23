@@ -44,6 +44,7 @@ const AddUser = ({ navigation }) => {
             await refUID.set({
                 firstName: userPropToAdd.firstName,
                 secondName: userPropToAdd.secondName,
+                mejl: userPropToAdd.mejl,
                 personNummer: userPropToAdd.personnummer,
                 alias:'',
                 firstLogin: userPropToAdd.firstLogin,

@@ -9,23 +9,36 @@ const Conv = () => {
     const [convos, setConvos] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
-    const openConvo = () => {
-         const ulle = firestore().collection('rooms').doc('room1').onSnapshot(documentSnapshot => {
-            const alle = documentSnapshot.data().users.client.alias
-            /* const alle = documentSnapshot.data().users.client.alias; */
-            console.log('alle', alle )
-           
-            //console.log("Client alias:", ulle.data().users.client.alias);
-        }); 
-     
-        firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
+    const openConvo = async () => {
+              
+/*         firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
             const newConvos = querySnapshot.docs.map(doc => ({
                 timestamp: doc.data().timestamp.toDate(),
                 text: doc.data().msg,
-                alias: 'A'
-                
+                alias: 'A' 
             }));
             setConvos(newConvos)
+        }); */
+
+    const getRoomName = await firestore().collection('rooms').where('users.client.uid', '!=', '').get();
+        getRoomName.docs.map(d => {
+            const splitRef = d.ref.path.split('/');
+            const last = splitRef[splitRef.length -1];
+            const docPath = firestore().collection('rooms').doc(last).collection('messages');
+            docPath.orderBy('timestamp').limitToLast(1).onSnapshot(a => {
+                //console.log('a', a.docs)
+                const newConvos = a.docs.map(b => ({
+                    timestamp: b.data().timestamp.toDate(),
+                    text: b.data().msg,
+                    alias: 'A'
+/*                     author: b.data().author,
+                    uid: b.data().uid */
+                }))
+                console.log('NEW CONVOS:', newConvos)
+            setConvos(newConvos)
+            })
+            
+            // setRefPath(docPath)
         });
     }
     const onRefresh = useCallback(async () => {
@@ -73,9 +86,11 @@ function Item({ alias, text, timestamp }) {
             data={convos.sort((b, a) => a.timestamp.localeCompare(b.timestamp))}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            refreshControl={<RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh} />}
+            refreshControl={
+                <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh} />
+            }
             />
         </View>
     );

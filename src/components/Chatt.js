@@ -15,7 +15,6 @@ const Chatt = ({ navigation }) => {
     const [msgToSend, setMsgToSend] = useState();
     const [refPath, setRefPath] = useState();
 
-// Filtrera "room1" / doc.id med 'room1.client.uid'
     const user = auth().currentUser;
 
     return (

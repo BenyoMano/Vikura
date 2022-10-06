@@ -3,6 +3,7 @@ import { Text, View, FlatList, RefreshControl } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { useNavigation } from "@react-navigation/native";
 import firestore from '@react-native-firebase/firestore';
+//import { RouteProp } from '@react-navigation/native';
 
 
 const Conv = () => {
@@ -10,37 +11,33 @@ const Conv = () => {
     const [refreshing, setRefreshing] = useState(false);
 
     const openConvo = async () => {
-              
-/*         firestore().collection('rooms').doc('room1').collection('messages').orderBy('timestamp').limitToLast(1).onSnapshot(querySnapshot => {
-            const newConvos = querySnapshot.docs.map(doc => ({
-                timestamp: doc.data().timestamp.toDate(),
-                text: doc.data().msg,
-                alias: 'A' 
-            }));
-            setConvos(newConvos)
-        }); */
 
     const getRoomName = await firestore().collection('rooms').where('users.client.uid', '!=', '').get();
+    const newConvos = [];
         getRoomName.docs.map(d => {
             const splitRef = d.ref.path.split('/');
             const last = splitRef[splitRef.length -1];
             const docPath = firestore().collection('rooms').doc(last).collection('messages');
+            
             docPath.orderBy('timestamp').limitToLast(1).onSnapshot(a => {
-                //console.log('a', a.docs)
-                const newConvos = a.docs.map(b => ({
+                a.docs.forEach(b => {
+                    console.log('msgUID', b.data().uid)
+                    newConvos.push ({
                     timestamp: b.data().timestamp.toDate(),
                     text: b.data().msg,
-                    alias: 'A'
-/*                     author: b.data().author,
-                    uid: b.data().uid */
-                }))
-                console.log('NEW CONVOS:', newConvos)
-            setConvos(newConvos)
-            })
-            
-            // setRefPath(docPath)
+                    alias: b.data().author,
+                    uid: b.data().uid
+                })})
+                setConvos(newConvos);
+            });
         });
     }
+
+    useEffect(() => {
+        openConvo();
+        return () => openConvo();
+    }, []) 
+
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
         console.log('Refreshing...')
@@ -49,15 +46,10 @@ const Conv = () => {
         console.log('--refreshed--')
     }, [refreshing]);
 
-    useEffect(() => {
-        openConvo()
-        return () => openConvo();
-    }, []) 
-
-function Item({ alias, text, timestamp }) {
+function Item({ alias, text, timestamp, uid }) {
     const navigation = useNavigation();
     return (
-        <Pressable onPress={() => navigation.navigate('Chatt')}>
+        <Pressable onPress={() => navigation.navigate('Chatt', {id: uid})}>
             <View style={styles.item}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{alias}</Text>
@@ -75,6 +67,7 @@ function Item({ alias, text, timestamp }) {
         alias={item.alias}
         timestamp={item.timestamp.toLocaleString()}
         text={item.text} 
+        uid={item.uid}
         />
     );
 
@@ -83,9 +76,9 @@ function Item({ alias, text, timestamp }) {
             <FlatList
             horizontal={false}
             numColumns={1}
-            data={convos.sort((b, a) => a.timestamp.localeCompare(b.timestamp))}
+            data={convos/* .sort((b, a) => a.alias < b.alias) */} //a.timestamp.localeCompare(b.timestamp)
             renderItem={renderItem}
-            keyExtractor={item => item.timestamp}
+            keyExtractor={item => item.alias}
             refreshControl={
                 <RefreshControl
                 refreshing={refreshing}

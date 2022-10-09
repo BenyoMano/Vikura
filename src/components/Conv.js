@@ -3,7 +3,6 @@ import { Text, View, FlatList, RefreshControl } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { useNavigation } from "@react-navigation/native";
 import firestore from '@react-native-firebase/firestore';
-//import { RouteProp } from '@react-navigation/native';
 
 
 const Conv = () => {
@@ -15,6 +14,8 @@ const Conv = () => {
     const getRoomName = await firestore().collection('rooms').where('users.client.uid', '!=', '').get();
     const newConvos = [];
         getRoomName.docs.map(d => {
+            const clientAlias = d.data().users.client.alias;
+            console.log('Client Alias', clientAlias)
             const splitRef = d.ref.path.split('/');
             const last = splitRef[splitRef.length -1];
             const docPath = firestore().collection('rooms').doc(last).collection('messages');
@@ -25,7 +26,7 @@ const Conv = () => {
                     newConvos.push ({
                     timestamp: b.data().timestamp.toDate(),
                     text: b.data().msg,
-                    alias: b.data().author,
+                    alias: clientAlias,
                     uid: b.data().uid
                 })})
                 setConvos(newConvos);
@@ -78,7 +79,7 @@ function Item({ alias, text, timestamp, uid }) {
             numColumns={1}
             data={convos/* .sort((b, a) => a.alias < b.alias) */} //a.timestamp.localeCompare(b.timestamp)
             renderItem={renderItem}
-            keyExtractor={item => item.alias}
+            keyExtractor={item => item.timestamp}
             refreshControl={
                 <RefreshControl
                 refreshing={refreshing}

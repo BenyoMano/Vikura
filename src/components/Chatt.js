@@ -10,12 +10,13 @@ import ButtonClear from "./ButtonClear";
 import clearMessages from "./clearMessages";
 import ReportConcernButton from "./ReportConcernButton";
 import auth from '@react-native-firebase/auth';
-
+//import { Route } from "@react-navigation/native";
 
 const Chatt = ({ navigation, route }) => {
     const [msgToSend, setMsgToSend] = useState();
     const [refPath, setRefPath] = useState();
-    const {id} = route.params;
+    if (route.params !== undefined) {const {id} = route.params}
+        else { id = [] }
     const user = auth().currentUser;
 
     return (
@@ -42,7 +43,7 @@ const Chatt = ({ navigation, route }) => {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <ChattRuta clientUserId={id} user={user} refPath={refPath} setRefPath={setRefPath} />
+                        <ChattRuta clientUserId={id} user={user} refPath={refPath} setRefPath={setRefPath} /> 
                     </View>
                         <View style={{ flexDirection: 'row', width: 360, marginBottom: 30 }}>
                             <View style={{ justifyContent: 'flex-start'}}>

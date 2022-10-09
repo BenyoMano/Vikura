@@ -41,12 +41,13 @@ const AddUser = ({ navigation }) => {
         const user = auth().currentUser;
         const addPersonalDetails = async () => {
             const refUID = firestore().collection('Users').doc(user.uid);
+            const userAlias = checkboxState === true ? 'KURATOR' : ''
             await refUID.set({
                 firstName: userPropToAdd.firstName,
                 secondName: userPropToAdd.secondName,
                 mejl: userPropToAdd.mejl,
                 personNummer: userPropToAdd.personnummer,
-                alias:'',
+                alias: userAlias,
                 firstLogin: userPropToAdd.firstLogin,
                 kurator: checkboxState,
             })

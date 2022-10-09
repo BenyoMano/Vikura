@@ -11,17 +11,18 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
 
     
     const openChat = async () => {
-        console.log('Client UserId', clientUserId)
+        
 
         const isKurator = await firestore().collection('Users').doc(user.uid).get();
         console.log('Kurator', isKurator.get('kurator'))
         if (isKurator.get('kurator') == true) {
+            console.log('Client UserId', clientUserId)
                 const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', clientUserId).get();
                 getRoomName.docs.map(d => {
                     const splitRef = d.ref.path.split('/');
                     const last = splitRef[splitRef.length -1];
-                    const clientDocPath = firestore().collection('rooms').doc(last).collection('messages');
-                    clientDocPath.onSnapshot(querySnapshot => {
+                    const docPath = firestore().collection('rooms').doc(last).collection('messages');
+                    docPath.onSnapshot(querySnapshot => {
                         const newData = querySnapshot.docs.map(documentSnapshot => ({
                             timestamp: documentSnapshot.data().timestamp.toDate(),
                             text: documentSnapshot.data().msg,
@@ -30,7 +31,7 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                         }))
                     setMessages(newData)
                     })
-                   // setRefPath(docPath)
+                    setRefPath(docPath)
                 });
         } else {
             console.log('uid', user.uid)
@@ -57,7 +58,6 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                     const roomRef = firestore().collection('rooms');
                     console.log('Creating room')
                     const getAlias = await firestore().collection('Users').doc(user.uid).get();
-                    console.log('Field Path', getAlias.get('alias'))
 
                     await roomRef.add({
                         users: {
@@ -68,6 +68,7 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                         }
                     });
 
+                    const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
                     getRoomName.docs.map(d => {
                         const splitRef = d.ref.path.split('/');
                         const last = splitRef[splitRef.length -1];

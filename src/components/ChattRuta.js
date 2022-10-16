@@ -9,39 +9,66 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
     const [messages, setMessages] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 
+   async function getRefPath(getRoomName) {
+        getRoomName.docs.map(d => {
+            const splitRef = d.ref.path.split('/');
+            const last = splitRef[splitRef.length -1];
+            const docPath = firestore().collection('rooms').doc(last).collection('messages');
+            setRefPath(docPath);
+                
+            console.log('RUN')
+        });
+    }
+
+    async function runRefPath(refPath) {
+        refPath.onSnapshot(querySnapshot => {
+            const newData = querySnapshot.docs.map(documentSnapshot => ({
+                timestamp: documentSnapshot.data().timestamp.toDate(),
+                text: documentSnapshot.data().msg,
+                author: documentSnapshot.data().author,
+                uid: documentSnapshot.data().uid
+            }))
+        setMessages(newData)
+        })
+    }
     
     const openChat = async () => {
         
-
         const isKurator = await firestore().collection('Users').doc(user.uid).get();
         console.log('Kurator', isKurator.get('kurator'))
         if (isKurator.get('kurator') == true) {
             console.log('Client UserId', clientUserId)
-                const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', clientUserId).get();
-                getRoomName.docs.map(d => {
-                    const splitRef = d.ref.path.split('/');
-                    const last = splitRef[splitRef.length -1];
-                    const docPath = firestore().collection('rooms').doc(last).collection('messages');
-                    docPath.onSnapshot(querySnapshot => {
-                        const newData = querySnapshot.docs.map(documentSnapshot => ({
-                            timestamp: documentSnapshot.data().timestamp.toDate(),
-                            text: documentSnapshot.data().msg,
-                            author: documentSnapshot.data().author,
-                            uid: documentSnapshot.data().uid
-                        }))
-                    setMessages(newData)
-                    })
-                    setRefPath(docPath)
-                });
+            const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', clientUserId).get();
+            getRoomName.docs.map(d => {
+                const splitRef = d.ref.path.split('/');
+                const last = splitRef[splitRef.length -1];
+                const docPath = firestore().collection('rooms').doc(last).collection('messages');
+                setRefPath(docPath)
+                console.log('RUM KURATOR -- FÖRE')
+                docPath.onSnapshot(querySnapshot => {
+                    console.log('RUM KURATOR -- EFTER')
+                    const newData = querySnapshot.docs.map(documentSnapshot => ({
+                        timestamp: documentSnapshot.data().timestamp.toDate(),
+                        text: documentSnapshot.data().msg,
+                        author: documentSnapshot.data().author,
+                        uid: documentSnapshot.data().uid
+                    }))
+                setMessages(newData)
+                })
+            });
         } else {
             console.log('uid', user.uid)
             const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
+            console.log('Room name', getRoomName.empty)
             if (!getRoomName.empty) {
-                getRoomName.docs.map(d => {
+                 getRoomName.docs.map(d => {
                     const splitRef = d.ref.path.split('/');
                     const last = splitRef[splitRef.length -1];
                     const docPath = firestore().collection('rooms').doc(last).collection('messages');
+                    setRefPath(docPath)
+
                     docPath.onSnapshot(querySnapshot => {
+                        console.log('RUM FINNS -- EFTER')
                         const newData = querySnapshot.docs.map(documentSnapshot => ({
                             timestamp: documentSnapshot.data().timestamp.toDate(),
                             text: documentSnapshot.data().msg,
@@ -50,8 +77,10 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                         }))
                     setMessages(newData)
                     })
-                    setRefPath(docPath)
-                });
+
+                }); 
+               // getRefPath(getRoomName);
+               // runRefPath();
             } else {
                 console.log('Room does not exist!');
                 const createRoom = async () => {
@@ -67,26 +96,22 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                             }
                         }
                     });
-
-                    const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
-                    getRoomName.docs.map(d => {
-                        const splitRef = d.ref.path.split('/');
-                        const last = splitRef[splitRef.length -1];
-                        const docPath = firestore().collection('rooms').doc(last).collection('messages');
-                        setRefPath(docPath);
-                    });
+                    //const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
+                    getRefPath(getRoomName);
                 }
                 createRoom();
             }
         }
-        
-
     }
         
     useEffect(() => {
         openChat();
         return () => openChat();
     }, [])
+
+/*     useEffect(() => {
+        runRefPath();
+    }, [refPath]) */
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true)

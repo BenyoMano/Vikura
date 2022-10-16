@@ -73,12 +73,13 @@ const Hem = ({ navigation }) => {
             if (newUserStatus === false && kuratorStatus == !true) {
                 navigation.navigate('Chatt')
             }
-/*             if (newUserStatus === true && kurator == true) {
-                navigation.navigate('NewKurator')
-            } */
             if (newUserStatus === false && kuratorStatus == true) {
                 navigation.navigate('Kurator')
             }
+            if (newUserStatus === true && kuratorStatus == true) {
+                navigation.navigate('NewKurator')
+            }
+
          })
 
         //Clear TextInput fields

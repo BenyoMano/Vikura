@@ -3,6 +3,7 @@ import { AppRegistry } from 'react-native';
 import Hem from './src/components/Hem';
 import Elev from './src/components/Elev';
 import Kurator from './src/components/Kurator';
+import NewKurator from './src/components/NewKurator';
 import Chatt from './src/components/Chatt';
 import AddUser from './src/components/AddUser';
 import ReportConcern from './src/components/ReportConcern';
@@ -32,6 +33,7 @@ const App = () => {
                     <Stack.Screen name='Hem' component={Hem} />
                     <Stack.Screen name='Elev' component={Elev} />
                     <Stack.Screen name='Kurator' component={Kurator} />
+                    <Stack.Screen name='NewKurator' component={NewKurator} /> 
                     <Stack.Screen name='Chatt' component={Chatt} />
                     <Stack.Screen name='AddUser' component={AddUser} />
                     <Stack.Screen name='ReportConcern' component={ReportConcern} />

@@ -14,9 +14,13 @@ import auth from '@react-native-firebase/auth';
 
 const Chatt = ({ navigation, route }) => {
     const [msgToSend, setMsgToSend] = useState();
-    const [refPath, setRefPath] = useState();
-    if (route.params !== undefined) {const {id} = route.params}
-        else { id = [] }
+    const [refPath, setRefPath] = useState(false);
+    const {id} = route.params
+/*     if (route.params) {
+        const {id} = route.params
+        console.log('Route Params ID', id)
+    }
+    else { id = [] } */
     const user = auth().currentUser;
 
     return (

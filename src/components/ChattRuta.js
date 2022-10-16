@@ -44,9 +44,7 @@ const ChattRuta = ({ user, refPath, setRefPath, clientUserId }) => {
                 const last = splitRef[splitRef.length -1];
                 const docPath = firestore().collection('rooms').doc(last).collection('messages');
                 setRefPath(docPath)
-                console.log('RUM KURATOR -- FÖRE')
                 docPath.onSnapshot(querySnapshot => {
-                    console.log('RUM KURATOR -- EFTER')
                     const newData = querySnapshot.docs.map(documentSnapshot => ({
                         timestamp: documentSnapshot.data().timestamp.toDate(),
                         text: documentSnapshot.data().msg,

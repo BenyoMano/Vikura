@@ -6,46 +6,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import Button from '../atoms/Button';
-import Logo from './Header/Logo';
+import Button from '../../atoms/Button';
+import Logo from '../Header/Logo';
 import auth from '@react-native-firebase/auth';
 import InputBarLogIn from './InputBarLogIn';
 import firestore from '@react-native-firebase/firestore';
-import {MyKeyboardAvoidingView} from '../atoms/MyKeyboardAvoidingView';
-
-function Initiate() {
-  // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-  console.log('Initiate');
-
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-    //console.log(user.phoneNumber);
-    //console.log('User id: ' + auth().currentUser.uid);
-  }
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; //unsubscribe on unmount
-  }, []);
-
-  if (initializing) return null;
-
-  if (!user) {
-    return (
-      <View>
-        <Text>Login</Text>
-      </View>
-    );
-  }
-  return (
-    <View>
-      <Text>Welcome {user.phoneNumber}</Text>
-    </View>
-  );
-}
+import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
@@ -76,10 +42,10 @@ const Hem = ({navigation}) => {
         const kuratorStatus = querySnapshot.get('kurator');
         console.log('User status', newUserStatus);
         if (newUserStatus === true && kuratorStatus == !true) {
-          navigation.navigate('Elev');
+          navigation.navigate('NewElev');
         }
         if (newUserStatus === false && kuratorStatus == !true) {
-          navigation.navigate('Chatt', {id: user.uid});
+          navigation.navigate('ChatView', {id: user.uid});
         }
         if (newUserStatus === false && kuratorStatus == true) {
           navigation.navigate('Kurator');
@@ -142,7 +108,10 @@ const Hem = ({navigation}) => {
           <View style={{flex: 1}}>
             <Button title="Logga in" onPress={() => signIn()} />
             <Button title="Logga ut" onPress={() => signOut()} />
-            <Button title="Nästa" onPress={() => navigation.navigate('Elev')} />
+            <Button
+              title="Nästa"
+              onPress={() => navigation.navigate('NewElev')}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>

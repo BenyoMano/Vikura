@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Logo from '../Header/Logo';
-import BackButton from '../Header/BackButton';
-import Welcome from '../Welcome';
+import {View, StyleSheet} from 'react-native';
+import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
 import CopyButton from './CopyButton';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
+import {HeaderView} from '../Header/HeaderView';
 
 const ReportConcern = ({navigation}) => {
   return (
@@ -18,12 +17,7 @@ const ReportConcern = ({navigation}) => {
         },
       ]}>
       <View style={{flexDirection: 'row', width: 360}}>
-        <View>
-          <BackButton onPress={() => navigation.goBack()} />
-        </View>
-        <View style={{position: 'absolute', left: '50%', right: '50%'}}>
-          <Logo style={{width: 90, height: 35, marginTop: 32}} />
-        </View>
+        <HeaderView navigation={navigation} />
       </View>
       <View
         style={{
@@ -34,7 +28,7 @@ const ReportConcern = ({navigation}) => {
           width: 360,
         }}>
         <View>
-          <Welcome
+          <MainText
             title="Orosanmälan"
             style={{fontSize: 32, marginRight: 10, top: 40, color: 'black'}}
           />
@@ -44,7 +38,7 @@ const ReportConcern = ({navigation}) => {
         </>
       </View>
       <View style={{flex: 0.4}}>
-        <Welcome
+        <MainText
           title="Personuppgifter:"
           style={{fontSize: 18, top: 0, color: 'grey'}}
         />

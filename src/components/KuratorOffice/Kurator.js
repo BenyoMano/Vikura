@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Conv from './Conv';
-import {HeaderView} from './Header/HeaderView';
+import {HeaderView} from '.././Header/HeaderView';
 
 const Kurator = ({navigation}) => {
   return (

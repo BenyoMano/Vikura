@@ -6,15 +6,15 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
-import Button from '../atoms/Button';
-import Welcome from './Welcome';
+import Button from '../../atoms/Button';
+import MainText from '../../atoms/MainText';
 import InputBarNewDetails from './InputBarNewDetails';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {MyKeyboardAvoidingView} from '../atoms/MyKeyboardAvoidingView';
-import {HeaderView} from './Header/HeaderView';
+import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
+import {HeaderView} from '.././Header/HeaderView';
 
-const Elev = ({navigation}) => {
+const NewElev = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const security = false;
@@ -100,14 +100,14 @@ const Elev = ({navigation}) => {
             <HeaderView navigation={navigation} />
           </View>
           <View style={{flex: 1}}>
-            <Welcome
+            <MainText
               title="Välkommen!"
               style={{fontSize: 38, color: 'black', top: 40}}
             />
           </View>
           <View style={{flex: 1}}>
             {isKeyboardVisible === false ? (
-              <Welcome
+              <MainText
                 title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
                             Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig."
                 style={{
@@ -176,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Elev;
+export default NewElev;

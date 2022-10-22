@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppRegistry} from 'react-native';
-import Hem from './src/components/Hem';
-import Elev from './src/components/Elev';
-import Kurator from './src/components/Kurator';
-import NewKurator from './src/components/NewKurator';
+import Hem from './src/components/Login/Hem';
+import NewElev from './src/components/NewDetails/NewElev';
+import Kurator from './src/components/KuratorOffice/Kurator';
+import NewKurator from './src/components/NewDetails/NewKurator';
 import ChatView from './src/components/ChatRoom/ChatView';
 import AddUser from './src/components/AddUser/AddUserView';
 import ReportConcern from './src/components/ReportConcern/ReportConcernView';
@@ -29,7 +29,7 @@ const App = () => {
           initialRouteName="Hem"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="Hem" component={Hem} />
-          <Stack.Screen name="Elev" component={Elev} />
+          <Stack.Screen name="NewElev" component={NewElev} />
           <Stack.Screen name="Kurator" component={Kurator} />
           <Stack.Screen name="NewKurator" component={NewKurator} />
           <Stack.Screen name="ChatView" component={ChatView} />

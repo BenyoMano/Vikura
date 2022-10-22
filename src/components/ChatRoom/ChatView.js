@@ -1,48 +1,27 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import Logo from './Logo';
-import BackButton from './BackButton';
+import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import ChattRuta from './ChattRuta';
-import InputBarChatt from './InputBarChatt';
+import InputBarChatt from './InputbarChat';
 import ButtonSend from './ButtonSend';
 import sendMessage from './sendMessage';
-import ButtonClear from './ButtonClear';
-import clearMessages from './clearMessages';
-import ReportConcernButton from './ReportConcernButton';
 import auth from '@react-native-firebase/auth';
-import {MyKeyboardAvoidingView} from '../atoms/MyKeyboardAvoidingView';
-//import { Route } from "@react-navigation/native";
+import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
+import {HeaderView} from '../Header/HeaderView';
 
-const Chatt = ({navigation, route}) => {
+const ChatView = ({navigation, route}) => {
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
   const {id} = route.params;
-  /*       if (route.params) {
-        const {id} = route.params
-        console.log('Route Params ID', id)
-    }
-    else { id = [] }  */
+
   const user = auth().currentUser;
 
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={[
-            styles.container,
-            {
-              flexDirection: 'column',
-            },
-          ]}>
+        <View style={[{flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', width: 360}}>
-            <View style={{justifyContent: 'flex-start'}}>
+            <HeaderView navigation={navigation} />
+            {/*             <View style={{justifyContent: 'flex-start'}}>
               <BackButton onPress={() => navigation.goBack()} />
             </View>
             <View style={{position: 'absolute', left: '50%', right: '50%'}}>
@@ -55,7 +34,7 @@ const Chatt = ({navigation, route}) => {
               <ReportConcernButton
                 onPress={() => navigation.navigate('ReportConcern')}
               />
-            </View>
+            </View> */}
           </View>
           <View style={{flex: 1}}>
             <ChattRuta
@@ -88,13 +67,4 @@ const Chatt = ({navigation, route}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-});
-
-export default Chatt;
+export default ChatView;

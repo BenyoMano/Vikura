@@ -2,19 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
-  Platform,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import Button from './Button';
-import Logo from './Logo';
-import Welcome from './Welcome';
+import Button from '../atoms/Button';
+import Logo from './Header/Logo';
 import auth from '@react-native-firebase/auth';
 import InputBarLogIn from './InputBarLogIn';
 import firestore from '@react-native-firebase/firestore';
+import {MyKeyboardAvoidingView} from '../atoms/MyKeyboardAvoidingView';
 
 function Initiate() {
   // Set an initializing state whilst Firebase connects
@@ -106,9 +103,7 @@ const Hem = ({navigation}) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
+    <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
           style={[
@@ -151,7 +146,7 @@ const Hem = ({navigation}) => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </MyKeyboardAvoidingView>
   );
 };
 

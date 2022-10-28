@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -20,6 +20,7 @@ const NewKurator = ({navigation}) => {
   const security = false;
   const capitalize = 'none';
   const {password, rePassword} = newDetails;
+  const ref_input2 = useRef();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -113,18 +114,25 @@ const NewKurator = ({navigation}) => {
           <View style={{flex: 2}}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
               <InputBarNewDetails
+                autoFocus={false}
+                blurOnSubmit={false}
                 title="Ange nytt lösenord:"
+                returnKeyType="next"
                 security={true}
                 keys={'password'}
                 value={password}
+                onSubmitEditing={() => ref_input2.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
               />
               <InputBarNewDetails
+                autoFocus={false}
+                blurOnSubmit={false}
                 title="Repetera lösenord:"
                 security={true}
                 keys={'rePassword'}
                 value={rePassword}
+                ref={ref_input2}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
               />

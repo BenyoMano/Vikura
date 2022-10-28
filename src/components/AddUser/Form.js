@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -21,6 +21,10 @@ const Form = ({
     firstLogin,
     kurator,
   } = userPropToAdd;
+  const ref_input2 = useRef();
+  const ref_input3 = useRef();
+  const ref_input4 = useRef();
+  const ref_input5 = useRef();
 
   function kuratorCheck() {
     console.log('firstname', firstName);
@@ -38,51 +42,73 @@ const Form = ({
     <View style={viewStyle.container}>
       <View>
         <InputbarAddUser
+          autoFocus={false}
+          blurOnSubmit={false}
           title="Förnamn:"
+          returnKeyType="next"
           capitalize="words"
           keys={'firstName'}
           value={firstName}
+          onSubmitEditing={() => ref_input2.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />
       </View>
       <View>
         <InputbarAddUser
+          autoFocus={false}
+          blurOnSubmit={false}
           title="Efternamn:"
+          returnKeyType="next"
           capitalize="words"
           keys={'secondName'}
           value={secondName}
+          ref={ref_input2}
+          onSubmitEditing={() => ref_input3.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />
       </View>
       <View>
         <InputbarAddUser
+          autoFocus={false}
+          blurOnSubmit={false}
           title="Mejl:"
+          returnKeyType="next"
           keyType="email-address"
           capitalize={capitalize}
           keys={'mejl'}
           value={mejl}
+          ref={ref_input3}
+          onSubmitEditing={() => ref_input4.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />
       </View>
       <View>
         <InputbarAddUser
+          autoFocus={false}
+          blurOnSubmit={false}
           title="Lösenord:"
+          returnKeyType="next"
           capitalize={capitalize}
           keys={'password'}
           value={password}
+          ref={ref_input4}
+          onSubmitEditing={() => ref_input5.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />
       </View>
       <View>
         <InputbarAddUser
+          autoFocus={false}
+          blurOnSubmit={true}
           title="Personnummer:"
           keyType="numeric"
           keys={'personnummer'}
           value={personnummer}
+          ref={ref_input5}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />

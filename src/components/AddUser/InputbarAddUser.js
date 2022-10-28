@@ -1,29 +1,43 @@
 import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 
-const InputBarAddUser = ({
-  title,
-  keys,
-  value,
-  userPropToAdd,
-  setUserPropToAdd,
-  capitalize,
-  keyType,
-}) => {
-  const {viewStyle, textStyle, barStyle} = styles;
+const InputBarAddUser = React.forwardRef(
+  (
+    {
+      autoFocus,
+      blurOnSubmit,
+      title,
+      keys,
+      value,
+      userPropToAdd,
+      setUserPropToAdd,
+      capitalize,
+      keyType,
+      returnKeyType,
+      onSubmitEditing,
+    },
+    ref,
+  ) => {
+    const {viewStyle, textStyle, barStyle} = styles;
 
-  return (
-    <View style={viewStyle}>
-      <Text style={textStyle}>{title}</Text>
-      <TextInput
-        style={barStyle}
-        autoCapitalize={capitalize}
-        keyboardType={keyType}
-        onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
-        value={value}></TextInput>
-    </View>
-  );
-};
+    return (
+      <View style={viewStyle}>
+        <Text style={textStyle}>{title}</Text>
+        <TextInput
+          style={barStyle}
+          autoFocus={autoFocus}
+          blurOnSubmit={blurOnSubmit}
+          autoCapitalize={capitalize}
+          returnKeyType={returnKeyType}
+          keyboardType={keyType}
+          ref={ref}
+          onSubmitEditing={onSubmitEditing}
+          onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
+          value={value}></TextInput>
+      </View>
+    );
+  },
+);
 
 const styles = {
   viewStyle: {

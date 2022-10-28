@@ -1,31 +1,45 @@
 import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View, useRef} from 'react-native';
 
-const InputBarLogIn = ({
-  title,
-  keys,
-  value,
-  loginDetails,
-  setLoginDetails,
-  security,
-  keyType,
-}) => {
-  const {viewStyle, textStyle, barStyle} = styles;
+const InputBarLogIn = React.forwardRef(
+  (
+    {
+      autoFocus,
+      blurOnSubmit,
+      title,
+      keys,
+      value,
+      loginDetails,
+      setLoginDetails,
+      security,
+      keyType,
+      returnKeyType,
+      onSubmitEditing,
+    },
+    ref,
+  ) => {
+    const {viewStyle, textStyle, barStyle} = styles;
 
-  return (
-    <View style={viewStyle}>
-      <Text style={textStyle}>{title}</Text>
-      <TextInput
-        style={barStyle}
-        autoCorrect={false}
-        autoCapitalize="none"
-        keyboardType={keyType}
-        secureTextEntry={security}
-        onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
-        value={value}></TextInput>
-    </View>
-  );
-};
+    return (
+      <View style={viewStyle}>
+        <Text style={textStyle}>{title}</Text>
+        <TextInput
+          style={barStyle}
+          autoFocus={autoFocus}
+          blurOnSubmit={blurOnSubmit}
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType={keyType}
+          returnKeyType={returnKeyType}
+          secureTextEntry={security}
+          ref={ref}
+          onSubmitEditing={onSubmitEditing}
+          onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
+          value={value}></TextInput>
+      </View>
+    );
+  },
+);
 
 const styles = {
   viewStyle: {

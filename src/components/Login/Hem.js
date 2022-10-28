@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
   const security = false;
   const {mejl, password} = loginDetails;
+  const ref_input2 = useRef();
 
   async function signIn() {
     await auth()
@@ -88,10 +89,14 @@ const Hem = ({navigation}) => {
           <View style={styles.contcont}>
             <View style={styles.logincontainer}>
               <InputBarLogIn
+                autoFocus={false}
+                blurOnSubmit={false}
                 title="Mejl:"
                 keyType="email-address"
+                returnKeyType="next"
                 keys={'mejl'}
                 value={mejl}
+                onSubmitEditing={() => ref_input2.current.focus()}
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
               />
@@ -100,6 +105,7 @@ const Hem = ({navigation}) => {
                 security={true}
                 keys={'password'}
                 value={password}
+                ref={ref_input2}
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
               />

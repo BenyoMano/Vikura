@@ -40,6 +40,8 @@ const Conv = () => {
           setConvos(newConvos);
         });
     });
+    console.log('Convos:', convos);
+    convos.forEach(a => console.log('HEEJ', a.timestamp.toLocaleString()));
   };
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const Conv = () => {
       <FlatList
         horizontal={false}
         numColumns={1}
-        data={convos /* .sort((b, a) => a.alias < b.alias) */} //a.timestamp.localeCompare(b.timestamp)
+        data={convos.sort((a, b) => a.timestamp < b.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         refreshControl={

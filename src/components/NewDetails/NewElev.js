@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '.././Header/HeaderView';
+import newDetailsElev from '../../firebase/newDetailsElev';
 
 const NewElev = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
@@ -20,6 +21,8 @@ const NewElev = ({navigation}) => {
   const security = false;
   const capitalize = 'none';
   const {password, rePassword, alias} = newDetails;
+  const ref_input2 = useRef();
+  const ref_input3 = useRef();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -122,33 +125,50 @@ const NewElev = ({navigation}) => {
           <View style={{flex: 2}}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
               <InputBarNewDetails
+                autoFocus={false}
+                blurOnSubmit={false}
                 title="Ange nytt lösenord:"
+                returnKeyType="next"
                 security={true}
                 keys={'password'}
                 value={password}
+                onSubmitEditing={() => ref_input2.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
               />
               <InputBarNewDetails
+                autoFocus={false}
+                blurOnSubmit={false}
                 title="Repetera lösenord:"
+                returnKeyType="next"
                 security={true}
                 keys={'rePassword'}
                 value={rePassword}
+                ref={ref_input2}
+                onSubmitEditing={() => ref_input3.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
               />
               <InputBarNewDetails
+                autoFocus={false}
+                blurOnSubmit={true}
                 title="Ange ett nickname:"
                 capitalize="words"
                 keys={'alias'}
                 value={alias}
+                ref={ref_input3}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
               />
             </ScrollView>
           </View>
           <View style={{marginBottom: 10}}>
-            <Button title="Bekräfta" onPress={() => renewDetails()} />
+            <Button
+              title="Bekräfta"
+              onPress={() => {
+                newDetailsElev({password, rePassword, alias});
+              }}
+            />
             <Button
               title="Starta chatt"
               onPress={() => navigation.navigate('Kurator')}

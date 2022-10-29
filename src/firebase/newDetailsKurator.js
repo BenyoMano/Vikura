@@ -1,9 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
-async function renewDetails() {
+const newDetailsKurator = async ({password, rePassword}) => {
   if (rePassword === password) {
     await auth()
-      .currentUser.updatePassword(newDetails.password)
+      .currentUser.updatePassword(password)
       .then(() => {
         console.log('Password updated');
       })
@@ -16,22 +17,23 @@ async function renewDetails() {
         }
         console.error(error);
       });
+
+    firestore()
+      .collection('Users')
+      .doc(auth().currentUser.uid)
+      .onSnapshot(querySnapshot => {
+        const currentData = querySnapshot.data();
+        console.log('Current Data:', currentData);
+        firestore()
+          .collection('Users')
+          .doc(auth().currentUser.uid)
+          .set({
+            ...currentData,
+            firstLogin: false,
+          });
+      });
   } else {
     console.log('Lösenordet matchar inte!');
   }
-
-  firestore()
-    .collection('Users')
-    .doc(auth().currentUser.uid)
-    .onSnapshot(querySnapshot => {
-      const currentData = querySnapshot.data();
-      console.log('Current Data:', currentData);
-      firestore()
-        .collection('Users')
-        .doc(auth().currentUser.uid)
-        .set({
-          ...currentData,
-          firstLogin: false,
-        });
-    });
-}
+};
+export default newDetailsKurator;

@@ -9,10 +9,9 @@ import {
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
 import InputBarNewDetails from './InputBarNewDetails';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
+import newDetailsKurator from '../../firebase/newDetailsKurator';
 
 const NewKurator = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
@@ -41,42 +40,6 @@ const NewKurator = ({navigation}) => {
       keyboardDidShowListener.remove();
     };
   }, []);
-
-  async function renewDetails() {
-    if (rePassword === password) {
-      await auth()
-        .currentUser.updatePassword(newDetails.password)
-        .then(() => {
-          console.log('Password updated');
-        })
-        .catch(error => {
-          if (error.code === 'auth/weak-password') {
-            console.log('Weak password');
-          }
-          if (error.code === 'auth/requires-recent-login') {
-            console.log('You have to reauthenticate');
-          }
-          console.error(error);
-        });
-    } else {
-      console.log('Lösenordet matchar inte!');
-    }
-
-    firestore()
-      .collection('Users')
-      .doc(auth().currentUser.uid)
-      .onSnapshot(querySnapshot => {
-        const currentData = querySnapshot.data();
-        console.log('Current Data:', currentData);
-        firestore()
-          .collection('Users')
-          .doc(auth().currentUser.uid)
-          .set({
-            ...currentData,
-            firstLogin: false,
-          });
-      });
-  }
 
   return (
     <MyKeyboardAvoidingView>
@@ -127,7 +90,7 @@ const NewKurator = ({navigation}) => {
               />
               <InputBarNewDetails
                 autoFocus={false}
-                blurOnSubmit={false}
+                blurOnSubmit={true}
                 title="Repetera lösenord:"
                 security={true}
                 keys={'rePassword'}
@@ -139,7 +102,10 @@ const NewKurator = ({navigation}) => {
             </ScrollView>
           </View>
           <View style={{marginBottom: 10}}>
-            <Button title="Bekräfta" onPress={() => renewDetails()} />
+            <Button
+              title="Bekräfta"
+              onPress={() => newDetailsKurator({password, rePassword})}
+            />
             <Button
               title="Starta chatt"
               onPress={() => navigation.navigate('Kurator')}

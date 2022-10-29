@@ -21,23 +21,9 @@ const ChatView = ({navigation, route}) => {
         <View style={[{flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView navigation={navigation} />
-            {/*             <View style={{justifyContent: 'flex-start'}}>
-              <BackButton onPress={() => navigation.goBack()} />
-            </View>
-            <View style={{position: 'absolute', left: '50%', right: '50%'}}>
-              <Logo style={{width: 90, height: 35, marginTop: 32}} />
-            </View>
-            <View style={{position: 'absolute', left: '67%'}}>
-              <ButtonClear title="Clear" onPress={() => clearMessages()} />
-            </View>
-            <View style={{position: 'absolute', left: '88%'}}>
-              <ReportConcernButton
-                onPress={() => navigation.navigate('ReportConcern')}
-              />
-            </View> */}
           </View>
           <View style={{flex: 1}}>
-            <ChattRuta
+            <ChattRuta // error: state on unmount
               clientUserId={id}
               user={user}
               refPath={refPath}

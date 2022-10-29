@@ -16,6 +16,7 @@ const Conv = () => {
     const newConvos = [];
     getRoomName.docs.map(d => {
       const clientAlias = d.data().users.client.alias;
+      const clientId = d.data().users.client.uid;
       console.log('Client Alias', clientAlias);
       const splitRef = d.ref.path.split('/');
       const last = splitRef[splitRef.length - 1];
@@ -29,12 +30,12 @@ const Conv = () => {
         .limitToLast(1)
         .onSnapshot(a => {
           a.docs.forEach(b => {
-            console.log('msgUID', b.data().uid);
+            console.log('msgUID', clientId);
             newConvos.push({
               timestamp: b.data().timestamp.toDate(),
               text: b.data().msg,
               alias: clientAlias,
-              uid: b.data().uid,
+              uid: clientId,
             });
           });
           setConvos(newConvos);

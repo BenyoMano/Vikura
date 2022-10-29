@@ -36,7 +36,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
 
   const openChat = async () => {
     const isKurator = await firestore().collection('Users').doc(user.uid).get();
-    console.log('Kurator', isKurator.get('kurator'));
+    console.log('Kurator:', isKurator.get('kurator'));
     if (isKurator.get('kurator') == true) {
       console.log('Client UserId', clientUserId);
       const getRoomName = await firestore()
@@ -51,8 +51,8 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
           .doc(last)
           .collection('messages');
         setRefPath(docPath);
-        console.log('docPath', docPath);
-        console.log('refPath', refPath);
+        //console.log('docPath', docPath);
+        // console.log('refPath', refPath);
         docPath.onSnapshot(querySnapshot => {
           const newData = querySnapshot.docs.map(documentSnapshot => ({
             timestamp: documentSnapshot.data().timestamp.toDate(),

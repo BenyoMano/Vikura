@@ -1,9 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 
-const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
-  const {viewStyle} = styles;
+const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   const [messages, setMessages] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
 
   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {
@@ -34,8 +32,10 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
   const openChat = async () => {
     const isKurator = await firestore().collection('Users').doc(user.uid).get();
     console.log('Kurator:', isKurator.get('kurator'));
+    console.log('kuraotr', kurator);
+
     if (isKurator.get('kurator') == true) {
-      console.log('Client UserId', clientUserId);
+      console.log('Client UserId', clientUserId); //clientUserId
       const getRoomName = await firestore()
         .collection('rooms')
         .where('users.client.uid', '==', clientUserId)
@@ -67,6 +67,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
         .where('users.client.uid', '==', user.uid)
         .get();
       console.log('Room name', getRoomName.empty);
+
       if (!getRoomName.empty) {
         getRoomName.docs.map(d => {
           const splitRef = d.ref.path.split('/');

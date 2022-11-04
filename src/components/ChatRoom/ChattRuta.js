@@ -3,10 +3,11 @@ import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 
-const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
+const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  console.log('Inside ChattRuta "kurator":', kurator);
 
   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {
@@ -36,7 +37,10 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
 
   const openChat = async () => {
     const isKurator = await firestore().collection('Users').doc(user.uid).get();
-    console.log('Kurator:', isKurator.get('kurator'));
+    console.log('gamla sättet "Kurator":', isKurator.get('kurator'));
+    console.log('Nya sättet "Kurator":', kurator);
+    console.log('user ruta', user);
+
     if (isKurator.get('kurator') == true) {
       console.log('Client UserId', clientUserId);
       const getRoomName = await firestore()
@@ -51,6 +55,11 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
           .doc(last)
           .collection('messages');
         setRefPath(docPath);
+        console.log(
+          'entered if kurator, "isKurator"',
+          isKurator.get('kurator'),
+        );
+        console.log('Entered if kurator, "kurator"', kurator);
         //console.log('docPath', docPath);
         // console.log('refPath', refPath);
         docPath.onSnapshot(querySnapshot => {
@@ -64,10 +73,12 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
         });
       });
     } else {
-      console.log('uid', user.uid);
+      clientUserId = user.uid;
+      //console.log('user.uid', user.uid);
+      console.log('clientUserId', clientUserId);
       const getRoomName = await firestore()
         .collection('rooms')
-        .where('users.client.uid', '==', user.uid)
+        .where('users.client.uid', '==', clientUserId)
         .get();
       console.log('Room name', getRoomName.empty);
       if (!getRoomName.empty) {
@@ -100,18 +111,17 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
           console.log('Creating room');
           const getAlias = await firestore()
             .collection('Users')
-            .doc(user.uid)
+            .doc(clientUserId)
             .get();
 
           await roomRef.add({
             users: {
               client: {
                 alias: getAlias.get('alias'),
-                uid: user.uid,
+                uid: clientUserId,
               },
             },
           });
-          //const getRoomName = await firestore().collection('rooms').where('users.client.uid', '==', user.uid).get();
           getRefPath(getRoomName);
         };
         createRoom();
@@ -138,10 +148,11 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
 
   function Item({text, timestamp, uid}) {
     return (
-      <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+      <View
+        style={uid === clientUserId ? styles.bubblaSend : styles.bubblaRecieve}>
         <View
           style={
-            uid === user.uid
+            uid === clientUserId
               ? styles.bubblaSend.bubbla
               : styles.bubblaRecieve.bubbla
           }>
@@ -149,7 +160,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
         </View>
         <View
           style={
-            uid === user.uid
+            uid === clientUserId
               ? styles.bubblaSend.timestamp
               : styles.bubblaRecieve.timestamp
           }>

@@ -23,6 +23,18 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
     });
   }
 
+  async function runRefPath(refPath) {
+    refPath.onSnapshot(querySnapshot => {
+      const newData = querySnapshot.docs.map(documentSnapshot => ({
+        timestamp: documentSnapshot.data().timestamp.toDate(),
+        text: documentSnapshot.data().msg,
+        author: documentSnapshot.data().author,
+        uid: documentSnapshot.data().uid,
+      }));
+      setMessages(newData);
+    });
+  }
+
   const openChat = async () => {
     const isKurator = await firestore().collection('Users').doc(user.uid).get();
     console.log('gamla sättet "Kurator":', isKurator.get('kurator'));

@@ -6,7 +6,6 @@ import CopyButton from './CopyButton';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
-//import Clipboard from '@react-native-clipboard/clipboard';
 
 const ReportConcern = ({navigation}) => {
   return (
@@ -48,9 +47,7 @@ const ReportConcern = ({navigation}) => {
         <PersonalInfo />
       </View>
       <View style={{width: 360, alignItems: 'flex-end'}}>
-        <CopyButton
-        //onPress={() => Clipboard.setString('mail@mail.com')}
-        ></CopyButton>
+        <CopyButton />
       </View>
       <View style={{flex: 0.5}}>
         <Button title="Gör något" />

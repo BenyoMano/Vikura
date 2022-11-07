@@ -1,68 +1,22 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import Logo from '../Header/Logo';
-import auth from '@react-native-firebase/auth';
 import InputBarLogIn from './InputBarLogIn';
-import firestore from '@react-native-firebase/firestore';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signOut from '../../firebase/signOut';
+import signIn from '../../firebase/signIn';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
   const security = false;
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
-
-  async function signIn() {
-    await auth()
-      .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
-      .then(() => {
-        console.log('User signed in!');
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email adress is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email adress is invalid!');
-        }
-        console.error(error);
-      });
-    const user = auth().currentUser;
-    firestore()
-      .collection('Users')
-      .doc(user.uid)
-      .onSnapshot(querySnapshot => {
-        const newUserStatus = querySnapshot.get('firstLogin');
-        const kuratorStatus = querySnapshot.get('kurator');
-        console.log('User status', newUserStatus);
-        if (newUserStatus === true && kuratorStatus == !true) {
-          navigation.navigate('NewElev');
-        }
-        if (newUserStatus === false && kuratorStatus == !true) {
-          navigation.navigate('ChatView', {id: user.uid});
-        }
-        if (newUserStatus === false && kuratorStatus == true) {
-          navigation.navigate('Kurator');
-        }
-        if (newUserStatus === true && kuratorStatus == true) {
-          navigation.navigate('NewKurator');
-        }
-      });
-
-    //Clear TextInput fields
-    setLoginDetails({
-      mejl: '',
-      password: '',
-    });
-  }
 
   return (
     <MyKeyboardAvoidingView>
@@ -107,7 +61,12 @@ const Hem = ({navigation}) => {
             </View>
           </View>
           <View style={{flex: 1}}>
-            <Button title="Logga in" onPress={() => signIn()} />
+            <Button
+              title="Logga in"
+              onPress={() =>
+                signIn({loginDetails, setLoginDetails, navigation})
+              }
+            />
             <Button title="Logga ut" onPress={() => signOut()} />
             <Button
               title="Nästa"

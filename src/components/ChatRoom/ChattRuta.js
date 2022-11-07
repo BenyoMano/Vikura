@@ -7,7 +7,7 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  console.log('Inside ChattRuta "kurator":', kurator);
+  //console.log('Inside ChattRuta "kurator":', kurator);
 
   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {

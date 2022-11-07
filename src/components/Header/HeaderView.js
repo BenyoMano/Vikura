@@ -8,6 +8,7 @@ import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
+import ButtonLogOut from './ButtonLogOut';
 
 export const HeaderView = ({navigation, kurator, children}) => {
   const route = useRoute();
@@ -28,15 +29,6 @@ export const HeaderView = ({navigation, kurator, children}) => {
         </View>
       ) : route.name === 'ChatView' && kurator ? (
         <View style={{position: 'absolute', left: '67%'}}>
-          <View style={{position: 'absolute', left: '-280%'}}>
-            <ButtonClear
-              title="Logga Ut"
-              onPress={() => {
-                signOut();
-                navigation.navigate('Hem');
-              }}
-            />
-          </View>
           <View>
             <ButtonClear title="Clear" onPress={() => clearMessages()} />
           </View>
@@ -45,6 +37,16 @@ export const HeaderView = ({navigation, kurator, children}) => {
               onPress={() => navigation.navigate('ReportConcern')}
             />
           </View>
+        </View>
+      ) : route.name === 'ChatView' && !kurator ? (
+        <View style={{position: 'absolute', right: '0%', marginTop: 32}}>
+          <ButtonLogOut
+            title="Logga Ut"
+            onPress={() => {
+              signOut();
+              navigation.navigate('Hem');
+            }}
+          />
         </View>
       ) : null}
     </View>

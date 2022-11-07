@@ -7,25 +7,27 @@ import sendMessage from './sendMessage';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import useIsKurator from '../../firebase/isKurator';
+import auth from '@react-native-firebase/auth';
 
 const ChatView = ({navigation, route}) => {
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
-  const {kurator, user} = useIsKurator({});
+  const isKurator = useIsKurator();
   const {id} = route.params;
+  const user = auth().currentUser;
 
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={[{flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', width: 360}}>
-            <HeaderView navigation={navigation} kurator={kurator} />
+            <HeaderView navigation={navigation} kurator={isKurator} />
           </View>
           <View style={{flex: 1}}>
             <ChattRuta // error: state on unmount
               clientUserId={id}
-              user={user}
-              kurator={kurator}
+              //user={user}
+              kurator={isKurator}
               refPath={refPath}
               setRefPath={setRefPath}
             />

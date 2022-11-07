@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import auth from '@react-native-firebase/auth';
 import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
@@ -36,12 +37,11 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   }
 
   const openChat = async () => {
-    const isKurator = await firestore().collection('Users').doc(user.uid).get();
-    console.log('gamla sättet "Kurator":', isKurator.get('kurator'));
-    console.log('Nya sättet "Kurator":', kurator);
-    console.log('user ruta', user);
+    if (kurator === undefined) return;
 
-    if (isKurator.get('kurator') == true) {
+    const user = auth().currentUser;
+
+    if (kurator) {
       console.log('Client UserId', clientUserId);
       const getRoomName = await firestore()
         .collection('rooms')
@@ -55,11 +55,7 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
           .doc(last)
           .collection('messages');
         setRefPath(docPath);
-        console.log(
-          'entered if kurator, "isKurator"',
-          isKurator.get('kurator'),
-        );
-        console.log('Entered if kurator, "kurator"', kurator);
+
         //console.log('docPath', docPath);
         // console.log('refPath', refPath);
         docPath.onSnapshot(querySnapshot => {
@@ -132,11 +128,7 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   useEffect(() => {
     openChat();
     return () => openChat();
-  }, []);
-
-  /*     useEffect(() => {
-        runRefPath();
-    }, [refPath]) */
+  }, [kurator]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);

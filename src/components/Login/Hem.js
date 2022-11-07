@@ -12,6 +12,7 @@ import auth from '@react-native-firebase/auth';
 import InputBarLogIn from './InputBarLogIn';
 import firestore from '@react-native-firebase/firestore';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
+import signOut from '../../firebase/signOut';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
@@ -61,12 +62,6 @@ const Hem = ({navigation}) => {
       mejl: '',
       password: '',
     });
-  }
-
-  function signOut() {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
   }
 
   return (

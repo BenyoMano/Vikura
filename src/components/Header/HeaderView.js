@@ -7,17 +7,11 @@ import ButtonClear from '../ChatRoom/ButtonClear';
 import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
+import signOut from '../../firebase/signOut';
 
 export const HeaderView = ({navigation, kurator, children}) => {
   const route = useRoute();
   console.log('Route Name:', route.name);
-
-  function signOut() {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  }
 
   return (
     <View style={{flexDirection: 'row', width: 360}}>
@@ -32,7 +26,7 @@ export const HeaderView = ({navigation, kurator, children}) => {
         <View style={{position: 'absolute', left: '80%'}}>
           <AddUserButton onPress={() => navigation.navigate('AddUser')} />
         </View>
-      ) : route.name === 'ChatView' /* && kurator === 'true' */ ? (
+      ) : route.name === 'ChatView' && kurator ? (
         <View style={{position: 'absolute', left: '67%'}}>
           <View style={{position: 'absolute', left: '-280%'}}>
             <ButtonClear

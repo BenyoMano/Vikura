@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
+import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
 
 const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;

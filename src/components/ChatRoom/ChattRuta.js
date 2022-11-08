@@ -4,10 +4,11 @@ import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
 
-const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
+const ChattRuta = ({kurator, refPath, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const user = auth().currentUser;
   //console.log('Inside ChattRuta "kurator":', kurator);
 
   async function getRefPath(getRoomName) {
@@ -38,8 +39,6 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
 
   const openChat = async () => {
     if (kurator === undefined) return;
-
-    const user = auth().currentUser;
 
     if (kurator) {
       console.log('Client UserId', clientUserId);
@@ -140,11 +139,10 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
 
   function Item({text, timestamp, uid}) {
     return (
-      <View
-        style={uid === clientUserId ? styles.bubblaSend : styles.bubblaRecieve}>
+      <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
         <View
           style={
-            uid === clientUserId
+            uid === user.uid
               ? styles.bubblaSend.bubbla
               : styles.bubblaRecieve.bubbla
           }>
@@ -152,7 +150,7 @@ const ChattRuta = ({user, kurator, refPath, setRefPath, clientUserId}) => {
         </View>
         <View
           style={
-            uid === clientUserId
+            uid === user.uid
               ? styles.bubblaSend.timestamp
               : styles.bubblaRecieve.timestamp
           }>

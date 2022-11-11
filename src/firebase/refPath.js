@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 
-const refPath = ({setRefPath}) => {
+const refPath = ({setRefPath, getRoomName}) => {
   const getRefPath = () => {
     getRoomName.docs.map(d => {
       const splitRef = d.ref.path.split('/');
@@ -15,6 +15,7 @@ const refPath = ({setRefPath}) => {
     });
   };
   getRefPath();
+  return docPath;
 };
 
 export default refPath;

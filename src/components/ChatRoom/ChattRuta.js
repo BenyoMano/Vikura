@@ -3,13 +3,14 @@ import auth from '@react-native-firebase/auth';
 import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
+import refPath from '../../firebase/refPath';
 
-const ChattRuta = ({kurator, refPath, setRefPath, clientUserId}) => {
+const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const user = auth().currentUser;
-  //console.log('Inside ChattRuta "kurator":', kurator);
+  //console.log('Inside ChattRuta "isKurator":', isKurator);
 
   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {
@@ -38,14 +39,17 @@ const ChattRuta = ({kurator, refPath, setRefPath, clientUserId}) => {
   }
 
   const openChat = async () => {
-    if (kurator === undefined) return;
+    if (isKurator === undefined) return;
 
-    if (kurator) {
+    if (isKurator) {
       console.log('Client UserId', clientUserId);
       const getRoomName = await firestore()
         .collection('rooms')
         .where('users.client.uid', '==', clientUserId)
         .get();
+
+      //refPath({setRefPath, getRoomName});
+
       getRoomName.docs.map(d => {
         const splitRef = d.ref.path.split('/');
         const last = splitRef[splitRef.length - 1];
@@ -71,6 +75,7 @@ const ChattRuta = ({kurator, refPath, setRefPath, clientUserId}) => {
       clientUserId = user.uid;
       //console.log('user.uid', user.uid);
       console.log('clientUserId', clientUserId);
+
       const getRoomName = await firestore()
         .collection('rooms')
         .where('users.client.uid', '==', clientUserId)
@@ -127,7 +132,7 @@ const ChattRuta = ({kurator, refPath, setRefPath, clientUserId}) => {
   useEffect(() => {
     openChat();
     return () => openChat();
-  }, [kurator]);
+  }, [isKurator]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);

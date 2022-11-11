@@ -13,11 +13,12 @@ const Conv = () => {
       .collection('rooms')
       .where('users.client.uid', '!=', '')
       .get();
+
     const newConvos = [];
     getRoomName.docs.map(d => {
       const clientAlias = d.data().users.client.alias;
       const clientId = d.data().users.client.uid;
-      console.log('Client Alias', clientAlias);
+      console.log('Client alias:', clientAlias);
       const splitRef = d.ref.path.split('/');
       const last = splitRef[splitRef.length - 1];
       const docPath = firestore()
@@ -41,8 +42,9 @@ const Conv = () => {
           setConvos(newConvos);
         });
     });
-    console.log('Convos:', convos);
-    convos.forEach(a => console.log('HEEJ', a.timestamp.toLocaleString()));
+    convos.forEach(a =>
+      console.log('Convo timestamp:', a.timestamp.toLocaleString()),
+    );
   };
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {Platform} from 'react-native';
 import {
   View,
   StyleSheet,
@@ -25,7 +26,8 @@ const NewKurator = ({navigation}) => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
+        // or some other action
       },
     );
     const keyboardDidHideListener = Keyboard.addListener(
@@ -61,18 +63,18 @@ const NewKurator = ({navigation}) => {
             />
           </View>
           <View style={{flex: 1}}>
-            {isKeyboardVisible === false ? (
-              <MainText
-                title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
+            {/* {isKeyboardVisible === false ? ( */}
+            <MainText
+              title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
                             Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig."
-                style={{
-                  fontSize: 16,
-                  color: '#7f7f7f',
-                  top: 0,
-                  paddingHorizontal: 40,
-                }}
-              />
-            ) : null}
+              style={{
+                fontSize: 16,
+                color: '#7f7f7f',
+                top: 0,
+                paddingHorizontal: 40,
+              }}
+            />
+            {/* ) : null} */}
           </View>
           <View style={{flex: 2}}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -123,7 +125,6 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     backgroundColor: '#F7F7F7',
     borderRadius: 20,
-    // alignItems: 'center'
   },
   container: {
     flex: 1,

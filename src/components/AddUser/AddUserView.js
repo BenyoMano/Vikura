@@ -9,15 +9,14 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import Button from '../../atoms/Button';
 import Form from './Form';
 import Welcome from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
+import createUser from './createUser';
 
-const AddUser = ({navigation}) => {
+const AddUserView = ({navigation}) => {
   const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
@@ -33,64 +32,6 @@ const AddUser = ({navigation}) => {
     kurator: checkboxState,
   });
 
-  // Get user ID, connect with more infodata in Firestore DB ==>
-
-  async function createUser() {
-    await auth()
-      .createUserWithEmailAndPassword(
-        userPropToAdd.mejl,
-        userPropToAdd.password,
-      )
-      .then(() => {
-        console.log('User account created & signed in!');
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email adress is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email adress is invalid!');
-        }
-        console.error(error);
-      });
-    const user = auth().currentUser;
-    const addPersonalDetails = async () => {
-      const refUID = firestore().collection('Users').doc(user.uid);
-      const userAlias = checkboxState === true ? 'KURATOR' : '';
-      await refUID.set({
-        firstName: userPropToAdd.firstName,
-        secondName: userPropToAdd.secondName,
-        mejl: userPropToAdd.mejl,
-        personNummer: userPropToAdd.personnummer,
-        alias: userAlias,
-        firstLogin: userPropToAdd.firstLogin,
-        kurator: checkboxState,
-      });
-    };
-    addPersonalDetails().then(() =>
-      auth()
-        .signOut()
-        .then(() => console.log('User signed out!')),
-    );
-    console.log('Förnamn:', userPropToAdd.firstName);
-    console.log('Efternamn:', userPropToAdd.secondName);
-    console.log('Mejl', userPropToAdd.mejl);
-    console.log('Lösenord', userPropToAdd.password);
-    console.log('Personnummer', userPropToAdd.personnummer);
-    console.log('[first login]', userPropToAdd.firstLogin);
-    console.log('Kurator?:', checkboxState);
-    console.log('UID:', user.uid);
-
-    //Clear TextInput fields
-    setUserPropToAdd({
-      firstName: '',
-      secondName: '',
-      mejl: '',
-      password: '',
-      personnummer: '',
-      kurator: '',
-    });
-  }
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -176,7 +117,11 @@ const AddUser = ({navigation}) => {
                   <Pressable
                     style={[viewStyle.button, {margin: 10}]}
                     onPress={() => {
-                      createUser();
+                      createUser({
+                        userPropToAdd,
+                        setUserPropToAdd,
+                        checkboxState,
+                      });
                       setModalVisible(!modalVisible);
                     }}>
                     <Text style={textStyling.label}>Bekräfta</Text>
@@ -267,4 +212,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddUser;
+export default AddUserView;

@@ -121,6 +121,7 @@ const AddUserView = ({navigation}) => {
                         userPropToAdd,
                         setUserPropToAdd,
                         checkboxState,
+                        setCheckboxState,
                       });
                       setModalVisible(!modalVisible);
                     }}>

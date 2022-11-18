@@ -10,9 +10,8 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const user = auth().currentUser;
-  //console.log('Inside ChattRuta "isKurator":', isKurator);
 
-  async function getRefPath(getRoomName) {
+  /*   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {
       const splitRef = d.ref.path.split('/');
       const last = splitRef[splitRef.length - 1];
@@ -24,7 +23,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
 
       console.log('RUN');
     });
-  }
+  } */
 
   async function runRefPath(refPath) {
     refPath.onSnapshot(querySnapshot => {
@@ -102,8 +101,6 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
             setMessages(newData);
           });
         });
-        // getRefPath(getRoomName);
-        // runRefPath();
       } else {
         console.log('Room does not exist!');
         const createRoom = async () => {
@@ -122,7 +119,8 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
               },
             },
           });
-          getRefPath(getRoomName);
+          refPath(getRoomName);
+          //getRefPath(getRoomName);
         };
         createRoom();
       }

@@ -1,9 +1,13 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-const createUser = ({userPropToAdd, setUserPropToAdd, checkboxState}) => {
-  const user = auth().currentUser;
-  const addPersonalDetails = async () => {
+const createUser = ({
+  userPropToAdd,
+  setUserPropToAdd,
+  checkboxState,
+  setCheckboxState,
+}) => {
+  const addPersonalDetails = async user => {
     const refUID = firestore().collection('Users').doc(user.uid);
     const userAlias = checkboxState === true ? 'KURATOR' : '';
     await refUID.set({
@@ -24,6 +28,7 @@ const createUser = ({userPropToAdd, setUserPropToAdd, checkboxState}) => {
         userPropToAdd.password,
       )
       .then(() => {
+        const user = auth().currentUser;
         console.log('User account created & signed in!');
         console.log('Förnamn:', userPropToAdd.firstName);
         console.log('Efternamn:', userPropToAdd.secondName);
@@ -33,7 +38,8 @@ const createUser = ({userPropToAdd, setUserPropToAdd, checkboxState}) => {
         console.log('[first login]', userPropToAdd.firstLogin);
         console.log('Kurator?:', checkboxState);
         console.log('UID:', user.uid);
-        addPersonalDetails().then(() =>
+
+        addPersonalDetails(user).then(() =>
           auth()
             .signOut()
             .then(() => {
@@ -51,6 +57,7 @@ const createUser = ({userPropToAdd, setUserPropToAdd, checkboxState}) => {
         console.error(error);
       });
   }
+
   createNewUser();
   setUserPropToAdd({
     firstName: '',

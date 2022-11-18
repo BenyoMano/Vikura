@@ -68,10 +68,10 @@ const Hem = ({navigation}) => {
               }
             />
             <Button title="Logga ut" onPress={() => signOut()} />
-            {/*             <Button
+            <Button
               title="Nästa"
               onPress={() => navigation.navigate('NewElev')}
-            /> */}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>

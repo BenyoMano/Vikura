@@ -67,11 +67,11 @@ const Hem = ({navigation}) => {
                 signIn({loginDetails, setLoginDetails, navigation})
               }
             />
-            <Button title="Logga ut" onPress={() => signOut()} />
-            <Button
+            {/* <Button title="Logga ut" onPress={() => signOut()} /> */}
+            {/* <Button
               title="Nästa"
               onPress={() => navigation.navigate('NewElev')}
-            />
+            /> */}
           </View>
         </View>
       </TouchableWithoutFeedback>

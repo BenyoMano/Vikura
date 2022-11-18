@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
@@ -16,23 +16,45 @@ export const HeaderView = ({navigation, kurator, children}) => {
 
   return (
     <View style={{flexDirection: 'row', width: 360}}>
-      <View>
-        <BackButton onPress={() => navigation.goBack()} />
-      </View>
-      <View style={{position: 'absolute', left: '50%', right: '50%'}}>
+      <View
+        style={{
+          position: 'absolute',
+          left: '50%',
+          right: '50%',
+        }}>
         <Logo style={{width: 90, height: 35, marginTop: 32}} />
       </View>
 
       {route.name === 'Kurator' ? (
-        <View style={{position: 'absolute', left: '80%'}}>
-          <AddUserButton onPress={() => navigation.navigate('AddUser')} />
+        <View style={{flexDirection: 'row', width: 360, marginBottom: 60}}>
+          <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
+            <ButtonLogOut
+              title="Logga Ut"
+              onPress={() => {
+                signOut();
+                navigation.navigate('Hem');
+              }}
+            />
+          </View>
+          <View style={{position: 'absolute', left: '80%'}}>
+            <AddUserButton onPress={() => navigation.navigate('AddUser')} />
+          </View>
+        </View>
+      ) : route.name === ('AddUser', 'ReportConcern') ? (
+        <View style={{flexDirection: 'row', width: 360}}>
+          <View>
+            <BackButton onPress={() => navigation.goBack()} />
+          </View>
         </View>
       ) : route.name === 'ChatView' && kurator ? (
-        <View style={{position: 'absolute', left: '67%'}}>
+        <View style={{flexDirection: 'row', width: 360}}>
           <View>
+            <BackButton onPress={() => navigation.goBack()} />
+          </View>
+          <View style={{position: 'absolute', right: '0%'}}>
             <ButtonClear title="Clear" onPress={() => clearMessages()} />
           </View>
-          <View style={{position: 'absolute', left: '120%'}}>
+          <View style={{position: 'absolute', right: '20%'}}>
             <ReportConcernButton
               onPress={() => navigation.navigate('ReportConcern')}
             />

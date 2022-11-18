@@ -8,7 +8,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
   if (!loginDetails.password) {
     alert('Lösenord saknas!');
   }
-  if (!loginDetails.mejl && loginDetails.password) return;
+
   if (loginDetails.mejl && loginDetails.password) {
     await auth()
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)

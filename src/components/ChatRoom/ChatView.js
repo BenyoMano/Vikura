@@ -21,7 +21,11 @@ const ChatView = ({navigation, route}) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={[{flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', width: 360}}>
-            <HeaderView navigation={navigation} kurator={isKurator} />
+            <HeaderView
+              navigation={navigation}
+              kurator={isKurator}
+              clientUserId={id}
+            />
           </View>
           <View style={{flex: 1}}>
             <ChattRuta // error: state on unmount

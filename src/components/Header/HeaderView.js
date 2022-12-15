@@ -10,7 +10,7 @@ import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
 
-export const HeaderView = ({navigation, kurator, children}) => {
+export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
   const route = useRoute();
   console.log('Route Name:', route.name);
 
@@ -56,19 +56,25 @@ export const HeaderView = ({navigation, kurator, children}) => {
           </View>
           <View style={{position: 'absolute', right: '20%'}}>
             <ReportConcernButton
-              onPress={() => navigation.navigate('ReportConcern')}
+              onPress={() =>
+                navigation.navigate('ReportConcern', {
+                  clientUserId: clientUserId,
+                })
+              }
             />
           </View>
         </View>
       ) : route.name === 'ChatView' && !kurator ? (
-        <View style={{position: 'absolute', right: '0%', marginTop: 32}}>
-          <ButtonLogOut
-            title="Logga Ut"
-            onPress={() => {
-              signOut();
-              navigation.navigate('Hem');
-            }}
-          />
+        <View style={{flexDirection: 'row', width: 360, marginBottom: 60}}>
+          <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
+            <ButtonLogOut
+              title="Logga Ut"
+              onPress={() => {
+                signOut();
+                navigation.navigate('Hem');
+              }}
+            />
+          </View>
         </View>
       ) : null}
     </View>

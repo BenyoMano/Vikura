@@ -9,7 +9,6 @@ import Button from '../../atoms/Button';
 import Logo from '../Header/Logo';
 import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import signOut from '../../firebase/signOut';
 import signIn from '../../firebase/signIn';
 
 const Hem = ({navigation}) => {

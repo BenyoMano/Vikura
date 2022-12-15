@@ -28,7 +28,7 @@ const ChatView = ({navigation, route}) => {
             />
           </View>
           <View style={{flex: 1}}>
-            <ChattRuta // error: state on unmount
+            <ChattRuta
               clientUserId={id}
               isKurator={isKurator}
               //refPath={refPath}

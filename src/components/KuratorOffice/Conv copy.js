@@ -30,12 +30,6 @@ const Conv = () => {
         .orderBy('timestamp')
         .limitToLast(1)
         .onSnapshot(a => {
-          /*          const newConvos = a.docs.map(b => ({
-            timestamp: b.data().timestamp.toDate(),
-            text: b.data().msg,
-            alias: clientAlias,
-            uid: clientId,
-          })); */
           a.docs.forEach(b => {
             console.log('msgUID', clientId);
             newConvos.push({

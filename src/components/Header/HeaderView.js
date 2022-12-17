@@ -25,7 +25,7 @@ export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
         <Logo style={{width: 90, height: 35, marginTop: 32}} />
       </View>
 
-      {route.name === 'Kurator' ? (
+      {route.name === 'KuratorView' ? (
         <View style={{flexDirection: 'row', width: 360, marginBottom: 60}}>
           <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
             <ButtonLogOut

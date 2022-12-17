@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import Conv from './Conv';
 import {HeaderView} from '.././Header/HeaderView';
 
-const Kurator = ({navigation}) => {
+const KuratorView = ({navigation}) => {
   return (
     <View style={[styles.container, {flexDirection: 'column'}]}>
       <View style={{flexDirection: 'row', width: 360}}>
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Kurator;
+export default KuratorView;

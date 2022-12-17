@@ -124,7 +124,7 @@ const NewElev = ({navigation}) => {
             />
             <Button
               title="Starta chatt"
-              onPress={() => navigation.navigate('Kurator')}
+              onPress={() => navigation.navigate('KuratorView')}
             />
           </View>
         </View>

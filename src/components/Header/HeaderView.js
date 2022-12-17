@@ -37,10 +37,16 @@ export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
             />
           </View>
           <View style={{position: 'absolute', left: '80%'}}>
-            <AddUserButton onPress={() => navigation.navigate('AddUser')} />
+            <AddUserButton onPress={() => navigation.navigate('AddUserView')} />
           </View>
         </View>
-      ) : route.name === ('AddUser', 'ReportConcern') ? (
+      ) : route.name === 'AddUserView' ? (
+        <View style={{flexDirection: 'row', width: 360}}>
+          <View>
+            <BackButton onPress={() => navigation.goBack()} />
+          </View>
+        </View>
+      ) : route.name === 'ReportConcern' ? (
         <View style={{flexDirection: 'row', width: 360}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />

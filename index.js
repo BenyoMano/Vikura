@@ -5,11 +5,11 @@ import NewElev from './src/components/NewDetails/NewElev';
 import KuratorView from './src/components/KuratorOffice/KuratorView';
 import NewKurator from './src/components/NewDetails/NewKurator';
 import ChatView from './src/components/ChatRoom/ChatView';
-import AddUser from './src/components/AddUser/AddUserView';
 import ReportConcern from './src/components/ReportConcern/ReportConcernView';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import AddUserView from './src/components/AddUser/AddUserView';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +33,7 @@ const App = () => {
           <Stack.Screen name="KuratorView" component={KuratorView} />
           <Stack.Screen name="NewKurator" component={NewKurator} />
           <Stack.Screen name="ChatView" component={ChatView} />
-          <Stack.Screen name="AddUser" component={AddUser} />
+          <Stack.Screen name="AddUserView" component={AddUserView} />
           <Stack.Screen name="ReportConcern" component={ReportConcern} />
         </Stack.Navigator>
       </NavigationContainer>

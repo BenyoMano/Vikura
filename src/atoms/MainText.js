@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const Welcome = props => {
+const MainText = props => {
   const {textStyling, viewStyle} = styles;
 
   return (
@@ -29,4 +29,4 @@ const styles = {
   },
 };
 
-export default Welcome;
+export default MainText;

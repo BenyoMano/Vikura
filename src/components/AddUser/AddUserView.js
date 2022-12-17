@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Button from '../../atoms/Button';
 import Form from './Form';
-import Welcome from '../../atoms/MainText';
+import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import createUser from './createUser';
@@ -46,17 +46,18 @@ const AddUserView = ({navigation}) => {
             <HeaderView navigation={navigation} />
           </View>
           <View style={{justifyContent: 'center'}}>
-            <Welcome
+            <MainText
               title="Lägg till elev"
-              style={{fontSize: 32, color: 'black', marginTop: 20}}
+              style={{fontSize: 32, color: 'black', marginTop: 15, top: 0}}
             />
-            <Welcome
+            <MainText
               title="Skapa konto:"
               style={{
                 fontSize: 18,
                 color: 'grey',
+                top: 0,
                 marginTop: 20,
-                marginBottom: 10,
+                marginBottom: 15,
               }}
             />
           </View>

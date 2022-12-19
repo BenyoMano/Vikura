@@ -14,6 +14,7 @@ const ReportConcern = ({navigation, route}) => {
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
   console.log('ReportConcern ClientUserID', clientUserId);
+  if (userDetails === undefined) return;
   console.log('userDetails', userDetails);
 
   return (

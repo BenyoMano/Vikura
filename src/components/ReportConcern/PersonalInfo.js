@@ -10,7 +10,7 @@ const PersonalInfo = ({userDetails}) => {
         <Text style={textStyling.label}>Namn:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>{userDetails.secondName}</Text>
+        <Text style={textStyling.info}>hej</Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Mail:</Text>

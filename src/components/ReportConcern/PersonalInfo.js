@@ -1,8 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {firestore} from '@react-native-firebase/firestore';
 
-const PersonalInfo = () => {
+const PersonalInfo = ({userDetails}) => {
   const {textStyling, viewStyle} = styles;
 
   return (
@@ -11,19 +10,19 @@ const PersonalInfo = () => {
         <Text style={textStyling.label}>Namn:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>Josef Svensson</Text>
+        <Text style={textStyling.info}>{userDetails.secondName}</Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Mail:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>josef.svensson@gmail.com</Text>
+        <Text style={textStyling.info}>{userDetails.mail}</Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Personnummer:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>20050615-XXXX</Text>
+        <Text style={textStyling.info}>{userDetails.personNummer}</Text>
       </View>
     </View>
   );

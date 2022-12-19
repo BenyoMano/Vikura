@@ -1,7 +1,6 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {useEffect} from 'react';
 
 const useIsKurator = () => {
   const [isKurator, setIsKurator] = useState(undefined);

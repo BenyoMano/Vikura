@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
@@ -7,11 +7,14 @@ import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
-import getPersonalInfo from '../../firebase/getPersonalInfo';
+import useUserPersonalDetails from '../../firebase/userDetails';
 
 const ReportConcern = ({navigation, route}) => {
   const [data, setString] = useClipboard();
   const {clientUserId} = route.params;
+  const userDetails = useUserPersonalDetails({clientUserId});
+  console.log('ReportConcern ClientUserID', clientUserId);
+  console.log('userDetails', userDetails);
 
   return (
     <View
@@ -49,14 +52,13 @@ const ReportConcern = ({navigation, route}) => {
         />
       </View>
       <View style={styles.viewStyle}>
-        <PersonalInfo />
+        <PersonalInfo userDetails={userDetails} />
       </View>
       <View style={{width: 360, alignItems: 'flex-end'}}>
         <CopyButton
           onPress={() => {
             setString('Hello' + 'hejsan');
             alert('Kopierade: ' + data);
-            getPersonalInfo(clientUserId);
           }}
         />
       </View>

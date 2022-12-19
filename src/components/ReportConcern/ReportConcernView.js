@@ -8,14 +8,26 @@ import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
+import {Linking} from 'react-native';
 
 const ReportConcern = ({navigation, route}) => {
   const [data, setString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
-  console.log('ReportConcern ClientUserID', clientUserId);
   if (userDetails === undefined) return;
   console.log('userDetails', userDetails);
+  const detailsToSend = [
+    'Namn: ' +
+      userDetails.firstName +
+      ' ' +
+      userDetails.secondName +
+      '\n' +
+      'Mail: ' +
+      userDetails.mail +
+      '\n' +
+      'Personnummer: ' +
+      userDetails.personNummer,
+  ];
 
   return (
     <View
@@ -46,7 +58,7 @@ const ReportConcern = ({navigation, route}) => {
           <Icon name="warning" type="antdesign" color="#db4035" size={35} />
         </>
       </View>
-      <View style={{flex: 0.4}}>
+      <View style={{flex: 0.3}}>
         <MainText
           title="Personuppgifter:"
           style={{fontSize: 18, top: 0, color: 'grey'}}
@@ -58,13 +70,29 @@ const ReportConcern = ({navigation, route}) => {
       <View style={{width: 360, alignItems: 'flex-end'}}>
         <CopyButton
           onPress={() => {
-            setString('Hello' + 'hejsan');
+            setString(
+              '\n' +
+                userDetails.firstName +
+                ' ' +
+                userDetails.secondName +
+                '\n' +
+                userDetails.mail +
+                '\n' +
+                userDetails.personNummer,
+            );
             alert('Kopierade: ' + data);
           }}
         />
       </View>
       <View style={{flex: 0.5}}>
-        <Button title="Gör något" />
+        <Button
+          title="Gör något"
+          onPress={() => {
+            Linking.openURL(
+              'mailto:?subject=Orosanmälan&body=' + detailsToSend,
+            );
+          }}
+        />
       </View>
     </View>
   );
@@ -81,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     overflow: 'hidden',
-    marginTop: 10,
+    marginTop: 0,
     //marginBottom: 22,
     height: 250,
     width: 360,

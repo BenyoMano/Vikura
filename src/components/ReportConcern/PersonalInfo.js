@@ -10,7 +10,9 @@ const PersonalInfo = ({userDetails}) => {
         <Text style={textStyling.label}>Namn:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>hej</Text>
+        <Text style={textStyling.info}>
+          {userDetails.firstName} {userDetails.secondName}
+        </Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Mail:</Text>
@@ -46,10 +48,10 @@ const styles = {
     container: {
       // flexDirection: 'column',
       flex: 1,
-      marginLeft: 5,
+      paddingLeft: 5,
       //justifyContent: 'center',
       // alignItems: 'center',
-      // backgroundColor: 'grey'
+      backgroundColor: '#f7f5f5',
     },
     label: {
       marginLeft: 10,

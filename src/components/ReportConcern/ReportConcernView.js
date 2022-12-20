@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
 import CopyButton from './CopyButton';
@@ -80,13 +80,25 @@ const ReportConcern = ({navigation, route}) => {
                 '\n' +
                 userDetails.personNummer,
             );
-            alert('Kopierade: ' + data);
+            Alert.alert(
+              'Kopierat till ditt ClipBoard: ',
+              data,
+              [
+                {
+                  text: 'OK',
+                  onPress: () => console.log('OK'),
+                },
+              ],
+              {
+                cancelable: true,
+              },
+            );
           }}
         />
       </View>
       <View style={{flex: 0.5}}>
         <Button
-          title="Gör något"
+          title="Skicka mejl"
           onPress={() => {
             Linking.openURL(
               'mailto:?subject=Orosanmälan&body=' + detailsToSend,

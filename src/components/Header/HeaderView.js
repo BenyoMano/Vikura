@@ -57,10 +57,10 @@ export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
-          <View style={{position: 'absolute', right: '0%'}}>
+          {/*           <View style={{position: 'absolute', right: '0%'}}>
             <ButtonClear title="Clear" onPress={() => clearMessages()} />
-          </View>
-          <View style={{position: 'absolute', right: '20%'}}>
+          </View> */}
+          <View style={{position: 'absolute', right: '0%'}}>
             <ReportConcernButton
               onPress={() =>
                 navigation.navigate('ReportConcern', {

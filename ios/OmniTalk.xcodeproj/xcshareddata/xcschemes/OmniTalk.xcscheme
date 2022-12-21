@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "OmniTalk.app"
-               BlueprintName = "OmniTalk"
-               ReferencedContainer = "container:OmniTalk.xcodeproj">
+               BuildableName = "Omnitalk.app"
+               BlueprintName = "Omnitalk"
+               ReferencedContainer = "container:Omnitalk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "OmniTalkTests.xctest"
-               BlueprintName = "OmniTalkTests"
-               ReferencedContainer = "container:OmniTalk.xcodeproj">
+               BuildableName = "OmnitalkTests.xctest"
+               BlueprintName = "OmnitalkTests"
+               ReferencedContainer = "container:Omnitalk.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "OmniTalk.app"
-            BlueprintName = "OmniTalk"
-            ReferencedContainer = "container:OmniTalk.xcodeproj">
+            BuildableName = "Omnitalk.app"
+            BlueprintName = "Omnitalk"
+            ReferencedContainer = "container:Omnitalk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "OmniTalk.app"
-            BlueprintName = "OmniTalk"
-            ReferencedContainer = "container:OmniTalk.xcodeproj">
+            BuildableName = "Omnitalk.app"
+            BlueprintName = "Omnitalk"
+            ReferencedContainer = "container:Omnitalk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

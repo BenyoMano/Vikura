@@ -59,7 +59,7 @@ const Hem = ({navigation}) => {
               />
             </View>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 0.5}}>
             <Button
               title="Logga in"
               onPress={() =>
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   logincontainer: {
-    // flex: 1,
     paddingHorizontal: 20,
     margingBottom: 50,
     paddingBottom: 20,

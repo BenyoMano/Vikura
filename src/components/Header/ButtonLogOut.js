@@ -4,11 +4,14 @@ import {Text, View, Pressable, StyleSheet} from 'react-native';
 const ButtonLogOut = ({title, onPress}) => {
   const {btnContainerStyle, btnTextStyle} = styles;
   return (
-    <Pressable onPress={onPress}>
-      <View style={btnContainerStyle}>
-        <Text style={btnTextStyle}>{title}</Text>
-      </View>
-    </Pressable>
+    <View style={{borderRadius: 10, overflow: 'hidden'}}>
+      <Pressable onPress={onPress}
+      style={btnContainerStyle}
+      android_ripple={{color: '#e3e1e1'}}
+      >
+          <Text style={btnTextStyle}>{title}</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -19,8 +22,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1.5,
     borderRadius: 10,
-    // marginTop: 33,
-    marginBottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },

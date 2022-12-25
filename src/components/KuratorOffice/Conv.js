@@ -96,7 +96,7 @@ const Conv = () => {
       <FlatList
         horizontal={false}
         numColumns={1}
-        data={convos.sort((a, b) => a.timestamp < b.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
+        data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         refreshControl={

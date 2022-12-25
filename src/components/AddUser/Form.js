@@ -26,6 +26,7 @@ const Form = ({
   const ref_input4 = useRef();
   const ref_input5 = useRef();
 
+
   function kuratorCheck() {
     console.log('firstname', firstName);
     if (!checkboxState) {

@@ -20,8 +20,8 @@ const AddUserView = ({navigation}) => {
   const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
-  const showIfKurator = checkboxState === true ? 'JA' : 'NEJ';
   const [checkboxState, setCheckboxState] = React.useState(false);
+  const showIfKurator = checkboxState === true ? 'JA' : 'NEJ';
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
     secondName: '',

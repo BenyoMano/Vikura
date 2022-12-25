@@ -25,13 +25,14 @@ const ChatView = ({navigation, route}) => {
               navigation={navigation}
               kurator={isKurator}
               clientUserId={id}
+              user={user}
+              refPath={refPath}
             />
           </View>
           <View style={{flex: 1}}>
             <ChattRuta
               clientUserId={id}
               isKurator={isKurator}
-              //refPath={refPath}
               setRefPath={setRefPath}
             />
           </View>

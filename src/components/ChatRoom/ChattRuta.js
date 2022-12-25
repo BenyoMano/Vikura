@@ -10,7 +10,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const user = auth().currentUser;
-
+  
   /*   async function getRefPath(getRoomName) {
     getRoomName.docs.map(d => {
       const splitRef = d.ref.path.split('/');
@@ -38,8 +38,8 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   }
 
   const openChat = async () => {
+    console.log('isKurator:', isKurator)
     if (isKurator === undefined) return;
-
     if (isKurator) {
       console.log('Client UserId', clientUserId);
       const getRoomName = await firestore()
@@ -141,27 +141,51 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   }, [refreshing]);
 
   function Item({text, timestamp, uid}) {
+    if (isKurator === undefined) return;
     return (
-      <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+       !isKurator ? (
+        <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+          <View
+            style={
+              uid === user.uid
+                ? styles.bubblaSend.bubbla
+                : styles.bubblaRecieve.bubbla
+            }>
+            <Text style={styles.text.message}>{text}</Text>
+          </View>
+          <View
+            style={
+              uid === user.uid
+                ? styles.bubblaSend.timestamp
+                : styles.bubblaRecieve.timestamp
+            }>
+            <Text style={styles.text.author}>
+              {timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}
+            </Text>
+          </View>
+        </View>
+      ) : isKurator ? (
+        <View style={uid === clientUserId ? styles.bubblaRecieve : styles.bubblaSend }>
         <View
           style={
-            uid === user.uid
-              ? styles.bubblaSend.bubbla
-              : styles.bubblaRecieve.bubbla
+            uid === clientUserId
+              ? styles.bubblaRecieve.bubbla
+              : styles.bubblaSend.bubbla
           }>
           <Text style={styles.text.message}>{text}</Text>
         </View>
         <View
           style={
-            uid === user.uid
-              ? styles.bubblaSend.timestamp
-              : styles.bubblaRecieve.timestamp
+            uid === clientUserId
+              ? styles.bubblaRecieve.timestamp
+              : styles.bubblaSend.timestamp
           }>
           <Text style={styles.text.author}>
             {timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}
           </Text>
         </View>
       </View>
+      ) : null
     );
   }
   const renderItem = ({item}) => (
@@ -177,7 +201,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
-        data={messages.sort((a, b) => a.timestamp > b.timestamp)} //a.timestamp.localeCompare(b.timestamp))}
+        data={messages.sort((a, b) => a.timestamp - b.timestamp)} //a.timestamp.localeCompare(b.timestamp))}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         //onScrollEndDrag

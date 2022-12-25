@@ -4,11 +4,14 @@ import {Text, View, Pressable, StyleSheet} from 'react-native';
 const ButtonSend = ({title, onPress}) => {
   const {btnContainerStyle, btnTextStyle} = styles;
   return (
-    <Pressable onPress={onPress}>
-      <View style={btnContainerStyle}>
-        <Text style={btnTextStyle}>{title}</Text>
-      </View>
-    </Pressable>
+    <View style={{borderRadius: 12, overflow: 'hidden'}}>
+      <Pressable onPress={onPress}
+      style={btnContainerStyle}
+      android_ripple={{color: '#969595'}}
+      >
+          <Text style={btnTextStyle}>{title}</Text>
+      </Pressable>
+    </View>
   );
 };
 

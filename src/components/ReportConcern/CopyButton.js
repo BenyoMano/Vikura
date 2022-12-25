@@ -5,11 +5,14 @@ import {Icon} from 'react-native-elements';
 const Button = props => {
   const {btnContainerStyle} = styles;
   return (
-    <Pressable onPress={props.onPress}>
-      <View style={btnContainerStyle}>
+    <View style={{borderRadius: 10, overflow: 'hidden'}}>
+      <Pressable onPress={props.onPress}
+      style={btnContainerStyle}
+      android_ripple={{color: 'lightblue'}}
+      >
         <Icon name="copy" type="font-awesome" color="black" size={28} />
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
@@ -19,8 +22,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 2,
     borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 0,
     borderColor: 'lightblue',
     justifyContent: 'center',
   },

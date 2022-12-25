@@ -10,7 +10,7 @@ import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
 
-export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
+export const HeaderView = ({navigation, kurator, clientUserId, children, user, refPath}) => {
   const route = useRoute();
   console.log('Route Name:', route.name);
 
@@ -22,7 +22,7 @@ export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
           left: '50%',
           right: '50%',
         }}>
-        <Logo style={{width: 90, height: 35, marginTop: 32}} />
+        <Logo style={{width: 90, height: 35, marginTop: 32, marginBottom: 10}} />
       </View>
 
       {route.name === 'KuratorView' ? (
@@ -36,30 +36,42 @@ export const HeaderView = ({navigation, kurator, clientUserId, children}) => {
               }}
             />
           </View>
-          <View style={{position: 'absolute', left: '80%'}}>
+          <View style={{position: 'absolute', left: '80%', marginTop: 33}}>
             <AddUserButton onPress={() => navigation.navigate('AddUserView')} />
           </View>
         </View>
       ) : route.name === 'AddUserView' ? (
-        <View style={{flexDirection: 'row', width: 360}}>
+        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+          <View>
+            <BackButton onPress={() => navigation.goBack()} />
+          </View>
+        </View>
+      ) : route.name === 'NewKurator' ? (
+        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+          <View>
+            <BackButton onPress={() => navigation.goBack()} />
+          </View>
+        </View>
+      ) : route.name === 'NewElev' ? (
+        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ReportConcern' ? (
-        <View style={{flexDirection: 'row', width: 360}}>
+        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ChatView' && kurator ? (
-        <View style={{flexDirection: 'row', width: 360}}>
+        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
-          {/*           <View style={{position: 'absolute', right: '0%'}}>
-            <ButtonClear title="Clear" onPress={() => clearMessages()} />
-          </View> */}
+          <View style={{position: 'absolute', right: '15%'}}>
+            <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
+          </View>
           <View style={{position: 'absolute', right: '0%'}}>
             <ReportConcernButton
               onPress={() =>

@@ -2,13 +2,16 @@ import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 
 const Button = props => {
-  const {btnContainerStyle, btnTextStyle} = styles;
+  const {btnContainerStyle, pressedBtnContainerStyle, btnTextStyle} = styles;
   return (
-    <Pressable onPress={props.onPress}>
-      <View style={btnContainerStyle}>
-        <Text style={btnTextStyle}>{props.title}</Text>
-      </View>
-    </Pressable>
+    <View style={{borderRadius: 12, overflow: 'hidden'}}>
+      <Pressable onPress={props.onPress}
+      style={btnContainerStyle}
+      android_ripple={{color: '#969595'}}
+      >
+          <Text style={btnTextStyle}>{props.title}</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -18,7 +21,12 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     width: 230,
     borderRadius: 12,
-    marginTop: 20,
+  },
+  pressedBtnContainerStyle: {
+    backgroundColor: 'green',
+    paddingVertical: 18,
+    width: 230,
+    borderRadius: 12,
   },
   btnTextStyle: {
     color: 'black',

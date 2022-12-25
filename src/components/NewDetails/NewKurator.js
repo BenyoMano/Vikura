@@ -104,14 +104,18 @@ const NewKurator = ({navigation}) => {
             </ScrollView>
           </View>
           <View style={{marginBottom: 10}}>
-            <Button
-              title="Bekräfta"
-              onPress={() => newDetailsKurator({password, rePassword})}
-            />
-            <Button
-              title="Starta chatt"
-              onPress={() => navigation.navigate('KuratorView')}
-            />
+            <View style={{ marginBottom: 10}}>
+              <Button
+                title="Bekräfta"
+                onPress={() => newDetailsKurator({password, rePassword})}
+              />
+            </View>
+            <View>
+              <Button
+                title="Starta chatt"
+                onPress={() => navigation.navigate('KuratorView')}
+              />
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>

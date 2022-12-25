@@ -1,4 +1,3 @@
-import React from 'react';
 import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 

@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     height: 44,
     borderWidth: 1,
     borderRadius: 10,
-    marginTop: 30,
     justifyContent: 'center',
   },
   btnTextStyle: {

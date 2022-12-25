@@ -67,7 +67,7 @@ const ReportConcern = ({navigation, route}) => {
       <View style={styles.viewStyle}>
         <PersonalInfo userDetails={userDetails} />
       </View>
-      <View style={{width: 360, alignItems: 'flex-end'}}>
+      <View style={{width: 360, marginTop: 10, alignItems: 'flex-end'}}>
         <CopyButton
           onPress={() => {
             setString(

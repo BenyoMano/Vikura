@@ -9,7 +9,7 @@ const navigateAfterSignIn = async ({navigation}) => {
     .onSnapshot(querySnapshot => {
       const newUserStatus = querySnapshot.get('firstLogin');
       const kuratorStatus = querySnapshot.get('kurator');
-      console.log('User status', newUserStatus);
+      console.log('New user:', newUserStatus);
       if (newUserStatus === true && kuratorStatus == !true) {
         navigation.navigate('NewElev');
       }

@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
       fontFamily: 'NunitoSans-Regular',
     },
   },
-  //===========================
   viewStyle: {
     container: {
       backgroundColor: 'white',

@@ -56,26 +56,26 @@ const NewKurator = ({navigation}) => {
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView navigation={navigation} />
           </View>
-          <View style={{flex: 1}}>
+          <View style={{marginTop: 40, marginBottom: 50}}>
             <MainText
               title="Välkommen!"
-              style={{fontSize: 38, color: 'black', top: 40}}
+              style={{fontSize: 38, color: 'black'}}
             />
           </View>
-          <View style={{flex: 1}}>
-            {/* {isKeyboardVisible === false ? ( */}
-            <MainText
-              title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
-                            Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig."
-              style={{
-                fontSize: 16,
-                color: '#7f7f7f',
-                top: 0,
-                paddingHorizontal: 40,
-              }}
-            />
-            {/* ) : null} */}
+          {!isKeyboardVisible ? (
+            <View>
+              <MainText
+                title="Första gången du loggar in behöver du skapa ett nytt lösenord."
+                style={{
+                  fontSize: 19,
+                  color: '#7f7f7f',
+                  marginBottom: 40,
+                  paddingHorizontal: 40,
+                }}
+              />
           </View>
+          ) : null}
+
           <View style={{flex: 2}}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
               <InputBarNewDetails
@@ -103,20 +103,14 @@ const NewKurator = ({navigation}) => {
               />
             </ScrollView>
           </View>
-          <View style={{marginBottom: 10}}>
-            <View style={{ marginBottom: 10}}>
+          {!isKeyboardVisible ? (
+            <View style={{ marginBottom: 40}}>
               <Button
                 title="Bekräfta"
                 onPress={() => newDetailsKurator({password, rePassword})}
               />
             </View>
-            <View>
-              <Button
-                title="Starta chatt"
-                onPress={() => navigation.navigate('KuratorView')}
-              />
-            </View>
-          </View>
+          ) : null}
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>

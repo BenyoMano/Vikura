@@ -4,6 +4,7 @@ import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
 import refPath from '../../firebase/refPath';
+import { showMessage } from 'react-native-flash-message';
 
 const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const {viewStyle} = styles;
@@ -11,31 +12,6 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const [refreshing, setRefreshing] = useState(false);
   const user = auth().currentUser;
   
-  /*   async function getRefPath(getRoomName) {
-    getRoomName.docs.map(d => {
-      const splitRef = d.ref.path.split('/');
-      const last = splitRef[splitRef.length - 1];
-      const docPath = firestore()
-        .collection('rooms')
-        .doc(last)
-        .collection('messages');
-      setRefPath(docPath);
-
-      console.log('RUN');
-    });
-  } */
-
-  async function runRefPath(refPath) {
-    refPath.onSnapshot(querySnapshot => {
-      const newData = querySnapshot.docs.map(documentSnapshot => ({
-        timestamp: documentSnapshot.data().timestamp.toDate(),
-        text: documentSnapshot.data().msg,
-        author: documentSnapshot.data().author,
-        uid: documentSnapshot.data().uid,
-      }));
-      setMessages(newData);
-    });
-  }
 
   const openChat = async () => {
     console.log('isKurator:', isKurator)
@@ -47,7 +23,6 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
         .where('users.client.uid', '==', clientUserId)
         .get();
 
-      //refPath({setRefPath, getRoomName});
 
       getRoomName.docs.map(d => {
         const splitRef = d.ref.path.split('/');
@@ -79,7 +54,8 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
         .collection('rooms')
         .where('users.client.uid', '==', clientUserId)
         .get();
-      console.log('Room name', getRoomName.empty);
+      console.log('getRoomName.empty ?', getRoomName.empty);
+
       if (!getRoomName.empty) {
         getRoomName.docs.map(d => {
           const splitRef = d.ref.path.split('/');
@@ -110,7 +86,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
             .collection('Users')
             .doc(clientUserId)
             .get();
-
+          
           await roomRef.add({
             users: {
               client: {
@@ -119,10 +95,23 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
               },
             },
           });
-          refPath(getRoomName);
-          //getRefPath(getRoomName);
+          
+          const newGetRoomName = await firestore()
+          .collection('rooms')
+          .where('users.client.uid', '==', clientUserId)
+          .get();
+
+          refPath({newGetRoomName, setRefPath});
         };
         createRoom();
+        showMessage({
+          message: "Välkommen!",
+          description: "Du kan börja chatta direkt!",
+          type: "info",
+          position: "center",
+          floating: true,
+          duration: 2500
+        });
       }
     }
   };

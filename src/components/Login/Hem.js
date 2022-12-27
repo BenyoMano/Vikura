@@ -30,7 +30,7 @@ const Hem = ({navigation}) => {
           <View
             style={{
               flex: 0.5,
-              justifyContent: 'flex-end' /* backgroundColor: 'lightpink' */,
+              justifyContent: 'flex-end'
             }}>
             <Logo style={{width: 160, height: 62, marginTop: 30}} />
           </View>

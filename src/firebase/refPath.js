@@ -1,8 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
 
-const refPath = ({setRefPath, getRoomName}) => {
+
+const refPath = ({setRefPath, newGetRoomName}) => {
+  if (newGetRoomName === undefined) return;
   const getRefPath = () => {
-    getRoomName.docs.map(d => {
+    newGetRoomName.docs.map(d => {
       const splitRef = d.ref.path.split('/');
       const last = splitRef[splitRef.length - 1];
       const docPath = firestore()
@@ -10,12 +12,10 @@ const refPath = ({setRefPath, getRoomName}) => {
         .doc(last)
         .collection('messages');
       setRefPath(docPath);
-      //console.log('docPath', docPath);
-      // console.log('refPath', refPath);
+      console.log('Room Created Successfully!')
     });
   };
   getRefPath();
-  return docPath;
 };
 
 export default refPath;

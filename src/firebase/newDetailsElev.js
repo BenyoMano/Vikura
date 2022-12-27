@@ -2,7 +2,10 @@ import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-const newDetailsElev = async ({password, rePassword, alias}) => {
+
+const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
+  const user = auth().currentUser;
+
   if (rePassword === password) {
     await auth()
       .currentUser.updatePassword(password)
@@ -42,6 +45,7 @@ const newDetailsElev = async ({password, rePassword, alias}) => {
             alias: alias,
           });
       });
+    navigation.navigate('ChatView', {id: user.uid})
   } else {
     console.log('Lösenordet matchar inte!');
   }

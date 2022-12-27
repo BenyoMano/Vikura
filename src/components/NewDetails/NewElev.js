@@ -55,26 +55,27 @@ const NewElev = ({navigation}) => {
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView navigation={navigation} />
           </View>
-          <View style={{flex: 1}}>
+          <View style={{marginTop: 40, marginBottom: 50}}>
             <MainText
               title="Välkommen!"
-              style={{fontSize: 38, color: 'black', top: 40}}
+              style={{fontSize: 38, color: 'black'}}
             />
           </View>
-          <View style={{flex: 1}}>
-            {isKeyboardVisible === false ? (
+          {!isKeyboardVisible ? (
+            <View style={{ backgroundColor: 'transparent'}}>
               <MainText
-                title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname.
-                            Ditt nickname kan vara helt påhittat och är bara till för kuratorn ska kunna referera till dig."
+                title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname för att det ska kännas mer personligt."
                 style={{
-                  fontSize: 16,
+                  fontSize: 19,
                   color: '#7f7f7f',
-                  top: 0,
+                  marginTop: 0,
+                  marginBottom: 40,
                   paddingHorizontal: 40,
                 }}
               />
-            ) : null}
-          </View>
+            </View>
+          ) : null}
+          
           <View style={{flex: 2}}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
               <InputBarNewDetails
@@ -115,18 +116,16 @@ const NewElev = ({navigation}) => {
               />
             </ScrollView>
           </View>
-          <View style={{marginBottom: 10}}>
-            <Button
-              title="Bekräfta"
-              onPress={() => {
-                newDetailsElev({password, rePassword, alias});
-              }}
-            />
-            <Button
-              title="Starta chatt"
-              onPress={() => navigation.navigate('KuratorView')}
-            />
-          </View>
+          {!isKeyboardVisible ? (
+            <View style={{marginBottom: 40}}>
+              <Button
+                title="Bekräfta"
+                onPress={() => {
+                  newDetailsElev({navigation, password, rePassword, alias});
+                }}
+              />
+            </View>
+          ) : null}
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     backgroundColor: '#F7F7F7',
     borderRadius: 20,
-    // alignItems: 'center'
   },
   container: {
     flex: 1,

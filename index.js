@@ -10,6 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AddUserView from './src/components/AddUser/AddUserView';
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ const App = () => {
           <Stack.Screen name="ReportConcern" component={ReportConcern} />
         </Stack.Navigator>
       </NavigationContainer>
+      <FlashMessage position='top'/>
     </SafeAreaProvider>
   );
 };

@@ -7,7 +7,7 @@ const Button = props => {
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable onPress={props.onPress}
       style={btnContainerStyle}
-      android_ripple={{color: '#969595'}}
+      android_ripple={{color: '#b5dfb7'}}
       >
           <Text style={btnTextStyle}>{props.title}</Text>
       </Pressable>
@@ -17,13 +17,14 @@ const Button = props => {
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    backgroundColor: '#C4C4C4',
+    // backgroundColor: '#C4C4C4',
+    backgroundColor: '#85ad87',
     paddingVertical: 18,
     width: 230,
     borderRadius: 12,
   },
   pressedBtnContainerStyle: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     paddingVertical: 18,
     width: 230,
     borderRadius: 12,

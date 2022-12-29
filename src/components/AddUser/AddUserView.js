@@ -37,15 +37,16 @@ const AddUserView = ({navigation}) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
           style={[
-            styles.container,
+            styles.mainContainer,
             {
               flexDirection: 'column',
             },
           ]}>
           <View style={{flexDirection: 'row', width: 360}}>
-            <HeaderView navigation={navigation} />
+            <HeaderView navigation={navigation}/>
           </View>
-          <View style={{justifyContent: 'center'}}>
+          <View 
+          style={{justifyContent: 'center'}}>
             <MainText
               title="Lägg till elev"
               style={{fontSize: 32, color: 'black', marginTop: 15, top: 0}}
@@ -61,7 +62,6 @@ const AddUserView = ({navigation}) => {
               }}
             />
           </View>
-
           <View style={{justifyContent: 'center'}}>
             <Modal
               transparent={true}
@@ -69,7 +69,7 @@ const AddUserView = ({navigation}) => {
               onRequestClose={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <View style={viewStyle.container}>
+              <View style={viewStyle.modalContainer}>
                 <View style={viewStyle.label}>
                   <Text style={textStyling.label}>Namn:</Text>
                 </View>
@@ -134,7 +134,7 @@ const AddUserView = ({navigation}) => {
           </View>
 
           <View style={{flex: 3}}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
                 setUserPropToAdd={setUserPropToAdd}
@@ -154,17 +154,22 @@ const AddUserView = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  contentContainer: {
+  scrollViewContainer: {
     paddingHorizontal: 20,
     paddingBottom: 15,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: '#85ad87',
+    // backgroundColor: '#94af8f',
+    // backgroundColor: '#f7e0b5',
     borderRadius: 20,
   },
-  container: {
+  mainContainer: {
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
+    // backgroundColor: '#85ad87',
+    backgroundColor: "#f7e0b5",
+    width: '100%'
   },
   textStyling: {
     label: {
@@ -179,8 +184,10 @@ const styles = StyleSheet.create({
     },
   },
   viewStyle: {
-    container: {
-      backgroundColor: 'white',
+    modalContainer: {
+      // backgroundColor: 'white',
+      backgroundColor: '#85ad87',
+      // backgroundColor: '#cfcd9e',
       borderRadius: 20,
       alignSelf: 'center',
       top: '28%',
@@ -209,6 +216,7 @@ const styles = StyleSheet.create({
       borderColor: 'black',
       padding: 10,
       backgroundColor: 'lightgrey',
+      // backgroundColor: '#f7e0b5'
     },
   },
 });

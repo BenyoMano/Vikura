@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Text, View, FlatList, RefreshControl} from 'react-native';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
@@ -69,7 +68,8 @@ const Conv = () => {
   function Item({alias, text, timestamp, uid}) {
     const navigation = useNavigation();
     return (
-      <Pressable onPress={() => navigation.navigate('ChatView', {id: uid})}>
+      <Pressable 
+      onPress={() => navigation.navigate('ChatView', {id: uid})}>
         <View style={styles.item}>
           <View style={styles.header}>
             <Text style={styles.title}>{alias}</Text>
@@ -142,9 +142,11 @@ const styles = {
     padding: 15,
     marginHorizontal: 0,
     marginVertical: 0,
-    backgroundColor: '#EEEEEE',
+    // backgroundColor: '#EEEEEE',
+    backgroundColor: '#ffffe7',
     borderWidth: 1,
-    borderColor: '#EEEEEE',
+    // borderColor: '#EEEEEE',
+    borderColor: '#ffffe7',
     borderBottomColor: 'black',
   },
 };

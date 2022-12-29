@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f7e0b5',
   },
   viewStyle: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {View, TouchableWithoutFeedback, Keyboard, StyleSheet} from 'react-native';
 import ChattRuta from './ChattRuta';
 import InputBarChatt from './InputbarChat';
 import ButtonSend from './ButtonSend';
@@ -19,7 +19,7 @@ const ChatView = ({navigation, route}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={[{flexDirection: 'column'}]}>
+        <View style={styles.container}>
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView
               navigation={navigation}
@@ -58,5 +58,16 @@ const ChatView = ({navigation, route}) => {
     </MyKeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+   flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: '#f7e0b5',
+    width: '100%'
+  },
+});
 
 export default ChatView;

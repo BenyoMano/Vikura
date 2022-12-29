@@ -1,21 +1,24 @@
 import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 
-const ButtonClear = props => {
+const ButtonClear = ({title, onPress}) => {
   const {btnContainerStyle, btnTextStyle} = styles;
 
   return (
-    <Pressable onPress={props.onPress}>
-      <View style={btnContainerStyle}>
-        <Text style={btnTextStyle}>{props.title}</Text>
+    <View style={{borderRadius: 12, overflow: 'hidden'}}>
+      <Pressable onPress={onPress}
+      android_ripple={{color: '#b5dfb7'}}>
+        <View style={btnContainerStyle}>
+          <Text style={btnTextStyle}>{title}</Text>
+        </View>
+      </Pressable>
       </View>
-    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    backgroundColor: '#C4C4C4',
+    backgroundColor: '#85ad87',
     paddingVertical: 0,
     width: 60,
     height: 44,

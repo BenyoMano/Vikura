@@ -79,13 +79,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f7e0b5',
+    width: '100%'
   },
   logincontainer: {
     paddingHorizontal: 20,
     margingBottom: 50,
     paddingBottom: 20,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: '#85ad87',
+    // backgroundColor: '#94af8f',
+    // backgroundColor: '#8b9d77'
     borderRadius: 20,
   },
   contcont: {

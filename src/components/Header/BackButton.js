@@ -8,7 +8,7 @@ const Button = props => {
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable onPress={props.onPress}
       style={btnContainerStyle}
-      android_ripple={{color: '#e3e1e1'}}
+      android_ripple={{color: '#b5dfb7'}}
       >
           <Icon name="arrow-back" type="ionicon" color="black" />
       </Pressable>

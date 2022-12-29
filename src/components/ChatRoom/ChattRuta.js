@@ -213,6 +213,7 @@ const styles = {
     borderColor: 'gray',
     borderWidth: 2,
     borderRadius: 12,
+    backgroundColor: '#ffffe7'
   },
   text: {
     message: {
@@ -236,7 +237,8 @@ const styles = {
       padding: 9,
       minWidth: 0,
       maxWidth: '70%',
-      backgroundColor: '#C7D4F6',
+      // backgroundColor: '#C7D4F6',
+      backgroundColor: '#b5ccf7',
       borderRadius: 12,
     },
     timestamp: {
@@ -258,7 +260,8 @@ const styles = {
       padding: 9,
       minWidth: 0,
       maxWidth: '70%',
-      backgroundColor: '#FCF789',
+      // backgroundColor: '#FCF789',
+      backgroundColor: '#ffd933',
       borderRadius: 12,
     },
     timestamp: {

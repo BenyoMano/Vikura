@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {Image, View, Animated} from 'react-native';
+import {Image, Animated} from 'react-native';
 
 const Logo = props => {
   const {ViewStyle} = styles;
@@ -18,9 +18,8 @@ const Logo = props => {
 
   return (
     <Animated.View style={[ViewStyle, {opacity: fadeAnim}]}>
-      
       <Image
-        source={require('./../../assets/images/vikuraCut.jpg')}
+        source={require('./../../assets/images/transparent.png')}
         style={props.style}
       />
     </Animated.View>

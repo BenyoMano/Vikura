@@ -8,8 +8,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
       message: "Varning!",
       description: "Mejl saknas!",
       type: "warning",
-      position: "center",
-      floating: true,
+      position: "default",
     });
   }
   if (!loginDetails.password) {
@@ -17,8 +16,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
       message: "Varning!",
       description: "Lösenord saknas!",
       type: "warning",
-      position: "center",
-      floating: true,
+      position: "default",
     });
   }
 
@@ -41,8 +39,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
           message: "Varning!",
           description: String(error),
           type: "warning",
-          position: "center",
-          floating: true,
+          position: "default",
           duration: 3200
         });
       });

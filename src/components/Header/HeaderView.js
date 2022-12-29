@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
@@ -10,7 +10,15 @@ import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
 
-export const HeaderView = ({navigation, kurator, clientUserId, children, user, refPath}) => {
+
+export const HeaderView = ({
+  navigation, 
+  kurator, 
+  clientUserId, 
+  children, 
+  user, 
+  refPath, 
+}) => {
   const route = useRoute();
   console.log('Route Name:', route.name);
 

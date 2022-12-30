@@ -15,8 +15,10 @@ import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import createUser from './createUser';
+import useColorStyle from '../../atoms/colorStyle';
 
 const AddUserView = ({navigation}) => {
+  const colorStyle = useColorStyle();
   const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
@@ -36,8 +38,7 @@ const AddUserView = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[
-            styles.mainContainer,
+          style={[colorStyle === true ? styles.color.mainContainer : styles.greyScale.mainContainer,
             {
               flexDirection: 'column',
             },
@@ -69,7 +70,7 @@ const AddUserView = ({navigation}) => {
               onRequestClose={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <View style={viewStyle.modalContainer}>
+              <View style={colorStyle === true ? viewStyle.modalContainer.color : viewStyle.modalContainer.greyScale }>
                 <View style={viewStyle.label}>
                   <Text style={textStyling.label}>Namn:</Text>
                 </View>
@@ -111,12 +112,12 @@ const AddUserView = ({navigation}) => {
                     marginTop: 15,
                   }}>
                   <Pressable
-                    style={[viewStyle.button, {margin: 10}]}
+                    style={[colorStyle === true ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={textStyling.label}>Tillbaka</Text>
                   </Pressable>
                   <Pressable
-                    style={[viewStyle.button, {margin: 10}]}
+                    style={[colorStyle === true ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => {
                       createUser({
                         userPropToAdd,
@@ -134,7 +135,7 @@ const AddUserView = ({navigation}) => {
           </View>
 
           <View style={{flex: 3}}>
-            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <ScrollView contentContainerStyle={colorStyle === true ? styles.color.scrollViewContainer : styles.greyScale.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
                 setUserPropToAdd={setUserPropToAdd}
@@ -154,22 +155,39 @@ const AddUserView = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  scrollViewContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 15,
-    backgroundColor: '#85ad87',
-    // backgroundColor: '#94af8f',
-    // backgroundColor: '#f7e0b5',
-    borderRadius: 20,
+  color: {
+    scrollViewContainer: {
+      paddingHorizontal: 20,
+      paddingBottom: 15,
+      backgroundColor: '#85ad87',
+      // backgroundColor: '#94af8f',
+      // backgroundColor: '#f7e0b5',
+      borderRadius: 20,
+    },
+    mainContainer: {
+      flex: 1,
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      // backgroundColor: '#FFFFFF',
+      // backgroundColor: '#85ad87',
+      backgroundColor: "#f7e0b5",
+      width: '100%'
+    },
   },
-  mainContainer: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    // backgroundColor: '#FFFFFF',
-    // backgroundColor: '#85ad87',
-    backgroundColor: "#f7e0b5",
-    width: '100%'
+  greyScale: {
+    scrollViewContainer: {
+      paddingHorizontal: 20,
+      paddingBottom: 15,
+      backgroundColor: '#EEEEEE',
+      borderRadius: 20,
+    },
+    mainContainer: {
+      flex: 1,
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      backgroundColor: '#FFFFFF',
+      width: '100%'
+    },
   },
   textStyling: {
     label: {
@@ -184,24 +202,43 @@ const styles = StyleSheet.create({
     },
   },
   viewStyle: {
-    modalContainer: {
-      // backgroundColor: 'white',
-      backgroundColor: '#85ad87',
-      // backgroundColor: '#cfcd9e',
-      borderRadius: 20,
-      alignSelf: 'center',
-      top: '28%',
-      paddingHorizontal: 15,
-      paddingBottom: 15,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
+      modalContainer: {
+        color: {
+        // backgroundColor: 'white',
+        backgroundColor: '#85ad87',
+        // backgroundColor: '#cfcd9e',
+        borderRadius: 20,
+        alignSelf: 'center',
+        top: '28%',
+        paddingHorizontal: 15,
+        paddingBottom: 15,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 30,
+        },
+        greyScale: {
+          backgroundColor: 'white',
+          borderRadius: 20,
+          alignSelf: 'center',
+          top: '28%',
+          paddingHorizontal: 15,
+          paddingBottom: 15,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+          elevation: 30,
+        }
+
       },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 30,
-    },
     label: {
       marginLeft: 10,
       marginTop: 30,
@@ -210,13 +247,24 @@ const styles = StyleSheet.create({
       marginLeft: 10,
       marginTop: 5,
     },
-    button: {
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: 'black',
-      padding: 10,
-      backgroundColor: 'lightgrey',
-      // backgroundColor: '#f7e0b5'
+    color: {
+      button: {
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 10,
+        // backgroundColor: 'lightgrey',
+        backgroundColor: '#f7e0b5'
+      },
+    },
+    greyScale: {
+      button: {
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 10,
+        backgroundColor: 'lightgrey',
+      },
     },
   },
 });

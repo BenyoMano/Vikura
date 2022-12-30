@@ -5,11 +5,13 @@ import firestore from '@react-native-firebase/firestore';
 import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
 import refPath from '../../firebase/refPath';
 import { showMessage } from 'react-native-flash-message';
+import useColorStyle from '../../atoms/colorStyle';
 
 const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
-  const {viewStyle} = styles;
+  const {color, greyScale} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const colorStyle = useColorStyle();
   const user = auth().currentUser;
   
 
@@ -186,7 +188,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
     />
   );
   return (
-    <View style={viewStyle}>
+    <View style={colorStyle === true ? color.viewStyle : greyScale.viewStyle}>
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
@@ -202,18 +204,35 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   );
 };
 const styles = {
-  viewStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    overflow: 'hidden',
-    marginTop: 30,
-    marginBottom: 22,
-    height: 550,
-    width: 360,
-    borderColor: 'gray',
-    borderWidth: 2,
-    borderRadius: 12,
-    backgroundColor: '#ffffe7'
+  color: {
+    viewStyle: {
+      flex: 1,
+      justifyContent: 'center',
+      overflow: 'hidden',
+      marginTop: 30,
+      marginBottom: 22,
+      height: 550,
+      width: 360,
+      borderColor: 'gray',
+      borderWidth: 2,
+      borderRadius: 12,
+      backgroundColor: '#ffffe7'
+    },
+  },
+  greyScale: {
+    viewStyle: {
+      flex: 1,
+      justifyContent: 'center',
+      overflow: 'hidden',
+      marginTop: 30,
+      marginBottom: 22,
+      height: 550,
+      width: 360,
+      borderColor: 'gray',
+      borderWidth: 2,
+      borderRadius: 12,
+      backgroundColor: 'white'
+    },
   },
   text: {
     message: {

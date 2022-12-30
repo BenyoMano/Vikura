@@ -1,13 +1,16 @@
 import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
+import useColorStyle from './colorStyle';
 
 const Button = props => {
-  const {btnContainerStyle, pressedBtnContainerStyle, btnTextStyle} = styles;
+  const {color, greyScale, btnTextStyle} = styles;
+  const colorStyle = useColorStyle();
+
   return (
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable onPress={props.onPress}
-      style={btnContainerStyle}
-      android_ripple={{color: '#b5dfb7'}}
+      style={colorStyle === true ? color.btnContainerStyle : greyScale.btnContainerStyle}
+      android_ripple={{color: colorStyle === true ? '#b5dfb7' : '#919191'}}
       >
           <Text style={btnTextStyle}>{props.title}</Text>
       </Pressable>
@@ -16,12 +19,21 @@ const Button = props => {
 };
 
 const styles = StyleSheet.create({
-  btnContainerStyle: {
-    // backgroundColor: '#C4C4C4',
-    backgroundColor: '#85ad87',
-    paddingVertical: 18,
-    width: 230,
-    borderRadius: 12,
+  color: {    
+    btnContainerStyle: {
+      backgroundColor: '#85ad87',
+      paddingVertical: 18,
+      width: 230,
+      borderRadius: 12,
+    },
+  },
+  greyScale: {    
+    btnContainerStyle: {
+      backgroundColor: '#C4C4C4',
+      paddingVertical: 18,
+      width: 230,
+      borderRadius: 12,
+    },
   },
   pressedBtnContainerStyle: {
     // backgroundColor: 'green',

@@ -2,10 +2,12 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import useColorStyle from '../../atoms/colorStyle';
 
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const colorStyle = useColorStyle();
 
   const openConvo = async () => {
     const getRoomName = await firestore()
@@ -70,7 +72,7 @@ const Conv = () => {
     return (
       <Pressable 
       onPress={() => navigation.navigate('ChatView', {id: uid})}>
-        <View style={styles.item}>
+        <View style={colorStyle === true ? styles.color.item : styles.greyScale.item}>
           <View style={styles.header}>
             <Text style={styles.title}>{alias}</Text>
             <Text style={styles.timestamp}>{timestamp}</Text>
@@ -138,16 +140,31 @@ const styles = {
     color: 'black',
     fontFamily: 'NunitoSans-Regular',
   },
-  item: {
-    padding: 15,
-    marginHorizontal: 0,
-    marginVertical: 0,
-    // backgroundColor: '#EEEEEE',
-    backgroundColor: '#ffffe7',
-    borderWidth: 1,
-    // borderColor: '#EEEEEE',
-    borderColor: '#ffffe7',
-    borderBottomColor: 'black',
+  color: {
+    item: {
+      padding: 15,
+      marginHorizontal: 0,
+      marginVertical: 0,
+      // backgroundColor: '#EEEEEE',
+      backgroundColor: '#ffffe7',
+      borderWidth: 1,
+      // borderColor: '#EEEEEE',
+      borderColor: '#ffffe7',
+      borderBottomColor: 'black',
+    },
+  },
+  greyScale: {
+    item: {
+      padding: 15,
+      marginHorizontal: 0,
+      marginVertical: 0,
+      backgroundColor: '#EEEEEE',
+      // backgroundColor: '#ffffe7',
+      borderWidth: 1,
+      borderColor: '#EEEEEE',
+      // borderColor: '#ffffe7',
+      borderBottomColor: 'black',
+    },
   },
 };
 

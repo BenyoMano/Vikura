@@ -16,7 +16,10 @@ const createRoom = async () => {
       },
     },
   });
-  getRefPath(getRoomName);
+
+  // roomName() // här innanför, eller utanför
+
+ // getRefPath(getRoomName);
 };
 
 export default createRoom;

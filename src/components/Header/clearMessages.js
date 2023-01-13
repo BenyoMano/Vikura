@@ -1,5 +1,4 @@
 import {} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 
 const clearMessages = ({user, refPath}) => {
   const clearMessage = async () => {

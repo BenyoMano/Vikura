@@ -9,50 +9,52 @@ const Conv = () => {
   const [refreshing, setRefreshing] = useState(false);
   const colorStyle = useColorStyle();
 
+
   const openConvo = async () => {
     const getRoomName = await firestore()
       .collection('rooms')
       .where('users.client.uid', '!=', '')
       .get();
+      
 
     const newConvos = [];
-    getRoomName.docs.map(d => {
-      const clientAlias = d.data().users.client.alias;
-      const clientId = d.data().users.client.uid;
+    getRoomName.docs.map(roomDetails => {
+      const clientAlias = roomDetails.data().users.client.alias;
+      const clientId = roomDetails.data().users.client.uid;
       console.log('Client alias:', clientAlias);
-      const splitRef = d.ref.path.split('/');
-      const last = splitRef[splitRef.length - 1];
-      const docPath = firestore()
+      const splitRefPath = roomDetails.ref.path.split('/');
+      const roomId = splitRefPath[splitRefPath.length - 1];
+      const pathToMessages = firestore()
         .collection('rooms')
-        .doc(last)
+        .doc(roomId)
         .collection('messages');
 
-      docPath
+      pathToMessages
         .orderBy('timestamp')
         .limitToLast(1)
-        .onSnapshot(a => {
-          /*          const newConvos = a.docs.map(b => ({
-            timestamp: b.data().timestamp.toDate(),
-            text: b.data().msg,
-            alias: clientAlias,
-            uid: clientId,
-          })); */
-          a.docs.forEach(b => {
-            console.log('msgUID', clientId);
+        .onSnapshot(lastMessage => {
+
+          lastMessage.docs.forEach(lastMessageDetails => {
             newConvos.push({
-              timestamp: b.data().timestamp.toDate(),
-              text: b.data().msg,
+              timestamp: lastMessageDetails.data().timestamp.toDate(),
+              text: lastMessageDetails.data().msg,
+              isRead: lastMessageDetails.data().isRead,
               alias: clientAlias,
               uid: clientId,
             });
           });
-          setConvos(newConvos);
+          console.log('newConvos', newConvos) 
+
+          if( newConvos === []) return
+          setConvos(newConvos)
         });
     });
-    convos.forEach(a =>
-      console.log('Convo timestamp:', a.timestamp.toLocaleString()),
-    );
-  };
+    console.log('Convos :', convos)
+    // convos.forEach(a =>
+    //   console.log('Convo timestamp:', a.timestamp.toLocaleString()),
+    // );
+  }
+
 
   useEffect(() => {
     openConvo();
@@ -67,8 +69,9 @@ const Conv = () => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({alias, text, timestamp, uid}) {
+  function Item({alias, text, isRead, timestamp, uid}) {
     const navigation = useNavigation();
+    console.log('isRead:', isRead);
     return (
       <Pressable 
       onPress={() => navigation.navigate('ChatView', {id: uid})}>
@@ -78,7 +81,7 @@ const Conv = () => {
             <Text style={styles.timestamp}>{timestamp}</Text>
           </View>
           <View>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={isRead ? styles.isRead.text : styles.notIsRead.text}>{text}</Text>
           </View>
         </View>
       </Pressable>
@@ -86,9 +89,10 @@ const Conv = () => {
   }
   const renderItem = ({item}) => (
     <Item
-      alias={item.alias}
       timestamp={item.timestamp.toLocaleString()}
+      alias={item.alias}
       text={item.text}
+      isRead={item.isRead}
       uid={item.uid}
     />
   );
@@ -98,7 +102,7 @@ const Conv = () => {
       <FlatList
         horizontal={false}
         numColumns={1}
-        data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
+        data={convos.sort((a, b) => b.timestamp.toLocaleString() - a.timestamp.toLocaleString())} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         refreshControl={
@@ -135,10 +139,19 @@ const styles = {
     color: 'black',
     paddingTop: 5,
   },
-  text: {
-    fontSize: 14,
-    color: 'black',
-    fontFamily: 'NunitoSans-Regular',
+  isRead: {
+    text: {
+      fontSize: 14,
+      color: 'black',
+      fontFamily: 'NunitoSans-Regular',
+    },
+  },
+  notIsRead: {
+    text: {
+      fontSize: 14,
+      color: 'red',
+      fontFamily: 'NunitoSans-Bold',
+    },
   },
   color: {
     item: {

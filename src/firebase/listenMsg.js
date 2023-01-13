@@ -1,8 +1,10 @@
-//import firestore from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
-const listenMsg = () => {
-  docPath.onSnapshot(querySnapshot => {
-    const newData = querySnapshot.docs.map(documentSnapshot => ({
+const listenMsg = ({pathToMessages, setMessages}) => {
+
+  pathToMessages.onSnapshot(messageDetails => {
+
+    const newData = messageDetails.docs.map(documentSnapshot => ({
       timestamp: documentSnapshot.data().timestamp.toDate(),
       text: documentSnapshot.data().msg,
       author: documentSnapshot.data().author,

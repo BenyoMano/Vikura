@@ -34,6 +34,7 @@ const Hem = ({navigation}) => {
               justifyContent: 'flex-end'
             }}>
             <Logo style={{width: 160, height: 62, marginTop: 30}} />
+            
           </View>
           <View style={styles.contcont}>
             <View style={colorStyle === true ? 
@@ -82,14 +83,14 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       alignItems: 'center',
-      backgroundColor: '#f7e0b5',
+      backgroundColor: '#EEEEEE',
       width: '100%'
     },
     logincontainer: {
       paddingHorizontal: 20,
       margingBottom: 50,
       paddingBottom: 20,
-      backgroundColor: '#85ad87',
+      backgroundColor: '#cccccc',
       // backgroundColor: '#94af8f',
       // backgroundColor: '#8b9d77'
       borderRadius: 20,

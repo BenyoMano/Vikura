@@ -1,29 +1,36 @@
-import firestore from '@react-native-firebase/firestore';
-import createRoom from './createRoom';
-import listenMsg from './listenMsg';
+import { showMessage } from 'react-native-flash-message';
+import createRoom from './createRoom'; // Finns i if empty
 import refPath from './refPath';
 import roomName from './roomName';
 
-const openChat = async ({user, clientUserId}) => {
-  const isKurator = await firestore().collection('Users').doc(user.uid).get();
+const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}) => {
+  console.log('isKurator:', isKurator)
 
-  if (isKurator.get('kurator') == true) {
-    console.log('Client UserId', clientUserId); //clientUserId
-    roomName();
-    refPath();
-    listenMsg();
+  if (isKurator === undefined) return;
+
+  if (isKurator) {
+    const rumNamn = await roomName({clientUserId}); 
+    refPath({setRefPath, rumNamn, setMessages});
   } else {
-    clientUserId = user.uid;
-    roomName();
-    console.log('Room name', roomName.empty);
-    //console.log('Room name', getRoomName.empty);
 
-    if (!roomName.empty) {
-      refPath();
-      listenMsg();
+    clientUserId = user.uid;
+    const rumNamn = await roomName({clientUserId});
+
+    if (!rumNamn.empty) {
+      refPath({setRefPath, rumNamn, setMessages});
     } else {
       console.log('Room does not exist!');
       createRoom();
+      const rumNamn = await roomName({clientUserId});
+      refPath({setRefPath, rumNamn, setMessages});
+      showMessage({
+        message: "Välkommen!",
+        description: "Du kan börja chatta direkt!",
+        type: "info",
+        position: "center",
+        floating: true,
+        duration: 2500
+      })
     }
   }
 };

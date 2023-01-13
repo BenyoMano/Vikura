@@ -1,11 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, View, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import AutoScrollFlatList from 'react-native-autoscroll-flatlist';
+import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import refPath from '../../firebase/refPath';
 import { showMessage } from 'react-native-flash-message';
 import useColorStyle from '../../atoms/colorStyle';
+import openChat from '../../firebase/openChat';
 
 const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const {color, greyScale} = styles;
@@ -14,114 +15,116 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const colorStyle = useColorStyle();
   const user = auth().currentUser;
   
+  
+  // const openChat = async () => {
+  //   console.log('isKurator:', isKurator)
+  //   if (isKurator === undefined) return;
+  //   if (isKurator) {
+  //     console.log('Client UserId', clientUserId);
 
-  const openChat = async () => {
-    console.log('isKurator:', isKurator)
-    if (isKurator === undefined) return;
-    if (isKurator) {
-      console.log('Client UserId', clientUserId);
-      const getRoomName = await firestore()
-        .collection('rooms')
-        .where('users.client.uid', '==', clientUserId)
-        .get();
+  //     const getRoomName = await firestore()
+  //       .collection('rooms')
+  //       .where('users.client.uid', '==', clientUserId)
+  //       .get();
 
+  //     getRoomName.docs.map(d => {
+  //       const splitRef = d.ref.path.split('/');
+  //       const last = splitRef[splitRef.length - 1];
+  //       const docPath = firestore()
+  //         .collection('rooms')
+  //         .doc(last)
+  //         .collection('messages');
+  //       setRefPath(docPath);
 
-      getRoomName.docs.map(d => {
-        const splitRef = d.ref.path.split('/');
-        const last = splitRef[splitRef.length - 1];
-        const docPath = firestore()
-          .collection('rooms')
-          .doc(last)
-          .collection('messages');
-        setRefPath(docPath);
+  //       //console.log('docPath', docPath);
+  //       // console.log('refPath', refPath);
+  //       docPath.onSnapshot(querySnapshot => {
+  //         const newData = querySnapshot.docs.map(documentSnapshot => ({
+  //           timestamp: documentSnapshot.data().timestamp.toDate(),
+  //           text: documentSnapshot.data().msg,
+  //           author: documentSnapshot.data().author,
+  //           uid: documentSnapshot.data().uid,
+  //         }));
+  //         setMessages(newData);
+  //       });
+  //     });
+  //   } else {
+  //     clientUserId = user.uid;
+  //     //console.log('user.uid', user.uid);
+  //     console.log('clientUserId', clientUserId);
 
-        //console.log('docPath', docPath);
-        // console.log('refPath', refPath);
-        docPath.onSnapshot(querySnapshot => {
-          const newData = querySnapshot.docs.map(documentSnapshot => ({
-            timestamp: documentSnapshot.data().timestamp.toDate(),
-            text: documentSnapshot.data().msg,
-            author: documentSnapshot.data().author,
-            uid: documentSnapshot.data().uid,
-          }));
-          setMessages(newData);
-        });
-      });
-    } else {
-      clientUserId = user.uid;
-      //console.log('user.uid', user.uid);
-      console.log('clientUserId', clientUserId);
+  //     const getRoomName = await firestore()
+  //       .collection('rooms')
+  //       .where('users.client.uid', '==', clientUserId)
+  //       .get();
+  //     console.log('getRoomName.empty ?', getRoomName.empty);
 
-      const getRoomName = await firestore()
-        .collection('rooms')
-        .where('users.client.uid', '==', clientUserId)
-        .get();
-      console.log('getRoomName.empty ?', getRoomName.empty);
+  //     if (!getRoomName.empty) {
+  //       getRoomName.docs.map(d => {
+  //         const splitRef = d.ref.path.split('/');
+  //         const last = splitRef[splitRef.length - 1];
+  //         const docPath = firestore()
+  //           .collection('rooms')
+  //           .doc(last)
+  //           .collection('messages');
+  //         setRefPath(docPath);
 
-      if (!getRoomName.empty) {
-        getRoomName.docs.map(d => {
-          const splitRef = d.ref.path.split('/');
-          const last = splitRef[splitRef.length - 1];
-          const docPath = firestore()
-            .collection('rooms')
-            .doc(last)
-            .collection('messages');
-          setRefPath(docPath);
-
-          docPath.onSnapshot(querySnapshot => {
-            console.log('RUM FINNS -- EFTER');
-            const newData = querySnapshot.docs.map(documentSnapshot => ({
-              timestamp: documentSnapshot.data().timestamp.toDate(),
-              text: documentSnapshot.data().msg,
-              author: documentSnapshot.data().author,
-              uid: documentSnapshot.data().uid,
-            }));
-            setMessages(newData);
-          });
-        });
-      } else {
-        console.log('Room does not exist!');
-        const createRoom = async () => {
-          const roomRef = firestore().collection('rooms');
-          console.log('Creating room');
-          const getAlias = await firestore()
-            .collection('Users')
-            .doc(clientUserId)
-            .get();
+  //         docPath.onSnapshot(querySnapshot => {
+  //           console.log('RUM FINNS -- EFTER');
+  //           const newData = querySnapshot.docs.map(documentSnapshot => ({
+  //             timestamp: documentSnapshot.data().timestamp.toDate(),
+  //             text: documentSnapshot.data().msg,
+  //             author: documentSnapshot.data().author,
+  //             uid: documentSnapshot.data().uid,
+  //           }));
+  //           setMessages(newData);
+  //         });
+  //       });
+  //     } else {
+  //       console.log('Room does not exist!');
+  //       const createRoom = async () => {
+  //         const roomRef = firestore().collection('rooms');
+  //         console.log('Creating room');
+  //         const getAlias = await firestore()
+  //           .collection('Users')
+  //           .doc(clientUserId)
+  //           .get();
           
-          await roomRef.add({
-            users: {
-              client: {
-                alias: getAlias.get('alias'),
-                uid: clientUserId,
-              },
-            },
-          });
+  //         await roomRef.add({
+  //           users: {
+  //             client: {
+  //               alias: getAlias.get('alias'),
+  //               uid: clientUserId,
+  //             },
+  //           },
+  //         });
           
-          const newGetRoomName = await firestore()
-          .collection('rooms')
-          .where('users.client.uid', '==', clientUserId)
-          .get();
+  //         const newGetRoomName = await firestore()
+  //         .collection('rooms')
+  //         .where('users.client.uid', '==', clientUserId)
+  //         .get();
 
-          refPath({newGetRoomName, setRefPath});
-        };
-        createRoom();
-        showMessage({
-          message: "Välkommen!",
-          description: "Du kan börja chatta direkt!",
-          type: "info",
-          position: "center",
-          floating: true,
-          duration: 2500
-        });
-      }
-    }
-  };
+  //         refPath({newGetRoomName, setRefPath});
+  //       };
+  //       createRoom();
+  //       showMessage({
+  //         message: "Välkommen!",
+  //         description: "Du kan börja chatta direkt!",
+  //         type: "info",
+  //         position: "center",
+  //         floating: true,
+  //         duration: 2500
+  //       });
+  //     }
+  //   }
+  // };
+
 
   useEffect(() => {
-    openChat();
+    openChat({isKurator, user, clientUserId, setRefPath, setMessages});
     return () => openChat();
   }, [isKurator]);
+  
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);

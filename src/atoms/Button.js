@@ -21,7 +21,7 @@ const Button = props => {
 const styles = StyleSheet.create({
   color: {    
     btnContainerStyle: {
-      backgroundColor: '#85ad87',
+      backgroundColor: '#99BEB1',
       paddingVertical: 18,
       width: 230,
       borderRadius: 12,

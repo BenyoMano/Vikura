@@ -12,6 +12,7 @@ const sendMessage = ({msgToSend, user, refPath}) => {
         author: getUserData.get('alias'),
         kurator: getUserData.get('kurator'),
         msg: msgToSend,
+        isRead: false,
         timestamp: new Date(),
         uid: user.uid,
       })

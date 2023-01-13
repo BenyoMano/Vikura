@@ -1,18 +1,22 @@
 import firestore from '@react-native-firebase/firestore';
+import listenMsg from './listenMsg';
 
 
-const refPath = ({setRefPath, newGetRoomName}) => {
-  if (newGetRoomName === undefined) return;
+const refPath = ({setRefPath, rumNamn, setMessages}) => {
   const getRefPath = () => {
-    newGetRoomName.docs.map(d => {
-      const splitRef = d.ref.path.split('/');
-      const last = splitRef[splitRef.length - 1];
-      const docPath = firestore()
+    rumNamn.docs.map(roomDetails => {
+      const splitRefPath = roomDetails.ref.path.split('/');
+      const roomId = splitRefPath[splitRefPath.length - 1];
+      const pathToMessages = firestore()
         .collection('rooms')
-        .doc(last)
+        .doc(roomId)
         .collection('messages');
-      setRefPath(docPath);
-      console.log('Room Created Successfully!')
+
+      setRefPath(pathToMessages);
+     // console.log('Room Created Successfully!')
+
+      listenMsg({pathToMessages, setMessages});
+
     });
   };
   getRefPath();

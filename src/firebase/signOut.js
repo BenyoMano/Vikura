@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 
 const signOut = () => {
+  
   const user = auth().currentUser;
   console.log('Current User?:', user)
   if (user) {
@@ -10,7 +11,6 @@ const signOut = () => {
   } else {
     console.log('No user to sign out!')
   }
-  
 };
 
 export default signOut;

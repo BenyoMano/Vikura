@@ -8,7 +8,9 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
 
   if (isKurator === undefined) return;
 
+
   if (isKurator) {
+
     const rumNamn = await roomName({clientUserId}); 
     refPath({setRefPath, rumNamn, setMessages});
   } else {

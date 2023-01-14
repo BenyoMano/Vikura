@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import allRoomNames from './allRoomNames';
 import convRefPath from './convRefPath';
 
-const openConvo2 = async ({convos, setConvos, setRefPath}) => {
+const openConvo = async ({convos, setConvos, setRefPath}) => {
 
   // const getAllRoomNames = await firestore()
   // .collection('rooms')
@@ -56,4 +56,4 @@ const openConvo2 = async ({convos, setConvos, setRefPath}) => {
 
 };
 
-export default openConvo2;
+export default openConvo;

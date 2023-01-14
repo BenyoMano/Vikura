@@ -11,115 +11,12 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const [refreshing, setRefreshing] = useState(false);
   const colorStyle = useColorStyle();
   const user = auth().currentUser;
-  
-  
-  // const openChat = async () => {
-  //   console.log('isKurator:', isKurator)
-  //   if (isKurator === undefined) return;
-  //   if (isKurator) {
-  //     console.log('Client UserId', clientUserId);
-
-  //     const getRoomName = await firestore()
-  //       .collection('rooms')
-  //       .where('users.client.id', '==', clientUserId)
-  //       .get();
-
-  //     getRoomName.docs.map(d => {
-  //       const splitRef = d.ref.path.split('/');
-  //       const last = splitRef[splitRef.length - 1];
-  //       const docPath = firestore()
-  //         .collection('rooms')
-  //         .doc(last)
-  //         .collection('messages');
-  //       setRefPath(docPath);
-
-  //       //console.log('docPath', docPath);
-  //       // console.log('refPath', refPath);
-  //       docPath.onSnapshot(querySnapshot => {
-  //         const newData = querySnapshot.docs.map(documentSnapshot => ({
-  //           timestamp: documentSnapshot.data().timestamp.toDate(),
-  //           text: documentSnapshot.data().msg,
-  //           author: documentSnapshot.data().author,
-  //           id: documentSnapshot.data().id,
-  //         }));
-  //         setMessages(newData);
-  //       });
-  //     });
-  //   } else {
-  //     clientUserId = user.uid;
-  //     //console.log('user.uid', user.uid);
-  //     console.log('clientUserId', clientUserId);
-
-  //     const getRoomName = await firestore()
-  //       .collection('rooms')
-  //       .where('users.client.id', '==', clientUserId)
-  //       .get();
-  //     console.log('getRoomName.empty ?', getRoomName.empty);
-
-  //     if (!getRoomName.empty) {
-  //       getRoomName.docs.map(d => {
-  //         const splitRef = d.ref.path.split('/');
-  //         const last = splitRef[splitRef.length - 1];
-  //         const docPath = firestore()
-  //           .collection('rooms')
-  //           .doc(last)
-  //           .collection('messages');
-  //         setRefPath(docPath);
-
-  //         docPath.onSnapshot(querySnapshot => {
-  //           console.log('RUM FINNS -- EFTER');
-  //           const newData = querySnapshot.docs.map(documentSnapshot => ({
-  //             timestamp: documentSnapshot.data().timestamp.toDate(),
-  //             text: documentSnapshot.data().msg,
-  //             author: documentSnapshot.data().author,
-  //             id: documentSnapshot.data().id,
-  //           }));
-  //           setMessages(newData);
-  //         });
-  //       });
-  //     } else {
-  //       console.log('Room does not exist!');
-  //       const createRoom = async () => {
-  //         const roomRef = firestore().collection('rooms');
-  //         console.log('Creating room');
-  //         const getAlias = await firestore()
-  //           .collection('Users')
-  //           .doc(clientUserId)
-  //           .get();
-          
-  //         await roomRef.add({
-  //           users: {
-  //             client: {
-  //               alias: getAlias.get('alias'),
-  //               id: clientUserId,
-  //             },
-  //           },
-  //         });
-          
-  //         const newGetRoomName = await firestore()
-  //         .collection('rooms')
-  //         .where('users.client.id', '==', clientUserId)
-  //         .get();
-
-  //         refPath({newGetRoomName, setRefPath});
-  //       };
-  //       createRoom();
-  //       showMessage({
-  //         message: "Välkommen!",
-  //         description: "Du kan börja chatta direkt!",
-  //         type: "info",
-  //         position: "center",
-  //         floating: true,
-  //         duration: 2500
-  //       });
-  //     }
-  //   }
-  // };
-
 
   useEffect(() => {
-    openChat({isKurator, user, clientUserId, setRefPath, setMessages});
-    return () => openChat();
+    if (isKurator !== undefined) {
+      openChat({isKurator, user, clientUserId, setRefPath, setMessages});
+      return () => openChat();
+    }  
   }, [isKurator]);
   
 
@@ -132,7 +29,6 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   }, [refreshing]);
 
   function Item({text, timestamp, id}) {
-    if (isKurator === undefined) return;
     return (
        !isKurator ? (
         <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>

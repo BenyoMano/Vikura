@@ -28,7 +28,14 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({text, timestamp, id}) {
+  function Item({text, timestamp, id, displayTimestamp}) {
+
+    const currentDay = new Date().toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
+    const currentYear = new Date().toLocaleString([], {year: 'numeric'});
+
+    const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
+    const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
+
     return (
        !isKurator ? (
         <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
@@ -47,7 +54,11 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
                 : styles.bubblaRecieve.timestamp
             }>
             <Text style={styles.text.author}>
-              {timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}
+              {
+                sameDay ? displayTimestamp.toLocaleString([], {hour: 'numeric', minute: 'numeric'})
+                : sameYear ? displayTimestamp.toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'})
+                : displayTimestamp.toLocaleString([], {year: 'numeric', month: 'long', day: 'numeric' })
+              }
             </Text>
           </View>
         </View>
@@ -68,7 +79,11 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
               : styles.bubblaSend.timestamp
           }>
           <Text style={styles.text.author}>
-            {timestamp.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}
+            {
+              sameDay ? displayTimestamp.toLocaleString([], {hour: 'numeric', minute: 'numeric'})
+              : sameYear ? displayTimestamp.toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'})
+              : displayTimestamp.toLocaleString([], {year: 'numeric', month: 'long', day: 'numeric' })
+            }
           </Text>
         </View>
       </View>
@@ -78,6 +93,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   const renderItem = ({item}) => (
     <Item
       timestamp={item.timestamp}
+      displayTimestamp={item.displayTimestamp}
       text={item.text}
       author={item.author}
       id={item.id}

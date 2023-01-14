@@ -1,6 +1,7 @@
 import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
+
 const sendMessage = ({msgToSend, user, refPath}) => {
 
   if (!msgToSend) return;

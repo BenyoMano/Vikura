@@ -3,78 +3,82 @@ import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import useColorStyle from '../../atoms/colorStyle';
+import openConvo2 from '../../firebase/openConvo2';
 
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [refPath, setRefPath] = useState(false);
   const colorStyle = useColorStyle();
 
 
-  const openConvo = async () => {
-    const getRoomName = await firestore()
-      .collection('rooms')
-      .where('users.client.uid', '!=', '')
-      .get();
+  // const openConvo = async () => {
+  //   const getRoomName = await firestore()
+  //     .collection('rooms')
+  //     .where('users.client.id', '!=', '')
+  //     .get();
       
 
-    const newConvos = [];
-    getRoomName.docs.map(roomDetails => {
-      const clientAlias = roomDetails.data().users.client.alias;
-      const clientId = roomDetails.data().users.client.uid;
-      console.log('Client alias:', clientAlias);
-      const splitRefPath = roomDetails.ref.path.split('/');
-      const roomId = splitRefPath[splitRefPath.length - 1];
-      const pathToMessages = firestore()
-        .collection('rooms')
-        .doc(roomId)
-        .collection('messages');
+  //   const newConvos = [];
+  //   getRoomName.docs.map(roomDetails => {
+  //     const clientAlias = roomDetails.data().users.client.alias;
+  //     const clientId = roomDetails.data().users.client.id;
+  //     console.log('Client alias:', clientAlias);
+  //     const splitRefPath = roomDetails.ref.path.split('/');
+  //     const roomId = splitRefPath[splitRefPath.length - 1];
+      
+  //     const pathToMessages = firestore()
+  //       .collection('rooms')
+  //       .doc(roomId)
+  //       .collection('messages');
 
-      pathToMessages
-        .orderBy('timestamp')
-        .limitToLast(1)
-        .onSnapshot(lastMessage => {
+  //     pathToMessages
+  //       .orderBy('timestamp')
+  //       .limitToLast(1)
+  //       .onSnapshot(lastMessage => {
 
-          lastMessage.docs.forEach(lastMessageDetails => {
-            newConvos.push({
-              timestamp: lastMessageDetails.data().timestamp.toDate(),
-              text: lastMessageDetails.data().msg,
-              isRead: lastMessageDetails.data().isRead,
-              alias: clientAlias,
-              uid: clientId,
-            });
-          });
-          console.log('newConvos', newConvos) 
+  //         lastMessage.docs.forEach(lastMessageDetails => {
+  //           newConvos.push({
+  //             timestamp: lastMessageDetails.data().timestamp.toDate(),
+  //             text: lastMessageDetails.data().msg,
+  //             isRead: lastMessageDetails.data().isRead,
+  //             alias: clientAlias,
+  //             id: clientId,
+  //           });
+  //         });
+  //         console.log('newConvos', newConvos) 
 
-          if( newConvos === []) return
-          setConvos(newConvos)
-        });
-    });
-    console.log('Convos :', convos)
-    // convos.forEach(a =>
-    //   console.log('Convo timestamp:', a.timestamp.toLocaleString()),
-    // );
-  }
-
+  //         if( newConvos === []) return;
+  //         setConvos(newConvos)
+  //       });
+  //   });
+  //   console.log('Convos :', convos)
+  //   // convos.forEach(a =>
+  //   //   console.log('Convo timestamp:', a.timestamp.toLocaleString()),
+  //   // );
+  // }
 
   useEffect(() => {
-    openConvo();
-    return () => openConvo();
+    // openConvo();
+    openConvo2({convos, setConvos, setRefPath});
+    return () => openConvo2();
+    // return () => openConvo();
   }, []);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     console.log('Refreshing...');
-    openConvo();
+    openConvo2();
     setRefreshing(false);
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({alias, text, isRead, timestamp, uid}) {
+  function Item({alias, text, isRead, timestamp, id}) {
     const navigation = useNavigation();
     console.log('isRead:', isRead);
     return (
       <Pressable 
-      onPress={() => navigation.navigate('ChatView', {id: uid})}>
+      onPress={() => navigation.navigate('ChatView', {id: id})}>
         <View style={colorStyle === true ? styles.color.item : styles.greyScale.item}>
           <View style={styles.header}>
             <Text style={styles.title}>{alias}</Text>
@@ -93,7 +97,7 @@ const Conv = () => {
       alias={item.alias}
       text={item.text}
       isRead={item.isRead}
-      uid={item.uid}
+      id={item.id}
     />
   );
 

@@ -1,10 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, View, RefreshControl} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
-import refPath from '../../firebase/refPath';
-import { showMessage } from 'react-native-flash-message';
 import useColorStyle from '../../atoms/colorStyle';
 import openChat from '../../firebase/openChat';
 
@@ -24,7 +21,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
 
   //     const getRoomName = await firestore()
   //       .collection('rooms')
-  //       .where('users.client.uid', '==', clientUserId)
+  //       .where('users.client.id', '==', clientUserId)
   //       .get();
 
   //     getRoomName.docs.map(d => {
@@ -43,19 +40,19 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   //           timestamp: documentSnapshot.data().timestamp.toDate(),
   //           text: documentSnapshot.data().msg,
   //           author: documentSnapshot.data().author,
-  //           uid: documentSnapshot.data().uid,
+  //           id: documentSnapshot.data().id,
   //         }));
   //         setMessages(newData);
   //       });
   //     });
   //   } else {
-  //     clientUserId = user.uid;
-  //     //console.log('user.uid', user.uid);
+  //     clientUserId = user.id;
+  //     //console.log('user.id', user.id);
   //     console.log('clientUserId', clientUserId);
 
   //     const getRoomName = await firestore()
   //       .collection('rooms')
-  //       .where('users.client.uid', '==', clientUserId)
+  //       .where('users.client.id', '==', clientUserId)
   //       .get();
   //     console.log('getRoomName.empty ?', getRoomName.empty);
 
@@ -75,7 +72,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   //             timestamp: documentSnapshot.data().timestamp.toDate(),
   //             text: documentSnapshot.data().msg,
   //             author: documentSnapshot.data().author,
-  //             uid: documentSnapshot.data().uid,
+  //             id: documentSnapshot.data().id,
   //           }));
   //           setMessages(newData);
   //         });
@@ -94,14 +91,14 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   //           users: {
   //             client: {
   //               alias: getAlias.get('alias'),
-  //               uid: clientUserId,
+  //               id: clientUserId,
   //             },
   //           },
   //         });
           
   //         const newGetRoomName = await firestore()
   //         .collection('rooms')
-  //         .where('users.client.uid', '==', clientUserId)
+  //         .where('users.client.id', '==', clientUserId)
   //         .get();
 
   //         refPath({newGetRoomName, setRefPath});
@@ -134,14 +131,14 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({text, timestamp, uid}) {
+  function Item({text, timestamp, id}) {
     if (isKurator === undefined) return;
     return (
        !isKurator ? (
-        <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+        <View style={id === user.id ? styles.bubblaSend : styles.bubblaRecieve}>
           <View
             style={
-              uid === user.uid
+              id === user.id
                 ? styles.bubblaSend.bubbla
                 : styles.bubblaRecieve.bubbla
             }>
@@ -149,7 +146,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
           </View>
           <View
             style={
-              uid === user.uid
+              id === user.id
                 ? styles.bubblaSend.timestamp
                 : styles.bubblaRecieve.timestamp
             }>
@@ -159,10 +156,10 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
           </View>
         </View>
       ) : isKurator ? (
-        <View style={uid === clientUserId ? styles.bubblaRecieve : styles.bubblaSend }>
+        <View style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend }>
         <View
           style={
-            uid === clientUserId
+            id === clientUserId
               ? styles.bubblaRecieve.bubbla
               : styles.bubblaSend.bubbla
           }>
@@ -170,7 +167,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
         </View>
         <View
           style={
-            uid === clientUserId
+            id === clientUserId
               ? styles.bubblaRecieve.timestamp
               : styles.bubblaSend.timestamp
           }>
@@ -187,7 +184,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
       timestamp={item.timestamp}
       text={item.text}
       author={item.author}
-      uid={item.uid}
+      id={item.id}
     />
   );
   return (

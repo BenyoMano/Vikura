@@ -5,7 +5,7 @@ const navigateAfterSignIn = async ({navigation}) => {
   const user = auth().currentUser;
   firestore()
     .collection('Users')
-    .doc(user.uid)
+    .doc(user.id)
     .onSnapshot(querySnapshot => {
       const newUserStatus = querySnapshot.get('firstLogin');
       const kuratorStatus = querySnapshot.get('kurator');
@@ -14,7 +14,7 @@ const navigateAfterSignIn = async ({navigation}) => {
         navigation.navigate('NewElev');
       }
       if (newUserStatus === false && kuratorStatus == !true) {
-        navigation.navigate('ChatView', {id: user.uid});
+        navigation.navigate('ChatView', {id: user.id});
       }
       if (newUserStatus === false && kuratorStatus == true) {
         navigation.navigate('KuratorView');

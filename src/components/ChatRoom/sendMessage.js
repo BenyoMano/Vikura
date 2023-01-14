@@ -5,7 +5,7 @@ const sendMessage = ({msgToSend, user, refPath}) => {
   const addMessage = async () => {
     const getUserData = await firestore()
       .collection('Users')
-      .doc(user.uid)
+      .doc(user.id)
       .get();
     await refPath
       .add({
@@ -14,7 +14,7 @@ const sendMessage = ({msgToSend, user, refPath}) => {
         msg: msgToSend,
         isRead: false,
         timestamp: new Date(),
-        uid: user.uid,
+        id: user.id,
       })
       .catch(error => {
         console.error(error);

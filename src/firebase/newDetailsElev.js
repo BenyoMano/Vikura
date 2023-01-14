@@ -32,20 +32,20 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
 
     firestore()
       .collection('Users')
-      .doc(auth().currentUser.uid)
+      .doc(auth().currentUser.id)
       .onSnapshot(querySnapshot => {
         const currentData = querySnapshot.data();
         console.log('Current Data:', currentData);
         firestore()
           .collection('Users')
-          .doc(auth().currentUser.uid)
+          .doc(auth().currentUser.id)
           .set({
             ...currentData,
             firstLogin: false,
             alias: alias,
           });
       });
-    navigation.navigate('ChatView', {id: user.uid})
+    navigation.navigate('ChatView', {id: user.id})
   } else {
     console.log('Lösenordet matchar inte!');
   }

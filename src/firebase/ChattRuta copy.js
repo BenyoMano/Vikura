@@ -24,12 +24,12 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({text, timestamp, uid}) {
+  function Item({text, timestamp, id}) {
     return (
-      <View style={uid === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+      <View style={id === user.id ? styles.bubblaSend : styles.bubblaRecieve}>
         <View
           style={
-            uid === user.uid
+            id === user.id
               ? styles.bubblaSend.bubbla
               : styles.bubblaRecieve.bubbla
           }>
@@ -37,7 +37,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
         </View>
         <View
           style={
-            uid === user.uid
+            id === user.id
               ? styles.bubblaSend.timestamp
               : styles.bubblaRecieve.timestamp
           }>
@@ -53,7 +53,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
       timestamp={item.timestamp}
       text={item.text}
       author={item.author}
-      uid={item.uid}
+      id={item.id}
     />
   );
   return (

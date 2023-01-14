@@ -1,5 +1,5 @@
 import { showMessage } from 'react-native-flash-message';
-import createRoom from './createRoom'; // Finns i if empty
+import createRoom from './createRoom';
 import refPath from './refPath';
 import roomName from './roomName';
 
@@ -13,13 +13,12 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
     refPath({setRefPath, rumNamn, setMessages});
   } else {
 
-    clientUserId = user.uid;
+    clientUserId = user.id;
     const rumNamn = await roomName({clientUserId});
 
     if (!rumNamn.empty) {
       refPath({setRefPath, rumNamn, setMessages});
     } else {
-      console.log('Room does not exist!');
       createRoom();
       const rumNamn = await roomName({clientUserId});
       refPath({setRefPath, rumNamn, setMessages});

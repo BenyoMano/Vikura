@@ -68,7 +68,7 @@ const createUser = ({
     userPropToAdd.personnummer
     ) {  
     const addPersonalDetails = async user => {
-      const refUID = firestore().collection('Users').doc(user.uid);
+      const refUID = firestore().collection('Users').doc(user.id);
       const userAlias = checkboxState === true ? 'KURATOR' : '';
       await refUID.set({
         firstName: userPropToAdd.firstName,
@@ -97,7 +97,7 @@ const createUser = ({
           console.log('Personnummer', userPropToAdd.personnummer);
           console.log('[first login]', userPropToAdd.firstLogin);
           console.log('Kurator?:', checkboxState);
-          console.log('UID:', user.uid);
+          console.log('id:', user.id);
 
           addPersonalDetails(user).then(() =>
             auth()

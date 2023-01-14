@@ -12,14 +12,10 @@ const createRoom = async () => {
     users: {
       client: {
         alias: getAlias.get('alias'),
-        uid: clientUserId,
+        id: clientUserId,
       },
     },
   });
-
-  // roomName() // här innanför, eller utanför
-
- // getRefPath(getRoomName);
 };
 
 export default createRoom;

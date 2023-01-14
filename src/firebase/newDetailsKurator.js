@@ -20,13 +20,13 @@ const newDetailsKurator = async ({password, rePassword}) => {
 
     firestore()
       .collection('Users')
-      .doc(auth().currentUser.uid)
+      .doc(auth().currentUser.id)
       .onSnapshot(querySnapshot => {
         const currentData = querySnapshot.data();
         console.log('Current Data:', currentData);
         firestore()
           .collection('Users')
-          .doc(auth().currentUser.uid)
+          .doc(auth().currentUser.id)
           .set({
             ...currentData,
             firstLogin: false,

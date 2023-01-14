@@ -1,5 +1,3 @@
-import firestore from '@react-native-firebase/firestore';
-
 const listenMsg = ({pathToMessages, setMessages}) => {
 
   pathToMessages.onSnapshot(messageDetails => {
@@ -8,7 +6,7 @@ const listenMsg = ({pathToMessages, setMessages}) => {
       timestamp: documentSnapshot.data().timestamp.toDate(),
       text: documentSnapshot.data().msg,
       author: documentSnapshot.data().author,
-      uid: documentSnapshot.data().uid,
+      id: documentSnapshot.data().id,
     }));
     setMessages(newData);
   });

@@ -25,6 +25,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
       .then(() => {
         console.log('User signed in!');
+        console.log('Current User', auth().currentUser);
         navigateAfterSignIn({navigation});
       })
       .catch(error => {
@@ -40,7 +41,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
           description: String(error),
           type: "warning",
           position: "default",
-          duration: 3200
+          duration: 3800
         });
       });
 

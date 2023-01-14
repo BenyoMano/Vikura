@@ -10,13 +10,13 @@ const useIsKurator = () => {
     const getKurator = async () => {
       const askKurator = await firestore()
         .collection('Users')
-        .doc(user.id)
+        .doc(user.uid)
         .get();
       const newIsKurator = askKurator.get('kurator');
       setIsKurator(newIsKurator);
     };
     getKurator();
-  }, [user.id]);
+  }, [user.uid]);
 
   return isKurator;
 };

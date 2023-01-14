@@ -8,7 +8,6 @@ const convRefPath = ({newConvos, setRefPath, rumNamn, setConvos}) => {
     rumNamn.docs.map(roomDetails => {
       const clientAlias = roomDetails.data().users.client.alias;
       const clientId = roomDetails.data().users.client.id;
-      console.log('Client alias:', clientAlias);
       const splitRefPath = roomDetails.ref.path.split('/');
       const roomId = splitRefPath[splitRefPath.length - 1];
       

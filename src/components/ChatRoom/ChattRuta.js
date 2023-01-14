@@ -46,8 +46,8 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
   //       });
   //     });
   //   } else {
-  //     clientUserId = user.id;
-  //     //console.log('user.id', user.id);
+  //     clientUserId = user.uid;
+  //     //console.log('user.uid', user.uid);
   //     console.log('clientUserId', clientUserId);
 
   //     const getRoomName = await firestore()
@@ -135,10 +135,10 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
     if (isKurator === undefined) return;
     return (
        !isKurator ? (
-        <View style={id === user.id ? styles.bubblaSend : styles.bubblaRecieve}>
+        <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
           <View
             style={
-              id === user.id
+              id === user.uid
                 ? styles.bubblaSend.bubbla
                 : styles.bubblaRecieve.bubbla
             }>
@@ -146,7 +146,7 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
           </View>
           <View
             style={
-              id === user.id
+              id === user.uid
                 ? styles.bubblaSend.timestamp
                 : styles.bubblaRecieve.timestamp
             }>

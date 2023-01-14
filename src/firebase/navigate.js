@@ -3,9 +3,10 @@ import auth from '@react-native-firebase/auth';
 
 const navigateAfterSignIn = async ({navigation}) => {
   const user = auth().currentUser;
+ 
   firestore()
     .collection('Users')
-    .doc(user.id)
+    .doc(user.uid)
     .onSnapshot(querySnapshot => {
       const newUserStatus = querySnapshot.get('firstLogin');
       const kuratorStatus = querySnapshot.get('kurator');
@@ -14,7 +15,7 @@ const navigateAfterSignIn = async ({navigation}) => {
         navigation.navigate('NewElev');
       }
       if (newUserStatus === false && kuratorStatus == !true) {
-        navigation.navigate('ChatView', {id: user.id});
+        navigation.navigate('ChatView', {id: user.uid});
       }
       if (newUserStatus === false && kuratorStatus == true) {
         navigation.navigate('KuratorView');

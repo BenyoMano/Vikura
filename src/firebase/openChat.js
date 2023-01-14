@@ -13,13 +13,13 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
     refPath({setRefPath, rumNamn, setMessages});
   } else {
 
-    clientUserId = user.id;
+    clientUserId = user.uid;
     const rumNamn = await roomName({clientUserId});
 
     if (!rumNamn.empty) {
       refPath({setRefPath, rumNamn, setMessages});
     } else {
-      createRoom();
+      createRoom({clientUserId});
       const rumNamn = await roomName({clientUserId});
       refPath({setRefPath, rumNamn, setMessages});
       showMessage({

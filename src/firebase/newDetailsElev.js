@@ -1,6 +1,7 @@
 import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { showMessage } from 'react-native-flash-message';
 
 
 const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
@@ -9,9 +10,6 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
   if (rePassword === password) {
     await auth()
       .currentUser.updatePassword(password)
-      .then(() => {
-        console.log('Password updated');
-      })
       .catch(error => {
         if (error.code === 'auth/weak-password') {
           console.log('Weak password');
@@ -20,34 +18,46 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
           console.log('You have to reauthenticate');
         }
         console.error(error);
+        showMessage({
+          message: "Varning!",
+          description: String(error),
+          type: "warning",
+          position: "default",
+          duration: 3200
+        });
       });
 
     await auth()
       .currentUser.updateProfile({
         displayName: alias,
-      })
-      .then(() => {
-        console.log('Nytt nickname', alias);
       });
 
     firestore()
       .collection('Users')
-      .doc(auth().currentUser.id)
+      .doc(auth().currentUser.uid)
       .onSnapshot(querySnapshot => {
         const currentData = querySnapshot.data();
-        console.log('Current Data:', currentData);
+
         firestore()
           .collection('Users')
-          .doc(auth().currentUser.id)
+          .doc(auth().currentUser.uid)
           .set({
             ...currentData,
             firstLogin: false,
             alias: alias,
           });
       });
-    navigation.navigate('ChatView', {id: user.id})
+    navigation.navigate('ChatView', {id: user.uid})
   } else {
+    showMessage({
+      message: "Varning!",
+      description: "Lösenord matchar inte!",
+      type: "warning",
+      position: "default",
+      duration: 3200
+    });
     console.log('Lösenordet matchar inte!');
+
   }
 };
 

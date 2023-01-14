@@ -26,10 +26,10 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
 
   function Item({text, timestamp, id}) {
     return (
-      <View style={id === user.id ? styles.bubblaSend : styles.bubblaRecieve}>
+      <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
         <View
           style={
-            id === user.id
+            id === user.uid
               ? styles.bubblaSend.bubbla
               : styles.bubblaRecieve.bubbla
           }>
@@ -37,7 +37,7 @@ const ChattRuta = ({user, refPath, setRefPath, clientUserId}) => {
         </View>
         <View
           style={
-            id === user.id
+            id === user.uid
               ? styles.bubblaSend.timestamp
               : styles.bubblaRecieve.timestamp
           }>

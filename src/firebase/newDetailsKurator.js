@@ -16,6 +16,13 @@ const newDetailsKurator = async ({password, rePassword}) => {
           console.log('You have to reauthenticate');
         }
         console.error(error);
+        showMessage({
+          message: "Varning!",
+          description: String(error),
+          type: "warning",
+          position: "default",
+          duration: 3200
+        });
       });
 
     firestore()
@@ -33,6 +40,13 @@ const newDetailsKurator = async ({password, rePassword}) => {
           });
       });
   } else {
+    showMessage({
+      message: "Varning!",
+      description: "Lösenord matchar inte!",
+      type: "warning",
+      position: "default",
+      duration: 3200
+    });
     console.log('Lösenordet matchar inte!');
   }
 };

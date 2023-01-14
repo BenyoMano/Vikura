@@ -13,8 +13,6 @@ const refPath = ({setRefPath, rumNamn, setMessages}) => {
         .collection('messages');
 
       setRefPath(pathToMessages);
-     // console.log('Room Created Successfully!')
-
       listenMsg({pathToMessages, setMessages});
 
     });

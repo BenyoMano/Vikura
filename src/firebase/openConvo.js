@@ -1,4 +1,3 @@
-import firestore from '@react-native-firebase/firestore';
 import allRoomNames from './allRoomNames';
 import convRefPath from './convRefPath';
 

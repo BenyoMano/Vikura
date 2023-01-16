@@ -1,6 +1,7 @@
 import { showMessage } from 'react-native-flash-message';
+import filterIsRead from '../components/ChatRoom/filterIsRead';
 import createRoom from './createRoom';
-import refPath from './refPath';
+import getRefPath from './getRefPath';
 import roomName from './roomName';
 
 const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}) => {
@@ -11,18 +12,19 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
   if (isKurator) {
 
     const rumNamn = await roomName({clientUserId}); 
-    refPath({setRefPath, rumNamn, setMessages});
+    getRefPath({setRefPath, rumNamn, setMessages});
+    // filterIsRead();
   } else {
 
     clientUserId = user.uid;
     const rumNamn = await roomName({clientUserId});
 
     if (!rumNamn.empty) {
-      refPath({setRefPath, rumNamn, setMessages});
+      getRefPath({setRefPath, rumNamn, setMessages});
     } else {
       createRoom({clientUserId});
       const rumNamn = await roomName({clientUserId});
-      refPath({setRefPath, rumNamn, setMessages});
+      getRefPath({setRefPath, rumNamn, setMessages});
       showMessage({
         message: "Välkommen!",
         description: "Du kan börja chatta direkt!",

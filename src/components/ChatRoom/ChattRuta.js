@@ -18,6 +18,9 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
       return () => openChat();
     }  
   }, [isKurator]);
+
+  const filterIsRead = messages.filter(msg => msg.isRead === false).map(msg => msg.timestamp)
+  console.log('Find', filterIsRead)
   
 
   const onRefresh = useCallback(async () => {
@@ -28,13 +31,14 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({text, timestamp, id, displayTimestamp}) {
+  function Item({text, id, displayTimestamp}) {
 
     const currentDay = new Date().toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
     const currentYear = new Date().toLocaleString([], {year: 'numeric'});
 
     const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
     const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
+
 
     return (
        !isKurator ? (

@@ -38,6 +38,10 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
 
     const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
     const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
+    console.log('displayTimestamp:', displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}));
+    console.log('Current day-----:', currentDay);
+    console.log('Current Year----:', currentYear);
+    console.log('Same day ?', sameDay);
 
 
     return (

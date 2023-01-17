@@ -1,8 +1,9 @@
+import firestore from '@react-native-firebase/firestore';
 import { showMessage } from 'react-native-flash-message';
-import filterIsRead from '../components/ChatRoom/filterIsRead';
 import createRoom from './createRoom';
 import getRefPath from './getRefPath';
 import roomName from './roomName';
+
 
 const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}) => {
   console.log('isKurator:', isKurator)
@@ -12,8 +13,8 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
   if (isKurator) {
 
     const rumNamn = await roomName({clientUserId}); 
-    getRefPath({setRefPath, rumNamn, setMessages});
-    // filterIsRead();
+    getRefPath({isKurator, setRefPath, rumNamn, setMessages});
+  
   } else {
 
     clientUserId = user.uid;

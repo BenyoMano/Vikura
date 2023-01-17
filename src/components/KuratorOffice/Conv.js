@@ -7,14 +7,14 @@ import openConvo from '../../firebase/openConvo';
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [refPath, setRefPath] = useState(false);
+  const [convRefPath, setConvRefPath] = useState(false);
   const colorStyle = useColorStyle();
 
 
  
 
   useEffect(() => {
-    openConvo({convos, setConvos, setRefPath});
+    openConvo({convos, setConvos, setConvRefPath});
     return () => openConvo();
   }, []);
 
@@ -106,7 +106,7 @@ const styles = {
   notIsRead: {
     text: {
       fontSize: 14,
-      color: 'red',
+      color: 'black',
       fontFamily: 'NunitoSans-Bold',
     },
   },

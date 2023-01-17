@@ -5,7 +5,7 @@ import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import useColorStyle from '../../atoms/colorStyle';
 import openChat from '../../firebase/openChat';
 
-const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
+const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
   const {color, greyScale} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -14,13 +14,10 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
 
   useEffect(() => {
     if (isKurator !== undefined) {
-      openChat({isKurator, user, clientUserId, setRefPath, setMessages});
+      openChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages});
       return () => openChat();
     }  
   }, [isKurator]);
-
-  const filterIsRead = messages.filter(msg => msg.isRead === false).map(msg => msg.timestamp)
-  console.log('Find', filterIsRead)
   
 
   const onRefresh = useCallback(async () => {
@@ -38,10 +35,6 @@ const ChattRuta = ({isKurator, setRefPath, clientUserId}) => {
 
     const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
     const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
-    console.log('displayTimestamp:', displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}));
-    console.log('Current day-----:', currentDay);
-    console.log('Current Year----:', currentYear);
-    console.log('Same day ?', sameDay);
 
 
     return (

@@ -1,7 +1,7 @@
 import allRoomNames from './allRoomNames';
-import convRefPath from './convRefPath';
+import getConvRefPath from './getConvRefPath';
 
-const openConvo = async ({convos, setConvos, setRefPath}) => {
+const openConvo = async ({convos, setConvos, setConvRefPath}) => {
 
   // const getAllRoomNames = await firestore()
   // .collection('rooms')
@@ -12,7 +12,7 @@ const openConvo = async ({convos, setConvos, setRefPath}) => {
 
   const newConvos = [];
 
-  convRefPath({newConvos, setRefPath, rumNamn, setConvos})
+  getConvRefPath({newConvos, setConvRefPath, rumNamn, setConvos})
 
   // rumNamn.docs.map(roomDetails => {
   //   const clientAlias = roomDetails.data().users.client.alias;

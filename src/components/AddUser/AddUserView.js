@@ -23,7 +23,7 @@ const AddUserView = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
   const [checkboxState, setCheckboxState] = React.useState(false);
-  const showIfKurator = checkboxState === true ? 'JA' : 'NEJ';
+  const showIfKurator = checkboxState ? 'JA' : 'NEJ';
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
     secondName: '',
@@ -38,7 +38,7 @@ const AddUserView = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[colorStyle === true ? styles.color.mainContainer : styles.greyScale.mainContainer,
+          style={[colorStyle ? styles.color.mainContainer : styles.greyScale.mainContainer,
             {
               flexDirection: 'column',
             },
@@ -70,7 +70,7 @@ const AddUserView = ({navigation}) => {
               onRequestClose={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <View style={colorStyle === true ? viewStyle.modalContainer.color : viewStyle.modalContainer.greyScale }>
+              <View style={colorStyle ? viewStyle.modalContainer.color : viewStyle.modalContainer.greyScale }>
                 <View style={viewStyle.label}>
                   <Text style={textStyling.label}>Namn:</Text>
                 </View>
@@ -112,12 +112,12 @@ const AddUserView = ({navigation}) => {
                     marginTop: 15,
                   }}>
                   <Pressable
-                    style={[colorStyle === true ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
+                    style={[colorStyle ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={textStyling.label}>Tillbaka</Text>
                   </Pressable>
                   <Pressable
-                    style={[colorStyle === true ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
+                    style={[colorStyle ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => {
                       createUser({
                         userPropToAdd,
@@ -135,7 +135,7 @@ const AddUserView = ({navigation}) => {
           </View>
 
           <View style={{flex: 3}}>
-            <ScrollView contentContainerStyle={colorStyle === true ? styles.color.scrollViewContainer : styles.greyScale.scrollViewContainer}>
+            <ScrollView contentContainerStyle={colorStyle ? styles.color.scrollViewContainer : styles.greyScale.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
                 setUserPropToAdd={setUserPropToAdd}

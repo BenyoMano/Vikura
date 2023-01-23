@@ -9,8 +9,8 @@ const Button = props => {
   return (
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable onPress={props.onPress}
-      style={colorStyle === true ? color.btnContainerStyle : greyScale.btnContainerStyle}
-      android_ripple={{color: colorStyle === true ? '#b5dfb7' : '#919191'}}
+      style={colorStyle ? color.btnContainerStyle : greyScale.btnContainerStyle}
+      android_ripple={{color: colorStyle ? '#b5dfb7' : '#919191'}}
       >
           <Text style={btnTextStyle}>{props.title}</Text>
       </Pressable>

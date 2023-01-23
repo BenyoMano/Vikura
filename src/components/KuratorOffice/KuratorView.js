@@ -8,7 +8,7 @@ const KuratorView = ({navigation}) => {
   const colorStyle = useColorStyle();
 
   return (
-    <View style={[colorStyle === true ? styles.color.container : styles.greyScale.container, {flexDirection: 'column'}]}>
+    <View style={[colorStyle ? styles.color.container : styles.greyScale.container, {flexDirection: 'column'}]}>
       <View style={{flexDirection: 'row', width: 360}}>
         <HeaderView navigation={navigation} />
       </View>

@@ -7,7 +7,8 @@ const listenConv = ({pathToMessages, setConvos, newConvos, clientId, clientAlias
 
     lastMessage.docs.forEach(lastMessageDetails => {
       newConvos.push({
-        timestamp: lastMessageDetails.data().timestamp.toDate(),
+        timestamp: lastMessageDetails.data().timestamp.toMillis(),
+        displayTimestamp: lastMessageDetails.data().timestamp.toDate(), 
         text: lastMessageDetails.data().msg,
         isRead: lastMessageDetails.data().isRead,
         alias: clientAlias,

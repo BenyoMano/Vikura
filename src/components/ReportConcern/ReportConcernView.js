@@ -33,7 +33,7 @@ const ReportConcern = ({navigation, route}) => {
 
   return (
     <View
-      style={[ colorStyle === true ? styles.color.container : styles.greyScale.container,
+      style={[ colorStyle ? styles.color.container : styles.greyScale.container,
         {
           flexDirection: 'column',
         },

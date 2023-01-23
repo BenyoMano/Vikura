@@ -2,7 +2,7 @@ import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
 
-const sendMessage = ({msgToSend, user, refPath}) => {
+const sendMessage = ({msgToSend, user, refPath, isKurator}) => {
 
   if (!msgToSend) return;
   if (msgToSend.trim() === '') return;
@@ -18,7 +18,7 @@ const sendMessage = ({msgToSend, user, refPath}) => {
         author: getUserData.get('alias'),
         kurator: getUserData.get('kurator'),
         msg: msgToSend,
-        isRead: false,
+        isRead: isKurator ? true : false,
         timestamp: new Date(),
         id: user.uid,
       })

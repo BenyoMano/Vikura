@@ -26,16 +26,15 @@ const Conv = () => {
     console.log('--refreshed--');
   }, [refreshing]);
 
-  function Item({alias, text, isRead, timestamp, id}) {
+  function Item({alias, text, isRead, displayTimestamp, id}) {
     const navigation = useNavigation();
-    console.log('isRead:', isRead);
     return (
       <Pressable 
       onPress={() => navigation.navigate('ChatView', {id: id})}>
-        <View style={colorStyle === true ? styles.color.item : styles.greyScale.item}>
+        <View style={colorStyle ? styles.color.item : styles.greyScale.item}>
           <View style={styles.header}>
             <Text style={styles.title}>{alias}</Text>
-            <Text style={styles.timestamp}>{timestamp}</Text>
+            <Text style={styles.timestamp}>{displayTimestamp.toLocaleString()}</Text>
           </View>
           <View>
             <Text style={isRead ? styles.isRead.text : styles.notIsRead.text}>{text}</Text>
@@ -46,7 +45,8 @@ const Conv = () => {
   }
   const renderItem = ({item}) => (
     <Item
-      timestamp={item.timestamp.toLocaleString()}
+      timestamp={item.timestamp}
+      displayTimestamp={item.displayTimestamp}
       alias={item.alias}
       text={item.text}
       isRead={item.isRead}
@@ -59,7 +59,7 @@ const Conv = () => {
       <FlatList
         horizontal={false}
         numColumns={1}
-        data={convos.sort((a, b) => b.timestamp.toLocaleString() - a.timestamp.toLocaleString())} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
+        data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         refreshControl={

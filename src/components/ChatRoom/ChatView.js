@@ -21,7 +21,7 @@ const ChatView = ({navigation, route}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={colorStyle === true ? styles.color.container : styles.greyScale.container}>
+        <View style={colorStyle ? styles.color.container : styles.greyScale.container}>
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView
               navigation={navigation}
@@ -50,7 +50,7 @@ const ChatView = ({navigation, route}) => {
               <ButtonSend
                 title="Skicka"
                 onPress={() => {
-                  sendMessage({msgToSend, user, refPath});
+                  sendMessage({msgToSend, user, refPath, isKurator});
                   setMsgToSend('');
                 }}
               />

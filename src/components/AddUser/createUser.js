@@ -69,14 +69,14 @@ const createUser = ({
     ) {  
     const addPersonalDetails = async user => {
       const refUID = firestore().collection('Users').doc(user.uid);
-      const userAlias = checkboxState === true ? 'KURATOR' : '';
+      const userAlias = checkboxState ? 'KURATOR' : '';
       await refUID.set({
         firstName: userPropToAdd.firstName,
         secondName: userPropToAdd.secondName,
         mejl: userPropToAdd.mejl,
         personNummer: userPropToAdd.personnummer,
         alias: userAlias,
-        firstLogin: userPropToAdd.firstLogin,
+        firstLogin: true,
         kurator: checkboxState,
       });
     };
@@ -89,15 +89,6 @@ const createUser = ({
         )
         .then(() => {
           const user = auth().currentUser;
-          console.log('User account created & signed in!');
-          console.log('Förnamn:', userPropToAdd.firstName);
-          console.log('Efternamn:', userPropToAdd.secondName);
-          console.log('Mejl', userPropToAdd.mejl);
-          console.log('Lösenord', userPropToAdd.password);
-          console.log('Personnummer', userPropToAdd.personnummer);
-          console.log('[first login]', userPropToAdd.firstLogin);
-          console.log('Kurator?:', checkboxState);
-          console.log('id:', user.uid);
 
           addPersonalDetails(user).then(() =>
             auth()

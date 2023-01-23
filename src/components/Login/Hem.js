@@ -23,7 +23,7 @@ const Hem = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[colorStyle === true ? styles.color.container : styles.greyScale.container,
+          style={[colorStyle ? styles.color.container : styles.greyScale.container,
             {
               flexDirection: 'column',
             },
@@ -37,7 +37,7 @@ const Hem = ({navigation}) => {
             
           </View>
           <View style={styles.contcont}>
-            <View style={colorStyle === true ? 
+            <View style={colorStyle ? 
             styles.color.logincontainer : styles.greyScale.logincontainer}>
               <InputBarLogIn
                 autoFocus={false}

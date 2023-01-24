@@ -20,7 +20,6 @@ export const HeaderView = ({
   refPath, 
 }) => {
   const route = useRoute();
-  console.log('Route Name:', route.name);
 
   return (
     <View style={{flexDirection: 'row', width: 360}}>

@@ -11,8 +11,6 @@ const Conv = () => {
   const colorStyle = useColorStyle();
 
 
- 
-
   useEffect(() => {
     openConvo({convos, setConvos, setConvRefPath});
     return () => openConvo();

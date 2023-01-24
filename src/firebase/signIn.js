@@ -24,8 +24,6 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
     await auth()
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
       .then(() => {
-        console.log('User signed in!');
-        console.log('Current User', auth().currentUser);
         navigateAfterSignIn({navigation});
       })
       .catch(error => {

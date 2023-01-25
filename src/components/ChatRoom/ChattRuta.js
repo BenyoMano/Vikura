@@ -109,9 +109,9 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         //onScrollEndDrag
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
       />
     </View>
   );

@@ -1,8 +1,8 @@
 const listenConv = ({pathToMessages, setConvos, newConvos, clientId, clientAlias}) => {
 
   pathToMessages
-  .orderBy('timestamp')
-  .limitToLast(1)
+  .orderBy('timestamp', 'desc')
+  .limit(1)
   .onSnapshot(lastMessage => {
 
     lastMessage.docs.forEach(lastMessageDetails => {

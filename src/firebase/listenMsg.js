@@ -1,6 +1,6 @@
 const listenMsg = async ({isKurator, pathToMessages, setMessages}) => {
 
-  pathToMessages.onSnapshot(messageDetails => {
+  pathToMessages.orderBy('timestamp', 'desc').limit(15).onSnapshot(messageDetails => {
 
     const newData = messageDetails.docs.map(documentSnapshot => ({
       timestamp: documentSnapshot.data().timestamp.toMillis(),

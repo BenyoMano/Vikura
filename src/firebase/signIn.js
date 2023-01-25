@@ -1,5 +1,5 @@
 import auth from '@react-native-firebase/auth';
-import navigateAfterSignIn from './navigate';
+import navigateAfterSignIn from './navigateAfterSignIn';
 import { showMessage } from 'react-native-flash-message';
 
 const signIn = async ({navigation, loginDetails, setLoginDetails}) => {

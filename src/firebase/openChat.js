@@ -1,4 +1,3 @@
-import firestore from '@react-native-firebase/firestore';
 import { showMessage } from 'react-native-flash-message';
 import createRoom from './createRoom';
 import getRefPath from './getRefPath';

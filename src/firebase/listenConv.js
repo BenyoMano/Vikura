@@ -15,7 +15,6 @@ const listenConv = ({pathToMessages, setConvos, newConvos, clientId, clientAlias
         id: clientId,
       });
     });
-    console.log('newConvos', newConvos) 
 
     if( newConvos === []) return;
     setConvos(newConvos)

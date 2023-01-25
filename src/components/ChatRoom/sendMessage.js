@@ -25,7 +25,6 @@ const sendMessage = ({msgToSend, user, refPath, isKurator}) => {
       .catch(error => {
         console.error(error);
       });
-    console.log('=>', msgToSend);
   };
   addMessage();
 };

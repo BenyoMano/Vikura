@@ -9,15 +9,23 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
   const {color, greyScale} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [msgLimit, setMsgLimit] = useState(0);
   const colorStyle = useColorStyle();
   const user = auth().currentUser;
-
+  
+  const onScroll = (e) => {
+    const scrollOffset = e.nativeEvent.contentOffset.y
+    if (scrollOffset <= 10) {
+      setMsgLimit(msgLimit + 15);
+    }
+  }
+  
   useEffect(() => {
     if (isKurator !== undefined) {
-      openChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages});
+      openChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages, msgLimit});
       return () => openChat();
     }  
-  }, [isKurator]);
+  }, [isKurator, msgLimit]);
   
 
   const onRefresh = useCallback(async () => {
@@ -29,6 +37,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
   }, [refreshing]);
 
   function Item({text, id, displayTimestamp}) {
+
 
     const currentDay = new Date().toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
     const currentYear = new Date().toLocaleString([], {year: 'numeric'});
@@ -105,13 +114,18 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
-        data={messages.sort((a, b) => a.timestamp - b.timestamp)} //a.timestamp.localeCompare(b.timestamp))}
+        data={messages.sort((a, b) => a.timestamp - b.timestamp)}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
-        //onScrollEndDrag
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
+        onScroll={onScroll}
+        scrollEventThrottle={160}
+        showNewItemAlert={false}
+
+        onMomentumScrollEnd={(event) => {
+          if (event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - 50) {
+            setMsgLimit(0);
+          }
+      }}
       />
     </View>
   );

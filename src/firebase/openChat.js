@@ -4,7 +4,7 @@ import getRefPath from './getRefPath';
 import roomName from './roomName';
 
 
-const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}) => {
+const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages, msgLimit}) => {
   console.log('isKurator:', isKurator)
 
   if (isKurator === undefined) return;
@@ -12,7 +12,7 @@ const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages}
   if (isKurator) {
 
     const rumNamn = await roomName({clientUserId}); 
-    getRefPath({isKurator, setRefPath, rumNamn, setMessages});
+    getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit});
   
   } else {
 

@@ -18,6 +18,7 @@ const createUser = ({
       floating: true,
       duration: 2500
     });
+    return;
   }
   if (!userPropToAdd.secondName) {
     showMessage({
@@ -28,6 +29,7 @@ const createUser = ({
       floating: true,
       duration: 2500
     });
+    return;
   }
   if (!userPropToAdd.mejl) {
     showMessage({
@@ -38,6 +40,7 @@ const createUser = ({
       floating: true,
       duration: 2500
     });
+    return;
   }
   if (!userPropToAdd.password) {
     showMessage({
@@ -48,6 +51,7 @@ const createUser = ({
       floating: true,
       duration: 2500
     });
+    return;
   }
   if (!userPropToAdd.personnummer) {
     showMessage({
@@ -58,6 +62,18 @@ const createUser = ({
       floating: true,
       duration: 2500
     });
+    return;
+  }
+  if (userPropToAdd.personnummer.length !== 12) {
+    showMessage({
+      message: "Varning!",
+      description: "Personnummret måste innehålla 12 siffror, utan bindestreck!",
+      type: "warning",
+      position: "default",
+      floating: true,
+      duration: 3500
+    });
+    return;
   }
 
   if (
@@ -94,7 +110,13 @@ const createUser = ({
             auth()
               .signOut()
               .then(() => {
-                console.log('User signed out!');
+                showMessage({
+                  message: "Kontot skapades framgångsrikt!",
+                  type: "success",
+                  position: "default",
+                  floating: true,
+                  duration: 2000
+                });
               }),
           );
         })

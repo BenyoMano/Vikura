@@ -65,7 +65,7 @@ const Hem = ({navigation}) => {
             </View>
           </View>
           <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
-          {loading ? <DotsLoader size={20} color={"green"} betweenSpace={20} /> : null }
+            {loading ? <DotsLoader size={20} color={"green"} betweenSpace={20} /> : null }
           </View>
           <View style={{flex: 0.3}}>
             <Button

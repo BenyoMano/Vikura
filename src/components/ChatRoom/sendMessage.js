@@ -3,9 +3,9 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const sendMessage = ({msgToSend, user, refPath, isKurator}) => {
-
   if (!msgToSend) return;
   if (msgToSend.trim() === '') return;
+  
   msgToSend = msgToSend.trim();
 
   const addMessage = async () => {
@@ -26,6 +26,7 @@ const sendMessage = ({msgToSend, user, refPath, isKurator}) => {
         console.error(error);
       });
   };
+ 
   addMessage();
 };
 

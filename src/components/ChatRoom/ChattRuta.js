@@ -2,21 +2,19 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, View, RefreshControl} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
-import useColorStyle from '../../atoms/colorStyle';
 import openChat from '../../firebase/openChat';
+
 
 const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
   const {color, greyScale} = styles;
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [msgLimit, setMsgLimit] = useState(0);
-  const colorStyle = useColorStyle();
-  const user = auth().currentUser;
-  
+  const user = auth().currentUser; 
+
   const onScroll = (e) => {
     const scrollOffset = e.nativeEvent.contentOffset.y
     if (scrollOffset <= 10) {
-      console.log('++')
       setMsgLimit(msgLimit + 15);
     }
   }
@@ -27,18 +25,8 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
       return () => openChat();
     }  
   }, [isKurator, msgLimit]);
-  
-
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    console.log('Refreshing...');
-    openChat();
-    setRefreshing(false);
-    console.log('--refreshed--');
-  }, [refreshing]);
 
   function Item({text, id, displayTimestamp}) {
-
 
     const currentDay = new Date().toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
     const currentYear = new Date().toLocaleString([], {year: 'numeric'});
@@ -46,9 +34,8 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
     const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
     const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
 
-
     return (
-       !isKurator ? (
+      !isKurator ? (
         <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
           <View
             style={
@@ -111,7 +98,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
     />
   );
   return (
-    <View style={colorStyle === true ? color.viewStyle : greyScale.viewStyle}>
+    <View style={greyScale.viewStyle}>
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
@@ -121,33 +108,20 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
         onScroll={onScroll}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-
         onMomentumScrollEnd={(event) => {
-          if (msgLimit !== 0 && (event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - 150)) {
-            console.log("--")
+          if (msgLimit !== 0 && 
+            (event.nativeEvent.layoutMeasurement.height 
+            + event.nativeEvent.contentOffset.y 
+            >= event.nativeEvent.contentSize.height 
+            - 150)) {
             setMsgLimit(0);
           }
-      }}
+        }}
       />
     </View>
   );
 };
 const styles = {
-  color: {
-    viewStyle: {
-      flex: 1,
-      justifyContent: 'center',
-      overflow: 'hidden',
-      marginTop: 30,
-      marginBottom: 22,
-      height: 550,
-      width: 360,
-      borderColor: 'gray',
-      borderWidth: 2,
-      borderRadius: 12,
-      backgroundColor: '#ffffe7'
-    },
-  },
   greyScale: {
     viewStyle: {
       flex: 1,
@@ -185,7 +159,6 @@ const styles = {
       padding: 9,
       minWidth: 0,
       maxWidth: '70%',
-      // backgroundColor: '#C7D4F6',
       backgroundColor: '#b5ccf7',
       borderRadius: 12,
     },
@@ -208,7 +181,6 @@ const styles = {
       padding: 9,
       minWidth: 0,
       maxWidth: '70%',
-      // backgroundColor: '#FCF789',
       backgroundColor: '#ffd933',
       borderRadius: 12,
     },

@@ -2,7 +2,6 @@ import firestore from '@react-native-firebase/firestore';
 
 const createRoom = async ({clientUserId}) => {
   const roomRef = firestore().collection('rooms');
-  console.log('Creating room');
   const getAlias = await firestore()
     .collection('Users')
     .doc(clientUserId)

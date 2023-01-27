@@ -11,6 +11,7 @@ import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
 import useColorStyle from '../../atoms/colorStyle';
+import { DotsLoader } from 'react-native-indicator';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
@@ -18,6 +19,7 @@ const Hem = ({navigation}) => {
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
   const colorStyle = useColorStyle();
+  const [loading, setLoading] = useState(false);
 
   return (
     <MyKeyboardAvoidingView>
@@ -62,12 +64,14 @@ const Hem = ({navigation}) => {
               />
             </View>
           </View>
-          <View style={{flex: 0.5}}>
+          <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
+          {loading ? <DotsLoader size={20} color={"green"} betweenSpace={20} /> : null }
+          </View>
+          <View style={{flex: 0.3}}>
             <Button
               title="Logga in"
               onPress={() =>
-                signIn({loginDetails, setLoginDetails, navigation})
-              }
+                signIn({loginDetails, setLoginDetails, navigation, setLoading})}
             />
           </View>
         </View>
@@ -77,25 +81,6 @@ const Hem = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  color: {
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: '#EEEEEE',
-      width: '100%'
-    },
-    logincontainer: {
-      paddingHorizontal: 20,
-      margingBottom: 50,
-      paddingBottom: 20,
-      backgroundColor: '#cccccc',
-      // backgroundColor: '#94af8f',
-      // backgroundColor: '#8b9d77'
-      borderRadius: 20,
-    },
-  },
   greyScale: {
     container: {
       flex: 1,

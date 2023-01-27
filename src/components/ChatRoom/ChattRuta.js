@@ -16,6 +16,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
   const onScroll = (e) => {
     const scrollOffset = e.nativeEvent.contentOffset.y
     if (scrollOffset <= 10) {
+      console.log('++')
       setMsgLimit(msgLimit + 15);
     }
   }
@@ -122,7 +123,8 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
         showNewItemAlert={false}
 
         onMomentumScrollEnd={(event) => {
-          if (event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - 50) {
+          if (msgLimit !== 0 && (event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - 150)) {
+            console.log("--")
             setMsgLimit(0);
           }
       }}

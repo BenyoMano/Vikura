@@ -2,7 +2,8 @@ import auth from '@react-native-firebase/auth';
 import navigateAfterSignIn from './navigateAfterSignIn';
 import { showMessage } from 'react-native-flash-message';
 
-const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
+const signIn = async ({navigation, loginDetails, setLoginDetails, setLoading}) => {
+
   if (!loginDetails.mejl) {
     showMessage({
       message: "Varning!",
@@ -21,6 +22,9 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
   }
 
   if (loginDetails.mejl && loginDetails.password) {
+
+    setLoading(true);
+
     await auth()
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
       .then(() => {
@@ -48,6 +52,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails}) => {
       mejl: '',
       password: '',
     });
+    setLoading(false);
   }
 };
 

@@ -10,7 +10,6 @@ import Logo from '../Header/Logo';
 import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
-import useColorStyle from '../../atoms/colorStyle';
 import { DotsLoader } from 'react-native-indicator';
 
 const Hem = ({navigation}) => {
@@ -18,14 +17,13 @@ const Hem = ({navigation}) => {
   const security = false;
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
-  const colorStyle = useColorStyle();
   const [loading, setLoading] = useState(false);
 
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[colorStyle ? styles.color.container : styles.greyScale.container,
+          style={[styles.greyScale.container,
             {
               flexDirection: 'column',
             },
@@ -39,8 +37,7 @@ const Hem = ({navigation}) => {
             
           </View>
           <View style={styles.contcont}>
-            <View style={colorStyle ? 
-            styles.color.logincontainer : styles.greyScale.logincontainer}>
+            <View style={styles.greyScale.logincontainer}>
               <InputBarLogIn
                 autoFocus={false}
                 blurOnSubmit={false}

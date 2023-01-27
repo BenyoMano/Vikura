@@ -1,16 +1,14 @@
 import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
-import useColorStyle from '../../atoms/colorStyle';
 
 const ButtonSend = ({title, onPress}) => {
   const {color, greyScale, btnTextStyle} = styles;
-  const colorStyle = useColorStyle();
 
   return (
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable onPress={onPress}
-      style={colorStyle ? color.btnContainerStyle : greyScale.btnContainerStyle}
-      android_ripple={{color: colorStyle ? '#b5dfb7' : '#919191'}}
+      style={greyScale.btnContainerStyle}
+      android_ripple={{color: '#919191'}}
       >
           <Text style={btnTextStyle}>{title}</Text>
       </Pressable>
@@ -19,15 +17,6 @@ const ButtonSend = ({title, onPress}) => {
 };
 
 const styles = StyleSheet.create({
-color: {    
-  btnContainerStyle: {
-      width: 100,
-      height: 52,
-      backgroundColor: '#85ad87',
-      borderRadius: 12,
-      justifyContent: 'center',
-    },
-  },
   greyScale: {    
     btnContainerStyle: {
         width: 100,

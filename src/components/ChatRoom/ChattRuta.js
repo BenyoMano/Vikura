@@ -1,14 +1,12 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import {Text, View, RefreshControl} from 'react-native';
+import {Text, StyleSheet, View, RefreshControl} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import openChat from '../../firebase/openChat';
 
 
 const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
-  const {color, greyScale} = styles;
   const [messages, setMessages] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
   const [msgLimit, setMsgLimit] = useState(0);
   const user = auth().currentUser; 
 
@@ -98,7 +96,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
     />
   );
   return (
-    <View style={greyScale.viewStyle}>
+    <View style={styles.greyScale.viewStyle}>
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
@@ -121,7 +119,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
     </View>
   );
 };
-const styles = {
+const styles = StyleSheet.create({
   greyScale: {
     viewStyle: {
       flex: 1,
@@ -191,6 +189,6 @@ const styles = {
       marginLeft: 10,
     },
   },
-};
+});
 
 export default ChattRuta;

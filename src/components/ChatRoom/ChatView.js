@@ -8,7 +8,6 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import useIsKurator from '../../firebase/isKurator';
 import auth from '@react-native-firebase/auth';
-import useColorStyle from '../../atoms/colorStyle';
 
 const ChatView = ({navigation, route}) => {
   const [msgToSend, setMsgToSend] = useState();
@@ -16,12 +15,11 @@ const ChatView = ({navigation, route}) => {
   const isKurator = useIsKurator();
   const {id} = route.params;
   const user = auth().currentUser;
-  const colorStyle = useColorStyle();
 
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={colorStyle ? styles.color.container : styles.greyScale.container}>
+        <View style={styles.greyScale.container}>
           <View style={{flexDirection: 'row', width: 360}}>
             <HeaderView
               navigation={navigation}
@@ -63,16 +61,6 @@ const ChatView = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-  color: {
-    container: {
-    flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: '#f7e0b5',
-      width: '100%'
-    }
-  },
   greyScale: {
     container: {
     flex: 1,

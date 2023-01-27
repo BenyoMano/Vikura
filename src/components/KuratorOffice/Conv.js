@@ -1,14 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import useColorStyle from '../../atoms/colorStyle';
 import openConvo from '../../firebase/openConvo';
 
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [convRefPath, setConvRefPath] = useState(false);
-  const colorStyle = useColorStyle();
 
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const Conv = () => {
     return (
       <Pressable 
       onPress={() => navigation.navigate('ChatView', {id: id})}>
-        <View style={colorStyle ? styles.color.item : styles.greyScale.item}>
+        <View style={styles.greyScale.item}>
           <View style={styles.header}>
             <Text style={styles.title}>{alias}</Text>
             <Text style={styles.timestamp}>{displayTimestamp.toLocaleString()}</Text>
@@ -106,19 +104,6 @@ const styles = {
       fontSize: 14,
       color: 'black',
       fontFamily: 'NunitoSans-Bold',
-    },
-  },
-  color: {
-    item: {
-      padding: 15,
-      marginHorizontal: 0,
-      marginVertical: 0,
-      // backgroundColor: '#EEEEEE',
-      backgroundColor: '#ffffe7',
-      borderWidth: 1,
-      // borderColor: '#EEEEEE',
-      borderColor: '#ffffe7',
-      borderBottomColor: 'black',
     },
   },
   greyScale: {

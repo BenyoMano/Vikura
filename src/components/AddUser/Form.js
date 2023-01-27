@@ -2,7 +2,6 @@ import React, {useState, useRef} from 'react';
 import {View} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import useColorStyle from '../../atoms/colorStyle';
 
 const Form = ({
   userPropToAdd,
@@ -10,7 +9,6 @@ const Form = ({
   checkboxState,
   setCheckboxState,
 }) => {
-  const colorStyle = useColorStyle();
   const {color, greyScale, viewStyle} = styles;
   const capitalize = 'none';
   const {

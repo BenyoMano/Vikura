@@ -9,10 +9,8 @@ import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
-import useColorStyle from '../../atoms/colorStyle';
 
 const ReportConcern = ({navigation, route}) => {
-  const colorStyle = useColorStyle();
   const [data, setString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
@@ -33,7 +31,7 @@ const ReportConcern = ({navigation, route}) => {
 
   return (
     <View
-      style={[ colorStyle ? styles.color.container : styles.greyScale.container,
+      style={[styles.greyScale.container,
         {
           flexDirection: 'column',
         },
@@ -112,14 +110,6 @@ const ReportConcern = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-  color: {
-    container: {
-      flex: 1,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: '#f7e0b5',
-    },
-  },
   greyScale: {
     container: {
       flex: 1,

@@ -15,10 +15,8 @@ import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import createUser from './createUser';
-import useColorStyle from '../../atoms/colorStyle';
 
 const AddUserView = ({navigation}) => {
-  const colorStyle = useColorStyle();
   const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
@@ -38,7 +36,7 @@ const AddUserView = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[colorStyle ? styles.color.mainContainer : styles.greyScale.mainContainer,
+          style={[styles.greyScale.mainContainer,
             {
               flexDirection: 'column',
             },
@@ -70,7 +68,7 @@ const AddUserView = ({navigation}) => {
               onRequestClose={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <View style={colorStyle ? viewStyle.modalContainer.color : viewStyle.modalContainer.greyScale }>
+              <View style={viewStyle.modalContainer.greyScale }>
                 <View style={viewStyle.label}>
                   <Text style={textStyling.label}>Namn:</Text>
                 </View>
@@ -112,12 +110,12 @@ const AddUserView = ({navigation}) => {
                     marginTop: 15,
                   }}>
                   <Pressable
-                    style={[colorStyle ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
+                    style={[viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={textStyling.label}>Tillbaka</Text>
                   </Pressable>
                   <Pressable
-                    style={[colorStyle ? viewStyle.color.button : viewStyle.greyScale.button, {margin: 10}]}
+                    style={[viewStyle.greyScale.button, {margin: 10}]}
                     onPress={() => {
                       createUser({
                         userPropToAdd,
@@ -135,7 +133,7 @@ const AddUserView = ({navigation}) => {
           </View>
 
           <View style={{flex: 3}}>
-            <ScrollView contentContainerStyle={colorStyle ? styles.color.scrollViewContainer : styles.greyScale.scrollViewContainer}>
+            <ScrollView contentContainerStyle={styles.greyScale.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
                 setUserPropToAdd={setUserPropToAdd}
@@ -155,25 +153,6 @@ const AddUserView = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  color: {
-    scrollViewContainer: {
-      paddingHorizontal: 20,
-      paddingBottom: 15,
-      backgroundColor: '#85ad87',
-      // backgroundColor: '#94af8f',
-      // backgroundColor: '#f7e0b5',
-      borderRadius: 20,
-    },
-    mainContainer: {
-      flex: 1,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      // backgroundColor: '#FFFFFF',
-      // backgroundColor: '#85ad87',
-      backgroundColor: "#f7e0b5",
-      width: '100%'
-    },
-  },
   greyScale: {
     scrollViewContainer: {
       paddingHorizontal: 20,

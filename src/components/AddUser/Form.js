@@ -133,7 +133,6 @@ const Form = ({
             kuratorCheck();
           }}
           keys={'kurator'}
-          /* value={kurator} */
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />

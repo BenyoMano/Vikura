@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 
 const ButtonSend = ({title, onPress}) => {
-  const {color, greyScale, btnTextStyle} = styles;
+  const {greyScale, btnTextStyle} = styles;
 
   return (
     <View style={{borderRadius: 12, overflow: 'hidden'}}>

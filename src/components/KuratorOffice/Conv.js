@@ -2,15 +2,37 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import openConvo from '../../firebase/openConvo';
+import ContentLoader, {Rect} from 'react-content-loader/native';
 
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [convRefPath, setConvRefPath] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const ConvoLoader = () => {
+    return (    
+     <ContentLoader
+        speed={1} 
+        width={410}
+        height={686}
+        viewBox='0 0 410 686'
+        backgroundColor='#EEEEEE'
+        foregroundColor='#dedede'>
+        <Rect x="0" y="0" rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y="86" rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={2*86} rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={3*86} rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={4*86} rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={5*86} rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={6*86} rx="0" ry="0" width="410" height="84" />
+        <Rect x="0" y={7*86} rx="0" ry="0" width="410" height="84" />
+      </ContentLoader>)
+  }
 
 
   useEffect(() => {
-    openConvo({convos, setConvos, setConvRefPath});
+    openConvo({convos, setConvos, setConvRefPath, setIsLoaded});
     return () => openConvo();
   }, []);
 
@@ -52,16 +74,23 @@ const Conv = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        horizontal={false}
-        numColumns={1}
-        data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
-        renderItem={renderItem}
-        keyExtractor={item => item.timestamp}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
+      {!isLoaded ? 
+        ( 
+          ConvoLoader()
+        ) : 
+        (
+          <FlatList
+            horizontal={false}
+            numColumns={1}
+            data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
+            renderItem={renderItem}
+            keyExtractor={item => item.timestamp}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          />
+        )
+      }
     </View>
   );
 };
@@ -112,10 +141,8 @@ const styles = {
       marginHorizontal: 0,
       marginVertical: 0,
       backgroundColor: '#EEEEEE',
-      // backgroundColor: '#ffffe7',
       borderWidth: 1,
       borderColor: '#EEEEEE',
-      // borderColor: '#ffffe7',
       borderBottomColor: 'black',
     },
   },

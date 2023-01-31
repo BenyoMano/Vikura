@@ -7,8 +7,7 @@ import ContentLoader, {Rect} from 'react-content-loader/native';
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [convRefPath, setConvRefPath] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const ConvoLoader = () => {
     return (    
@@ -30,10 +29,11 @@ const Conv = () => {
       </ContentLoader>)
   }
 
+  
   useEffect(() => {
-    openConvo({convos, setConvos, setConvRefPath, setIsLoaded});
+    openConvo({setConvos, setIsLoaded});
     return () => openConvo();
-  }, []);
+  }, [setConvos,setIsLoaded]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -42,6 +42,12 @@ const Conv = () => {
     setRefreshing(false);
     console.log('--refreshed--');
   }, [refreshing]);
+
+const testSort = convos.sort((a, b) => b.timestamp < a.timestamp)
+
+testSort.forEach((t) => {
+  console.log("test",t.displayTimestamp)
+})
 
   function Item({alias, text, isRead, displayTimestamp, id}) {
     const navigation = useNavigation();
@@ -76,13 +82,14 @@ const Conv = () => {
     <View style={styles.container}>
       {!isLoaded ? 
         ( 
-          ConvoLoader()
+          <ConvoLoader />
         ) : 
         (
           <FlatList
             horizontal={false}
             numColumns={1}
-            data={convos.sort((a, b) => b.timestamp - a.timestamp)} 
+            // data={convos.sort((a, b) => b.timestamp < a.timestamp)} 
+            data={testSort}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
             refreshControl={

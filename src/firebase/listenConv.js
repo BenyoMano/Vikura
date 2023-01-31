@@ -1,5 +1,4 @@
-const listenConv = ({pathToMessages, setConvos, newConvos, clientId, clientAlias, setIsLoaded}) => {
-
+const listenConv = ({newConvos, pathToMessages, clientId, clientAlias}) => {
   pathToMessages
   .orderBy('timestamp', 'desc')
   .limit(1)
@@ -17,8 +16,6 @@ const listenConv = ({pathToMessages, setConvos, newConvos, clientId, clientAlias
     });
 
     if( newConvos === []) return;
-    setConvos(newConvos)
-    setIsLoaded(true);
   });
 };
 

@@ -30,7 +30,6 @@ const Conv = () => {
       </ContentLoader>)
   }
 
-
   useEffect(() => {
     openConvo({convos, setConvos, setConvRefPath, setIsLoaded});
     return () => openConvo();
@@ -61,6 +60,7 @@ const Conv = () => {
       </Pressable>
     );
   }
+
   const renderItem = ({item}) => (
     <Item
       timestamp={item.timestamp}
@@ -82,7 +82,7 @@ const Conv = () => {
           <FlatList
             horizontal={false}
             numColumns={1}
-            data={convos.sort((a, b) => b.timestamp - a.timestamp)} //a.timestamp.localeCompare(b.timestamp) // a.timestamp < b.timestamp
+            data={convos.sort((a, b) => b.timestamp - a.timestamp)} 
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
             refreshControl={

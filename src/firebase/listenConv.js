@@ -3,9 +3,8 @@ const listenConv = ({newConvos, pathToMessages, clientId, clientAlias}) => {
   .orderBy('timestamp', 'desc')
   .limit(1)
   .onSnapshot(lastMessage => {
-
     lastMessage.docs.forEach(lastMessageDetails => {
-      newConvos.push({
+      newConvos.push({  
         timestamp: lastMessageDetails.data().timestamp.toMillis(),
         displayTimestamp: lastMessageDetails.data().timestamp.toDate(), 
         text: lastMessageDetails.data().msg,

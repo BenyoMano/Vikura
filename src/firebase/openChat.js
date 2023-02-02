@@ -5,7 +5,6 @@ import roomName from './roomName';
 
 
 const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages, msgLimit}) => {
-  console.log('isKurator:', isKurator)
 
   if (isKurator === undefined) return;
 

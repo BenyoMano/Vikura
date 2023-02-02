@@ -80,12 +80,12 @@ const Hem = ({navigation}) => {
 const styles = StyleSheet.create({
   greyScale: {
     container: {
+      // width: '100%',
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: '#EEEEEE',
-      width: '100%'
     },
     logincontainer: {
       paddingHorizontal: 20,
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
       paddingBottom: 20,
       backgroundColor: '#d9d9d9',
       borderRadius: 20,
+      // borderWidth: 2,
     },
   },
   contcont: {

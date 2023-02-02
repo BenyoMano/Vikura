@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import listenConv from './listenConv';
 
 
-const getConvRefPath = ({newConvos, roomNames, setConvos, setIsLoaded}) => {
+const getConvRefPath = ({newConvos, roomNames}) => {
   const getRefPath = () => {
     roomNames.docs.map(roomDetails => {
       const clientAlias = roomDetails.data().users.client.alias;
@@ -15,7 +15,7 @@ const getConvRefPath = ({newConvos, roomNames, setConvos, setIsLoaded}) => {
         .doc(roomId)
         .collection('messages');
   
-      listenConv({newConvos, pathToMessages, setConvos, clientId, clientAlias, setIsLoaded})
+      listenConv({newConvos, pathToMessages, clientId, clientAlias})
     });
   };
   getRefPath();

@@ -27,15 +27,12 @@ const Form = ({
 
 
   function kuratorCheck() {
-    console.log('firstname', firstName);
     if (!checkboxState) {
       userPropToAdd.kurator = true;
     } else {
       userPropToAdd.kurator = false;
     }
     setUserPropToAdd({...userPropToAdd, kurator});
-    // setUserPropToAdd(userPropToAdd.kurator)
-    console.log('Kurator:', userPropToAdd.kurator);
   }
 
   return (

@@ -41,7 +41,7 @@ const AddUserView = ({navigation}) => {
               flexDirection: 'column',
             },
           ]}>
-          <View style={{flexDirection: 'row', width: 360}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
             <HeaderView navigation={navigation}/>
           </View>
           <View 

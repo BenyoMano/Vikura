@@ -15,26 +15,25 @@ export const HeaderView = ({
   navigation, 
   kurator, 
   clientUserId, 
-  children, 
   user, 
   refPath, 
 }) => {
   const route = useRoute();
 
   return (
-    <View style={{flexDirection: 'row', width: 360}}>
+    <View style={{flexDirection: 'row', width: '92%', alignItems:'center', marginTop: '7%', borderWidth: 2, borderColor: 'blue', /* paddingHorizontal:"4%" */}}>
       <View
         style={{
           position: 'absolute',
           left: '50%',
           right: '50%',
         }}>
-        <Logo style={{width: 90, height: 35, marginTop: 32, marginBottom: 10}} />
+        <Logo style={{width: 90, height: 35}} />
       </View>
 
       {route.name === 'KuratorView' ? (
-        <View style={{flexDirection: 'row', width: 360, marginBottom: 60}}>
-          <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+          <View>
             <ButtonLogOut
               title="Logga Ut"
               onPress={() => {
@@ -43,36 +42,36 @@ export const HeaderView = ({
               }}
             />
           </View>
-          <View style={{position: 'absolute', left: '80%', marginTop: 33}}>
+          <View>
             <AddUserButton onPress={() => navigation.navigate('AddUserView')} />
           </View>
         </View>
       ) : route.name === 'AddUserView' ? (
-        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'NewKurator' ? (
-        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'NewElev' ? (
-        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ReportConcern' ? (
-        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ChatView' && kurator ? (
-        <View style={{flexDirection: 'row', width: 360, marginTop: 33}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
@@ -90,7 +89,7 @@ export const HeaderView = ({
           </View>
         </View>
       ) : route.name === 'ChatView' && !kurator ? (
-        <View style={{flexDirection: 'row', width: 360, marginBottom: 60}}>
+        <View style={{flexDirection: 'row', width: '92%', alignItems:'center', marginTop: '7%'}}>
           <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
             <ButtonLogOut
               title="Logga Ut"

@@ -22,13 +22,17 @@ const InputBarChatt = ({msgToSend, setMsgToSend}) => {
 const styles = {
   viewStyle: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 0,
+    borderWidth: 2,
+    width: '100%',
   },
   barStyle: {
-    minHeight: 52,
+    // minHeight: 52,
+    minHeight: '5%',
     maxHeight: 250,
-    width: 244,
+    // width: 244,
+    width: '69%',
     color: 'black',
     backgroundColor: '#EEEEEE',
     borderColor: 'gray',

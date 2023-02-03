@@ -2,10 +2,10 @@ import React from 'react';
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 
 const ButtonSend = ({title, onPress}) => {
-  const {greyScale, btnTextStyle} = styles;
+  const {viewStyle, greyScale, btnTextStyle} = styles;
 
   return (
-    <View style={{borderRadius: 12, overflow: 'hidden'}}>
+    <View style={viewStyle}>
       <Pressable onPress={onPress}
       style={greyScale.btnContainerStyle}
       android_ripple={{color: '#919191'}}
@@ -17,9 +17,19 @@ const ButtonSend = ({title, onPress}) => {
 };
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
+    // width: '100%',
+    // left: '-200%',
+    borderRadius: 12, 
+    overflow: 'hidden',
+    borderWidth: 2, 
+  },
   greyScale: {    
     btnContainerStyle: {
         width: 100,
+        // width: '100%',
         height: 52,
         backgroundColor: '#C4C4C4',
         borderRadius: 12,

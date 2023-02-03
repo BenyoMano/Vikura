@@ -45,9 +45,8 @@ const styles = {
   viewStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
+    width: '100%',
     marginTop: 15,
-    // backgroundColor: 'lightblue',
   },
   textStyle: {
     fontSize: 14,
@@ -59,7 +58,8 @@ const styles = {
   },
   barStyle: {
     height: 52,
-    width: 320,
+    // width: 320,
+    width: '100%',
     color: 'black',
     backgroundColor: '#EEEEEE',
     borderColor: 'gray',

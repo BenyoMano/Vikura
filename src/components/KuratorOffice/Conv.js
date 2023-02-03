@@ -104,8 +104,8 @@ const styles = {
   container: {
     flex: 1,
     width: 'auto',
-    marginTop: 55,
-    marginBottom: 5,
+    marginTop: '7%',
+    marginBottom: '1%',
     backgroundColor: 'white',
     borderRadius: 25,
     overflow: 'hidden',

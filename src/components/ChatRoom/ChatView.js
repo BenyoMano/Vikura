@@ -20,7 +20,7 @@ const ChatView = ({navigation, route}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.greyScale.container}>
-          <View style={{flexDirection: 'row', width: 360}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
             <HeaderView
               navigation={navigation}
               kurator={isKurator}
@@ -37,14 +37,14 @@ const ChatView = ({navigation, route}) => {
               setRefPath={setRefPath}
             />
           </View>
-          <View style={{flexDirection: 'row', width: 360, marginBottom: 30}}>
-            <View style={{justifyContent: 'flex-start'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '88%', marginBottom: '6%', borderWidth: 2, borderColor: 'blue'}}>
+            <View style={{width: '100%', borderWidth: 2, borderColor: 'green'}}>
               <InputBarChatt
                 msgToSend={msgToSend}
                 setMsgToSend={setMsgToSend}
               />
             </View>
-            <View style={{position: 'absolute', right: '0%'}}>
+            <View style={{/* position: 'absolute', right: '0%' */}}>
               <ButtonSend
                 title="Skicka"
                 onPress={() => {

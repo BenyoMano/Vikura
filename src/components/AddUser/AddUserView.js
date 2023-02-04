@@ -132,7 +132,7 @@ const AddUserView = ({navigation}) => {
             </Modal>
           </View>
 
-          <View style={{flex: 3}}>
+          {/* <View style={{flex: 3}}> */}
             <ScrollView contentContainerStyle={styles.greyScale.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
@@ -141,7 +141,7 @@ const AddUserView = ({navigation}) => {
                 setCheckboxState={setCheckboxState}
               />
             </ScrollView>
-          </View>
+          {/* </View> */}
 
           <View style={{marginBottom: 10}}>
             <Button title="Registrera" onPress={() => setModalVisible(true)} />
@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
       paddingBottom: 15,
       backgroundColor: '#EEEEEE',
       borderRadius: 20,
+      width: '100%',
     },
     mainContainer: {
       flex: 1,
@@ -182,24 +183,6 @@ const styles = StyleSheet.create({
   },
   viewStyle: {
       modalContainer: {
-        color: {
-        // backgroundColor: 'white',
-        backgroundColor: '#85ad87',
-        // backgroundColor: '#cfcd9e',
-        borderRadius: 20,
-        alignSelf: 'center',
-        top: '28%',
-        paddingHorizontal: 15,
-        paddingBottom: 15,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 30,
-        },
         greyScale: {
           backgroundColor: 'white',
           borderRadius: 20,
@@ -225,16 +208,6 @@ const styles = StyleSheet.create({
     info: {
       marginLeft: 10,
       marginTop: 5,
-    },
-    color: {
-      button: {
-        borderRadius: 12,
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 10,
-        // backgroundColor: 'lightgrey',
-        backgroundColor: '#f7e0b5'
-      },
     },
     greyScale: {
       button: {

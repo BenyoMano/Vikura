@@ -29,7 +29,7 @@ const ChatView = ({navigation, route}) => {
               refPath={refPath}
             />
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
             <ChattRuta
               clientUserId={id}
               isKurator={isKurator}
@@ -37,14 +37,11 @@ const ChatView = ({navigation, route}) => {
               setRefPath={setRefPath}
             />
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '88%', marginBottom: '6%', borderWidth: 2, borderColor: 'blue'}}>
-            <View style={{width: '100%', borderWidth: 2, borderColor: 'green'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '88%', marginBottom: '6%'}}>
               <InputBarChatt
                 msgToSend={msgToSend}
                 setMsgToSend={setMsgToSend}
               />
-            </View>
-            <View style={{/* position: 'absolute', right: '0%' */}}>
               <ButtonSend
                 title="Skicka"
                 onPress={() => {
@@ -52,8 +49,8 @@ const ChatView = ({navigation, route}) => {
                   setMsgToSend('');
                 }}
               />
-            </View>
           </View>
+          
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>

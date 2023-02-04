@@ -145,6 +145,7 @@ const styles = {
       justifyContent: 'space-evenly',
       alignItems: 'center',
       overflow: 'hidden',
+      // width: '100%',
     },
   },
 };

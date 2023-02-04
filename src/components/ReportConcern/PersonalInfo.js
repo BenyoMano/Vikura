@@ -46,11 +46,8 @@ const styles = {
 
   viewStyle: {
     container: {
-      // flexDirection: 'column',
       flex: 1,
       paddingLeft: 5,
-      //justifyContent: 'center',
-      // alignItems: 'center',
       backgroundColor: '#f7f5f5',
     },
     label: {

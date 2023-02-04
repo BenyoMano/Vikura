@@ -21,7 +21,7 @@ export const HeaderView = ({
   const route = useRoute();
 
   return (
-    <View style={{flexDirection: 'row', width: '92%', alignItems:'center', marginTop: '7%', borderWidth: 2, borderColor: 'blue', /* paddingHorizontal:"4%" */}}>
+    <View style={{flexDirection: 'row', width: '88%', alignItems:'center', marginTop: '7%'}}>
       <View
         style={{
           position: 'absolute',

@@ -66,7 +66,7 @@ const ReportConcern = ({navigation, route}) => {
       <View style={styles.viewStyle}>
         <PersonalInfo userDetails={userDetails} />
       </View>
-      <View style={{width: 360, marginTop: 10, alignItems: 'flex-end'}}>
+      <View style={{width: '88%', marginTop: 10, alignItems: 'flex-end'}}>
         <CopyButton
           onPress={() => {
             setString(
@@ -95,7 +95,7 @@ const ReportConcern = ({navigation, route}) => {
           }}
         />
       </View>
-      <View style={{flex: 0.5}}>
+      <View style={{flex: 0.5, justifyContent: 'center'}}>
         <Button
           title="Skicka mejl"
           onPress={() => {
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     marginTop: 0,
-    height: 250,
-    width: 360,
+    height: '61%',
+    width: '88%',
     borderColor: 'grey',
     borderWidth: 2,
     borderRadius: 12,

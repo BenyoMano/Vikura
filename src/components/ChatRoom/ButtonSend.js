@@ -18,18 +18,12 @@ const ButtonSend = ({title, onPress}) => {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    // justifyContent: 'flex-start',
-    // alignItems: 'flex-start',
-    // width: '100%',
-    // left: '-200%',
     borderRadius: 12, 
     overflow: 'hidden',
-    borderWidth: 2, 
   },
   greyScale: {    
     btnContainerStyle: {
         width: 100,
-        // width: '100%',
         height: 52,
         backgroundColor: '#C4C4C4',
         borderRadius: 12,

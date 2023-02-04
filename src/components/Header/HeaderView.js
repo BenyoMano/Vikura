@@ -89,8 +89,7 @@ export const HeaderView = ({
           </View>
         </View>
       ) : route.name === 'ChatView' && !kurator ? (
-        <View style={{flexDirection: 'row', width: '92%', alignItems:'center', marginTop: '7%'}}>
-          <View style={{position: 'absolute', left: '0%', marginTop: 32}}>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
             <ButtonLogOut
               title="Logga Ut"
               onPress={() => {
@@ -98,7 +97,6 @@ export const HeaderView = ({
                 navigation.navigate('Hem');
               }}
             />
-          </View>
         </View>
       ) : null}
     </View>

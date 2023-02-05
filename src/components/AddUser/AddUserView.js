@@ -131,8 +131,6 @@ const AddUserView = ({navigation}) => {
               </View>
             </Modal>
           </View>
-
-          {/* <View style={{flex: 3}}> */}
             <ScrollView contentContainerStyle={styles.greyScale.scrollViewContainer}>
               <Form
                 userPropToAdd={userPropToAdd}
@@ -141,9 +139,7 @@ const AddUserView = ({navigation}) => {
                 setCheckboxState={setCheckboxState}
               />
             </ScrollView>
-          {/* </View> */}
-
-          <View style={{marginBottom: 10}}>
+          <View style={{marginVertical: 10}}>
             <Button title="Registrera" onPress={() => setModalVisible(true)} />
           </View>
         </View>
@@ -166,7 +162,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: '#FFFFFF',
-      width: '100%'
+      width: '100%',
     },
   },
   textStyling: {

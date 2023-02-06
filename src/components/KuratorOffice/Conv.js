@@ -2,43 +2,25 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import openConvo from '../../firebase/openConvo';
-import ContentLoader, {Rect} from 'react-content-loader/native';
+import ConvoLoader from './ConvoLoader';
 
 const Conv = () => {
   const [convos, setConvos] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const ConvoLoader = () => {
-    return (    
-     <ContentLoader
-        speed={1} 
-        width={410}
-        height={686}
-        viewBox='0 0 410 686'
-        backgroundColor='#EEEEEE'
-        foregroundColor='#dedede'>
-        <Rect x="0" y="0" rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y="86" rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={2*86} rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={3*86} rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={4*86} rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={5*86} rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={6*86} rx="0" ry="0" width="410" height="84" />
-        <Rect x="0" y={7*86} rx="0" ry="0" width="410" height="84" />
-      </ContentLoader>)
-  }
-
+  
   useEffect(() => {
     openConvo({setConvos, setIsLoaded});
     return () => openConvo();
-  }, [setConvos,setIsLoaded]);
+  }, [setConvos, setIsLoaded]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    console.log('Refreshing...');
+    setIsLoaded(false);
+    openConvo({setConvos, setIsLoaded});
+    setIsLoaded(true);
     setRefreshing(false);
-    console.log('--refreshed--');
   }, [refreshing]);
 
 const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp)

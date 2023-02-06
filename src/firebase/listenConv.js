@@ -13,8 +13,6 @@ const listenConv = ({newConvos, pathToMessages, clientId, clientAlias}) => {
         id: clientId,
       });
     });
-
-    if( newConvos === []) return;
   });
 };
 

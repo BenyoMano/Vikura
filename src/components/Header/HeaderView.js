@@ -75,9 +75,9 @@ export const HeaderView = ({
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
-          <View style={{position: 'absolute', right: '15%'}}>
+          {/* <View style={{position: 'absolute', right: '15%'}}>
             <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
-          </View>
+          </View> */}
           <View style={{position: 'absolute', right: '0%'}}>
             <ReportConcernButton
               onPress={() =>

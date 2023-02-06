@@ -16,6 +16,16 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
       setMsgLimit(msgLimit + 15);
     }
   }
+  const onMomentumScrollEnd = (event) => {
+    const layoutHeight = event.nativeEvent.layoutMeasurement.height;
+    const contentOffsetY = event.nativeEvent.contentOffset.y;
+    const contentSizeHeight = event.nativeEvent.contentSize.height;
+    const calc = (layoutHeight + contentOffsetY >= contentSizeHeight - 150);
+    console.log('Nummer:', calc)
+    if (msgLimit !== 0 && calc) {
+      setMsgLimit(0);
+    }
+  }
   
   useEffect(() => {
     if (isKurator !== undefined) {
@@ -106,15 +116,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
         onScroll={onScroll}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-        onMomentumScrollEnd={(event) => {
-          if (msgLimit !== 0 && 
-            (event.nativeEvent.layoutMeasurement.height 
-            + event.nativeEvent.contentOffset.y 
-            >= event.nativeEvent.contentSize.height 
-            - 150)) {
-            setMsgLimit(0);
-          }
-        }}
+        onMomentumScrollEnd={onMomentumScrollEnd}
       />
     </View>
   );

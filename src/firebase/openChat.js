@@ -1,17 +1,20 @@
+import { useContext } from 'react';
 import { showMessage } from 'react-native-flash-message';
 import createRoom from './createRoom';
 import getRefPath from './getRefPath';
+import { IsKuratorContext } from './isKuratorContext';
 import roomName from './roomName';
 
 
 const openChat = async ({isKurator, user, clientUserId, setRefPath, setMessages, msgLimit}) => {
-
+  // const isKurator = useContext(IsKuratorContext);
+  
   if (isKurator === undefined) return;
 
   if (isKurator) {
 
     const rumNamn = await roomName({clientUserId}); 
-    getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit});
+    getRefPath({setRefPath, rumNamn, setMessages, msgLimit});
   
   } else {
 

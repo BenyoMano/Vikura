@@ -53,7 +53,7 @@ const signIn = async ({navigation, loginDetails, setLoginDetails, setLoading}) =
       password: '',
     });
     setLoading(false);
-  }
+  };
 };
 
 export default signIn;

@@ -1,7 +1,11 @@
-const listenMsg = async ({isKurator, pathToMessages, setMessages, msgLimit}) => {
+import { useContext } from "react";
+import { IsKuratorContext } from "./isKuratorContext";
 
+const listenMsg = async ({pathToMessages, setMessages, msgLimit}) => {
+  const isKurator = useContext(IsKuratorContext);
+  
   pathToMessages.orderBy('timestamp', 'desc').limit(15 + msgLimit).onSnapshot(messageDetails => {
-
+    
     const newData = messageDetails.docs.map(documentSnapshot => ({
       timestamp: documentSnapshot.data().timestamp.toMillis(),
       displayTimestamp: documentSnapshot.data().timestamp.toDate(), 
@@ -11,7 +15,7 @@ const listenMsg = async ({isKurator, pathToMessages, setMessages, msgLimit}) => 
       id: documentSnapshot.data().id,
     }));
     setMessages(newData);
-  });
+  }); 
 
   if (isKurator) {
     await pathToMessages.where('isRead', '==', false).get().then((a) => {

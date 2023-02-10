@@ -9,16 +9,18 @@ import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
+import { useContext } from 'react';
+import { IsKuratorContext } from '../../firebase/isKuratorContext';
 
 
 export const HeaderView = ({
-  navigation, 
-  kurator, 
+  navigation,  
   clientUserId, 
   user, 
   refPath, 
 }) => {
   const route = useRoute();
+  const isKurator = useContext(IsKuratorContext);
 
   return (
     <View style={{flexDirection: 'row', width: '88%', alignItems:'center', marginTop: '7%'}}>
@@ -70,7 +72,7 @@ export const HeaderView = ({
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
-      ) : route.name === 'ChatView' && kurator ? (
+      ) : route.name === 'ChatView' && isKurator ? (
         <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
@@ -88,7 +90,7 @@ export const HeaderView = ({
             />
           </View>
         </View>
-      ) : route.name === 'ChatView' && !kurator ? (
+      ) : route.name === 'ChatView' && !isKurator ? (
         <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
             <ButtonLogOut
               title="Logga Ut"

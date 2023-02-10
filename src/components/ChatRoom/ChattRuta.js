@@ -1,11 +1,16 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, StyleSheet, View, RefreshControl} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import openChat from '../../firebase/openChat';
+import { IsKuratorContext } from '../../firebase/isKuratorContext';
+import useIsKurator from '../../firebase/isKurator';
 
 
-const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
+const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
+  // const isKurator = useContext(IsKuratorContext);
+  const isKurator = useIsKurator();
+  console.log(isKurator);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
   const user = auth().currentUser; 
@@ -31,7 +36,7 @@ const ChattRuta = ({isKurator, refPath, setRefPath, clientUserId}) => {
     if (isKurator !== undefined) {
       openChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages, msgLimit});
       return () => openChat();
-    }  
+    }
   }, [isKurator, msgLimit]);
 
   function Item({text, id, displayTimestamp}) {

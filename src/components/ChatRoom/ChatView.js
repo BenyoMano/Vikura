@@ -6,13 +6,11 @@ import ButtonSend from './ButtonSend';
 import sendMessage from './sendMessage';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
-import useIsKurator from '../../firebase/isKurator';
 import auth from '@react-native-firebase/auth';
 
 const ChatView = ({navigation, route}) => {
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
-  const isKurator = useIsKurator();
   const {id} = route.params;
   const user = auth().currentUser;
 
@@ -23,7 +21,6 @@ const ChatView = ({navigation, route}) => {
           <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
             <HeaderView
               navigation={navigation}
-              kurator={isKurator}
               clientUserId={id}
               user={user}
               refPath={refPath}
@@ -32,7 +29,6 @@ const ChatView = ({navigation, route}) => {
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
             <ChattRuta
               clientUserId={id}
-              isKurator={isKurator}
               refPath={refPath}
               setRefPath={setRefPath}
             />
@@ -45,7 +41,7 @@ const ChatView = ({navigation, route}) => {
               <ButtonSend
                 title="Skicka"
                 onPress={() => {
-                  sendMessage({msgToSend, user, refPath, isKurator});
+                  sendMessage({msgToSend, user, refPath});
                   setMsgToSend('');
                 }}
               />

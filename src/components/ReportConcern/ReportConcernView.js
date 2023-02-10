@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
@@ -9,8 +9,11 @@ import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
+import { IsKuratorContext } from '../../firebase/isKuratorContext';
 
 const ReportConcern = ({navigation, route}) => {
+  const isKurator = useContext(IsKuratorContext);
+  console.log('isKurator:', isKurator);
   const [data, setString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});

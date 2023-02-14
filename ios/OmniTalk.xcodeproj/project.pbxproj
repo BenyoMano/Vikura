@@ -8,42 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* OmnitalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OmnitalkTests.m */; };
+		038118D5E55C4726BEAC6865 /* NunitoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D0614F6017A42C88ACC9CDC /* NunitoSans-ExtraBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-Omnitalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Omnitalk.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-Omnitalk-OmnitalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Omnitalk-OmnitalkTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		AE69B36F6CED446788555A9D /* NunitoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62659AA49A6F4B319F95BB4F /* NunitoSans-Black.ttf */; };
 		1C6D96BEFDE84926A22F42A6 /* NunitoSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 134AB6ED4AF74728867F9E35 /* NunitoSans-BlackItalic.ttf */; };
-		CC49C7F9563F41939C912E0C /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BC9FD0F1B374042B220DCC1 /* NunitoSans-Bold.ttf */; };
-		FB0AEBCAA3474FA4A05DB6F3 /* NunitoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E901E260D05649169A9D48F1 /* NunitoSans-BoldItalic.ttf */; };
-		038118D5E55C4726BEAC6865 /* NunitoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D0614F6017A42C88ACC9CDC /* NunitoSans-ExtraBold.ttf */; };
-		ED69EC9E0E95423188931D28 /* NunitoSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4760F76D8284CC5A3580F79 /* NunitoSans-ExtraBoldItalic.ttf */; };
 		24FEC2E8C325421CA2AA175B /* NunitoSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB169C50BEAF4341BEF07B71 /* NunitoSans-ExtraLight.ttf */; };
-		BDD0CD583C934B70BB086A29 /* NunitoSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32B14B6337C434EA96E7B22 /* NunitoSans-ExtraLightItalic.ttf */; };
+		34E3713E46824AF7ADD076E3 /* NunitoSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C70BC54F896848C6B3F9DCF1 /* NunitoSans-SemiBoldItalic.ttf */; };
 		5DD340B0EEB843D38C41E4E4 /* NunitoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6661CC519E304B638ED10ED2 /* NunitoSans-Italic.ttf */; };
 		60E6A1829AEC4073B64AB0F2 /* NunitoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CE977DE2FE849179F53939C /* NunitoSans-Light.ttf */; };
-		938C1FC3DA5743B6AED277FA /* NunitoSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BD36531B5A84BC9A2026A32 /* NunitoSans-LightItalic.ttf */; };
-		9DB7211218DB46078618FC63 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CCB07E100124117A5FE3750 /* NunitoSans-Regular.ttf */; };
-		9B831E606D67417AA23F4624 /* NunitoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04987DCB25BD4B2799580481 /* NunitoSans-SemiBold.ttf */; };
-		34E3713E46824AF7ADD076E3 /* NunitoSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C70BC54F896848C6B3F9DCF1 /* NunitoSans-SemiBoldItalic.ttf */; };
-		3387DF65342A46BA8DF13C5F /* NunitoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 442D16BDEA3246EEB0024F45 /* NunitoSans-Black.ttf */; };
-		AFEA14C8762A41478E4568E6 /* NunitoSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D925BAF891AE45F5A5F66154 /* NunitoSans-BlackItalic.ttf */; };
-		3105BD329AE4467BB33285B3 /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDD213BD62EC4BF9894E6A19 /* NunitoSans-Bold.ttf */; };
-		7737091CC44B42949077372E /* NunitoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA80426FB8FF4F9EBA2BB411 /* NunitoSans-BoldItalic.ttf */; };
-		073250C858FC4EC98BAC1BE9 /* NunitoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD523003DC540808420AE17 /* NunitoSans-ExtraBold.ttf */; };
-		EC5684FBC73B453089FDBBAE /* NunitoSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F181E25BAED4CD48C6DE283 /* NunitoSans-ExtraBoldItalic.ttf */; };
-		DE3ADB6E02E149A5B913B3B5 /* NunitoSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 805C7A5C78484896979476E5 /* NunitoSans-ExtraLight.ttf */; };
-		953B71B1114F400CB5E30636 /* NunitoSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1495122A60354917A2FDA919 /* NunitoSans-ExtraLightItalic.ttf */; };
-		B2D8F0C330984C75BA279E22 /* NunitoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91C7EAF642164E92A0B5C82E /* NunitoSans-Italic.ttf */; };
-		0E7C867631834E5FAC1EB89C /* NunitoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F58BD09387F0421882F408BC /* NunitoSans-Light.ttf */; };
-		DAAA9D55B0C04EFE9682A7CF /* NunitoSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D89A6860FA4041959B2D55A6 /* NunitoSans-LightItalic.ttf */; };
-		0E171F58321A4B6E8F483939 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33856F0038FA49BEB61CAF4B /* NunitoSans-Regular.ttf */; };
-		8E2DDFD755DA4BFD9DB69446 /* NunitoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A536E28788E434D98D65BCA /* NunitoSans-SemiBold.ttf */; };
-		581BD550A11045B187D5502B /* NunitoSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03E95663813A42B9B4F4328D /* NunitoSans-SemiBoldItalic.ttf */; };
 		6596300C88784A6BA58AD069 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04134CBBFB3149C9AF694C41 /* OFL.txt */; };
-		6B776F74F13E4026BDE80E09 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1BE35C85F17243E19684FDAA /* OFL.txt */; };
+		7699B88040F8A987B510C191 /* libPods-Omnitalk-OmnitalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Omnitalk-OmnitalkTests.a */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		938C1FC3DA5743B6AED277FA /* NunitoSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BD36531B5A84BC9A2026A32 /* NunitoSans-LightItalic.ttf */; };
+		9B831E606D67417AA23F4624 /* NunitoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04987DCB25BD4B2799580481 /* NunitoSans-SemiBold.ttf */; };
+		9DB7211218DB46078618FC63 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CCB07E100124117A5FE3750 /* NunitoSans-Regular.ttf */; };
+		AE69B36F6CED446788555A9D /* NunitoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62659AA49A6F4B319F95BB4F /* NunitoSans-Black.ttf */; };
+		BDD0CD583C934B70BB086A29 /* NunitoSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32B14B6337C434EA96E7B22 /* NunitoSans-ExtraLightItalic.ttf */; };
+		CC49C7F9563F41939C912E0C /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BC9FD0F1B374042B220DCC1 /* NunitoSans-Bold.ttf */; };
+		ED69EC9E0E95423188931D28 /* NunitoSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4760F76D8284CC5A3580F79 /* NunitoSans-ExtraBoldItalic.ttf */; };
+		FB0AEBCAA3474FA4A05DB6F3 /* NunitoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E901E260D05649169A9D48F1 /* NunitoSans-BoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,50 +45,50 @@
 		00E356EE1AD99517003FC87E /* OmnitalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmnitalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* OmnitalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OmnitalkTests.m; sourceTree = "<group>"; };
+		03E95663813A42B9B4F4328D /* NunitoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		04134CBBFB3149C9AF694C41 /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = ../src/assets/fonts/NunitoSans/OFL.txt; sourceTree = "<group>"; };
+		04987DCB25BD4B2799580481 /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-SemiBold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		0A536E28788E434D98D65BCA /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-SemiBold.ttf"; path = "../src/assets/fonts/NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		134AB6ED4AF74728867F9E35 /* NunitoSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-BlackItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-BlackItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Omnitalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omnitalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Omnitalk/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Omnitalk/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Omnitalk/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Omnitalk/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Omnitalk/main.m; sourceTree = "<group>"; };
+		1495122A60354917A2FDA919 /* NunitoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Omnitalk-OmnitalkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Omnitalk-OmnitalkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE35C85F17243E19684FDAA /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = ../src/assets/fonts/OFL.txt; sourceTree = "<group>"; };
+		1F181E25BAED4CD48C6DE283 /* NunitoSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		2CE977DE2FE849179F53939C /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Light.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Light.ttf"; sourceTree = "<group>"; };
+		33856F0038FA49BEB61CAF4B /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Regular.ttf"; path = "../src/assets/fonts/NunitoSans-Regular.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Omnitalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omnitalk.debug.xcconfig"; path = "Target Support Files/Pods-Omnitalk/Pods-Omnitalk.debug.xcconfig"; sourceTree = "<group>"; };
+		442D16BDEA3246EEB0024F45 /* NunitoSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Black.ttf"; path = "../src/assets/fonts/NunitoSans-Black.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Omnitalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omnitalk.release.xcconfig"; path = "Target Support Files/Pods-Omnitalk/Pods-Omnitalk.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Omnitalk-OmnitalkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omnitalk-OmnitalkTests.debug.xcconfig"; path = "Target Support Files/Pods-Omnitalk-OmnitalkTests/Pods-Omnitalk-OmnitalkTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5BC9FD0F1B374042B220DCC1 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Bold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Bold.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Omnitalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Omnitalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62659AA49A6F4B319F95BB4F /* NunitoSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Black.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Black.ttf"; sourceTree = "<group>"; };
+		6661CC519E304B638ED10ED2 /* NunitoSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Italic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Italic.ttf"; sourceTree = "<group>"; };
+		6D0614F6017A42C88ACC9CDC /* NunitoSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraBold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		6DD523003DC540808420AE17 /* NunitoSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraBold.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		805C7A5C78484896979476E5 /* NunitoSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraLight.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Omnitalk/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Omnitalk-OmnitalkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omnitalk-OmnitalkTests.release.xcconfig"; path = "Target Support Files/Pods-Omnitalk-OmnitalkTests/Pods-Omnitalk-OmnitalkTests.release.xcconfig"; sourceTree = "<group>"; };
+		91C7EAF642164E92A0B5C82E /* NunitoSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Italic.ttf"; path = "../src/assets/fonts/NunitoSans-Italic.ttf"; sourceTree = "<group>"; };
+		9BD36531B5A84BC9A2026A32 /* NunitoSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-LightItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		9CCB07E100124117A5FE3750 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Regular.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Regular.ttf"; sourceTree = "<group>"; };
+		A4760F76D8284CC5A3580F79 /* NunitoSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		AB169C50BEAF4341BEF07B71 /* NunitoSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraLight.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		C70BC54F896848C6B3F9DCF1 /* NunitoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D89A6860FA4041959B2D55A6 /* NunitoSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-LightItalic.ttf"; path = "../src/assets/fonts/NunitoSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		D925BAF891AE45F5A5F66154 /* NunitoSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-BlackItalic.ttf"; path = "../src/assets/fonts/NunitoSans-BlackItalic.ttf"; sourceTree = "<group>"; };
+		E901E260D05649169A9D48F1 /* NunitoSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-BoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		EA80426FB8FF4F9EBA2BB411 /* NunitoSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-BoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		62659AA49A6F4B319F95BB4F /* NunitoSans-Black.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Black.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		134AB6ED4AF74728867F9E35 /* NunitoSans-BlackItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BlackItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5BC9FD0F1B374042B220DCC1 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Bold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E901E260D05649169A9D48F1 /* NunitoSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6D0614F6017A42C88ACC9CDC /* NunitoSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A4760F76D8284CC5A3580F79 /* NunitoSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AB169C50BEAF4341BEF07B71 /* NunitoSans-ExtraLight.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLight.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F32B14B6337C434EA96E7B22 /* NunitoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6661CC519E304B638ED10ED2 /* NunitoSans-Italic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Italic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2CE977DE2FE849179F53939C /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Light.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9BD36531B5A84BC9A2026A32 /* NunitoSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-LightItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9CCB07E100124117A5FE3750 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Regular.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		04987DCB25BD4B2799580481 /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBold.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C70BC54F896848C6B3F9DCF1 /* NunitoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		442D16BDEA3246EEB0024F45 /* NunitoSans-Black.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Black.ttf"; path = "../src/assets/fonts/NunitoSans-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D925BAF891AE45F5A5F66154 /* NunitoSans-BlackItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BlackItalic.ttf"; path = "../src/assets/fonts/NunitoSans-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FDD213BD62EC4BF9894E6A19 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Bold.ttf"; path = "../src/assets/fonts/NunitoSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EA80426FB8FF4F9EBA2BB411 /* NunitoSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-BoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6DD523003DC540808420AE17 /* NunitoSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBold.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1F181E25BAED4CD48C6DE283 /* NunitoSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		805C7A5C78484896979476E5 /* NunitoSans-ExtraLight.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLight.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1495122A60354917A2FDA919 /* NunitoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/NunitoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		91C7EAF642164E92A0B5C82E /* NunitoSans-Italic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Italic.ttf"; path = "../src/assets/fonts/NunitoSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F58BD09387F0421882F408BC /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Light.ttf"; path = "../src/assets/fonts/NunitoSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D89A6860FA4041959B2D55A6 /* NunitoSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-LightItalic.ttf"; path = "../src/assets/fonts/NunitoSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		33856F0038FA49BEB61CAF4B /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; name = "NunitoSans-Regular.ttf"; path = "../src/assets/fonts/NunitoSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0A536E28788E434D98D65BCA /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBold.ttf"; path = "../src/assets/fonts/NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		03E95663813A42B9B4F4328D /* NunitoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "NunitoSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/NunitoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		04134CBBFB3149C9AF694C41 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/NunitoSans/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1BE35C85F17243E19684FDAA /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F32B14B6337C434EA96E7B22 /* NunitoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/NunitoSans/NunitoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		F58BD09387F0421882F408BC /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Light.ttf"; path = "../src/assets/fonts/NunitoSans-Light.ttf"; sourceTree = "<group>"; };
+		FDD213BD62EC4BF9894E6A19 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Bold.ttf"; path = "../src/assets/fonts/NunitoSans-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,19 +183,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3B4392A12AC88292D35C810B /* Pods-Omnitalk.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Omnitalk.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-Omnitalk-OmnitalkTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-Omnitalk-OmnitalkTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		94FF211C2B7E42FD90A4F4C8 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				62659AA49A6F4B319F95BB4F /* NunitoSans-Black.ttf */,
 				134AB6ED4AF74728867F9E35 /* NunitoSans-BlackItalic.ttf */,
@@ -245,7 +219,17 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
+		};
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4392A12AC88292D35C810B /* Pods-Omnitalk.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-Omnitalk.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-Omnitalk-OmnitalkTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-Omnitalk-OmnitalkTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -283,6 +267,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				4A54BA7A1072055ABD58854C /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -310,7 +295,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Omnitalk" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "OmniTalk" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -357,22 +342,7 @@
 				9DB7211218DB46078618FC63 /* NunitoSans-Regular.ttf in Resources */,
 				9B831E606D67417AA23F4624 /* NunitoSans-SemiBold.ttf in Resources */,
 				34E3713E46824AF7ADD076E3 /* NunitoSans-SemiBoldItalic.ttf in Resources */,
-				3387DF65342A46BA8DF13C5F /* NunitoSans-Black.ttf in Resources */,
-				AFEA14C8762A41478E4568E6 /* NunitoSans-BlackItalic.ttf in Resources */,
-				3105BD329AE4467BB33285B3 /* NunitoSans-Bold.ttf in Resources */,
-				7737091CC44B42949077372E /* NunitoSans-BoldItalic.ttf in Resources */,
-				073250C858FC4EC98BAC1BE9 /* NunitoSans-ExtraBold.ttf in Resources */,
-				EC5684FBC73B453089FDBBAE /* NunitoSans-ExtraBoldItalic.ttf in Resources */,
-				DE3ADB6E02E149A5B913B3B5 /* NunitoSans-ExtraLight.ttf in Resources */,
-				953B71B1114F400CB5E30636 /* NunitoSans-ExtraLightItalic.ttf in Resources */,
-				B2D8F0C330984C75BA279E22 /* NunitoSans-Italic.ttf in Resources */,
-				0E7C867631834E5FAC1EB89C /* NunitoSans-Light.ttf in Resources */,
-				DAAA9D55B0C04EFE9682A7CF /* NunitoSans-LightItalic.ttf in Resources */,
-				0E171F58321A4B6E8F483939 /* NunitoSans-Regular.ttf in Resources */,
-				8E2DDFD755DA4BFD9DB69446 /* NunitoSans-SemiBold.ttf in Resources */,
-				581BD550A11045B187D5502B /* NunitoSans-SemiBoldItalic.ttf in Resources */,
 				6596300C88784A6BA58AD069 /* OFL.txt in Resources */,
-				6B776F74F13E4026BDE80E09 /* OFL.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +381,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omnitalk/Pods-Omnitalk-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4A54BA7A1072055ABD58854C /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n";
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -691,7 +674,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -725,6 +708,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -762,7 +746,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -788,6 +772,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -814,7 +799,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Omnitalk" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "OmniTalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

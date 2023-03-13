@@ -11,6 +11,8 @@ target 'Omnitalk' do
   flags = get_default_flags()
   
   #Firebase grejer
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true

@@ -18,7 +18,7 @@ const IsKuratorProvider = ({children}) => {
       setIsKurator(kurator);
     };
     getKurator();
-  }, [user.uid]);
+  }, []);
 
   return (
     <IsKuratorContext.Provider value={isKurator}>

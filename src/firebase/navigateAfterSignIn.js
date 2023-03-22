@@ -4,10 +4,7 @@ import {useIsKurator} from './isKuratorContext';
 import {useEffect} from 'react';
 
 const navigateAfterSignIn = async ({navigation}) => {
-  
   const user = auth().currentUser;
-
- 
   const askNavigationConditions = await firestore()
     .collection('Users')
     .doc(user.uid)

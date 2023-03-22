@@ -1,83 +1,113 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
-import {Text, StyleSheet, View, RefreshControl} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
-// import OpenChat from '../../firebase/openChat';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
-import useIsKurator from '../../firebase/isKurator';
 import useOpenChat from '../../firebase/openChat';
 
 const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
-  
   const isKurator = useContext(IsKuratorContext);
-  //const isKurator = useIsKurator();
-  console.log(isKurator);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
   const user = auth().currentUser;
-  const openChat =  useOpenChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages});
+  const openChat = useOpenChat({
+    isKurator,
+    user,
+    clientUserId,
+    refPath,
+    setRefPath,
+    setMessages,
+  });
 
-  const onScroll = (e) => {
+  const onScroll = e => {
     const scrollOffset = e.nativeEvent.contentOffset.y;
     if (scrollOffset <= 10) {
+      // Doesn't work perfectly, seems to load at least once initially
+      console.log('setMsgLimit');
       setMsgLimit(msgLimit + 15);
     }
   };
-  const onMomentumScrollEnd = (event) => {
+  const onMomentumScrollEnd = event => {
     const layoutHeight = event.nativeEvent.layoutMeasurement.height;
     const contentOffsetY = event.nativeEvent.contentOffset.y;
     const contentSizeHeight = event.nativeEvent.contentSize.height;
-    const calc = (layoutHeight + contentOffsetY >= contentSizeHeight - 150);
-    console.log('Nummer:', calc)
+    const calc = layoutHeight + contentOffsetY >= contentSizeHeight - 150;
     if (msgLimit !== 0 && calc) {
+      // Doesn't work perfectly, seems to load at least once initially
+      console.log('Near bottom reached, load more!');
       setMsgLimit(0);
     }
-  }
-  
+  };
+
   useEffect(() => {
-   // if (isKurator !== undefined) {
-      // eslint-disable-next-line prettier/prettier
-      openChat(msgLimit);
-     // return () => OpenChat();
+    // if (isKurator !== undefined) {
+    openChat(msgLimit);
+    // return () => OpenChat();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msgLimit]);
 
   function Item({text, id, displayTimestamp}) {
-
-    const currentDay = new Date().toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
+    const currentDay = new Date().toLocaleString([], {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    });
     const currentYear = new Date().toLocaleString([], {year: 'numeric'});
 
-    const sameDay = displayTimestamp.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric'}) === currentDay ? true : false;
-    const sameYear = displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear ? true : false;
+    const sameDay =
+      displayTimestamp.toLocaleString([], {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      }) === currentDay
+        ? true
+        : false;
+    const sameYear =
+      displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear
+        ? true
+        : false;
 
-    return (
-      !isKurator ? (
-        <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
-          <View
-            style={
-              id === user.uid
-                ? styles.bubblaSend.bubbla
-                : styles.bubblaRecieve.bubbla
-            }>
-            <Text style={styles.text.message}>{text}</Text>
-          </View>
-          <View
-            style={
-              id === user.uid
-                ? styles.bubblaSend.timestamp
-                : styles.bubblaRecieve.timestamp
-            }>
-            <Text style={styles.text.author}>
-              {
-                sameDay ? displayTimestamp.toLocaleString([], {hour: 'numeric', minute: 'numeric'})
-                : sameYear ? displayTimestamp.toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'})
-                : displayTimestamp.toLocaleString([], {year: 'numeric', month: 'long', day: 'numeric' })
-              }
-            </Text>
-          </View>
+    return !isKurator ? (
+      <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
+        <View
+          style={
+            id === user.uid
+              ? styles.bubblaSend.bubbla
+              : styles.bubblaRecieve.bubbla
+          }>
+          <Text style={styles.text.message}>{text}</Text>
         </View>
-      ) : isKurator ? (
-        <View style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend }>
+        <View
+          style={
+            id === user.uid
+              ? styles.bubblaSend.timestamp
+              : styles.bubblaRecieve.timestamp
+          }>
+          <Text style={styles.text.author}>
+            {sameDay
+              ? displayTimestamp.toLocaleString([], {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })
+              : sameYear
+              ? displayTimestamp.toLocaleString([], {
+                  month: 'short',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })
+              : displayTimestamp.toLocaleString([], {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+          </Text>
+        </View>
+      </View>
+    ) : isKurator ? (
+      <View
+        style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend}>
         <View
           style={
             id === clientUserId
@@ -93,16 +123,27 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
               : styles.bubblaSend.timestamp
           }>
           <Text style={styles.text.author}>
-            {
-              sameDay ? displayTimestamp.toLocaleString([], {hour: 'numeric', minute: 'numeric'})
-              : sameYear ? displayTimestamp.toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'})
-              : displayTimestamp.toLocaleString([], {year: 'numeric', month: 'long', day: 'numeric' })
-            }
+            {sameDay
+              ? displayTimestamp.toLocaleString([], {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })
+              : sameYear
+              ? displayTimestamp.toLocaleString([], {
+                  month: 'short',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })
+              : displayTimestamp.toLocaleString([], {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
           </Text>
         </View>
       </View>
-      ) : null
-    );
+    ) : null;
   }
   const renderItem = ({item}) => (
     <Item
@@ -113,7 +154,10 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
       id={item.id}
     />
   );
-  const sortedMessages = useMemo(()=> messages.sort((a,b) => a.timestamp - b.timestamp), [messages])
+  const sortedMessages = useMemo(
+    () => messages.sort((a, b) => a.timestamp - b.timestamp),
+    [messages],
+  );
   return (
     <View style={styles.greyScale.viewStyle}>
       <AutoScrollFlatList
@@ -143,7 +187,7 @@ const styles = StyleSheet.create({
       borderColor: 'gray',
       borderWidth: 2,
       borderRadius: 12,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
     },
   },
   text: {

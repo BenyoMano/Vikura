@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import Logo from './Logo';
@@ -17,7 +18,13 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
   const isKurator = useContext(IsKuratorContext);
 
   return (
-    <View style={{flexDirection: 'row', width: '88%', alignItems:'center', marginTop: '7%'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        width: '88%',
+        alignItems: 'center',
+        marginTop: '7%',
+      }}>
       <View
         style={{
           position: 'absolute',
@@ -28,7 +35,13 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
       </View>
 
       {route.name === 'KuratorView' ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <ButtonLogOut
               title="Logga Ut"
@@ -43,31 +56,61 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
           </View>
         </View>
       ) : route.name === 'AddUserView' ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'NewKurator' ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'NewElev' ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ReportConcern' ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
       ) : route.name === 'ChatView' && isKurator ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <View>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
@@ -85,14 +128,20 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
           </View>
         </View>
       ) : route.name === 'ChatView' && !isKurator ? (
-        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems:'center'}}>
-            <ButtonLogOut
-              title="Logga Ut"
-              onPress={() => {
-                signOut();
-                navigation.navigate('Hem');
-              }}
-            />
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <ButtonLogOut
+            title="Logga Ut"
+            onPress={() => {
+              signOut();
+              navigation.navigate('Hem');
+            }}
+          />
         </View>
       ) : null}
     </View>

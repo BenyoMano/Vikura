@@ -6,7 +6,6 @@ import {IsKuratorContext} from '../../firebase/isKuratorContext';
 const SendMessage = ({isKurator, msgToSend, user, refPath}) => {
   if (!msgToSend) return;
   if (msgToSend.trim() === '') return;
-  
   msgToSend = msgToSend.trim();
 
   const addMessage = async () => {
@@ -27,7 +26,6 @@ const SendMessage = ({isKurator, msgToSend, user, refPath}) => {
         console.error(error);
       });
   };
- 
   addMessage();
 };
 

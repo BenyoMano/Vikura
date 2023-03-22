@@ -1,8 +1,12 @@
 import {useContext} from 'react';
 import {IsKuratorContext} from './isKuratorContext';
 
-const ListenMsg = async ({isKurator, pathToMessages, setMessages, msgLimit}) => {
-
+const ListenMsg = async ({
+  isKurator,
+  pathToMessages,
+  setMessages,
+  msgLimit,
+}) => {
   pathToMessages
     .orderBy('timestamp', 'desc')
     .limit(15 + msgLimit)

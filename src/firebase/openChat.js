@@ -1,4 +1,3 @@
-import {useContext} from 'react';
 import {showMessage} from 'react-native-flash-message';
 import createRoom from './createRoom';
 import getRefPath from './getRefPath';
@@ -11,9 +10,7 @@ const useOpenChat = ({
   setRefPath,
   setMessages,
 }) => {
-  console.log('useOpenchat')
-  const openChat = async (msgLimit) => {
-    console.log('openChat')
+  const openChat = async msgLimit => {
     if (isKurator === undefined) return;
 
     if (isKurator) {
@@ -22,7 +19,7 @@ const useOpenChat = ({
     } else {
       clientUserId = user.uid;
       const rumNamn = await roomName({clientUserId});
-  
+
       if (!rumNamn.empty) {
         getRefPath({isKurator, setRefPath, rumNamn, setMessages});
       } else {
@@ -39,11 +36,8 @@ const useOpenChat = ({
         });
       }
     }
-
-  } 
-  return openChat
-
- 
+  };
+  return openChat;
 };
 
 export default useOpenChat;

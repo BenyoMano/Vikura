@@ -24,7 +24,8 @@ const Hem = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[styles.greyScale.container,
+          style={[
+            styles.greyScale.container,
             {
               flexDirection: 'column',
             },
@@ -32,10 +33,9 @@ const Hem = ({navigation}) => {
           <View
             style={{
               flex: 0.5,
-              justifyContent: 'flex-end'
+              justifyContent: 'flex-end',
             }}>
             <Logo style={{width: 160, height: 62, marginTop: 30}} />
-            
           </View>
           <View style={styles.contcont}>
             <View style={styles.greyScale.logincontainer}>
@@ -63,13 +63,16 @@ const Hem = ({navigation}) => {
             </View>
           </View>
           <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
-            {loading ? <DotsLoader size={20} color={"green"} betweenSpace={20} /> : null }
+            {loading ? (
+              <DotsLoader size={20} color={'green'} betweenSpace={20} />
+            ) : null}
           </View>
           <View style={{flex: 0.3}}>
             <Button
               title="Logga in"
               onPress={() =>
-                signIn({loginDetails, setLoginDetails, navigation, setLoading})}
+                signIn({loginDetails, setLoginDetails, navigation, setLoading})
+              }
             />
           </View>
         </View>

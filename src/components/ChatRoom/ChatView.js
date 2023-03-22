@@ -13,7 +13,7 @@ import SendMessage from './sendMessage';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import auth from '@react-native-firebase/auth';
-import { IsKuratorContext } from '../../firebase/isKuratorContext';
+import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
 const ChatView = ({navigation, route}) => {
   const isKurator = useContext(IsKuratorContext);

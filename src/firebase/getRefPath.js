@@ -1,8 +1,8 @@
 import firestore from '@react-native-firebase/firestore';
-import listenMsg from './listenMsg';
+import ListenMsg from './listenMsg';
 
 
-const getRefPath = ({setRefPath, rumNamn, setMessages, msgLimit}) => {
+const getRefPath = ({isKurator, setRefPath, rumNamn, setMessages, msgLimit}) => {
   const newRefPath = async () => {
     rumNamn.docs.map(roomDetails => {
       const splitRefPath = roomDetails.ref.path.split('/');
@@ -13,7 +13,7 @@ const getRefPath = ({setRefPath, rumNamn, setMessages, msgLimit}) => {
         .collection('messages');
 
       setRefPath(pathToMessages);
-      listenMsg({pathToMessages, setMessages, msgLimit});
+      ListenMsg({isKurator, pathToMessages, setMessages, msgLimit});
      
     });
   };

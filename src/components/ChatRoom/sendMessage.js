@@ -1,12 +1,9 @@
 import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import { IsKuratorContext } from '../../firebase/isKuratorContext';
-import { useContext } from 'react';
+import {useContext} from 'react';
+import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
-
-const sendMessage = ({msgToSend, user, refPath}) => {
-  const isKurator = useContext(IsKuratorContext);
-  // const 
+const SendMessage = ({isKurator, msgToSend, user, refPath}) => {
   if (!msgToSend) return;
   if (msgToSend.trim() === '') return;
   
@@ -34,4 +31,4 @@ const sendMessage = ({msgToSend, user, refPath}) => {
   addMessage();
 };
 
-export default sendMessage;
+export default SendMessage;

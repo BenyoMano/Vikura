@@ -1,26 +1,29 @@
-import React, {useContext, useEffect, useState} from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+import React, {useContext, useEffect, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, StyleSheet, View, RefreshControl} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
-import openChat from '../../firebase/openChat';
-import { IsKuratorContext } from '../../firebase/isKuratorContext';
+// import OpenChat from '../../firebase/openChat';
+import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useIsKurator from '../../firebase/isKurator';
-
+import useOpenChat from '../../firebase/openChat';
 
 const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
-  // const isKurator = useContext(IsKuratorContext);
-  const isKurator = useIsKurator();
+  
+  const isKurator = useContext(IsKuratorContext);
+  //const isKurator = useIsKurator();
   console.log(isKurator);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
-  const user = auth().currentUser; 
+  const user = auth().currentUser;
+  const openChat =  useOpenChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages});
 
   const onScroll = (e) => {
-    const scrollOffset = e.nativeEvent.contentOffset.y
+    const scrollOffset = e.nativeEvent.contentOffset.y;
     if (scrollOffset <= 10) {
       setMsgLimit(msgLimit + 15);
     }
-  }
+  };
   const onMomentumScrollEnd = (event) => {
     const layoutHeight = event.nativeEvent.layoutMeasurement.height;
     const contentOffsetY = event.nativeEvent.contentOffset.y;
@@ -33,11 +36,11 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
   }
   
   useEffect(() => {
-    if (isKurator !== undefined) {
-      openChat({isKurator, user, clientUserId, refPath, setRefPath, setMessages, msgLimit});
-      return () => openChat();
-    }
-  }, [isKurator, msgLimit]);
+   // if (isKurator !== undefined) {
+      // eslint-disable-next-line prettier/prettier
+      openChat(msgLimit);
+     // return () => OpenChat();
+  }, [msgLimit]);
 
   function Item({text, id, displayTimestamp}) {
 
@@ -110,12 +113,13 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
       id={item.id}
     />
   );
+  const sortedMessages = useMemo(()=> messages.sort((a,b) => a.timestamp - b.timestamp), [messages])
   return (
     <View style={styles.greyScale.viewStyle}>
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
-        data={messages.sort((a, b) => a.timestamp - b.timestamp)}
+        data={sortedMessages}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
         onScroll={onScroll}

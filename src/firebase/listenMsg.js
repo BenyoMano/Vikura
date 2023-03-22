@@ -1,31 +1,35 @@
-import { useContext } from "react";
-import { IsKuratorContext } from "./isKuratorContext";
+import {useContext} from 'react';
+import {IsKuratorContext} from './isKuratorContext';
 
-const listenMsg = async ({pathToMessages, setMessages, msgLimit}) => {
-  const isKurator = useContext(IsKuratorContext);
-  
-  pathToMessages.orderBy('timestamp', 'desc').limit(15 + msgLimit).onSnapshot(messageDetails => {
-    
-    const newData = messageDetails.docs.map(documentSnapshot => ({
-      timestamp: documentSnapshot.data().timestamp.toMillis(),
-      displayTimestamp: documentSnapshot.data().timestamp.toDate(), 
-      text: documentSnapshot.data().msg,
-      isRead: documentSnapshot.data().isRead,
-      author: documentSnapshot.data().author,
-      id: documentSnapshot.data().id,
-    }));
-    setMessages(newData);
-  }); 
+const ListenMsg = async ({isKurator, pathToMessages, setMessages, msgLimit}) => {
+
+  pathToMessages
+    .orderBy('timestamp', 'desc')
+    .limit(15 + msgLimit)
+    .onSnapshot(messageDetails => {
+      const newData = messageDetails.docs.map(documentSnapshot => ({
+        timestamp: documentSnapshot.data().timestamp.toMillis(),
+        displayTimestamp: documentSnapshot.data().timestamp.toDate(),
+        text: documentSnapshot.data().msg,
+        isRead: documentSnapshot.data().isRead,
+        author: documentSnapshot.data().author,
+        id: documentSnapshot.data().id,
+      }));
+      setMessages(newData);
+    });
 
   if (isKurator) {
-    await pathToMessages.where('isRead', '==', false).get().then((a) => {
-      a.forEach((doc) => {
-        doc.ref.update({
-          isRead: true
-        })
-      })
-    });
+    await pathToMessages
+      .where('isRead', '==', false)
+      .get()
+      .then(a => {
+        a.forEach(doc => {
+          doc.ref.update({
+            isRead: true,
+          });
+        });
+      });
   }
 };
 
-export default listenMsg;
+export default ListenMsg;

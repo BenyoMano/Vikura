@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useContext} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
@@ -9,7 +10,7 @@ import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
-import { IsKuratorContext } from '../../firebase/isKuratorContext';
+import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
 const ReportConcern = ({navigation, route}) => {
   const isKurator = useContext(IsKuratorContext);
@@ -33,12 +34,14 @@ const ReportConcern = ({navigation, route}) => {
 
   return (
     <View
-      style={[styles.greyScale.container,
+      style={[
+        styles.greyScale.container,
         {
           flexDirection: 'column',
         },
       ]}>
-      <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
+      <View
+        style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
         <HeaderView navigation={navigation} />
       </View>
       <View
@@ -103,7 +106,7 @@ const ReportConcern = ({navigation, route}) => {
           onPress={() => {
             Linking.openURL(
               'mailto:?subject=Orosanmälan&body=' + detailsToSend,
-            );
+            ).catch(() => null);
           }}
         />
       </View>

@@ -9,16 +9,10 @@ import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
-import { useContext } from 'react';
-import { IsKuratorContext } from '../../firebase/isKuratorContext';
+import {useContext} from 'react';
+import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
-
-export const HeaderView = ({
-  navigation,  
-  clientUserId, 
-  user, 
-  refPath, 
-}) => {
+export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
 

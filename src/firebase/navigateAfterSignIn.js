@@ -1,7 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { useIsKurator } from './isKuratorContext';
-import { useEffect } from 'react';
+import {useIsKurator} from './isKuratorContext';
+import {useEffect} from 'react';
 
 const navigateAfterSignIn = async ({navigation}) => {
   

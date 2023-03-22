@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
-import {View, TouchableWithoutFeedback, Keyboard, StyleSheet} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useContext, useState} from 'react';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet,
+} from 'react-native';
 import ChattRuta from './ChattRuta';
 import InputBarChatt from './InputbarChat';
 import ButtonSend from './ButtonSend';
-import sendMessage from './sendMessage';
+import SendMessage from './sendMessage';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import auth from '@react-native-firebase/auth';
+import { IsKuratorContext } from '../../firebase/isKuratorContext';
 
 const ChatView = ({navigation, route}) => {
+  const isKurator = useContext(IsKuratorContext);
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
   const {id} = route.params;
@@ -18,7 +26,12 @@ const ChatView = ({navigation, route}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.greyScale.container}>
-          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              width: '100%',
+            }}>
             <HeaderView
               navigation={navigation}
               clientUserId={id}
@@ -33,20 +46,22 @@ const ChatView = ({navigation, route}) => {
               setRefPath={setRefPath}
             />
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '88%', marginBottom: '6%'}}>
-              <InputBarChatt
-                msgToSend={msgToSend}
-                setMsgToSend={setMsgToSend}
-              />
-              <ButtonSend
-                title="Skicka"
-                onPress={() => {
-                  sendMessage({msgToSend, user, refPath});
-                  setMsgToSend('');
-                }}
-              />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '88%',
+              marginBottom: '6%',
+            }}>
+            <InputBarChatt msgToSend={msgToSend} setMsgToSend={setMsgToSend} />
+            <ButtonSend
+              title="Skicka"
+              onPress={() => {
+                SendMessage({isKurator, msgToSend, user, refPath});
+                setMsgToSend('');
+              }}
+            />
           </View>
-          
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>
@@ -56,12 +71,12 @@ const ChatView = ({navigation, route}) => {
 const styles = StyleSheet.create({
   greyScale: {
     container: {
-    flex: 1,
+      flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: 'white',
-      width: '100%'
+      width: '100%',
     },
   },
 });

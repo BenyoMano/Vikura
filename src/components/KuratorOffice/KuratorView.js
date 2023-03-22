@@ -1,13 +1,14 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Conv from './Conv';
 import {HeaderView} from '.././Header/HeaderView';
 
 const KuratorView = ({navigation}) => {
-
   return (
     <View style={[styles.greyScale.container, {flexDirection: 'column'}]}>
-      <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
+      <View
+        style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
         <HeaderView navigation={navigation} />
       </View>
       <View style={{flex: 1}}>
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: 'white',
-    }
+    },
   },
 });
 

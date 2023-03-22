@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useState} from 'react';
 import {
   View,
@@ -10,7 +11,7 @@ import Logo from '../Header/Logo';
 import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
-import { DotsLoader } from 'react-native-indicator';
+import {DotsLoader} from 'react-native-indicator';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});

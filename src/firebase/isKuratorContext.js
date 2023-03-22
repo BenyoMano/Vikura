@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, useEffect} from 'react';
+import React, {createContext, useContext, useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
@@ -7,18 +7,19 @@ const IsKuratorContext = createContext();
 const IsKuratorProvider = ({children}) => {
   const [isKurator, setIsKurator] = useState(undefined);
   const user = auth().currentUser;
-
+ 
   useEffect(() => {
     const getKurator = async () => {
-      const fetchKurator = await firestore()
+      if (!user) return;
+      const firestoreUser = await firestore()
         .collection('Users')
         .doc(user.uid)
         .get();
-      const kurator = fetchKurator.get('kurator');
+      const kurator = firestoreUser.get('kurator');
       setIsKurator(kurator);
     };
     getKurator();
-  }, []);
+  }, [user]);
 
   return (
     <IsKuratorContext.Provider value={isKurator}>

@@ -35,7 +35,8 @@ const InputBarLogIn = React.forwardRef(
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
-          value={value}></TextInput>
+          value={value}
+        />
       </View>
     );
   },

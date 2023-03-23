@@ -35,7 +35,7 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
     const calc = layoutHeight + contentOffsetY >= contentSizeHeight - 150;
     if (msgLimit !== 0 && calc) {
       // Doesn't work perfectly, seems to load at least once initially
-      console.log('Near bottom reached, load more!');
+      console.log('Near bottom reached --reset msgLimit--');
       setMsgLimit(0);
     }
   };

@@ -12,7 +12,7 @@ const Conv = () => {
   
   useEffect(() => {
     openConvo({setConvos, setIsLoaded});
-    return () => openConvo();
+   // return () => openConvo();
   }, [setConvos, setIsLoaded]);
 
   // fungerar inte - TypeError: Cannot read property 'setConvos' of undefined

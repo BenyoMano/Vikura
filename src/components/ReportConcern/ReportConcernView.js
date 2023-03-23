@@ -10,11 +10,8 @@ import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
-import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
 const ReportConcern = ({navigation, route}) => {
-  const isKurator = useContext(IsKuratorContext);
-  console.log('isKurator:', isKurator);
   const [data, setString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
@@ -90,7 +87,6 @@ const ReportConcern = ({navigation, route}) => {
               [
                 {
                   text: 'OK',
-                  onPress: () => console.log('OK'),
                 },
               ],
               {

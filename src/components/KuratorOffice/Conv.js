@@ -15,15 +15,16 @@ const Conv = () => {
     return () => openConvo();
   }, [setConvos, setIsLoaded]);
 
-  const onRefresh = useCallback(async () => {
+  // fungerar inte - TypeError: Cannot read property 'setConvos' of undefined
+/*   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     setIsLoaded(false);
     openConvo({setConvos, setIsLoaded});
     setIsLoaded(true);
     setRefreshing(false);
-  }, [refreshing]);
+  }, [refreshing]); */
 
-const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp)
+  const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
 
   function Item({alias, text, isRead, displayTimestamp, id}) {
     const navigation = useNavigation();
@@ -67,9 +68,9 @@ const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp)
             data={sortedConvos}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            refreshControl={
+           /*  refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
+            } */
           />
         )
       }

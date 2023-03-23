@@ -21,7 +21,7 @@ const useOpenChat = ({
       const rumNamn = await roomName({clientUserId});
 
       if (!rumNamn.empty) {
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages});
+        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit});
       } else {
         createRoom({clientUserId});
         const rumNamn = await roomName({clientUserId});

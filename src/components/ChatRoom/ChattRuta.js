@@ -68,6 +68,7 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
         ? true
         : false;
 
+      
     return !isKurator ? (
       <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
         <View

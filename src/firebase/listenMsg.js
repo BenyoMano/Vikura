@@ -7,6 +7,7 @@ const ListenMsg = async ({
   setMessages,
   msgLimit,
 }) => {
+
   pathToMessages
     .orderBy('timestamp', 'desc')
     .limit(15 + msgLimit)

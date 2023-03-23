@@ -16,13 +16,13 @@ const Conv = () => {
   }, [setConvos, setIsLoaded]);
 
   // fungerar inte - TypeError: Cannot read property 'setConvos' of undefined
-/*   const onRefresh = useCallback(async () => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
     setIsLoaded(false);
     openConvo({setConvos, setIsLoaded});
     setIsLoaded(true);
     setRefreshing(false);
-  }, [refreshing]); */
+  }, [refreshing]);
 
   const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
 
@@ -68,9 +68,9 @@ const Conv = () => {
             data={sortedConvos}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-           /*  refreshControl={
+            refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            } */
+            }
           />
         )
       }

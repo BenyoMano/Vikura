@@ -32,7 +32,7 @@ const App = () => {
     <IsKuratorProvider>
       <SafeAreaProvider
         style={{
-          paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20,
+          paddingTop: Platform.OS === 'ios' ? 20 : null,
         }}>
         <NavigationContainer>
           <Stack.Navigator
@@ -53,4 +53,4 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent('Omnitalk', () => App);
+AppRegistry.registerComponent('OmniTalk', () => App);

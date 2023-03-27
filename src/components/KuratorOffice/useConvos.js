@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import allRoomNames from './allRoomNames';
+import allRoomNames from '../../firebase/allRoomNames';
+import firestore from '@react-native-firebase/firestore';
 
 export const useConvos = () => {
 

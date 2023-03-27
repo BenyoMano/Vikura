@@ -8,7 +8,7 @@ import { useConvos } from './useConvos';
 const Conv = () => {
   // const [convos, setConvos] = useState([]);
   // const [refreshing, setRefreshing] = useState(false);
-  // const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const convos = useConvos();
 

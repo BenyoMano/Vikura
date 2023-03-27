@@ -3,14 +3,40 @@ import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import openConvo from '../../firebase/openConvo';
 import ConvoLoader from './ConvoLoader';
-import { useConvos } from './useConvos';
+import { useRooms } from './useRooms';
+
+const Room = ({roomId}) => {
+  const [latestMessage, setLatestMessage] = useState("");
+
+  useEffect(()=>{
+   const getLatestMessage = async ()=> {
+        const pathToMessages = firestore()
+          .collection('rooms')
+          .doc(roomId)
+          .collection('messages');
+
+                pathToMessages
+                  .orderBy('timestamp', 'desc')
+                  .limit(1)
+                  .onSnapshot(lastMessage => {
+                    lastMessage.docs.forEach(lastMessageDetails => {
+                      setLatestMessage(lastMessageDetails.data().msg)
+                  });
+                });
+   }
+
+   getLatestMessage()
+  })
+
+  return(<Text>{latestMessage}</Text>)
+}
 
 const Conv = () => {
   // const [convos, setConvos] = useState([]);
   // const [refreshing, setRefreshing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true);
 
-  const convos = useConvos();
+  const rooms = useRooms();
 
   
   // useEffect(() => {
@@ -47,15 +73,8 @@ const Conv = () => {
     );
   }
 
-  const renderItem = ({item}) => (
-    <Item
-      timestamp={item.timestamp}
-      displayTimestamp={item.displayTimestamp}
-      alias={item.alias}
-      text={item.text}
-      isRead={item.isRead}
-      id={item.id}
-    />
+  const renderItem = (roomId) => (
+    <Room roomId={roomId} />
   );
 
   return (
@@ -68,9 +87,9 @@ const Conv = () => {
           <FlatList
             horizontal={false}
             numColumns={1}
-            data={sortedConvos}
+            data={rooms}
             renderItem={renderItem}
-            keyExtractor={item => item.timestamp}
+            keyExtractor={item => item.roomId}
             // refreshControl={
             //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             // }

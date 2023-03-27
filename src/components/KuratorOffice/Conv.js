@@ -3,26 +3,29 @@ import {Text, View, FlatList, RefreshControl, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import openConvo from '../../firebase/openConvo';
 import ConvoLoader from './ConvoLoader';
+import { useConvos } from './useConvos';
 
 const Conv = () => {
-  const [convos, setConvos] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [convos, setConvos] = useState([]);
+  // const [refreshing, setRefreshing] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
+
+  const convos = useConvos();
 
   
-  useEffect(() => {
-    openConvo({setConvos, setIsLoaded});
-   // return () => openConvo();
-  }, [setConvos, setIsLoaded]);
+  // useEffect(() => {
+  //   openConvo({setConvos, setIsLoaded});
+  //  // return () => openConvo();
+  // }, [setConvos, setIsLoaded]);
 
   // fungerar inte - TypeError: Cannot read property 'setConvos' of undefined
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    setIsLoaded(false);
-    openConvo({setConvos, setIsLoaded});
-    setIsLoaded(true);
-    setRefreshing(false);
-  }, [refreshing]);
+  // const onRefresh = useCallback(async () => {
+  //   setRefreshing(true);
+  //   setIsLoaded(false);
+  //   openConvo({setConvos, setIsLoaded});
+  //   setIsLoaded(true);
+  //   setRefreshing(false);
+  // }, [refreshing]);
 
   const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
 
@@ -68,9 +71,9 @@ const Conv = () => {
             data={sortedConvos}
             renderItem={renderItem}
             keyExtractor={item => item.timestamp}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
+            // refreshControl={
+            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            // }
           />
         )
       }

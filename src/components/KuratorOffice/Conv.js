@@ -4,31 +4,59 @@ import {useNavigation} from '@react-navigation/native';
 import openConvo from '../../firebase/openConvo';
 import ConvoLoader from './ConvoLoader';
 import { useRooms } from './useRooms';
+import firestore from '@react-native-firebase/firestore';
 
-const Room = ({roomId}) => {
-  const [latestMessage, setLatestMessage] = useState("");
+const Room = ({roomId, clientAlias, clientId}) => {
+  const [latestMessage, setLatestMessage] = useState(undefined);
+  console.log('Latest', latestMessage )
 
   useEffect(()=>{
+    let unsubscribe; 
    const getLatestMessage = async ()=> {
         const pathToMessages = firestore()
           .collection('rooms')
           .doc(roomId)
           .collection('messages');
 
+          unsubscribe = 
                 pathToMessages
                   .orderBy('timestamp', 'desc')
                   .limit(1)
                   .onSnapshot(lastMessage => {
                     lastMessage.docs.forEach(lastMessageDetails => {
-                      setLatestMessage(lastMessageDetails.data().msg)
+                      setLatestMessage({
+                        timestamp: lastMessageDetails.data().timestamp.toMillis(),
+                        displayTimestamp: lastMessageDetails.data().timestamp.toDate(), 
+                        text: lastMessageDetails.data().msg,
+                        isRead: lastMessageDetails.data().isRead,
+                        alias: clientAlias,
+                        id: clientId,
+                      })
                   });
                 });
    }
 
    getLatestMessage()
-  })
+   return () => unsubscribe();
+  }, [])
 
-  return(<Text>{latestMessage}</Text>)
+  const navigation = useNavigation();
+  if (latestMessage === undefined) return null;
+
+  return (
+    <Pressable 
+    onPress={() => navigation.navigate('ChatView', {id: latestMessage.id})}>
+      <View style={styles.greyScale.item}>
+        <View style={styles.header}>
+          <Text style={styles.title}>{latestMessage.alias}</Text>
+          <Text style={styles.timestamp}>{latestMessage.displayTimestamp.toLocaleString()}</Text>
+        </View>
+        <View>
+          <Text style={latestMessage.isRead ? styles.isRead.text : styles.notIsRead.text}>{latestMessage.text}</Text>
+        </View>
+      </View>
+    </Pressable>
+  );
 }
 
 const Conv = () => {
@@ -53,7 +81,7 @@ const Conv = () => {
   //   setRefreshing(false);
   // }, [refreshing]);
 
-  const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
+  // const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
 
   function Item({alias, text, isRead, displayTimestamp, id}) {
     const navigation = useNavigation();
@@ -72,9 +100,9 @@ const Conv = () => {
       </Pressable>
     );
   }
-
-  const renderItem = (roomId) => (
-    <Room roomId={roomId} />
+  console.log('rooms', rooms);
+  const renderItem = ({item}) => (
+    <Room roomId={item.roomId} clientAlias={item.clientAlias} clientId={item.clientId} key={item} />
   );
 
   return (

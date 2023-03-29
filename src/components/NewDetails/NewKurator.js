@@ -21,19 +21,19 @@ const NewKurator = ({navigation}) => {
   const capitalize = 'none';
   const {password, rePassword} = newDetails;
   const ref_input2 = useRef();
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
         setKeyboardVisible(true);
-        // or some other action
       },
     );
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       },
     );
 
@@ -89,7 +89,8 @@ const NewKurator = ({navigation}) => {
                 onSubmitEditing={() => ref_input2.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
-              />
+                submitted={submitted}
+                />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
@@ -100,6 +101,7 @@ const NewKurator = ({navigation}) => {
                 ref={ref_input2}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
+                submitted={submitted}
               />
             </ScrollView>
           </View>
@@ -107,7 +109,7 @@ const NewKurator = ({navigation}) => {
             <View style={{ marginBottom: 40}}>
               <Button
                 title="Bekräfta"
-                onPress={() => newDetailsKurator({password, rePassword})}
+                onPress={() => {newDetailsKurator({password, rePassword, setSubmitted}); setSubmitted(true)}}
               />
             </View>
           ) : null}

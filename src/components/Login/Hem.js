@@ -15,10 +15,11 @@ import {DotsLoader} from 'react-native-indicator';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
-  const security = false;
+ // const security = false;
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   return (
     <MyKeyboardAvoidingView>
@@ -50,7 +51,8 @@ const Hem = ({navigation}) => {
                 onSubmitEditing={() => ref_input2.current.focus()}
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
-              />
+                submitted={submitted}
+                />
               <InputBarLogIn
                 title="Kod:"
                 security={true}
@@ -59,7 +61,8 @@ const Hem = ({navigation}) => {
                 ref={ref_input2}
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
-              />
+                submitted={submitted}
+                />
             </View>
           </View>
           <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
@@ -71,7 +74,7 @@ const Hem = ({navigation}) => {
             <Button
               title="Logga in"
               onPress={() =>
-                signIn({loginDetails, setLoginDetails, navigation, setLoading})
+                {signIn({loginDetails, setLoginDetails, navigation, setLoading, setSubmitted}); setSubmitted(true)}
               }
             />
           </View>

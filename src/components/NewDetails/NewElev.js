@@ -21,18 +21,19 @@ const NewElev = ({navigation}) => {
   const {password, rePassword, alias} = newDetails;
   const ref_input2 = useRef();
   const ref_input3 = useRef();
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
       },
     );
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       },
     );
 
@@ -89,7 +90,8 @@ const NewElev = ({navigation}) => {
                 onSubmitEditing={() => ref_input2.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
-              />
+                submitted={submitted}
+                />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
@@ -102,7 +104,8 @@ const NewElev = ({navigation}) => {
                 onSubmitEditing={() => ref_input3.current.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
-              />
+                submitted={submitted}
+                />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
@@ -113,7 +116,8 @@ const NewElev = ({navigation}) => {
                 ref={ref_input3}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
-              />
+                submitted={submitted}
+                />
             </ScrollView>
           </View>
           {!isKeyboardVisible ? (
@@ -121,7 +125,7 @@ const NewElev = ({navigation}) => {
               <Button
                 title="Bekräfta"
                 onPress={() => {
-                  newDetailsElev({navigation, password, rePassword, alias});
+                  {newDetailsElev({navigation, password, rePassword, alias, setSubmitted}); setSubmitted(true)};
                 }}
               />
             </View>

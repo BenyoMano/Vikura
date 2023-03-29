@@ -15,16 +15,19 @@ const InputBarNewDetails = React.forwardRef(
       capitalize,
       returnKeyType,
       onSubmitEditing,
+      submitted
     },
     ref,
   ) => {
-    const {viewStyle, textStyle, barStyle} = styles;
+    const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
+    var empty = false;
+    !value && submitted ? empty = true : false;
 
     return (
       <View style={viewStyle}>
         <Text style={textStyle}>{title}</Text>
         <TextInput
-          style={barStyle}
+          style={empty ? redBarStyle : barStyle}
           autoFocus={autoFocus}
           blurOnSubmit={blurOnSubmit}
           autoCorrect={false}
@@ -66,6 +69,14 @@ const styles = {
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
   },
+  redBarStyle: {
+    height: 52,
+    width: 320,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#D9534F',
+    borderWidth: 3,
+    borderRadius: 12,
+  }
 };
 
 export default InputBarNewDetails;

@@ -8,13 +8,14 @@ const createUser = ({
   setUserPropToAdd,
   checkboxState,
   setCheckboxState,
+  setSubmitted
 }) => {
 
   if (!userPropToAdd.firstName) {
     showMessage({
       message: "Varning!",
       description: "Namn saknas!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -25,7 +26,7 @@ const createUser = ({
     showMessage({
       message: "Varning!",
       description: "Efternamn saknas!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -36,7 +37,7 @@ const createUser = ({
     showMessage({
       message: "Varning!",
       description: "Mejl saknas!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -47,7 +48,7 @@ const createUser = ({
     showMessage({
       message: "Varning!",
       description: "Lösenord saknas!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -58,7 +59,7 @@ const createUser = ({
     showMessage({
       message: "Varning!",
       description: "Personnummer saknas!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -69,7 +70,7 @@ const createUser = ({
     showMessage({
       message: "Varning!",
       description: "Personnummret måste innehålla 12 siffror, utan bindestreck!",
-      type: "warning",
+      type: "danger",
       position: "default",
       duration: 3500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
@@ -141,6 +142,7 @@ const createUser = ({
       personnummer: '',
       kurator: '',
     });
+    setSubmitted(false);
   };
 };
 

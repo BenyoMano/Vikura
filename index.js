@@ -53,4 +53,4 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent('Omnitalk', () => App);
+AppRegistry.registerComponent('OmniTalk', () => App);

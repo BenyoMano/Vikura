@@ -15,16 +15,19 @@ const InputBarAddUser = React.forwardRef(
       keyType,
       returnKeyType,
       onSubmitEditing,
+      submitted
     },
     ref,
   ) => {
-    const {viewStyle, textStyle, barStyle} = styles;
+    const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
+    var empty = false;
+    !value && submitted ? empty = true : false;
 
     return (
       <View style={viewStyle}>
         <Text style={textStyle}>{title}</Text>
         <TextInput
-          style={barStyle}
+          style={empty ? redBarStyle : barStyle}
           autoFocus={autoFocus}
           blurOnSubmit={blurOnSubmit}
           autoCapitalize={capitalize}
@@ -33,7 +36,8 @@ const InputBarAddUser = React.forwardRef(
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
-          value={value}></TextInput>
+          value={value}>
+        </TextInput>
       </View>
     );
   },
@@ -61,6 +65,16 @@ const styles = {
     backgroundColor: '#FFFFFF',
     borderColor: 'gray',
     borderWidth: 2,
+    borderRadius: 12,
+    fontFamily: 'NunitoSans-Regular',
+  },
+  redBarStyle: {
+    height: 52,
+    width: 320,
+    color: 'black',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#D9534F',
+    borderWidth: 3,
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
   },

@@ -8,6 +8,7 @@ const Form = ({
   setUserPropToAdd,
   checkboxState,
   setCheckboxState,
+  submitted
 }) => {
   const {color, greyScale, viewStyle} = styles;
   const capitalize = 'none';
@@ -49,7 +50,8 @@ const Form = ({
           onSubmitEditing={() => ref_input2.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
-        />
+          submitted={submitted}
+          />
       </View>
       <View>
         <InputbarAddUser
@@ -64,7 +66,8 @@ const Form = ({
           onSubmitEditing={() => ref_input3.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
-        />
+          submitted={submitted}
+          />
       </View>
       <View>
         <InputbarAddUser
@@ -80,7 +83,8 @@ const Form = ({
           onSubmitEditing={() => ref_input4.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
-        />
+          submitted={submitted}
+          />
       </View>
       <View>
         <InputbarAddUser
@@ -95,7 +99,8 @@ const Form = ({
           onSubmitEditing={() => ref_input5.current.focus()}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
-        />
+          submitted={submitted}
+          />
       </View>
       <View>
         <InputbarAddUser
@@ -108,6 +113,7 @@ const Form = ({
           ref={ref_input5}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
+          submitted={submitted}
         />
       </View>
       <View style={{paddingTop: 15, alignSelf: 'flex-start'}}>

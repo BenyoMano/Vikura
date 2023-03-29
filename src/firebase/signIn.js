@@ -3,17 +3,19 @@ import navigateAfterSignIn from './navigateAfterSignIn';
 import {showMessage} from 'react-native-flash-message';
 import { Platform } from 'react-native';
 
+
 const signIn = async ({
   navigation,
   loginDetails,
   setLoginDetails,
   setLoading,
+  setSubmitted,
 }) => {
   if (!loginDetails.mejl) {
     showMessage({
       message: 'Varning!',
       description: 'Mejl saknas!',
-      type: 'warning',
+      type: 'danger',
       position: 'default',
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -22,7 +24,7 @@ const signIn = async ({
     showMessage({
       message: 'Varning!',
       description: 'Lösenord saknas!',
-      type: 'warning',
+      type: 'danger',
       position: 'default',
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -35,6 +37,11 @@ const signIn = async ({
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
       .then(() => {
         navigateAfterSignIn({navigation});
+        //Clear TextInput fields
+        setLoginDetails({
+          mejl: '',
+          password: '',
+    });
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -47,19 +54,16 @@ const signIn = async ({
         showMessage({
           message: 'Varning!',
           description: String(error),
-          type: 'warning',
+          type: 'danger',
           position: 'default',
           duration: 3800,
           hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
 
-    //Clear TextInput fields
-    setLoginDetails({
-      mejl: '',
-      password: '',
-    });
+
     setLoading(false);
+    setSubmitted(false);
   }
 };
 

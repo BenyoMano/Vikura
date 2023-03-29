@@ -21,6 +21,7 @@ const AddUserView = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const capitalize = 'none';
   const [checkboxState, setCheckboxState] = React.useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const showIfKurator = checkboxState ? 'JA' : 'NEJ';
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
@@ -122,8 +123,10 @@ const AddUserView = ({navigation}) => {
                         setUserPropToAdd,
                         checkboxState,
                         setCheckboxState,
+                        setSubmitted
                       });
                       setModalVisible(!modalVisible);
+                      setSubmitted(true)
                     }}>
                     <Text style={textStyling.label}>Bekräfta</Text>
                   </Pressable>
@@ -137,6 +140,7 @@ const AddUserView = ({navigation}) => {
                 setUserPropToAdd={setUserPropToAdd}
                 checkboxState={checkboxState}
                 setCheckboxState={setCheckboxState}
+                submitted={submitted}
               />
             </ScrollView>
           <View style={{marginVertical: 10}}>

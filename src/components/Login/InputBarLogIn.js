@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextInput, View, useRef} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 
 const InputBarLogIn = React.forwardRef(
   (
@@ -15,16 +15,19 @@ const InputBarLogIn = React.forwardRef(
       keyType,
       returnKeyType,
       onSubmitEditing,
+      submitted,
     },
     ref,
   ) => {
-    const {viewStyle, textStyle, barStyle} = styles;
-
+    const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
+    var empty = false;
+    !value && submitted ? empty = true : false;
+    
     return (
       <View style={viewStyle}>
         <Text style={textStyle}>{title}</Text>
         <TextInput
-          style={barStyle}
+          style={empty ? redBarStyle : barStyle}
           autoFocus={autoFocus}
           blurOnSubmit={blurOnSubmit}
           autoCorrect={false}
@@ -68,6 +71,14 @@ const styles = {
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
   },
+  redBarStyle: {
+    height: 52,
+    width: '100%',
+    backgroundColor: '#EEEEEE',
+    borderColor: '#D9534F',
+    borderWidth: 3,
+    borderRadius: 12,
+  }
 };
 
 export default InputBarLogIn;

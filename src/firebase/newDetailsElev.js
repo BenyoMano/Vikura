@@ -1,4 +1,4 @@
-import {} from 'react-native';
+import { Platform } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { showMessage } from 'react-native-flash-message';
@@ -23,7 +23,8 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
           description: String(error),
           type: "warning",
           position: "default",
-          duration: 3200
+          duration: 3200,
+          hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
 
@@ -47,17 +48,17 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
             alias: alias,
           });
       });
-    navigation.navigate('ChatView', {id: user.uid})
+    navigation.navigate('ChatView', {id: user.uid});
   } else {
     showMessage({
       message: "Varning!",
       description: "Lösenord matchar inte!",
       type: "warning",
       position: "default",
-      duration: 3200
+      duration: 3200,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     console.log('Lösenordet matchar inte!');
-
   }
 };
 

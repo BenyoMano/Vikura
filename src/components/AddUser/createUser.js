@@ -1,5 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { Platform } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 
 const createUser = ({
@@ -14,9 +15,10 @@ const createUser = ({
       message: "Varning!",
       description: "Namn saknas!",
       type: "warning",
-      position: "center",
+      position: "default",
       floating: true,
-      duration: 2500
+      duration: 2500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
@@ -25,9 +27,10 @@ const createUser = ({
       message: "Varning!",
       description: "Efternamn saknas!",
       type: "warning",
-      position: "center",
+      position: "default",
       floating: true,
-      duration: 2500
+      duration: 2500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
@@ -36,9 +39,10 @@ const createUser = ({
       message: "Varning!",
       description: "Mejl saknas!",
       type: "warning",
-      position: "center",
+      position: "default",
       floating: true,
-      duration: 2500
+      duration: 2500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
@@ -47,9 +51,10 @@ const createUser = ({
       message: "Varning!",
       description: "Lösenord saknas!",
       type: "warning",
-      position: "center",
+      position: "default",
       floating: true,
-      duration: 2500
+      duration: 2500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
@@ -60,7 +65,8 @@ const createUser = ({
       type: "warning",
       position: "default",
       floating: true,
-      duration: 2500
+      duration: 2500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
@@ -71,7 +77,8 @@ const createUser = ({
       type: "warning",
       position: "default",
       floating: true,
-      duration: 3500
+      duration: 3500,
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }

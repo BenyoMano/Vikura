@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import navigateAfterSignIn from './navigateAfterSignIn';
 import {showMessage} from 'react-native-flash-message';
+import { Platform } from 'react-native';
 
 const signIn = async ({
   navigation,
@@ -14,6 +15,7 @@ const signIn = async ({
       description: 'Mejl saknas!',
       type: 'warning',
       position: 'default',
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
   }
   if (!loginDetails.password) {
@@ -22,6 +24,7 @@ const signIn = async ({
       description: 'Lösenord saknas!',
       type: 'warning',
       position: 'default',
+      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
   }
 
@@ -47,6 +50,7 @@ const signIn = async ({
           type: 'warning',
           position: 'default',
           duration: 3800,
+          hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
 

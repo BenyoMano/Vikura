@@ -16,7 +16,6 @@ const createUser = ({
       description: "Namn saknas!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -28,7 +27,6 @@ const createUser = ({
       description: "Efternamn saknas!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -40,7 +38,6 @@ const createUser = ({
       description: "Mejl saknas!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -52,7 +49,6 @@ const createUser = ({
       description: "Lösenord saknas!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -64,7 +60,6 @@ const createUser = ({
       description: "Personnummer saknas!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 2500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
@@ -76,7 +71,6 @@ const createUser = ({
       description: "Personnummret måste innehålla 12 siffror, utan bindestreck!",
       type: "warning",
       position: "default",
-      floating: true,
       duration: 3500,
       hideStatusBar: Platform.OS === 'ios' ? true : false,
     });

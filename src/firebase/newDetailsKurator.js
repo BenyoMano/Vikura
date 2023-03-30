@@ -1,7 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { Platform } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 
 const newDetailsKurator = async ({password, rePassword}) => {
   if (rePassword === password) {
@@ -19,12 +18,10 @@ const newDetailsKurator = async ({password, rePassword}) => {
         }
         console.error(error);
         showMessage({
-          message: "Varning!",
+          message: 'Varning!',
           description: String(error),
-          type: "warning",
-          position: "default",
+          type: 'danger',
           duration: 3200,
-          hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
 
@@ -44,12 +41,10 @@ const newDetailsKurator = async ({password, rePassword}) => {
       });
   } else {
     showMessage({
-      message: "Varning!",
-      description: "Lösenord matchar inte!",
-      type: "warning",
-      position: "default",
+      message: 'Varning!',
+      description: 'Lösenord matchar inte!',
+      type: 'danger',
       duration: 3200,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     console.log('Lösenordet matchar inte!');
   }

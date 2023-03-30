@@ -45,7 +45,7 @@ const App = () => {
             <Stack.Screen name="ReportConcern" component={ReportConcern} />
           </Stack.Navigator>
         </NavigationContainer>
-        <FlashMessage position="top" />
+        <FlashMessage position="top" floating={true} />
       </SafeAreaProvider>
     </IsKuratorProvider>
   );

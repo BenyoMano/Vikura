@@ -1,10 +1,8 @@
-import { Platform } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 
-
-const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
+const newDetailsElev = async ({navigation, password, rePassword, alias}) => {
   const user = auth().currentUser;
 
   if (rePassword === password) {
@@ -19,19 +17,16 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
         }
         console.error(error);
         showMessage({
-          message: "Varning!",
+          message: 'Varning!',
           description: String(error),
-          type: "warning",
-          position: "default",
+          type: 'danger',
           duration: 3200,
-          hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
 
-    await auth()
-      .currentUser.updateProfile({
-        displayName: alias,
-      });
+    await auth().currentUser.updateProfile({
+      displayName: alias,
+    });
 
     firestore()
       .collection('Users')
@@ -51,12 +46,10 @@ const newDetailsElev = async ({ navigation, password, rePassword, alias}) => {
     navigation.navigate('ChatView', {id: user.uid});
   } else {
     showMessage({
-      message: "Varning!",
-      description: "Lösenord matchar inte!",
-      type: "warning",
-      position: "default",
+      message: 'Varning!',
+      description: 'Lösenord matchar inte!',
+      type: 'danger',
       duration: 3200,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     console.log('Lösenordet matchar inte!');
   }

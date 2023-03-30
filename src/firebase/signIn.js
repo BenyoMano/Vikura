@@ -1,8 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import navigateAfterSignIn from './navigateAfterSignIn';
 import {showMessage} from 'react-native-flash-message';
-import { Platform } from 'react-native';
-
 
 const signIn = async ({
   navigation,
@@ -16,8 +14,6 @@ const signIn = async ({
       message: 'Varning!',
       description: 'Mejl saknas!',
       type: 'danger',
-      position: 'default',
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
   }
   if (!loginDetails.password) {
@@ -25,8 +21,6 @@ const signIn = async ({
       message: 'Varning!',
       description: 'Lösenord saknas!',
       type: 'danger',
-      position: 'default',
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
   }
 
@@ -41,7 +35,7 @@ const signIn = async ({
         setLoginDetails({
           mejl: '',
           password: '',
-    });
+        });
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -55,12 +49,9 @@ const signIn = async ({
           message: 'Varning!',
           description: String(error),
           type: 'danger',
-          position: 'default',
           duration: 3800,
-          hideStatusBar: Platform.OS === 'ios' ? true : false,
         });
       });
-
 
     setLoading(false);
     setSubmitted(false);

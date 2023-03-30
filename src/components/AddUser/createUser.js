@@ -1,90 +1,77 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { Platform } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 
 const createUser = ({
   userPropToAdd,
   setUserPropToAdd,
   checkboxState,
   setCheckboxState,
-  setSubmitted
+  setSubmitted,
 }) => {
-
   if (!userPropToAdd.firstName) {
     showMessage({
-      message: "Varning!",
-      description: "Namn saknas!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description: 'Namn saknas!',
+      type: 'danger',
       duration: 2500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
   if (!userPropToAdd.secondName) {
     showMessage({
-      message: "Varning!",
-      description: "Efternamn saknas!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description: 'Efternamn saknas!',
+      type: 'danger',
       duration: 2500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
   if (!userPropToAdd.mejl) {
     showMessage({
-      message: "Varning!",
-      description: "Mejl saknas!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description: 'Mejl saknas!',
+      type: 'danger',
       duration: 2500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
   if (!userPropToAdd.password) {
     showMessage({
-      message: "Varning!",
-      description: "Lösenord saknas!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description: 'Lösenord saknas!',
+      type: 'danger',
       duration: 2500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
   if (!userPropToAdd.personnummer) {
     showMessage({
-      message: "Varning!",
-      description: "Personnummer saknas!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description: 'Personnummer saknas!',
+      type: 'danger',
       duration: 2500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
   if (userPropToAdd.personnummer.length !== 12) {
     showMessage({
-      message: "Varning!",
-      description: "Personnummret måste innehålla 12 siffror, utan bindestreck!",
-      type: "danger",
-      position: "default",
+      message: 'Varning!',
+      description:
+        'Personnummret måste innehålla 12 siffror, utan bindestreck!',
+      type: 'danger',
       duration: 3500,
-      hideStatusBar: Platform.OS === 'ios' ? true : false,
     });
     return;
   }
 
   if (
-    userPropToAdd.firstName && 
-    userPropToAdd.secondName && 
-    userPropToAdd.mejl && 
-    userPropToAdd.password && 
+    userPropToAdd.firstName &&
+    userPropToAdd.secondName &&
+    userPropToAdd.mejl &&
+    userPropToAdd.password &&
     userPropToAdd.personnummer
-    ) {  
+  ) {
     const addPersonalDetails = async user => {
       const refUID = firestore().collection('Users').doc(user.uid);
       const userAlias = checkboxState ? 'KURATOR' : '';
@@ -113,11 +100,9 @@ const createUser = ({
               .signOut()
               .then(() => {
                 showMessage({
-                  message: "Kontot skapades framgångsrikt!",
-                  type: "success",
-                  position: "default",
-                  floating: true,
-                  duration: 2000
+                  message: 'Kontot skapades framgångsrikt!',
+                  type: 'success',
+                  duration: 2000,
                 });
               }),
           );
@@ -143,7 +128,7 @@ const createUser = ({
       kurator: '',
     });
     setSubmitted(false);
-  };
+  }
 };
 
 export default createUser;

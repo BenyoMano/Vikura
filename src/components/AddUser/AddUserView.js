@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   Modal,
@@ -6,7 +7,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  Pressable,
   ScrollView,
 } from 'react-native';
 import Button from '../../atoms/Button';
@@ -15,6 +15,7 @@ import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import createUser from './createUser';
+import SmallButton from '../../atoms/SmallButton';
 
 const AddUserView = ({navigation}) => {
   const {textStyling, viewStyle} = styles;
@@ -37,16 +38,21 @@ const AddUserView = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          style={[styles.greyScale.mainContainer,
+          style={[
+            styles.greyScale.mainContainer,
             {
               flexDirection: 'column',
             },
           ]}>
-          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
-            <HeaderView navigation={navigation}/>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              width: '100%',
+            }}>
+            <HeaderView navigation={navigation} />
           </View>
-          <View 
-          style={{justifyContent: 'center'}}>
+          <View style={{justifyContent: 'center'}}>
             <MainText
               title="Lägg till elev"
               style={{fontSize: 32, color: 'black', marginTop: 15, top: 0}}
@@ -69,7 +75,7 @@ const AddUserView = ({navigation}) => {
               onRequestClose={() => {
                 setModalVisible(!modalVisible);
               }}>
-              <View style={viewStyle.modalContainer.greyScale }>
+              <View style={viewStyle.modalContainer.greyScale}>
                 <View style={viewStyle.label}>
                   <Text style={textStyling.label}>Namn:</Text>
                 </View>
@@ -110,39 +116,42 @@ const AddUserView = ({navigation}) => {
                     justifyContent: 'center',
                     marginTop: 15,
                   }}>
-                  <Pressable
-                    style={[viewStyle.greyScale.button, {margin: 10}]}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={textStyling.label}>Tillbaka</Text>
-                  </Pressable>
-                  <Pressable
-                    style={[viewStyle.greyScale.button, {margin: 10}]}
-                    onPress={() => {
-                      createUser({
-                        userPropToAdd,
-                        setUserPropToAdd,
-                        checkboxState,
-                        setCheckboxState,
-                        setSubmitted
-                      });
-                      setModalVisible(!modalVisible);
-                      setSubmitted(true)
-                    }}>
-                    <Text style={textStyling.label}>Bekräfta</Text>
-                  </Pressable>
+                  <View style={{margin: 10}}>
+                    <SmallButton
+                      title="Tillbaka"
+                      onPress={() => setModalVisible(!modalVisible)}
+                    />
+                  </View>
+                  <View style={{margin: 10}}>
+                    <SmallButton
+                      title="Bekräfta"
+                      onPress={() => {
+                        createUser({
+                          userPropToAdd,
+                          setUserPropToAdd,
+                          checkboxState,
+                          setCheckboxState,
+                          setSubmitted,
+                        });
+                        setModalVisible(!modalVisible);
+                        setSubmitted(true);
+                      }}
+                    />
+                  </View>
                 </View>
               </View>
             </Modal>
           </View>
-            <ScrollView contentContainerStyle={styles.greyScale.scrollViewContainer}>
-              <Form
-                userPropToAdd={userPropToAdd}
-                setUserPropToAdd={setUserPropToAdd}
-                checkboxState={checkboxState}
-                setCheckboxState={setCheckboxState}
-                submitted={submitted}
-              />
-            </ScrollView>
+          <ScrollView
+            contentContainerStyle={styles.greyScale.scrollViewContainer}>
+            <Form
+              userPropToAdd={userPropToAdd}
+              setUserPropToAdd={setUserPropToAdd}
+              checkboxState={checkboxState}
+              setCheckboxState={setCheckboxState}
+              submitted={submitted}
+            />
+          </ScrollView>
           <View style={{marginVertical: 10}}>
             <Button title="Registrera" onPress={() => setModalVisible(true)} />
           </View>
@@ -182,25 +191,24 @@ const styles = StyleSheet.create({
     },
   },
   viewStyle: {
-      modalContainer: {
-        greyScale: {
-          backgroundColor: 'white',
-          borderRadius: 20,
-          alignSelf: 'center',
-          top: '28%',
-          paddingHorizontal: 15,
-          paddingBottom: 15,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 4,
-          elevation: 30,
-        }
-
+    modalContainer: {
+      greyScale: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        alignSelf: 'center',
+        top: '28%',
+        paddingHorizontal: 15,
+        paddingBottom: 15,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 30,
       },
+    },
     label: {
       marginLeft: 10,
       marginTop: 30,
@@ -208,15 +216,6 @@ const styles = StyleSheet.create({
     info: {
       marginLeft: 10,
       marginTop: 5,
-    },
-    greyScale: {
-      button: {
-        borderRadius: 12,
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 10,
-        backgroundColor: 'lightgrey',
-      },
     },
   },
 });

@@ -2,8 +2,8 @@
 import React from 'react';
 import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
 
-const Button = props => {
-  const {greyScale, btnTextStyle} = styles;
+const SmallButton = ({title, onPress}) => {
+  const {viewStyle, greyScale, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
   const fadeIn = () => {
     Animated.timing(animated, {
@@ -22,11 +22,8 @@ const Button = props => {
   };
 
   return (
-    <View style={{borderRadius: 12, overflow: 'hidden'}}>
-      <Pressable
-        onPressIn={fadeIn}
-        onPressOut={fadeOut}
-        onPress={props.onPress}>
+    <View style={viewStyle}>
+      <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={onPress}>
         <Animated.View
           style={[
             greyScale.btnContainerStyle,
@@ -34,7 +31,7 @@ const Button = props => {
               opacity: animated,
             },
           ]}>
-          <Text style={btnTextStyle}>{props.title}</Text>
+          <Text style={btnTextStyle}>{title}</Text>
         </Animated.View>
       </Pressable>
     </View>
@@ -42,21 +39,25 @@ const Button = props => {
 };
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
   greyScale: {
     btnContainerStyle: {
-      backgroundColor: '#C4C4C4',
-      paddingVertical: 18,
-      width: 230,
       borderRadius: 12,
+      borderWidth: 1,
+      borderColor: 'black',
+      padding: 10,
+      backgroundColor: 'lightgrey',
     },
   },
   btnTextStyle: {
     color: 'black',
     fontSize: 18,
     textAlign: 'center',
-    textTransform: 'uppercase',
     fontFamily: 'NunitoSans-Regular',
   },
 });
 
-export default Button;
+export default SmallButton;

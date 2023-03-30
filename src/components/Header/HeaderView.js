@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, Platform} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
@@ -23,7 +23,7 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
         flexDirection: 'row',
         width: '88%',
         alignItems: 'center',
-        marginTop: '7%',
+        marginTop: Platform.OS === 'ios' ? '12%' : '7%',
       }}>
       <View
         style={{

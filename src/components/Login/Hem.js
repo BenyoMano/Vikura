@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import Logo from '../Header/Logo';
@@ -15,7 +16,6 @@ import {DotsLoader} from 'react-native-indicator';
 
 const Hem = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
- // const security = false;
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ const Hem = ({navigation}) => {
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
                 submitted={submitted}
-                />
+              />
               <InputBarLogIn
                 title="Kod:"
                 security={true}
@@ -62,7 +62,7 @@ const Hem = ({navigation}) => {
                 loginDetails={loginDetails}
                 setLoginDetails={setLoginDetails}
                 submitted={submitted}
-                />
+              />
             </View>
           </View>
           <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
@@ -73,9 +73,16 @@ const Hem = ({navigation}) => {
           <View style={{flex: 0.3}}>
             <Button
               title="Logga in"
-              onPress={() =>
-                {signIn({loginDetails, setLoginDetails, navigation, setLoading, setSubmitted}); setSubmitted(true)}
-              }
+              onPress={() => {
+                signIn({
+                  loginDetails,
+                  setLoginDetails,
+                  navigation,
+                  setLoading,
+                  setSubmitted,
+                });
+                setSubmitted(true);
+              }}
             />
           </View>
         </View>

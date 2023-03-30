@@ -30,10 +30,8 @@ const App = () => {
 
   return (
     <IsKuratorProvider>
-      <SafeAreaProvider
-        style={{
-          paddingTop: Platform.OS === 'ios' ? 20 : null,
-        }}>
+      <SafeAreaProvider>
+        <StatusBar color="red" />
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Hem"

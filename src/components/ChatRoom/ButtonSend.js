@@ -7,7 +7,7 @@ const ButtonSend = ({title, onPress}) => {
   const fadeIn = () => {
     Animated.timing(animated, {
       toValue: 0.4,
-      duration: 150,
+      duration: 100,
       useNativeDriver: true,
     }).start();
   };

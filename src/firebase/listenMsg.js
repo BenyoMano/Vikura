@@ -1,6 +1,3 @@
-import {useContext} from 'react';
-import {IsKuratorContext} from './isKuratorContext';
-
 const ListenMsg = async ({
   isKurator,
   pathToMessages,

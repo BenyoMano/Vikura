@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  Platform,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import Logo from '../Header/Logo';

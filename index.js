@@ -17,16 +17,6 @@ import {IsKuratorProvider} from './src/firebase/isKuratorContext';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  /*   const CustomTextProps = {
-    fontFamily: 'NunitoSans-Light',
-    color: 'black',
-  };
-  const CustomTextInputProps = {
-    fontFamily: 'NunitoSans-Light',
-    color: 'black',
-  }; */
-
-  // const [isKurator, setIsKurator] = useState(undefined);
 
   return (
     <IsKuratorProvider>

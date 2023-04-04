@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const Room = ({roomId, clientAlias, clientId}) => {
   const [latestMessage, setLatestMessage] = useState(undefined);
-  console.log('Latest', latestMessage )
+ // console.log('Latest', latestMessage )
 
   useEffect(()=>{
     let unsubscribe; 
@@ -100,7 +100,7 @@ const Conv = () => {
       </Pressable>
     );
   }
-  console.log('rooms', rooms);
+  //console.log('rooms', rooms);
   const renderItem = ({item}) => (
     <Room roomId={item.roomId} clientAlias={item.clientAlias} clientId={item.clientId} key={item} />
   );

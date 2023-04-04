@@ -8,6 +8,8 @@ const IsKuratorProvider = ({children}) => {
   const [isKurator, setIsKurator] = useState(undefined);
   const user = auth().currentUser;
 
+  console.log('IsKuratorContext - user', user);
+
   useEffect(() => {
     const getKurator = async () => {
       if (!user) return;
@@ -27,5 +29,5 @@ const IsKuratorProvider = ({children}) => {
     </IsKuratorContext.Provider>
   );
 };
-// export const useIsKurator = () => useContext(IsKuratorContext)
+
 export {IsKuratorContext, IsKuratorProvider};

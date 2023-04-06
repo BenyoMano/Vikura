@@ -4,8 +4,8 @@ import { Animated } from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = props => {
-  const {btnContainerStyle} = styles;
+const LogoutButton = props => {
+  const {btnContainerStyle, rightSideStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonTranslate = animatedValue.interpolate({
     inputRange: [0, 1],
@@ -31,19 +31,23 @@ const Button = props => {
   }
 
   const animatedTransform = {
-    transform: [{translateX: buttonTranslate}]
+    transform: [{translateX: buttonTranslate}],
+    zIndex: 3,
   }
 
   return (
-    <View style={{borderRadius: 10, overflow: 'hidden'}}>
+    <View style={btnContainerStyle}>
       <Pressable
       onPress={props.onPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      style={btnContainerStyle}>
+      style={{flexDirection: 'row', alignItems: 'center'}}
+      >
         <Animated.View style={[animatedTransform]}>
-          <Icon name="arrow-back" type="ionicon" color="black" />
+          <Icon name="arrow-back" type="ionicon" color="black" size={30} />
         </Animated.View>
+        <View style={rightSideStyle}>
+        </View>
       </Pressable>
     </View>
   );
@@ -51,13 +55,22 @@ const Button = props => {
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    width: 65,
-    height: 34,
-    borderWidth: 1.5,
     borderRadius: 10,
-    borderColor: 'black',
+    overflow: 'visible',
+  },
+  rightSideStyle: {
+    left: -20,
+    width: 35,
+    height: 50,
+    borderBottomWidth: 1.5,
+    borderRightWidth: 1.5,
+    borderTopWidth: 1.5,
+    borderLeftWidth: 10,
+    borderLeftColor: 'white',
+    borderRadius: 10,
+    // borderColor: 'black',
     justifyContent: 'center',
   },
 });
 
-export default Button;
+export default LogoutButton;

@@ -12,6 +12,7 @@ import signOut from '../../firebase/signOut';
 import ButtonLogOut from './ButtonLogOut';
 import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
+import LogoutButton from './LogoutButton';
 
 export const HeaderView = ({navigation, clientUserId}) => {
   const route = useRoute();
@@ -44,7 +45,7 @@ export const HeaderView = ({navigation, clientUserId}) => {
             alignItems: 'center',
           }}>
           <View>
-            <ButtonLogOut
+            <LogoutButton
               title="Logga Ut"
               onPress={() => {
                 signOut();

@@ -35,7 +35,7 @@ const App = () => {
             <Stack.Screen name="ReportConcern" component={ReportConcern} />
           </Stack.Navigator>
         </NavigationContainer>
-        <FlashMessage position="top" floating={true} />
+        <FlashMessage position="top" floating={Platform.OS === 'ios' ? true : false} />
       </SafeAreaProvider>
     </IsKuratorProvider>
   );

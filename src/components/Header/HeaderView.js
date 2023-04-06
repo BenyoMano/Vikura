@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Image, Platform} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
@@ -13,7 +13,7 @@ import ButtonLogOut from './ButtonLogOut';
 import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
-export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
+export const HeaderView = ({navigation, clientUserId}) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
 
@@ -23,7 +23,8 @@ export const HeaderView = ({navigation, clientUserId, user, refPath}) => {
         flexDirection: 'row',
         width: '88%',
         alignItems: 'center',
-        marginTop: Platform.OS === 'ios' ? '12%' : '7%',
+        marginTop: '12%',
+        // marginTop: Platform.OS === 'ios' ? '12%' : '12%',
       }}>
       <View
         style={{

@@ -21,7 +21,7 @@ const App = () => {
   return (
     <IsKuratorProvider>
       <SafeAreaProvider>
-        <StatusBar color="red" />
+        <StatusBar translucent backgroundColor="transparent" barStyle={'dark-content'} />
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Hem"

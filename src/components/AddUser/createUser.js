@@ -99,6 +99,14 @@ const createUser = ({
             auth()
               .signOut()
               .then(() => {
+                setUserPropToAdd({
+                  firstName: '',
+                  secondName: '',
+                  mejl: '',
+                  password: '',
+                  personnummer: '',
+                  kurator: '',
+                });
                 showMessage({
                   message: 'Kontot skapades framgångsrikt!',
                   type: 'success',
@@ -119,14 +127,6 @@ const createUser = ({
     }
 
     createNewUser();
-    setUserPropToAdd({
-      firstName: '',
-      secondName: '',
-      mejl: '',
-      password: '',
-      personnummer: '',
-      kurator: '',
-    });
     setSubmitted(false);
   }
 };

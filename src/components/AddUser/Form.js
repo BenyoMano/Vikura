@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useRef} from 'react';
 import {View} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
@@ -8,7 +9,7 @@ const Form = ({
   setUserPropToAdd,
   checkboxState,
   setCheckboxState,
-  submitted
+  submitted,
 }) => {
   const {color, greyScale, viewStyle} = styles;
   const capitalize = 'none';
@@ -51,7 +52,7 @@ const Form = ({
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
-          />
+        />
       </View>
       <View>
         <InputbarAddUser
@@ -67,7 +68,7 @@ const Form = ({
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
-          />
+        />
       </View>
       <View>
         <InputbarAddUser
@@ -84,7 +85,7 @@ const Form = ({
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
-          />
+        />
       </View>
       <View>
         <InputbarAddUser
@@ -100,7 +101,7 @@ const Form = ({
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
-          />
+        />
       </View>
       <View>
         <InputbarAddUser

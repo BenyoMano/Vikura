@@ -15,13 +15,13 @@ const InputBarAddUser = React.forwardRef(
       keyType,
       returnKeyType,
       onSubmitEditing,
-      submitted
+      submitted,
     },
     ref,
   ) => {
     const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
     var empty = false;
-    !value && submitted ? empty = true : false;
+    !value && submitted ? (empty = true) : false;
 
     return (
       <View style={viewStyle}>
@@ -36,8 +36,8 @@ const InputBarAddUser = React.forwardRef(
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
-          value={value}>
-        </TextInput>
+          value={value}
+        />
       </View>
     );
   },

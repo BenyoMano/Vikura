@@ -10,6 +10,7 @@ import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 
 const ReportConcern = ({navigation, route}) => {
   const [data, setString] = useClipboard();
@@ -101,18 +102,16 @@ const ReportConcern = ({navigation, route}) => {
           title="Skicka mejl"
           onPress={() => {
             Linking.openURL(
-              'mailto:?subject=Orosanmälan&body=' + detailsToSend,
-            ).catch(() => null);
-          }}
-        />
-      </View>
-      <View style={{flex: 0.5, justifyContent: 'center'}}>
-        <Button
-          title="Test"
-          onPress={() => {
-            Linking.openURL(
-              'mailto:support@example.com?subject=SendMail&body=Description',
-            );
+              'mailto:?subject=Orosanm%C3%A4lan&body=' +
+                encodeURIComponent(detailsToSend),
+            ).catch(error => {
+              showMessage({
+                message: 'Misslyckades!',
+                description: String(error),
+                type: 'danger',
+                duration: 5000,
+              });
+            });
           }}
         />
       </View>

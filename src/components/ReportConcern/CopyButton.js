@@ -18,7 +18,7 @@ const Button = props => {
       useNativeDriver: true,
     }).start();
   }
-//Hej
+
   const onPressOut = () => {
     Animated.timing(animatedValue, {
       toValue: 0,

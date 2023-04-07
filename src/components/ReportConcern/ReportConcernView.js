@@ -106,6 +106,16 @@ const ReportConcern = ({navigation, route}) => {
           }}
         />
       </View>
+      <View style={{flex: 0.5, justifyContent: 'center'}}>
+        <Button
+          title="Test"
+          onPress={() => {
+            Linking.openURL(
+              'mailto:support@example.com?subject=SendMail&body=Description',
+            );
+          }}
+        />
+      </View>
     </View>
   );
 };

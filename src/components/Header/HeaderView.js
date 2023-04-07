@@ -9,7 +9,6 @@ import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
-import ButtonLogOut from './ButtonLogOut';
 import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import LogoutButton from './LogoutButton';
@@ -25,7 +24,6 @@ export const HeaderView = ({navigation, clientUserId}) => {
         width: '88%',
         alignItems: 'center',
         marginTop: '12%',
-        // marginTop: Platform.OS === 'ios' ? '12%' : '12%',
       }}>
       <View
         style={{
@@ -137,7 +135,7 @@ export const HeaderView = ({navigation, clientUserId}) => {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <ButtonLogOut
+          <LogoutButton
             title="Logga Ut"
             onPress={() => {
               signOut();

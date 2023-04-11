@@ -42,7 +42,7 @@ export const useConvos = () => {
         }
 
         getConvos()
-    })
+    }, [])
 
     return convos;
 

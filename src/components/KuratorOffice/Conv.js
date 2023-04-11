@@ -8,7 +8,6 @@ import firestore from '@react-native-firebase/firestore';
 
 const Room = ({roomId, clientAlias, clientId}) => {
   const [latestMessage, setLatestMessage] = useState(undefined);
- // console.log('Latest', latestMessage )
 
   useEffect(()=>{
     let unsubscribe; 
@@ -62,9 +61,10 @@ const Room = ({roomId, clientAlias, clientId}) => {
 const Conv = () => {
   // const [convos, setConvos] = useState([]);
   // const [refreshing, setRefreshing] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const rooms = useRooms();
+  const rooms = useRooms({setIsLoaded});
+  // setIsLoaded(true);
 
   
   // useEffect(() => {
@@ -83,24 +83,26 @@ const Conv = () => {
 
   // const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
 
-  function Item({alias, text, isRead, displayTimestamp, id}) {
-    const navigation = useNavigation();
-    return (
-      <Pressable 
-      onPress={() => navigation.navigate('ChatView', {id: id})}>
-        <View style={styles.greyScale.item}>
-          <View style={styles.header}>
-            <Text style={styles.title}>{alias}</Text>
-            <Text style={styles.timestamp}>{displayTimestamp.toLocaleString()}</Text>
-          </View>
-          <View>
-            <Text style={isRead ? styles.isRead.text : styles.notIsRead.text}>{text}</Text>
-          </View>
-        </View>
-      </Pressable>
-    );
-  }
+  // function Item({alias, text, isRead, displayTimestamp, id}) {
+  //   const navigation = useNavigation();
+  //   return (
+  //     <Pressable 
+  //     onPress={() => navigation.navigate('ChatView', {id: id})}>
+  //       <View style={styles.greyScale.item}>
+  //         <View style={styles.header}>
+  //           <Text style={styles.title}>{alias}</Text>
+  //           <Text style={styles.timestamp}>{displayTimestamp.toLocaleString()}</Text>
+  //         </View>
+  //         <View>
+  //           <Text style={isRead ? styles.isRead.text : styles.notIsRead.text}>{text}</Text>
+  //         </View>
+  //       </View>
+  //     </Pressable>
+  //   );
+  // }
+
   //console.log('rooms', rooms);
+  
   const renderItem = ({item}) => (
     <Room roomId={item.roomId} clientAlias={item.clientAlias} clientId={item.clientId} key={item} />
   );

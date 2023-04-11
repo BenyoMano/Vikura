@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import allRoomNames from '../../firebase/allRoomNames';
 
-export const useRooms = () => {
+export const useRooms = ({setIsLoaded}) => {
 
     const [rooms, setRooms] = useState([]);
 
@@ -15,11 +15,9 @@ export const useRooms = () => {
                 const roomId = splitRefPath[splitRefPath.length - 1];
                 return {roomId, clientAlias, clientId}
             });
-
             setRooms(newRooms);
-
+            setIsLoaded(true);
         }
-
         getRooms()
     }, [])
 

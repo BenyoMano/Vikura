@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated, Platform} from 'react-native';
+import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
 
 const Button = props => {
   const {greyScale, btnTextStyle} = styles;

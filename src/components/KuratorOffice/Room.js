@@ -1,10 +1,26 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import firestore from '@react-native-firebase/firestore';
 
 const Room = ({roomId, clientAlias, clientId}) => {
     const [latestMessage, setLatestMessage] = useState(undefined);
+    const animated = new Animated.Value(1);
+    const fadeIn = () => {
+      Animated.timing(animated, {
+        toValue: 0.5,
+        duration: 150,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    const fadeOut = () => {
+      Animated.timing(animated, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    };
   
     useEffect(()=>{
       let unsubscribe; 
@@ -40,9 +56,16 @@ const Room = ({roomId, clientAlias, clientId}) => {
     if (latestMessage === undefined) return null;
   
     return (
-      <Pressable 
-      onPress={() => navigation.navigate('ChatView', {id: latestMessage.id})}>
-        <View style={styles.greyScale.item}>
+      <Pressable
+        onPress={() => navigation.navigate('ChatView', {id: latestMessage.id})}
+        onPressIn={fadeIn}
+        onPressOut={fadeOut}>
+        <Animated.View 
+          style={[styles.greyScale.item,
+          {
+            opacity: animated
+          },
+        ]}>
           <View style={styles.header}>
             <Text style={styles.title}>{latestMessage.alias}</Text>
             <Text style={styles.timestamp}>{latestMessage.displayTimestamp.toLocaleString()}</Text>
@@ -50,7 +73,7 @@ const Room = ({roomId, clientAlias, clientId}) => {
           <View>
             <Text style={latestMessage.isRead ? styles.isRead.text : styles.notIsRead.text}>{latestMessage.text}</Text>
           </View>
-        </View>
+        </Animated.View>
       </Pressable>
     );
   };

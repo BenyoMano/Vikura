@@ -7,6 +7,7 @@ const getRefPath = ({
   rumNamn,
   setMessages,
   msgLimit,
+  setRoomId,
 }) => {
   const newRefPath = async () => {
     rumNamn.docs.map(roomDetails => {
@@ -19,6 +20,7 @@ const getRefPath = ({
 
       setRefPath(pathToMessages);
       ListenMsg({isKurator, pathToMessages, setMessages, msgLimit});
+      setRoomId(roomId);
     });
   };
   newRefPath();

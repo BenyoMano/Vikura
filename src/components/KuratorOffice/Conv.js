@@ -9,7 +9,13 @@ const Conv = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const rooms = useRooms({setIsLoaded});
 
+  // console.log('rooms: ', rooms.map(tmsp => tmsp.latestTimestamp));
+  // console.log('rooms: ', rooms.map(tmsp => tmsp.clientAlias));
+  
   // const sortedConvos = convos.sort((a, b) => b.timestamp < a.timestamp);
+
+  const sortedRooms = rooms.sort((a, b) => b.latestTimestamp - a.latestTimestamp);
+  // console.log('sortedRooms: ', sortedRooms.map(ts => ts.clientAlias));
   
   const renderItem = ({item}) => (
     <Room roomId={item.roomId} clientAlias={item.clientAlias} clientId={item.clientId} key={item} />
@@ -25,7 +31,7 @@ const Conv = () => {
           <FlatList
             horizontal={false}
             numColumns={1}
-            data={rooms}
+            data={sortedRooms}
             renderItem={renderItem}
             keyExtractor={item => item.roomId}
           />

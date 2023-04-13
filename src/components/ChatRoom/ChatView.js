@@ -19,11 +19,12 @@ const ChatView = ({navigation, route}) => {
   const isKurator = useContext(IsKuratorContext);
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
+  const [roomId, setRoomId] = useState();
   const {id} = route.params;
   const user = auth().currentUser;
 
-  console.log('ChatView id:', id);
-  console.log('ChatView user:', user);
+  // console.log('ChatView id:', id);
+  // console.log('ChatView user:', user);
 
   return (
     <MyKeyboardAvoidingView>
@@ -47,6 +48,7 @@ const ChatView = ({navigation, route}) => {
               clientUserId={id}
               refPath={refPath}
               setRefPath={setRefPath}
+              setRoomId={setRoomId}
             />
           </View>
           <View
@@ -60,7 +62,7 @@ const ChatView = ({navigation, route}) => {
             <ButtonSend
               title="Skicka"
               onPress={() => {
-                SendMessage({isKurator, msgToSend, user, refPath});
+                SendMessage({isKurator, msgToSend, user, refPath, roomId});
                 setMsgToSend('');
               }}
             />

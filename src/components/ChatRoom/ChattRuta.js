@@ -6,7 +6,7 @@ import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 
-const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
+const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
@@ -18,6 +18,7 @@ const ChattRuta = ({refPath, setRefPath, clientUserId}) => {
     refPath,
     setRefPath,
     setMessages,
+    setRoomId,
   });
 
   const onScroll = e => {

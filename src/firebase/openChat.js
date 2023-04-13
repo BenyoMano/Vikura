@@ -9,23 +9,24 @@ const useOpenChat = ({
   clientUserId,
   setRefPath,
   setMessages,
+  setRoomId,
 }) => {
   const openChat = async msgLimit => {
     if (isKurator === undefined) return;
 
     if (isKurator) {
       const rumNamn = await roomName({clientUserId});
-      getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit});
+      getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
     } else {
       clientUserId = user.uid;
       const rumNamn = await roomName({clientUserId});
 
       if (!rumNamn.empty) {
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit});
+        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
       } else {
         createRoom({clientUserId});
         const rumNamn = await roomName({clientUserId});
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages});
+        getRefPath({isKurator, setRefPath, rumNamn, setMessages, setRoomId});
         showMessage({
           message: 'Välkommen!',
           description: 'Du kan börja chatta direkt!',

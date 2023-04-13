@@ -1,6 +1,6 @@
 import React from 'react';
-import { Easing } from 'react-native';
-import { Animated } from 'react-native';
+import {Easing} from 'react-native';
+import {Animated} from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
@@ -19,7 +19,7 @@ const Button = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const onPressOut = () => {
     Animated.timing(animatedValue, {
@@ -28,19 +28,19 @@ const Button = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const animatedTransform = {
-    transform: [{translateX: buttonTranslate}]
-  }
+    transform: [{translateX: buttonTranslate}],
+  };
 
   return (
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
-      onPress={props.onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={btnContainerStyle}>
+        onPress={props.onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={btnContainerStyle}>
         <Animated.View style={[animatedTransform]}>
           <Icon name="arrow-back" type="ionicon" color="black" />
         </Animated.View>

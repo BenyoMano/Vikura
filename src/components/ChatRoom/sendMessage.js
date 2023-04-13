@@ -12,7 +12,7 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
       .collection('Users')
       .doc(user.uid)
       .get();
-      console.log('get alias', getUserData.get('alias'))
+    console.log('get alias', getUserData.get('alias'));
     await refPath
       .add({
         author: getUserData.get('alias'),
@@ -26,13 +26,15 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
         console.error(error);
       });
 
-    await firestore().collection('rooms').doc(roomId)
-    .update({
-      latestTimestamp: timestamp,
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    await firestore()
+      .collection('rooms')
+      .doc(roomId)
+      .update({
+        latestTimestamp: timestamp,
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   addMessage();

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
-import { Icon } from 'react-native-elements';
+import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {Icon} from 'react-native-elements';
 
 const ButtonLogOut = ({title, onPress}) => {
   const {btnContainerStyle, btnTextStyle} = styles;
@@ -21,7 +21,7 @@ const ButtonLogOut = ({title, onPress}) => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const onPressOut = () => {
     Animated.timing(animatedValue, {
@@ -30,26 +30,26 @@ const ButtonLogOut = ({title, onPress}) => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const animatedRotateStyle = {
     transform: [{translateX: buttonTranslate}, {rotateZ: buttonRotate}],
-  }
+  };
 
   return (
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
-      onPress={onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={btnContainerStyle}>
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={btnContainerStyle}>
         <Animated.View style={[animatedRotateStyle]}>
           <Icon
-          name="logout" 
-          type='simple-line-icons'
-          color="black"
-          size={40}
-          style={{transform: [{rotateZ: '180deg'}]}} 
+            name="logout"
+            type="simple-line-icons"
+            color="black"
+            size={40}
+            style={{transform: [{rotateZ: '180deg'}]}}
           />
         </Animated.View>
       </Pressable>

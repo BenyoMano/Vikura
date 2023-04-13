@@ -17,11 +17,14 @@ import {IsKuratorProvider} from './src/firebase/isKuratorContext';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-
   return (
     <IsKuratorProvider>
       <SafeAreaProvider>
-        <StatusBar translucent backgroundColor="transparent" barStyle={'dark-content'} />
+        <StatusBar
+          translucent
+          backgroundColor="transparent"
+          barStyle={'dark-content'}
+        />
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Hem"
@@ -35,7 +38,10 @@ const App = () => {
             <Stack.Screen name="ReportConcern" component={ReportConcern} />
           </Stack.Navigator>
         </NavigationContainer>
-        <FlashMessage position="top" floating={Platform.OS === 'ios' ? true : false} />
+        <FlashMessage
+          position="top"
+          floating={Platform.OS === 'ios' ? true : false}
+        />
       </SafeAreaProvider>
     </IsKuratorProvider>
   );

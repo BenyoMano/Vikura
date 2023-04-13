@@ -1,16 +1,18 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, Animated, Easing} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
+import BubblaView from './BubblaView';
 
 const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
   const user = auth().currentUser;
+
   const openChat = useOpenChat({
     isKurator,
     user,
@@ -44,8 +46,6 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   useEffect(() => {
     // if (isKurator !== undefined) {
     openChat(msgLimit);
-    // return () => OpenChat();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msgLimit]);
 
   function Item({text, id, displayTimestamp}) {
@@ -72,14 +72,15 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
       
     return !isKurator ? (
       <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
-        <View
+          <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
+{/* {        <View
           style={
             id === user.uid
               ? styles.bubblaSend.bubbla
               : styles.bubblaRecieve.bubbla
           }>
           <Text style={styles.text.message}>{text}</Text>
-        </View>
+        </View>} */}
         <View
           style={
             id === user.uid
@@ -110,14 +111,16 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
     ) : isKurator ? (
       <View
         style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend}>
-        <View
+        <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
+        
+        {/* <View
           style={
             id === clientUserId
               ? styles.bubblaRecieve.bubbla
               : styles.bubblaSend.bubbla
           }>
           <Text style={styles.text.message}>{text}</Text>
-        </View>
+        </View> */}
         <View
           style={
             id === clientUserId

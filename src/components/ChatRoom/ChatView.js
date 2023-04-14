@@ -23,9 +23,6 @@ const ChatView = ({navigation, route}) => {
   const {id} = route.params;
   const user = auth().currentUser;
 
-  // console.log('ChatView id:', id);
-  // console.log('ChatView user:', user);
-
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

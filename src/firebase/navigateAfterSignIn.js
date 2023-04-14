@@ -3,7 +3,6 @@ import auth from '@react-native-firebase/auth';
 
 const navigateAfterSignIn = async ({navigation}) => {
   const user = auth().currentUser;
-  console.log('navigateAfterSignIn - user', user);
   const askNavigationConditions = await firestore()
     .collection('Users')
     .doc(user.uid)

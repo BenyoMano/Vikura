@@ -6,9 +6,14 @@ const IsKuratorContext = createContext();
 
 const IsKuratorProvider = ({children}) => {
   const [isKurator, setIsKurator] = useState(undefined);
-  const user = auth().currentUser;
+  const [user, setUser] = useState(auth().currentUser);
 
-  console.log('IsKuratorContext - user', user);
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(newUser => {
+      setUser(newUser);
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const getKurator = async () => {

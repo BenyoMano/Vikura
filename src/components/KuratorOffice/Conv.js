@@ -28,8 +28,7 @@ const Conv = () => {
 
   return (
     <View style={styles.container}>
-      <ConvoLoader />
- {/*      {!isLoaded ? (
+      {!isLoaded ? (
         <ConvoLoader />
       ) : (
         <FlatList
@@ -39,7 +38,7 @@ const Conv = () => {
           renderItem={renderItem}
           keyExtractor={item => item.roomId}
         />
-      )} */}
+      )}
     </View>
   );
 };

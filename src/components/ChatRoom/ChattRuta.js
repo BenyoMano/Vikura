@@ -72,15 +72,7 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
       
     return !isKurator ? (
       <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
-          <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
-{/* {        <View
-          style={
-            id === user.uid
-              ? styles.bubblaSend.bubbla
-              : styles.bubblaRecieve.bubbla
-          }>
-          <Text style={styles.text.message}>{text}</Text>
-        </View>} */}
+        <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
         <View
           style={
             id === user.uid
@@ -112,15 +104,6 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
       <View
         style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend}>
         <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
-        
-        {/* <View
-          style={
-            id === clientUserId
-              ? styles.bubblaRecieve.bubbla
-              : styles.bubblaSend.bubbla
-          }>
-          <Text style={styles.text.message}>{text}</Text>
-        </View> */}
         <View
           style={
             id === clientUserId

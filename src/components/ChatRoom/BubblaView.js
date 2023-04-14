@@ -3,13 +3,8 @@ import { useEffect } from "react";
 import {Text, StyleSheet, Animated} from 'react-native';
 
 const BubblaView = ({isKurator, text, id, clientUserId, user}) => {
-    const animatedValue = new Animated.Value(0);
+    const animatedValue = new Animated.Value(1);
 
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-  }).start();
 
     // useEffect(() => {
     //     Animated.timing(animatedValue, {

@@ -1,15 +1,20 @@
 import React from 'react';
-import { Easing } from 'react-native';
-import { Animated } from 'react-native';
+import {Easing} from 'react-native';
+import {Animated} from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
+import {Circle, Polygon, Polyline, Svg} from 'react-native-svg';
 
 const LogoutButton = props => {
   const {btnContainerStyle, rightSideStyle} = styles;
   const animatedValue = new Animated.Value(0);
-  const buttonTranslate = animatedValue.interpolate({
+  const arrowTranslate = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, -10],
+  });
+  const doorTranslate = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 5],
   });
 
   const onPressIn = () => {
@@ -19,7 +24,7 @@ const LogoutButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const onPressOut = () => {
     Animated.timing(animatedValue, {
@@ -28,26 +33,36 @@ const LogoutButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
-  const animatedTransform = {
-    transform: [{translateX: buttonTranslate}],
-    zIndex: 3,
-  }
+  const animatedArrowTransform = {
+    transform: [{translateX: arrowTranslate}],
+    zIndex: 2,
+  };
+  const animatedDoorTransform = {
+    transform: [{translateX: doorTranslate}],
+    zIndex: 1,
+  };
 
   return (
     <View style={btnContainerStyle}>
       <Pressable
-      onPress={props.onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={{flexDirection: 'row', alignItems: 'center'}}
-      >
-        <Animated.View style={[animatedTransform]}>
+        onPress={props.onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Animated.View style={[animatedArrowTransform]}>
           <Icon name="arrow-back" type="ionicon" color="black" size={30} />
         </Animated.View>
-        <View style={rightSideStyle}>
-        </View>
+        <Animated.View style={[animatedDoorTransform, rightSideStyle]} />
+        {/* <Svg height={50} width={40}>
+          <Polyline points="35,10 5,10 5,45 35,45 35,10" fill="none" stroke="black" strokeWidth="2" />
+          <Polyline points="5,18 5,38" fill="none" stroke="white" strokeWidth="3" />
+          <Polygon points="11,8 11,47 35,45 35,10" fill="black" stroke="black" strokeWidth="2" />
+          <Circle cx="16" cy="27" r="2" fill="white" strokeWidth="2" />
+          <Polygon points="20,5 20,50 35,45 35,10" fill="black" stroke="black" strokeWidth="2" />
+          <Circle cx="25" cy="28" r="2" fill="white" strokeWidth="2" />
+        </Svg> */}
       </Pressable>
     </View>
   );

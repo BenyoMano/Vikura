@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
     paddingBottom: 15,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: '#d9d9d9',
     borderRadius: 20,
   },
   container: {

@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';

@@ -62,7 +62,6 @@ const styles = {
   },
   barStyle: {
     height: 52,
-    // width: 320,
     width: '100%',
     color: 'black',
     backgroundColor: '#EEEEEE',

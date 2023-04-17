@@ -30,7 +30,6 @@ const styles = {
   ViewStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-   // marginBottom: 10,
   },
 };
 

@@ -26,7 +26,6 @@ const ButtonSend = ({title, onPress}) => {
         onPressIn={fadeIn}
         onPressOut={fadeOut}
         onPress={onPress}
-        //</View>android_ripple={{color: '#919191'}}
       >
         <Animated.View
           style={[

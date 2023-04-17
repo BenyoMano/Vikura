@@ -8,7 +8,6 @@ const ConvoLoader = () => {
   return (
     <ContentLoader
       speed={1}
-      //width={410}
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}

@@ -49,39 +49,39 @@ const BubblaView = ({isKurator, text, id, clientUserId, user}) => {
 }
 
 const styles = StyleSheet.create({
-    text: {
-        message: {
-          color: 'black',
-          fontFamily: 'NunitoSans-Regular',
-        },
-      },
-    bubblaSend: {
-        bubbla: {
-          justifyContent: 'center',
-          marginTop: 10,
-          marginBottom: 5,
-          marginRight: 10,
-          padding: 9,
-          minWidth: 0,
-          maxWidth: '70%',
-          backgroundColor: '#b5ccf7',
-          borderRadius: 12,
-        },
-      },
-      bubblaRecieve: {
-        bubbla: {
-          justifyContent: 'center',
-          alignSelf: 'flex-start',
-          marginTop: 10,
-          marginBottom: 5,
-          marginLeft: 10,
-          padding: 9,
-          minWidth: 0,
-          maxWidth: '70%',
-          backgroundColor: '#ffd933',
-          borderRadius: 12,
-        },
-      },
+  text: {
+    message: {
+      color: 'black',
+      fontFamily: 'NunitoSans-Regular',
+    },
+  },
+  bubblaSend: {
+    bubbla: {
+      justifyContent: 'center',
+      marginTop: 10,
+      marginBottom: 5,
+      marginRight: 10,
+      padding: 9,
+      minWidth: 0,
+      maxWidth: '70%',
+      backgroundColor: '#b5ccf7',
+      borderRadius: 12,
+    },
+  },
+  bubblaRecieve: {
+    bubbla: {
+      justifyContent: 'center',
+      alignSelf: 'flex-start',
+      marginTop: 10,
+      marginBottom: 5,
+      marginLeft: 10,
+      padding: 9,
+      minWidth: 0,
+      maxWidth: '70%',
+      backgroundColor: '#ffd933',
+      borderRadius: 12,
+    },
+  },
 })
 
 export default BubblaView;

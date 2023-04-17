@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
-import {Text, StyleSheet, View, Animated, Easing} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
 
-const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
+const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
@@ -44,7 +44,6 @@ const ChattRuta = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   };
 
   useEffect(() => {
-    // if (isKurator !== undefined) {
     openChat(msgLimit);
   }, [msgLimit]);
 
@@ -234,4 +233,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChattRuta;
+export default ChatBox;

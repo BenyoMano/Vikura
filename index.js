@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {AppRegistry, Platform, StatusBar} from 'react-native';
-import Hem from './src/components/Login/Hem';
-import NewElev from './src/components/NewDetails/NewElev';
+import Home from './src/components/Login/Home';
+import NewClient from './src/components/NewDetails/NewClient';
 import KuratorView from './src/components/KuratorOffice/KuratorView';
 import NewKurator from './src/components/NewDetails/NewKurator';
 import ChatView from './src/components/ChatRoom/ChatView';
@@ -27,10 +27,10 @@ const App = () => {
         />
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Hem"
+            initialRouteName="Home"
             screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Hem" component={Hem} />
-            <Stack.Screen name="NewElev" component={NewElev} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="NewClient" component={NewClient} />
             <Stack.Screen name="KuratorView" component={KuratorView} />
             <Stack.Screen name="NewKurator" component={NewKurator} />
             <Stack.Screen name="ChatView" component={ChatView} />

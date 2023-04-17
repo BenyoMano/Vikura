@@ -6,7 +6,7 @@ import {
   Keyboard,
   StyleSheet,
 } from 'react-native';
-import ChattRuta from './ChattRuta';
+import ChatBox from './ChatBox';
 import InputBarChatt from './InputbarChat';
 import ButtonSend from './ButtonSend';
 import SendMessage from './sendMessage';
@@ -41,7 +41,7 @@ const ChatView = ({navigation, route}) => {
             />
           </View>
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
-            <ChattRuta
+            <ChatBox
               clientUserId={id}
               refPath={refPath}
               setRefPath={setRefPath}

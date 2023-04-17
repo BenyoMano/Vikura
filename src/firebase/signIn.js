@@ -31,7 +31,6 @@ const signIn = async ({
       .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
       .then(() => {
         navigateAfterSignIn({navigation});
-        //Clear TextInput fields
         setLoginDetails({
           mejl: '',
           password: '',

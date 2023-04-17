@@ -10,10 +10,10 @@ import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
 import InputBarNewDetails from './InputBarNewDetails';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import {HeaderView} from '.././Header/HeaderView';
+import {HeaderView} from '../Header/HeaderView';
 import newDetailsElev from '../../firebase/newDetailsElev';
 
-const NewElev = ({navigation}) => {
+const NewClient = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const security = false;
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewElev;
+export default NewClient;

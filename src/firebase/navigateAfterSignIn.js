@@ -12,7 +12,7 @@ const navigateAfterSignIn = async ({navigation}) => {
   const kuratorStatus = askNavigationConditions.get('kurator');
 
   if (newUserStatus && !kuratorStatus) {
-    navigation.navigate('NewElev');
+    navigation.navigate('NewClient');
   }
   if (!newUserStatus && !kuratorStatus) {
     navigation.navigate('ChatView', {id: user.uid});

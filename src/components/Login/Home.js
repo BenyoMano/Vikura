@@ -13,7 +13,7 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
 import {DotsLoader} from 'react-native-indicator';
 
-const Hem = ({navigation}) => {
+const Home = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
@@ -117,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Hem;
+export default Home;

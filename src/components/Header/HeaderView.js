@@ -47,7 +47,7 @@ export const HeaderView = ({navigation, clientUserId}) => {
               title="Logga Ut"
               onPress={() => {
                 signOut();
-                navigation.navigate('Hem');
+                navigation.navigate('Home');
               }}
             />
           </View>
@@ -79,7 +79,7 @@ export const HeaderView = ({navigation, clientUserId}) => {
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
-      ) : route.name === 'NewElev' ? (
+      ) : route.name === 'NewClient' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -139,7 +139,7 @@ export const HeaderView = ({navigation, clientUserId}) => {
             title="Logga Ut"
             onPress={() => {
               signOut();
-              navigation.navigate('Hem');
+              navigation.navigate('Home');
             }}
           />
         </View>

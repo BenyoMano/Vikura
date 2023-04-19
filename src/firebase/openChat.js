@@ -26,7 +26,7 @@ const useOpenChat = ({
       } else {
         createRoom({clientUserId});
         const rumNamn = await roomName({clientUserId});
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages, setRoomId});
+        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
         showMessage({
           message: 'Välkommen!',
           description: 'Du kan börja chatta direkt!',

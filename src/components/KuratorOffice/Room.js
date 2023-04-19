@@ -78,7 +78,7 @@ const Room = ({roomId, clientAlias, clientId}) => {
             style={
               latestMessage.isRead ? styles.isRead.text : styles.notIsRead.text
             }>
-            {latestMessage.text}
+            {latestMessage.text.length < 100 ? latestMessage.text : latestMessage.text.substring(0, 100) + "..."}
           </Text>
         </View>
       </Animated.View>

@@ -23,6 +23,7 @@ const AddUserView = ({navigation}) => {
   const capitalize = 'none';
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [hasAddedUser, setHasAddedUser] = useState(false);
   const showIfKurator = checkboxState ? 'JA' : 'NEJ';
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
@@ -50,7 +51,7 @@ const AddUserView = ({navigation}) => {
               justifyContent: 'center',
               width: '100%',
             }}>
-            <HeaderView navigation={navigation} />
+            <HeaderView navigation={navigation} hasAddedUser={hasAddedUser} setHasAddedUser={setHasAddedUser} />
           </View>
           <View style={{justifyContent: 'center'}}>
             <MainText
@@ -135,6 +136,7 @@ const AddUserView = ({navigation}) => {
                         });
                         setSubmitted(true);
                         setModalVisible(!modalVisible);
+                        setHasAddedUser(true);
                       }}
                     />
                   </View>

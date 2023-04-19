@@ -12,10 +12,13 @@ import signOut from '../../firebase/signOut';
 import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import LogoutButton from './LogoutButton';
+import { useState } from 'react';
 
-export const HeaderView = ({navigation, clientUserId}) => {
+export const HeaderView = ({navigation, clientUserId, hasAddedUser, setHasAddedUser}) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
+  console.log('hasAddedUser ? :', hasAddedUser);
+  
 
   return (
     <View
@@ -64,7 +67,17 @@ export const HeaderView = ({navigation, clientUserId}) => {
             alignItems: 'center',
           }}>
           <View>
-            <BackButton onPress={() => navigation.goBack()} />
+            { hasAddedUser === true ? (
+              <LogoutButton 
+                onPress={() => {
+                  signOut();
+                  navigation.navigate('Home');
+                  setHasAddedUser(false);
+                }}
+              />
+            ) : hasAddedUser === false ? (
+              <BackButton onPress={() => navigation.goBack()} />
+            ) : null }
           </View>
         </View>
       ) : route.name === 'NewKurator' ? (

@@ -17,8 +17,7 @@ import { useState } from 'react';
 export const HeaderView = ({navigation, clientUserId, hasAddedUser, setHasAddedUser}) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
-  console.log('hasAddedUser ? :', hasAddedUser);
-  
+
 
   return (
     <View

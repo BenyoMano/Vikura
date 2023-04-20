@@ -125,10 +125,10 @@ const createUser = ({
           }
           console.error(error);
         });
+        setSubmitted(false);
     }
 
     createNewUser();
-    setSubmitted(false);
   }
 };
 

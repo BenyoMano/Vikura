@@ -9,6 +9,13 @@ const createUser = ({
   setSubmitted,
   setHasAddedUser,
 }) => {
+
+  userPropToAdd.firstName = userPropToAdd.firstName.trim();
+  userPropToAdd.secondName = userPropToAdd.secondName.trim();
+  userPropToAdd.mejl = userPropToAdd.mejl.trim();
+  userPropToAdd.password = userPropToAdd.password.trim();
+  userPropToAdd.personnummer = userPropToAdd.personnummer.trim();
+
   if (!userPropToAdd.firstName) {
     showMessage({
       message: 'Varning!',

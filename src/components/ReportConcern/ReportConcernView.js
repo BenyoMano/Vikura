@@ -11,9 +11,10 @@ import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
+import { useEffect } from 'react';
 
 const ReportConcern = ({navigation, route}) => {
-  const [data, setString] = useClipboard();
+  const [clipboardString, setClipboardString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
   if (userDetails === undefined) return;
@@ -29,6 +30,7 @@ const ReportConcern = ({navigation, route}) => {
       'Personnummer: ' +
       userDetails.personNummer,
   ];
+
 
   return (
     <View
@@ -72,7 +74,7 @@ const ReportConcern = ({navigation, route}) => {
       <View style={{width: '88%', marginTop: 10, alignItems: 'flex-end'}}>
         <CopyButton
           onPress={() => {
-            setString(
+            setClipboardString(
               '\n' +
                 userDetails.firstName +
                 ' ' +
@@ -84,7 +86,7 @@ const ReportConcern = ({navigation, route}) => {
             );
             Alert.alert(
               'Kopierat till ditt ClipBoard: ',
-              data,
+              clipboardString,
               [
                 {
                   text: 'OK',

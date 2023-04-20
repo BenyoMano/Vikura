@@ -12,7 +12,6 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
       .collection('Users')
       .doc(user.uid)
       .get();
-    console.log('get alias', getUserData.get('alias'));
     await refPath
       .add({
         author: getUserData.get('alias'),

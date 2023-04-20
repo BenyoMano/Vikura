@@ -133,10 +133,10 @@ const AddUserView = ({navigation}) => {
                           checkboxState,
                           setCheckboxState,
                           setSubmitted,
+                          setHasAddedUser,
                         });
                         setSubmitted(true);
                         setModalVisible(!modalVisible);
-                        setHasAddedUser(true);
                       }}
                     />
                   </View>

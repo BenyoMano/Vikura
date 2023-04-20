@@ -6,8 +6,8 @@ const createUser = ({
   userPropToAdd,
   setUserPropToAdd,
   checkboxState,
-  setCheckboxState,
   setSubmitted,
+  setHasAddedUser,
 }) => {
   if (!userPropToAdd.firstName) {
     showMessage({
@@ -107,6 +107,7 @@ const createUser = ({
                   personnummer: '',
                   kurator: '',
                 });
+                setHasAddedUser(true);
                 showMessage({
                   message: 'Kontot skapades framgångsrikt!',
                   type: 'success',

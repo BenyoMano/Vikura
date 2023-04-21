@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
-// import CopyButton from './CopyButton';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
@@ -16,7 +15,6 @@ import ClipboardHandler from './ClipboardHandler';
 
 const ReportConcern = ({navigation, route}) => {
   const [clipboardString, setClipboardString] = useClipboard();
-  // const [showAlert, setShowAlert] = useState(false);
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
   if (userDetails === undefined) return;

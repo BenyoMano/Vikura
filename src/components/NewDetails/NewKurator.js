@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Platform} from 'react-native';
 import {
   View,
   StyleSheet,
@@ -17,8 +16,6 @@ import newDetailsKurator from '../../firebase/newDetailsKurator';
 const NewKurator = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const security = false;
-  const capitalize = 'none';
   const {password, rePassword} = newDetails;
   const ref_input2 = useRef();
   const [submitted, setSubmitted] = useState(false);

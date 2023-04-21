@@ -20,7 +20,6 @@ import SmallButton from '../../atoms/SmallButton';
 const AddUserView = ({navigation}) => {
   const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
-  const capitalize = 'none';
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [hasAddedUser, setHasAddedUser] = useState(false);

@@ -16,8 +16,6 @@ import newDetailsElev from '../../firebase/newDetailsElev';
 const NewClient = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const security = false;
-  const capitalize = 'none';
   const {password, rePassword, alias} = newDetails;
   const ref_input2 = useRef();
   const ref_input3 = useRef();

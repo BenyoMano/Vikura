@@ -11,7 +11,7 @@ const Form = ({
   setCheckboxState,
   submitted,
 }) => {
-  const {color, greyScale, viewStyle} = styles;
+  const {viewStyle} = styles;
   const capitalize = 'none';
   const {
     firstName,

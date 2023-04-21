@@ -6,6 +6,7 @@ import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
+import {onScroll, onMomentumScrollEnd} from './scrollHandlers';
 
 const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
@@ -22,26 +23,6 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
     setMessages,
     setRoomId,
   });
-
-  const onScroll = e => {
-    const scrollOffset = e.nativeEvent.contentOffset.y;
-    if (scrollOffset <= 10) {
-      // Doesn't work perfectly, seems to load at least once initially
-      console.log('setMsgLimit');
-      setMsgLimit(msgLimit + 15);
-    }
-  };
-  const onMomentumScrollEnd = event => {
-    const layoutHeight = event.nativeEvent.layoutMeasurement.height;
-    const contentOffsetY = event.nativeEvent.contentOffset.y;
-    const contentSizeHeight = event.nativeEvent.contentSize.height;
-    const calc = layoutHeight + contentOffsetY >= contentSizeHeight - 150;
-    if (msgLimit !== 0 && calc) {
-      // Doesn't work perfectly, seems to load at least once initially
-      console.log('Near bottom reached --reset msgLimit--');
-      setMsgLimit(0);
-    }
-  };
 
   useEffect(() => {
     openChat(msgLimit);
@@ -153,10 +134,10 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
         data={sortedMessages}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
-        onScroll={onScroll}
+        onScroll={onScroll(msgLimit, setMsgLimit)}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-        onMomentumScrollEnd={onMomentumScrollEnd}
+        onMomentumScrollEnd={onMomentumScrollEnd(msgLimit, setMsgLimit)}
       />
     </View>
   );

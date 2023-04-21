@@ -1,50 +1,27 @@
 import React from "react"
-import { useEffect } from "react";
-import {Text, StyleSheet, Animated} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 const BubblaView = ({isKurator, text, id, clientUserId, user}) => {
-    const animatedValue = new Animated.Value(1);
-
-
-    // useEffect(() => {
-    //     Animated.timing(animatedValue, {
-    //         toValue: 1,
-    //         duration: 300,
-    //         useNativeDriver: true,
-    //     }).start();
-    // }, [])
 
     return !isKurator ? (
-        <Animated.View
+        <View
         style={[
          id === user.uid
             ? styles.bubblaSend.bubbla
             : styles.bubblaRecieve.bubbla,
-            {
-              transform: [
-                {
-                    scale: animatedValue,
-                }
-            ]}
         ]}>
         <Text style={styles.text.message}>{text}</Text>
-        </Animated.View>
+        </View>
 
     ) : isKurator ? (
-        <Animated.View
+        <View
         style={[
           id === clientUserId
             ? styles.bubblaRecieve.bubbla
             : styles.bubblaSend.bubbla,
-            {
-              transform: [
-                {
-                  scale: animatedValue,
-                }
-              ]}
         ]}>
         <Text style={styles.text.message}>{text}</Text>
-      </Animated.View>
+      </View>
     ) : null;
 }
 

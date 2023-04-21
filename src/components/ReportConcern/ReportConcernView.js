@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
-import CopyButton from './CopyButton';
+// import CopyButton from './CopyButton';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
@@ -11,10 +11,12 @@ import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
-import { useEffect } from 'react';
+import ClipboardHandler from './ClipboardHandler';
+
 
 const ReportConcern = ({navigation, route}) => {
   const [clipboardString, setClipboardString] = useClipboard();
+  // const [showAlert, setShowAlert] = useState(false);
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
   if (userDetails === undefined) return;
@@ -72,31 +74,10 @@ const ReportConcern = ({navigation, route}) => {
         <PersonalInfo userDetails={userDetails} />
       </View>
       <View style={{width: '88%', marginTop: 10, alignItems: 'flex-end'}}>
-        <CopyButton
-          onPress={() => {
-            setClipboardString(
-              '\n' +
-                userDetails.firstName +
-                ' ' +
-                userDetails.secondName +
-                '\n' +
-                userDetails.mail +
-                '\n' +
-                userDetails.personNummer,
-            );
-            Alert.alert(
-              'Kopierat till ditt ClipBoard: ',
-              clipboardString,
-              [
-                {
-                  text: 'OK',
-                },
-              ],
-              {
-                cancelable: true,
-              },
-            );
-          }}
+        <ClipboardHandler
+          clipboardString={clipboardString}
+          setClipboardString={setClipboardString}
+          userDetails={userDetails}
         />
       </View>
       <View style={{flex: 0.5, justifyContent: 'center'}}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = props => {
+const CopyButton = props => {
   const {btnContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default CopyButton;

@@ -1,8 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
-  Modal,
-  Text,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -14,16 +12,13 @@ import Form from './Form';
 import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
-import createUser from './createUser';
-import SmallButton from '../../atoms/SmallButton';
+import { AddUserModal } from './AddUserModal';
 
 const AddUserView = ({navigation}) => {
-  const {textStyling, viewStyle} = styles;
   const [modalVisible, setModalVisible] = useState(false);
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [hasAddedUser, setHasAddedUser] = useState(false);
-  const showIfKurator = checkboxState ? 'JA' : 'NEJ';
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
     secondName: '',
@@ -69,79 +64,16 @@ const AddUserView = ({navigation}) => {
             />
           </View>
           <View style={{justifyContent: 'center'}}>
-            <Modal
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(!modalVisible);
-              }}>
-              <View style={viewStyle.modalContainer.greyScale}>
-                <View style={viewStyle.label}>
-                  <Text style={textStyling.label}>Namn:</Text>
-                </View>
-                <View style={viewStyle.info}>
-                  <Text style={textStyling.info}>
-                    {userPropToAdd.firstName} {userPropToAdd.secondName}
-                  </Text>
-                </View>
-                <View style={viewStyle.label}>
-                  <Text style={textStyling.label}>Mail:</Text>
-                </View>
-                <View style={viewStyle.info}>
-                  <Text style={textStyling.info}>{userPropToAdd.mejl}</Text>
-                </View>
-                <View style={viewStyle.label}>
-                  <Text style={textStyling.label}>Lösenord:</Text>
-                </View>
-                <View style={viewStyle.info}>
-                  <Text style={textStyling.info}>{userPropToAdd.password}</Text>
-                </View>
-                <View style={viewStyle.label}>
-                  <Text style={textStyling.label}>Personnummer:</Text>
-                </View>
-                <View style={viewStyle.info}>
-                  <Text style={textStyling.info}>
-                    {userPropToAdd.personnummer}
-                  </Text>
-                </View>
-                <View style={viewStyle.label}>
-                  <Text style={textStyling.label}>Kurator:</Text>
-                </View>
-                <View style={viewStyle.info}>
-                  <Text style={textStyling.info}> {showIfKurator} </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginTop: 15,
-                  }}>
-                  <View style={{margin: 10}}>
-                    <SmallButton
-                      title="Tillbaka"
-                      onPress={() => setModalVisible(!modalVisible)}
-                    />
-                  </View>
-                  <View style={{margin: 10}}>
-                    <SmallButton
-                      title="Bekräfta"
-                      onPress={() => {
-                        createUser({
-                          userPropToAdd,
-                          setUserPropToAdd,
-                          checkboxState,
-                          setCheckboxState,
-                          setSubmitted,
-                          setHasAddedUser,
-                        });
-                        setSubmitted(true);
-                        setModalVisible(!modalVisible);
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-            </Modal>
+            <AddUserModal
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              userPropToAdd={userPropToAdd}
+              setUserPropToAdd={setUserPropToAdd}
+              checkboxState={checkboxState}
+              setCheckboxState={setCheckboxState}
+              setSubmitted={setSubmitted}
+              setHasAddedUser={setHasAddedUser}
+            />
           </View>
           <ScrollView
             contentContainerStyle={styles.greyScale.scrollViewContainer}>
@@ -177,46 +109,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#FFFFFF',
       width: '100%',
-    },
-  },
-  textStyling: {
-    label: {
-      fontSize: 20,
-      color: 'black',
-      fontFamily: 'NunitoSans-Regular',
-    },
-    info: {
-      fontSize: 20,
-      color: 'grey',
-      fontFamily: 'NunitoSans-Regular',
-    },
-  },
-  viewStyle: {
-    modalContainer: {
-      greyScale: {
-        backgroundColor: 'white',
-        borderRadius: 20,
-        alignSelf: 'center',
-        top: '28%',
-        paddingHorizontal: 15,
-        paddingBottom: 15,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 30,
-      },
-    },
-    label: {
-      marginLeft: 10,
-      marginTop: 30,
-    },
-    info: {
-      marginLeft: 10,
-      marginTop: 5,
     },
   },
 });

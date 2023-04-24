@@ -49,10 +49,15 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
         ? true
         : false;
 
-      
     return !isKurator ? (
       <View style={id === user.uid ? styles.bubblaSend : styles.bubblaRecieve}>
-        <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
+        <BubblaView
+          text={text}
+          id={id}
+          clientUserId={clientUserId}
+          user={user}
+          isKurator={isKurator}
+        />
         <View
           style={
             id === user.uid
@@ -83,7 +88,13 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
     ) : isKurator ? (
       <View
         style={id === clientUserId ? styles.bubblaRecieve : styles.bubblaSend}>
-        <BubblaView text={text} id={id} clientUserId={clientUserId} user={user} isKurator={isKurator} />
+        <BubblaView
+          text={text}
+          id={id}
+          clientUserId={clientUserId}
+          user={user}
+          isKurator={isKurator}
+        />
         <View
           style={
             id === clientUserId

@@ -12,7 +12,7 @@ import Form from './Form';
 import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
-import { AddUserModal } from './AddUserModal';
+import {AddUserModal} from './AddUserModal';
 
 const AddUserView = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,7 +45,11 @@ const AddUserView = ({navigation}) => {
               justifyContent: 'center',
               width: '100%',
             }}>
-            <HeaderView navigation={navigation} hasAddedUser={hasAddedUser} setHasAddedUser={setHasAddedUser} />
+            <HeaderView
+              navigation={navigation}
+              hasAddedUser={hasAddedUser}
+              setHasAddedUser={setHasAddedUser}
+            />
           </View>
           <View style={{justifyContent: 'center'}}>
             <MainText

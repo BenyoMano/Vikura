@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useRef} from 'react';
+import React, {useRef} from 'react';
 import {View} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -13,15 +13,8 @@ const Form = ({
 }) => {
   const {viewStyle} = styles;
   const capitalize = 'none';
-  const {
-    firstName,
-    secondName,
-    mejl,
-    password,
-    personnummer,
-    firstLogin,
-    kurator,
-  } = userPropToAdd;
+  const {firstName, secondName, mejl, password, personnummer, kurator} =
+    userPropToAdd;
   const ref_input2 = useRef();
   const ref_input3 = useRef();
   const ref_input4 = useRef();

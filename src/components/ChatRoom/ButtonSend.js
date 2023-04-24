@@ -22,11 +22,7 @@ const ButtonSend = ({title, onPress}) => {
 
   return (
     <View style={viewStyle}>
-      <Pressable
-        onPressIn={fadeIn}
-        onPressOut={fadeOut}
-        onPress={onPress}
-      >
+      <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={onPress}>
         <Animated.View
           style={[
             greyScale.btnContainerStyle,

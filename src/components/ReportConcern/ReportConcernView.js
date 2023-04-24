@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
 import Button from '../../atoms/Button';
@@ -11,7 +11,6 @@ import useUserPersonalDetails from '../../firebase/userDetails';
 import {Linking} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import ClipboardHandler from './ClipboardHandler';
-
 
 const ReportConcern = ({navigation, route}) => {
   const [clipboardString, setClipboardString] = useClipboard();
@@ -30,7 +29,6 @@ const ReportConcern = ({navigation, route}) => {
       'Personnummer: ' +
       userDetails.personNummer,
   ];
-
 
   return (
     <View

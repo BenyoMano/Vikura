@@ -9,7 +9,6 @@ const createUser = ({
   setSubmitted,
   setHasAddedUser,
 }) => {
-
   userPropToAdd.firstName = userPropToAdd.firstName.trim();
   userPropToAdd.secondName = userPropToAdd.secondName.trim();
   userPropToAdd.mejl = userPropToAdd.mejl.trim();
@@ -132,7 +131,7 @@ const createUser = ({
           }
           console.error(error);
         });
-        setSubmitted(false);
+      setSubmitted(false);
     }
 
     createNewUser();

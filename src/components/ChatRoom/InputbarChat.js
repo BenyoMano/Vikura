@@ -15,7 +15,8 @@ const InputBarChatt = ({msgToSend, setMsgToSend}) => {
         placeholder="Skriv något..."
         placeholderTextColor="grey"
         textBreakStrategy="simple"
-        underlineColorAndroid="transparent"></TextInput>
+        underlineColorAndroid="transparent"
+      />
     </View>
   );
 };
@@ -28,7 +29,7 @@ const styles = {
   },
   barStyle: {
     // minHeight: 52,
-    minHeight: '5%',
+    /* minHeight: '5%', */
     maxHeight: 250,
     width: '100%',
     color: 'black',

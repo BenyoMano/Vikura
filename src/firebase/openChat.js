@@ -33,7 +33,7 @@ const useOpenChat = ({
           type: 'info',
           position: 'center',
           floating: true,
-          duration: 2500,
+          duration: 3000,
         });
       }
     }

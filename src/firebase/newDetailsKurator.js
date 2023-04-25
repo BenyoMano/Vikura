@@ -4,6 +4,22 @@ import {showMessage} from 'react-native-flash-message';
 
 const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted, setLoading}) => {
 
+  if (!password) {
+    showMessage({
+      message: 'Varning!',
+      description: "Du måste ange ett nytt lösenord!",
+      type: 'danger',
+    });
+    return;
+  }
+  if (!rePassword) {
+    showMessage({
+      message: 'Varning!',
+      description: "Du måste repetera ditt lösenord!",
+      type: 'danger',
+    });
+    return;
+  }
   if (rePassword !== password) {
     showMessage({
       message: 'Varning!',
@@ -33,7 +49,6 @@ const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted
       .doc(auth().currentUser.id)
       .onSnapshot(querySnapshot => {
         const currentData = querySnapshot.data();
-        console.log('Current Data:', currentData);
         firestore()
           .collection('Users')
           .doc(auth().currentUser.id)

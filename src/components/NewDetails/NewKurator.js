@@ -62,7 +62,7 @@ const NewKurator = ({navigation}) => {
             />
           </View>
           {!isKeyboardVisible ? (
-            <View>
+            <View style={{ backgroundColor: 'transparent'}}>
               <MainText
                 title="Första gången du loggar in behöver du skapa ett nytt lösenord."
                 style={{
@@ -104,11 +104,11 @@ const NewKurator = ({navigation}) => {
               />
             </ScrollView>
           </View>
-          <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
-                {loading ? (
-                  <DotsLoader size={20} color={'green'} betweenSpace={20} />
-                ) : null}
-          </View>
+            {loading ? (
+              <View style={{height: 22, marginBottom: 80, marginTop: 10}}>
+                <DotsLoader size={20} color={'green'} betweenSpace={20} />
+              </View>
+            ) : null}
           {!isKeyboardVisible ? (
             <View style={{ marginBottom: 40}}>
               <Button

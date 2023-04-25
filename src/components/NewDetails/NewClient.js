@@ -69,7 +69,6 @@ const NewClient = ({navigation}) => {
                 style={{
                   fontSize: 19,
                   color: '#7f7f7f',
-                  marginTop: 0,
                   marginBottom: 40,
                   paddingHorizontal: 40,
                 }}
@@ -120,11 +119,11 @@ const NewClient = ({navigation}) => {
                 />
             </ScrollView>
           </View>
-          <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
             {loading ? (
-              <DotsLoader size={20} color={'green'} betweenSpace={20} />
+              <View style={{height: 22, marginBottom: 20, marginTop: 10}}>
+                <DotsLoader size={20} color={'green'} betweenSpace={20} />
+              </View>
             ) : null}
-          </View>
           {!isKeyboardVisible ? (
             <View style={{marginBottom: 40}}>
               <Button

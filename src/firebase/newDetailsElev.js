@@ -5,6 +5,30 @@ import {showMessage} from 'react-native-flash-message';
 const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmitted, setLoading}) => {
   const user = auth().currentUser;
 
+  if (!password) {
+    showMessage({
+      message: 'Varning!',
+      description: "Du måste ange ett nytt lösenord!",
+      type: 'danger',
+    });
+  }
+  if (!rePassword) {
+    showMessage({
+      message: 'Varning!',
+      description: "Du måste repetera ditt lösenord!",
+      type: 'danger',
+    });
+    return;
+  }
+  if (!alias) {
+    showMessage({
+      message: 'Varning!',
+      description: "Du måste ange ett nickname!",
+      type: 'danger',
+    });
+    return;
+  }
+
   if (rePassword !== password) {
     showMessage({
       message: 'Varning!',

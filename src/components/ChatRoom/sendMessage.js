@@ -22,7 +22,12 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
         id: user.uid,
       })
       .catch(error => {
-        console.error(error);
+        showMessage({
+          message: 'Varning!',
+          description: String(error),
+          type: 'danger',
+          duration: 3200,
+        });
       });
 
     await firestore()
@@ -32,7 +37,12 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
         latestTimestamp: timestamp,
       })
       .catch(error => {
-        console.error(error);
+        showMessage({
+          message: 'Varning!',
+          description: String(error),
+          type: 'danger',
+          duration: 3200,
+        });
       });
   };
 

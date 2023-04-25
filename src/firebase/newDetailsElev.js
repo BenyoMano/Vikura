@@ -2,20 +2,25 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 
-const newDetailsElev = async ({navigation, password, rePassword, alias}) => {
+const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmitted, setLoading}) => {
   const user = auth().currentUser;
 
+  if (rePassword !== password) {
+    showMessage({
+      message: 'Varning!',
+      description: 'Lösenord matchar inte!',
+      type: 'danger',
+      duration: 3200,
+    });
+    return;
+  }
+
   if (rePassword === password) {
+    setLoading(true);
+
     await auth()
       .currentUser.updatePassword(password)
       .catch(error => {
-        if (error.code === 'auth/weak-password') {
-          console.log('Weak password');
-        }
-        if (error.code === 'auth/requires-recent-login') {
-          console.log('You have to reauthenticate');
-        }
-        console.error(error);
         showMessage({
           message: 'Varning!',
           description: String(error),
@@ -33,7 +38,6 @@ const newDetailsElev = async ({navigation, password, rePassword, alias}) => {
       .doc(auth().currentUser.uid)
       .onSnapshot(querySnapshot => {
         const currentData = querySnapshot.data();
-
         firestore()
           .collection('Users')
           .doc(auth().currentUser.uid)
@@ -44,15 +48,9 @@ const newDetailsElev = async ({navigation, password, rePassword, alias}) => {
           });
       });
     navigation.navigate('ChatView', {id: user.uid});
-  } else {
-    showMessage({
-      message: 'Varning!',
-      description: 'Lösenord matchar inte!',
-      type: 'danger',
-      duration: 3200,
-    });
-    console.log('Lösenordet matchar inte!');
-  }
+    setLoading(false);
+    setSubmitted(false);
+  };
 };
 
 export default newDetailsElev;

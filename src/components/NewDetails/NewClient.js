@@ -12,6 +12,7 @@ import InputBarNewDetails from './InputBarNewDetails';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import newDetailsElev from '../../firebase/newDetailsElev';
+import {DotsLoader} from 'react-native-indicator';
 
 const NewClient = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
@@ -19,6 +20,7 @@ const NewClient = ({navigation}) => {
   const {password, rePassword, alias} = newDetails;
   const ref_input2 = useRef();
   const ref_input3 = useRef();
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -118,12 +120,17 @@ const NewClient = ({navigation}) => {
                 />
             </ScrollView>
           </View>
+          <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
+            {loading ? (
+              <DotsLoader size={20} color={'green'} betweenSpace={20} />
+            ) : null}
+          </View>
           {!isKeyboardVisible ? (
             <View style={{marginBottom: 40}}>
               <Button
                 title="Bekräfta"
                 onPress={() => {
-                  {newDetailsElev({navigation, password, rePassword, alias, setSubmitted}); setSubmitted(true)};
+                  {newDetailsElev({navigation, password, rePassword, alias, setSubmitted, setLoading}); setSubmitted(true)};
                 }}
               />
             </View>

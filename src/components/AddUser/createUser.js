@@ -123,19 +123,16 @@ const createUser = ({
           );
         })
         .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email adress is already in use!');
-          }
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email adress is invalid!');
-          }
-          console.error(error);
+          showMessage({
+            message: 'Misslyckades!',
+            description: String(error),
+            type: 'danger',
+            duration: 5000,
+          });
         });
       setSubmitted(false);
     }
-
     createNewUser();
   }
 };
-
 export default createUser;

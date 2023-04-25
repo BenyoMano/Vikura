@@ -12,12 +12,14 @@ import InputBarNewDetails from './InputBarNewDetails';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import newDetailsKurator from '../../firebase/newDetailsKurator';
+import {DotsLoader} from 'react-native-indicator';
 
 const NewKurator = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {password, rePassword} = newDetails;
   const ref_input2 = useRef();
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -102,11 +104,16 @@ const NewKurator = ({navigation}) => {
               />
             </ScrollView>
           </View>
+          <View style={{height: 22, marginBottom: 40, marginTop: 10}}>
+                {loading ? (
+                  <DotsLoader size={20} color={'green'} betweenSpace={20} />
+                ) : null}
+          </View>
           {!isKeyboardVisible ? (
             <View style={{ marginBottom: 40}}>
               <Button
                 title="Bekräfta"
-                onPress={() => {newDetailsKurator({password, rePassword, setSubmitted}); setSubmitted(true)}}
+                onPress={() => {newDetailsKurator({navigation, password, rePassword, setSubmitted, setLoading}); setSubmitted(true)}}
               />
             </View>
           ) : null}

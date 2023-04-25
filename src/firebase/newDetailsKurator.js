@@ -2,21 +2,24 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 
-const newDetailsKurator = async ({password, rePassword}) => {
+const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted, setLoading}) => {
+
+  if (rePassword !== password) {
+    showMessage({
+      message: 'Varning!',
+      description: 'Lösenord matchar inte!',
+      type: 'danger',
+      duration: 3200,
+    });
+    return;
+  }
+
   if (rePassword === password) {
+    setLoading(true);
+
     await auth()
       .currentUser.updatePassword(password)
-      .then(() => {
-        console.log('Password updated');
-      })
       .catch(error => {
-        if (error.code === 'auth/weak-password') {
-          console.log('Weak password');
-        }
-        if (error.code === 'auth/requires-recent-login') {
-          console.log('You have to reauthenticate');
-        }
-        console.error(error);
         showMessage({
           message: 'Varning!',
           description: String(error),
@@ -39,14 +42,9 @@ const newDetailsKurator = async ({password, rePassword}) => {
             firstLogin: false,
           });
       });
-  } else {
-    showMessage({
-      message: 'Varning!',
-      description: 'Lösenord matchar inte!',
-      type: 'danger',
-      duration: 3200,
-    });
-    console.log('Lösenordet matchar inte!');
-  }
+      navigation.navigate('KuratorView');
+      setLoading(false);
+      setSubmitted(false);
+  };
 };
 export default newDetailsKurator;

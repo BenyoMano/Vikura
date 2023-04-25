@@ -53,16 +53,12 @@ const AddUserView = ({navigation}) => {
           </View>
           <View style={{justifyContent: 'center'}}>
             <MainText
-              title="Lägg till elev"
-              style={{fontSize: 32, color: 'black', marginTop: 15, top: 0}}
-            />
-            <MainText
               title="Skapa konto:"
               style={{
                 fontSize: 18,
                 color: 'grey',
                 top: 0,
-                marginTop: 20,
+                marginTop: 60,
                 marginBottom: 15,
               }}
             />

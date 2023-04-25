@@ -16,7 +16,6 @@ const Button = props => {
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: 100,
-      easing: Easing.linear,
       useNativeDriver: true,
     }).start();
   };

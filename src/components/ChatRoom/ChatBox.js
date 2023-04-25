@@ -1,17 +1,19 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, {useContext, useEffect, useState, useMemo} from 'react';
+import React, {useContext, useEffect, useState, useMemo, useRef} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, StyleSheet, View} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
-import {onScroll, onMomentumScrollEnd} from './scrollHandlers';
+import HistoryButton from './HistoryButton';
+import MinimizeButton from './MinimizeButton';
 
 const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
+  const flatListRef = useRef();
   const user = auth().currentUser;
 
   const openChat = useOpenChat({
@@ -139,16 +141,30 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   );
   return (
     <View style={styles.greyScale.viewStyle}>
+      <View style={{width: '25%', zIndex: 1, alignSelf: 'center'}}>
+        <View style={{position: 'absolute', left: '0%'}}>
+          <HistoryButton
+            msgLimit={msgLimit}
+            setMsgLimit={setMsgLimit}
+            flatListRef={flatListRef}
+          />
+        </View>
+        <View style={{position: 'absolute', right: '0%'}}>
+          <MinimizeButton
+            setMsgLimit={setMsgLimit}
+            flatListRef={flatListRef}
+          />
+        </View>
+      </View>
       <AutoScrollFlatList
+        ref={flatListRef}
         horizontal={false}
         numColumns={1}
         data={sortedMessages}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
-        onScroll={onScroll(msgLimit, setMsgLimit)}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-        onMomentumScrollEnd={onMomentumScrollEnd(msgLimit, setMsgLimit)}
       />
     </View>
   );

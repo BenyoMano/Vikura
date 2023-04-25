@@ -115,12 +115,12 @@ const Form = ({
           fillColor="#569253"
           unfillColor="#FFFFFF"
           isChecked={checkboxState}
-          text="KURATOR"
+          text="Utökad behörighet"
           iconStyle={{borderRadius: 10}}
           innerIconStyle={{borderRadius: 10, borderWidth: 2}}
           textStyle={{
             fontFamily: 'NunitoSans-SemiBold',
-            fontSize: 24,
+            fontSize: 22,
             textDecorationLine: 'none',
           }}
           //disableBuiltInState

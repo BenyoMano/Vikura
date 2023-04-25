@@ -15,6 +15,7 @@ import {HeaderView} from '../Header/HeaderView';
 import auth from '@react-native-firebase/auth';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 
+
 const ChatView = ({navigation, route}) => {
   const isKurator = useContext(IsKuratorContext);
   const [msgToSend, setMsgToSend] = useState();
@@ -41,6 +42,7 @@ const ChatView = ({navigation, route}) => {
             />
           </View>
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
+
             <ChatBox
               clientUserId={id}
               refPath={refPath}

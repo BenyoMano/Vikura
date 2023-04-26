@@ -13,6 +13,7 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
   const [msgLimit, setMsgLimit] = useState(0);
+  console.log('msgLimit: ', msgLimit);
   const flatListRef = useRef();
   const user = auth().currentUser;
 

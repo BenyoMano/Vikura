@@ -12,13 +12,36 @@ import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
 import {DotsLoader} from 'react-native-indicator';
+import MainText from '../../atoms/MainText';
+import { useEffect } from 'react';
 
 const Home = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {mejl, password} = loginDetails;
   const ref_input2 = useRef();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true);
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false);
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   return (
     <MyKeyboardAvoidingView>
@@ -32,12 +55,20 @@ const Home = ({navigation}) => {
           ]}>
           <View
             style={{
-              flex: 0.5,
-              justifyContent: 'flex-end',
+              flex: 0.3,
+              justifyContent: 'center',
             }}>
-            <Logo style={{width: 160, height: 62, marginTop: 30}} />
+            <Logo style={{width: 220, height: 82, marginTop: 0}} />
           </View>
           <View style={styles.contcont}>
+            {!isKeyboardVisible ? (
+              <View style={{ backgroundColor: 'transparent'}}>
+                <MainText
+                title="Välkommen!"
+                style={{fontSize: 30, color: 'black'}}
+                />
+              </View>
+            ) : null}
             <View style={styles.greyScale.logincontainer}>
               <InputBarLogIn
                 autoFocus={false}
@@ -69,7 +100,7 @@ const Home = ({navigation}) => {
               <DotsLoader size={20} color={'green'} betweenSpace={20} />
             ) : null}
           </View>
-          <View style={{flex: 0.3}}>
+          <View style={{flex: 0.2}}>
             <Button
               title="Logga in"
               onPress={() => {
@@ -110,10 +141,11 @@ const styles = StyleSheet.create({
     },
   },
   contcont: {
-    flex: 1,
+    flex: 0.4,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    // borderWidth: 1,
   },
 });
 

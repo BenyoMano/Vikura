@@ -6,7 +6,7 @@ import {Icon} from 'react-native-elements';
 
 const LogoutButton = ({setMsgLimit, flatListRef}) => {
 
-  const {btnContainerStyle, rightSideStyle} = styles;
+  const {btnContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const arrowDownTranslate = animatedValue.interpolate({
     inputRange: [0, 1],

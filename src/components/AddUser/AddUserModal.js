@@ -58,7 +58,7 @@ export const AddUserModal = ({
             </Text>
         </View>
         <View style={viewStyle.label}>
-            <Text style={textStyling.label}>Kurator:</Text>
+            <Text style={textStyling.label}>Utökad behörighet:</Text>
         </View>
         <View style={viewStyle.info}>
             <Text style={textStyling.info}> {showIfKurator} </Text>

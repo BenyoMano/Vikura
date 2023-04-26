@@ -58,7 +58,7 @@ const Home = ({navigation}) => {
               flex: 0.3,
               justifyContent: 'center',
             }}>
-            <Logo style={{width: 220, height: 82, marginTop: 0}} />
+            <Logo style={{width: 220, height: 82, marginTop: 60}} />
           </View>
           <View style={styles.contcont}>
             {!isKeyboardVisible ? (
@@ -73,7 +73,7 @@ const Home = ({navigation}) => {
               <InputBarLogIn
                 autoFocus={false}
                 blurOnSubmit={false}
-                title="Mejl:"
+                title="E-postadress"
                 keyType="email-address"
                 returnKeyType="next"
                 keys={'mejl'}
@@ -84,7 +84,7 @@ const Home = ({navigation}) => {
                 submitted={submitted}
               />
               <InputBarLogIn
-                title="Kod:"
+                title="Lösenord"
                 security={true}
                 keys={'password'}
                 value={password}
@@ -132,16 +132,17 @@ const styles = StyleSheet.create({
       backgroundColor: '#EEEEEE',
     },
     logincontainer: {
-      width: '90%',
-      paddingHorizontal: 20,
-      margingBottom: 50,
-      paddingBottom: 20,
-      backgroundColor: '#d9d9d9',
-      borderRadius: 20,
+      width: '80%',
+      // paddingHorizontal: 0,
+      // margingBottom: 50,
+      // paddingBottom: 0,
+      // backgroundColor: '#d9d9d9',
+      // borderRadius: 20,
     },
   },
   contcont: {
     flex: 0.4,
+    marginTop: 30,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 
 const InputBarNewDetails = React.forwardRef(
   (
@@ -19,13 +19,12 @@ const InputBarNewDetails = React.forwardRef(
     },
     ref,
   ) => {
-    const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
+    const {viewStyle, barStyle, redBarStyle} = styles;
     var empty = false;
     !value && submitted ? empty = true : false;
 
     return (
       <View style={viewStyle}>
-        <Text style={textStyle}>{title}</Text>
         <TextInput
           style={empty ? redBarStyle : barStyle}
           autoFocus={autoFocus}
@@ -37,7 +36,10 @@ const InputBarNewDetails = React.forwardRef(
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setNewDetails({...newDetails, [keys]: v})}
-          value={value}></TextInput>
+          value={value}
+          placeholder={title}
+          placeholderTextColor={'#575757'}
+        />
       </View>
     );
   },
@@ -46,33 +48,24 @@ const InputBarNewDetails = React.forwardRef(
 const styles = {
   viewStyle: {
     justifyContent: 'center',
-    //alignItems: 'center',
-    width: '80%',
-    marginTop: 20,
-    // backgroundColor: 'lightblue',
-  },
-  textStyle: {
-    fontSize: 12,
-    color: 'black',
-    paddingBottom: 2,
-    justifyContent: 'flex-start',
-    alignSelf: 'flex-start',
-    fontFamily: 'NunitoSans-Regular',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 15,
   },
   barStyle: {
+    paddingLeft: 10,
     height: 52,
-    width: 320,
+    width: '100%',
     color: 'black',
-    backgroundColor: '#FFFFFF',
-    borderColor: 'gray',
-    borderWidth: 2,
+    backgroundColor: '#C3C3C3',
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
   },
   redBarStyle: {
+    paddingLeft: 10,
     height: 52,
-    width: 320,
-    backgroundColor: '#FFFFFF',
+    width: '100%',
+    backgroundColor: '#C3C3C3',
     borderColor: '#D9534F',
     borderWidth: 3,
     borderRadius: 12,

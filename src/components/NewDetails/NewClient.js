@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -62,22 +61,22 @@ const NewClient = ({navigation}) => {
               style={{fontSize: 38, color: 'black'}}
             />
           </View>
-          {!isKeyboardVisible ? (
-            <View style={{ backgroundColor: 'transparent'}}>
-              <MainText
-                title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname för att det ska kännas mer personligt."
-                style={{
-                  fontSize: 19,
-                  color: '#7f7f7f',
-                  marginBottom: 40,
-                  paddingHorizontal: 40,
-                }}
-              />
-            </View>
-          ) : null}
-          
-          <View style={{flex: 2}}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.contentContainer}>
+            {!isKeyboardVisible ? (
+              <View style={{ backgroundColor: 'transparent'}}>
+                <MainText
+                  title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname för att det ska kännas mer personligt."
+                  style={{
+                    fontSize: 19,
+                    color: '#7f7f7f',
+                    marginBottom: 40,
+                    paddingHorizontal: 40,
+                  }}
+                />
+              </View>
+            ) : null}
+            
+            <View style={styles.loginContainer}>
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
@@ -117,15 +116,14 @@ const NewClient = ({navigation}) => {
                 setNewDetails={setNewDetails}
                 submitted={submitted}
                 />
-            </ScrollView>
+            </View>
           </View>
             {loading ? (
               <View style={{height: 22, marginBottom: 20, marginTop: 10}}>
                 <DotsLoader size={20} color={'green'} betweenSpace={20} />
               </View>
             ) : null}
-          {!isKeyboardVisible ? (
-            <View style={{marginBottom: 40}}>
+            <View style={{flex: 0.3}}>
               <Button
                 title="Bekräfta"
                 onPress={() => {
@@ -133,7 +131,6 @@ const NewClient = ({navigation}) => {
                 }}
               />
             </View>
-          ) : null}
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>
@@ -141,17 +138,21 @@ const NewClient = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 15,
-    backgroundColor: '#d9d9d9',
-    borderRadius: 20,
-  },
   container: {
+    width: '100%',
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',
+  },
+  loginContainer: {
+    width: '80%',
+    paddingTop: 20,
+  },
+  contentContainer: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 
 const InputBarLogIn = React.forwardRef(
   (
@@ -19,13 +19,12 @@ const InputBarLogIn = React.forwardRef(
     },
     ref,
   ) => {
-    const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
+    const {viewStyle, barStyle, redBarStyle} = styles;
     var empty = false;
     !value && submitted ? empty = true : false;
     
     return (
       <View style={viewStyle}>
-        <Text style={textStyle}>{title}</Text>
         <TextInput
           style={empty ? redBarStyle : barStyle}
           autoFocus={autoFocus}
@@ -39,6 +38,8 @@ const InputBarLogIn = React.forwardRef(
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
           value={value}
+          placeholder={title}
+          placeholderTextColor={'#575757'}
         />
       </View>
     );
@@ -52,28 +53,24 @@ const styles = {
     width: '100%',
     marginTop: 15,
   },
-  textStyle: {
-    fontSize: 14,
-    color: 'black',
-    paddingBottom: 5,
-    justifyContent: 'flex-start',
-    alignSelf: 'flex-start',
-    fontFamily: 'NunitoSans-Regular',
-  },
   barStyle: {
+    paddingLeft: 10,
     height: 52,
     width: '100%',
     color: 'black',
-    backgroundColor: '#EEEEEE',
-    borderColor: 'gray',
-    borderWidth: 2,
+    // backgroundColor: '#EEEEEE',
+    backgroundColor: '#C3C3C3',
+    // borderColor: 'gray',
+    // borderWidth: 2,
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
   },
   redBarStyle: {
+    paddingLeft: 10,
     height: 52,
     width: '100%',
-    backgroundColor: '#EEEEEE',
+    // backgroundColor: '#EEEEEE',
+    backgroundColor: '#C3C3C3',
     borderColor: '#D9534F',
     borderWidth: 3,
     borderRadius: 12,

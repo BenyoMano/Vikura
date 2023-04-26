@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -55,28 +54,28 @@ const NewKurator = ({navigation}) => {
           <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
             <HeaderView navigation={navigation} />
           </View>
-          <View style={{marginTop: 40, marginBottom: 50}}>
+          <View style={{marginTop: 40}}>
             <MainText
               title="Välkommen!"
               style={{fontSize: 38, color: 'black'}}
             />
           </View>
-          {!isKeyboardVisible ? (
-            <View style={{ backgroundColor: 'transparent'}}>
-              <MainText
-                title="Första gången du loggar in behöver du skapa ett nytt lösenord."
-                style={{
-                  fontSize: 19,
-                  color: '#7f7f7f',
-                  marginBottom: 40,
-                  paddingHorizontal: 40,
-                }}
-              />
-          </View>
-          ) : null}
+          <View style={styles.contentContainer}>
+            {!isKeyboardVisible ? (
+              <View style={{ backgroundColor: 'transparent'}}>
+                <MainText
+                  title="Första gången du loggar in behöver du skapa ett nytt lösenord."
+                  style={{
+                    fontSize: 19,
+                    color: '#7f7f7f',
+                    marginBottom: 40,
+                    paddingHorizontal: 40,
+                  }}
+                />
+            </View>
+            ) : null}
 
-          <View style={{flex: 2}}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <View style={styles.loginContainer}>
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
@@ -102,21 +101,19 @@ const NewKurator = ({navigation}) => {
                 setNewDetails={setNewDetails}
                 submitted={submitted}
               />
-            </ScrollView>
+            </View>
           </View>
             {loading ? (
               <View style={{height: 22, marginBottom: 80, marginTop: 10}}>
                 <DotsLoader size={20} color={'green'} betweenSpace={20} />
               </View>
             ) : null}
-          {!isKeyboardVisible ? (
-            <View style={{ marginBottom: 40}}>
+            <View style={{flex: 0.3}}>
               <Button
                 title="Bekräfta"
                 onPress={() => {newDetailsKurator({navigation, password, rePassword, setSubmitted, setLoading}); setSubmitted(true)}}
               />
             </View>
-          ) : null}
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>
@@ -124,17 +121,22 @@ const NewKurator = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 15,
-    backgroundColor: '#d9d9d9',
-    borderRadius: 20,
-  },
   container: {
+    width: '100%',
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',
+  },
+  loginContainer: {
+    width: '80%',
+    paddingTop: 40,
+  },
+  contentContainer: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
 

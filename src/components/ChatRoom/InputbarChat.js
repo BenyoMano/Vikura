@@ -28,8 +28,6 @@ const styles = {
     paddingRight: 10,
   },
   barStyle: {
-    // minHeight: 52,
-    /* minHeight: '5%', */
     maxHeight: 250,
     width: '100%',
     color: 'black',

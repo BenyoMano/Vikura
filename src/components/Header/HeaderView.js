@@ -12,6 +12,10 @@ import signOut from '../../firebase/signOut';
 import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import LogoutButton from './LogoutButton';
+import AdjustChatButton from './AdjustChatButton';
+import HistoryButton from '../ChatRoom/HistoryButton';
+import MinimizeButton from '../ChatRoom/MinimizeButton';
+import { useState } from 'react';
 
 export const HeaderView = ({
   navigation,
@@ -21,6 +25,8 @@ export const HeaderView = ({
 }) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
+  const [showAdjustButtons, setShowAdjustButtons] = useState(true);
+  const [closeAdjustButtons, setCloseAdjustButtons] = useState(false);
 
   return (
     <View
@@ -132,7 +138,7 @@ export const HeaderView = ({
           {/* <View style={{position: 'absolute', right: '15%'}}>
             <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
           </View> */}
-          <View style={{position: 'absolute', right: '0%'}}>
+          <View style={{position: 'absolute', right: '20%'}}>
             <ReportConcernButton
               onPress={() =>
                 navigation.navigate('ReportConcern', {
@@ -141,6 +147,24 @@ export const HeaderView = ({
               }
             />
           </View>
+          <View style={{position: 'absolute', right: '0%'}}>
+            <AdjustChatButton
+              onPress={() =>
+                {showAdjustButtons ? setTimeout(() => setShowAdjustButtons(false), 200) : setShowAdjustButtons(true)
+                !closeAdjustButtons ? setCloseAdjustButtons(true) : setCloseAdjustButtons(false)}
+              }
+            />
+          </View>
+          {showAdjustButtons ? (
+            <View>
+              <View style={{position: 'absolute', bottom: -80, right: -5}}>
+                <HistoryButton closeAdjustButtons={closeAdjustButtons} />
+              </View>
+              <View style={{position: 'absolute', bottom: -140, right: -5}}>
+                <MinimizeButton closeAdjustButtons={closeAdjustButtons} />
+              </View>
+            </View>
+          ) : null}
         </View>
       ) : route.name === 'ChatView' && !isKurator ? (
         <View

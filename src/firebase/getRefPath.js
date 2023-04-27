@@ -10,6 +10,7 @@ const getRefPath = ({
   setRoomId,
 }) => {
   const newRefPath = async () => {
+    console.log('getRefPath');
     rumNamn.docs.map(roomDetails => {
       const splitRefPath = roomDetails.ref.path.split('/');
       const roomId = splitRefPath[splitRefPath.length - 1];

@@ -1,39 +1,88 @@
-import React from 'react';
-import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = ({msgLimit, setMsgLimit, flatListRef}) => {
+const Button = ({msgLimit, setMsgLimit, flatListRef, closeAdjustButtons}) => {
   const {btnContainerStyle} = styles;
-  const animatedValue = new Animated.Value(0);
-  const buttonRotate = animatedValue.interpolate({
+  const animatedValue1 = new Animated.Value(0);
+  const animatedValue2 = new Animated.Value(0);
+  const [animatedValue3, setAnimatedValue3] = useState(new Animated.Value(0));
+  const [animatedValue4, setAnimatedValue4] = useState(new Animated.Value(0));
+
+  const buttonRotatePressIn = animatedValue1.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '30deg'],
+  });
+  const buttonRotatePressOut = animatedValue2.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: ['0deg', '-20deg', '20deg'],
+    outputRange: ['0deg', '-240deg', '-360deg'],
+  });
+  const buttonTranslate = animatedValue3.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [-15, -15, 0]
+  });
+  const buttonOpacity = animatedValue4.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 0.0, 1]
   });
 
+  useEffect(() => {
+    Animated.timing(animatedValue3, {
+      toValue: 1,
+      duration: 450,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(animatedValue4, {
+      toValue: 1,
+      duration: 450,
+      useNativeDriver: true,
+    }).start();
+  }, [])
+
+  if (closeAdjustButtons) {
+    Animated.timing(animatedValue3, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(animatedValue4, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  }
+
   const onPressIn = () => {
-    Animated.timing(animatedValue, {
+    Animated.timing(animatedValue1, {
       toValue: 1,
       duration: 150,
-      easing: Easing.linear,
       useNativeDriver: true,
     }).start();
   }
 
   const onPressOut = () => {
-    Animated.timing(animatedValue, {
-      toValue: 0,
-      duration: 50,
+    animatedValue2.setValue(0);
+    animatedValue1.setValue(0);
+    Animated.timing(animatedValue2, {
+      toValue: 1,
+      duration: 250,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
   }
 
-  const animatedRotateStyle = {
-    transform: [{rotateZ: buttonRotate}],
-  }
+  const animatedRotateStylePressIn = {
+    transform: [{rotateZ: buttonRotatePressIn}, {rotateZ: buttonRotatePressOut}],
+  };
+
+  const animatedTranslateStyle = {
+    transform: [{translateY: buttonTranslate}],
+    opacity: buttonOpacity,
+  };
 
   return (
-    <View>
+    <Animated.View style={[animatedTranslateStyle]}>
       <Pressable 
       onPress={() => {
         setMsgLimit(msgLimit + 15);
@@ -43,22 +92,25 @@ const Button = ({msgLimit, setMsgLimit, flatListRef}) => {
       onPressOut={onPressOut}
       style={btnContainerStyle}
       >
-        <Animated.View style={[animatedRotateStyle]}>
-          <Icon name="history" type="materialicons" color="" size={28} />
+        <Animated.View style={[animatedRotateStylePressIn]}>
+          <Icon name="history" type="materialicons" size={28} />
         </Animated.View>
       </Pressable>
-    </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: 'black',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    position: 'relative',
+    elevation: 30,
   },
 });
 

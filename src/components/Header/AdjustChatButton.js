@@ -2,18 +2,18 @@ import React from 'react';
 import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const AddUserButton = props => {
+const Button = props => {
   const {btnContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
-    inputRange: [0, 0.25, 1],
+    inputRange: [0, 0.5, 1],
     outputRange: ['0deg', '-20deg', '20deg'],
   });
 
   const onPressIn = () => {
     Animated.timing(animatedValue, {
       toValue: 1,
-      duration: 200,
+      duration: 150,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
@@ -22,7 +22,7 @@ const AddUserButton = props => {
   const onPressOut = () => {
     Animated.timing(animatedValue, {
       toValue: 0,
-      duration: 150,
+      duration: 50,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
@@ -33,10 +33,7 @@ const AddUserButton = props => {
   }
 
   return (
-    <View style={{
-      borderRadius: 10,
-      overflow: 'hidden'
-      }}>
+    <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable 
       onPress={props.onPress}
       onPressIn={onPressIn}
@@ -44,7 +41,7 @@ const AddUserButton = props => {
       style={btnContainerStyle}
       >
         <Animated.View style={[animatedRotateStyle]}>
-          <Icon name="adduser" type="antdesign" color="black" size={35} />
+          <Icon name="menu" type="feather" size={26} />
         </Animated.View>
       </Pressable>
     </View>
@@ -53,13 +50,13 @@ const AddUserButton = props => {
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    width: 65,
-    height: 59,
+    width: 40,
+    height: 40,
     borderWidth: 1.5,
     borderRadius: 10,
-    borderColor: '#166C1B',
+    borderColor: 'black',
     justifyContent: 'center',
   },
 });
 
-export default AddUserButton;
+export default Button;

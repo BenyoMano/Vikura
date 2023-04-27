@@ -142,21 +142,6 @@ const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   );
   return (
     <View style={styles.greyScale.viewStyle}>
-      <View style={{width: '25%', zIndex: 1, alignSelf: 'center'}}>
-        <View style={{position: 'absolute', left: '0%'}}>
-          <HistoryButton
-            msgLimit={msgLimit}
-            setMsgLimit={setMsgLimit}
-            flatListRef={flatListRef}
-          />
-        </View>
-        <View style={{position: 'absolute', right: '0%'}}>
-          <MinimizeButton
-            setMsgLimit={setMsgLimit}
-            flatListRef={flatListRef}
-          />
-        </View>
-      </View>
       <AutoScrollFlatList
         ref={flatListRef}
         horizontal={false}

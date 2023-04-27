@@ -33,6 +33,7 @@ const ChatView = ({navigation, route}) => {
               flexDirection: 'row',
               justifyContent: 'center',
               width: '100%',
+              zIndex: 2,
             }}>
             <HeaderView
               navigation={navigation}

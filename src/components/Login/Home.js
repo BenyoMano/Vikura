@@ -133,11 +133,6 @@ const styles = StyleSheet.create({
     },
     logincontainer: {
       width: '80%',
-      // paddingHorizontal: 0,
-      // margingBottom: 50,
-      // paddingBottom: 0,
-      // backgroundColor: '#d9d9d9',
-      // borderRadius: 20,
     },
   },
   contcont: {
@@ -146,7 +141,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',
-    // borderWidth: 1,
   },
 });
 

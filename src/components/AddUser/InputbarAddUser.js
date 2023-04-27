@@ -47,7 +47,6 @@ const styles = {
   viewStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    // width: '80%',
     marginTop: 20,
   },
   textStyle: {

@@ -6,6 +6,7 @@ import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
+import { onScroll } from './scrollHandlers';
 
 const ChatBox = ({msgLimit, refPath, setRefPath, clientUserId, setRoomId, flatListRef, setMsgLimit}) => {
   const isKurator = useContext(IsKuratorContext);
@@ -150,6 +151,7 @@ const ChatBox = ({msgLimit, refPath, setRefPath, clientUserId, setRoomId, flatLi
         showNewItemAlert={false}
         onScrollToTop={()=>{console.log("onScrollToTop")}}
         onEndReached={()=>{console.log("onEndReached")}}
+        onScroll={onScroll(msgLimit, setMsgLimit)}
       />
     </View>
   );

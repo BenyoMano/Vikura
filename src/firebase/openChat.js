@@ -13,30 +13,24 @@ const useOpenChat = ({
 }) => {
   const openChat = async msgLimit => {
     if (isKurator === undefined) return;
+    if (!isKurator) {
+    clientUserId = user.uid;
 
-    if (isKurator) {
-      const rumNamn = await roomName({clientUserId});
-      getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
-    } else {
-      clientUserId = user.uid;
-      const rumNamn = await roomName({clientUserId});
-
-      if (!rumNamn.empty) {
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
-      } else {
-        createRoom({clientUserId});
-        const rumNamn = await roomName({clientUserId});
-        getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
-        showMessage({
-          message: 'Välkommen!',
-          description: 'Du kan börja chatta direkt!',
-          type: 'info',
-          position: 'center',
-          floating: true,
-          duration: 3000,
-        });
-      }
+    if (rumNamn.empty) {
+      createRoom({clientUserId});
+      showMessage({
+        message: 'Välkommen!',
+        description: 'Du kan börja chatta direkt!',
+        type: 'info',
+        position: 'center',
+        floating: true,
+        duration: 3000,
+      });
     }
+    }
+    const rumNamn = await roomName({clientUserId});
+    const unsubscribeList = getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
+    return unsubscribeList;
   };
   return openChat;
 };

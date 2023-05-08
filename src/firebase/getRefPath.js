@@ -9,9 +9,8 @@ const getRefPath = ({
   msgLimit,
   setRoomId,
 }) => {
-  const newRefPath = async () => {
     console.log('getRefPath');
-    rumNamn.docs.map(roomDetails => {
+    return rumNamn.docs.map(roomDetails => {
       const splitRefPath = roomDetails.ref.path.split('/');
       const roomId = splitRefPath[splitRefPath.length - 1];
       
@@ -21,11 +20,10 @@ const getRefPath = ({
         .collection('messages');
 
       setRefPath(pathToMessages);
-      ListenMsg({isKurator, pathToMessages, setMessages, msgLimit});
+      const unsubscribe = ListenMsg({isKurator, pathToMessages, setMessages, msgLimit});
       setRoomId(roomId);
+      return unsubscribe;
     });
   };
-  newRefPath();
-};
 
 export default getRefPath;

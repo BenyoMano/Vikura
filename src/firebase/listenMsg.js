@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
-const ListenMsg = async ({
+const ListenMsg = ({
   isKurator,
   pathToMessages,
   setMessages,
   msgLimit,
 }) => {
 
-    pathToMessages
+  const unsubscribe = pathToMessages
       .orderBy('timestamp', 'desc')
       .limit(15 + msgLimit)
       .onSnapshot(messageDetails => {
@@ -26,7 +26,7 @@ const ListenMsg = async ({
   console.log(isKurator);
 
         if (isKurator) {
-        await pathToMessages
+        pathToMessages
           .where('isRead', '==', false)
           .get()
           .then(a => {
@@ -37,6 +37,8 @@ const ListenMsg = async ({
             });
           });
       }
+
+      return unsubscribe;
 
 
 };

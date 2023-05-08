@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
@@ -9,19 +9,19 @@ import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
-import {useContext} from 'react';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import LogoutButton from './LogoutButton';
 import AdjustChatButton from './AdjustChatButton';
 import HistoryButton from '../ChatRoom/HistoryButton';
 import MinimizeButton from '../ChatRoom/MinimizeButton';
-import { useState } from 'react';
 
 export const HeaderView = ({
   navigation,
   clientUserId,
   hasAddedUser,
   setHasAddedUser,
+  msgLimit,
+  setMsgLimit,
 }) => {
   const route = useRoute();
   const isKurator = useContext(IsKuratorContext);
@@ -158,10 +158,10 @@ export const HeaderView = ({
           {showAdjustButtons ? (
             <View>
               <View style={{position: 'absolute', bottom: -80, right: -5}}>
-                <HistoryButton closeAdjustButtons={closeAdjustButtons} />
+                <HistoryButton closeAdjustButtons={closeAdjustButtons} msgLimit={msgLimit} setMsgLimit={setMsgLimit} />
               </View>
               <View style={{position: 'absolute', bottom: -140, right: -5}}>
-                <MinimizeButton closeAdjustButtons={closeAdjustButtons} />
+                <MinimizeButton closeAdjustButtons={closeAdjustButtons} setMsgLimit={setMsgLimit} />
               </View>
             </View>
           ) : null}

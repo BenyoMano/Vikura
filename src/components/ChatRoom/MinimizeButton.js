@@ -90,7 +90,7 @@ const LogoutButton = ({setMsgLimit, flatListRef, closeAdjustButtons}) => {
       <Pressable
         onPress={ () => {
           setMsgLimit(0);
-          flatListRef.current.scrollToOffset({animated: true, offset: 5000});
+          // flatListRef.current.scrollToOffset({animated: true, offset: 5000});
           }
         }
         onPressIn={onPressIn}

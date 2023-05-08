@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 
-function ListenMsg({
+const ListenMsg = async ({
   isKurator,
   pathToMessages,
   setMessages,
   msgLimit,
-}) {
+}) => {
 
-  useEffect(() => {
-    const unsubscribe = pathToMessages
+    pathToMessages
       .orderBy('timestamp', 'desc')
       .limit(15 + msgLimit)
       .onSnapshot(messageDetails => {
@@ -23,23 +22,21 @@ function ListenMsg({
         setMessages(newData);
         console.log('setMessages', msgLimit);
       });
-    return () => unsubscribe();
-  }, [msgLimit])
 
   console.log(isKurator);
 
-      //   if (isKurator) {
-      //   await pathToMessages
-      //     .where('isRead', '==', false)
-      //     .get()
-      //     .then(a => {
-      //       a.forEach(doc => {
-      //         doc.ref.update({
-      //           isRead: true,
-      //         });
-      //       });
-      //     });
-      // }
+        if (isKurator) {
+        await pathToMessages
+          .where('isRead', '==', false)
+          .get()
+          .then(a => {
+            a.forEach(doc => {
+              doc.ref.update({
+                isRead: true,
+              });
+            });
+          });
+      }
 
 
 };

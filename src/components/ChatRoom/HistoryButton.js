@@ -86,7 +86,7 @@ const Button = ({msgLimit, setMsgLimit, flatListRef, closeAdjustButtons}) => {
       <Pressable 
       onPress={() => {
         setMsgLimit(msgLimit + 15);
-        flatListRef.current.scrollToOffset({animated: true, offset: 0});
+        // flatListRef.current.scrollToOffset({animated: true, offset: 0});
       }}
       onPressIn={onPressIn}
       onPressOut={onPressOut}

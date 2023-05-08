@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useRef} from 'react';
 import {
   View,
   TouchableWithoutFeedback,
@@ -20,7 +20,9 @@ const ChatView = ({navigation, route}) => {
   const isKurator = useContext(IsKuratorContext);
   const [msgToSend, setMsgToSend] = useState();
   const [refPath, setRefPath] = useState(false);
+  const [msgLimit, setMsgLimit] = useState(0);
   const [roomId, setRoomId] = useState();
+  const flatListRef = useRef();
   const {id} = route.params;
   const user = auth().currentUser;
 
@@ -40,6 +42,8 @@ const ChatView = ({navigation, route}) => {
               clientUserId={id}
               user={user}
               refPath={refPath}
+              msgLimit={msgLimit}
+              setMsgLimit={setMsgLimit}
             />
           </View>
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
@@ -49,6 +53,7 @@ const ChatView = ({navigation, route}) => {
               refPath={refPath}
               setRefPath={setRefPath}
               setRoomId={setRoomId}
+              msgLimit={msgLimit}
             />
           </View>
           <View

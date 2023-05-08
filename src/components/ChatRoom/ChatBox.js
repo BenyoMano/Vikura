@@ -1,27 +1,24 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, {useContext, useEffect, useState, useMemo, useRef} from 'react';
+import React, {useContext, useEffect, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
 import {Text, StyleSheet, View} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsKuratorContext} from '../../firebase/isKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
-import HistoryButton from './HistoryButton';
-import MinimizeButton from './MinimizeButton';
 
-const ChatBox = ({refPath, setRefPath, clientUserId, setRoomId}) => {
+const ChatBox = ({msgLimit, refPath, setRefPath, clientUserId, setRoomId, flatListRef}) => {
   const isKurator = useContext(IsKuratorContext);
   const [messages, setMessages] = useState([]);
-  const [msgLimit, setMsgLimit] = useState(0);
+  // const [msgLimit, setMsgLimit] = useState(0);
   console.log('msgLimit: ', msgLimit);
-  const flatListRef = useRef();
   const user = auth().currentUser;
 
   const openChat = useOpenChat({
     isKurator,
     user,
     clientUserId,
-    refPath,
+    refPath, // antagligen onödig
     setRefPath,
     setMessages,
     setRoomId,

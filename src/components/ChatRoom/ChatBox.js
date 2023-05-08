@@ -8,7 +8,6 @@ import useOpenChat from '../../firebase/openChat';
 import BubblaView from './BubblaView';
 import { useCallback } from 'react';
 
-const SORTED_MESSAGES = [{"author": "KURATOR", "displayTimestamp": "2023-04-27T14:34:21.195Z", "id": "ouZQgJqHZzLWZjEafqiCiYYxmfp1", "isRead": true, "text": "Gjgf", "timestamp": 1682606061195}, {"author": "KURATOR", "displayTimestamp": "2023-04-27T14:34:52.774Z", "id": "ouZQgJqHZzLWZjEafqiCiYYxmfp1", "isRead": true, "text": "Udhd", "timestamp": 1682606092774}]
 
 const Item = memo(({text, id, displayTimestamp, isKurator, clientUserId, user}) => {
   console.log('Item render')

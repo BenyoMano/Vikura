@@ -149,6 +149,7 @@ const ChatBox = ({msgLimit, refPath, setRefPath, clientUserId, setRoomId, flatLi
         scrollEventThrottle={160}
         showNewItemAlert={false}
         onScrollToTop={()=>{console.log("onScrollToTop")}}
+        onEndReached={()=>{console.log("onEndReached")}}
       />
     </View>
   );

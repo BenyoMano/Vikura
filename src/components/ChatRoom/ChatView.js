@@ -54,6 +54,7 @@ const ChatView = ({navigation, route}) => {
               setRefPath={setRefPath}
               setRoomId={setRoomId}
               msgLimit={msgLimit}
+              setMsgLimit={setMsgLimit}
             />
           </View>
           <View

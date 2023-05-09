@@ -5,12 +5,12 @@ import {Icon} from 'react-native-elements';
 const AddUserButton = props => {
   const {btnContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
-  const buttonRotate = animatedValue.interpolate({
+  const rotateAnimation = animatedValue.interpolate({
     inputRange: [0, 0.25, 1],
     outputRange: ['0deg', '-20deg', '20deg'],
   });
 
-  const onPressIn = () => {
+  const handlePressInAnimation = () => {
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: 200,
@@ -19,7 +19,7 @@ const AddUserButton = props => {
     }).start();
   }
 
-  const onPressOut = () => {
+  const handlePressOutAnimation = () => {
     Animated.timing(animatedValue, {
       toValue: 0,
       duration: 150,
@@ -28,8 +28,8 @@ const AddUserButton = props => {
     }).start();
   }
 
-  const animatedRotateStyle = {
-    transform: [{rotateZ: buttonRotate}],
+  const rotateAnimationStyle = {
+    transform: [{rotateZ: rotateAnimation}],
   }
 
   return (
@@ -39,11 +39,11 @@ const AddUserButton = props => {
       }}>
       <Pressable 
       onPress={props.onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
+      onPressIn={handlePressInAnimation}
+      onPressOut={handlePressOutAnimation}
       style={btnContainerStyle}
       >
-        <Animated.View style={[animatedRotateStyle]}>
+        <Animated.View style={[rotateAnimationStyle]}>
           <Icon name="adduser" type="antdesign" color="black" size={35} />
         </Animated.View>
       </Pressable>

@@ -1,24 +1,24 @@
 import React from "react"
 import {View, Text, StyleSheet} from 'react-native';
 
-const BubblaView = ({isKurator, text, id, clientUserId, user}) => {
+const BubbleView = ({isCurrentUserKurator, text, id, clientUserId, user}) => {
 
-    return !isKurator ? (
+    return !isCurrentUserKurator ? (
         <View
         style={[
          id === user.uid
-            ? styles.bubblaSend.bubbla
-            : styles.bubblaRecieve.bubbla,
+            ? styles.bubbleSend.bubble
+            : styles.bubbleRecieve.bubble,
         ]}>
         <Text style={styles.text.message}>{text}</Text>
         </View>
 
-    ) : isKurator ? (
+    ) : isCurrentUserKurator ? (
         <View
         style={[
           id === clientUserId
-            ? styles.bubblaRecieve.bubbla
-            : styles.bubblaSend.bubbla,
+            ? styles.bubbleRecieve.bubble
+            : styles.bubbleSend.bubble,
         ]}>
         <Text style={styles.text.message}>{text}</Text>
       </View>
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
       fontFamily: 'NunitoSans-Regular',
     },
   },
-  bubblaSend: {
-    bubbla: {
+  bubbleSend: {
+    bubble: {
       justifyContent: 'center',
       marginTop: 10,
       marginBottom: 5,
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
       borderRadius: 12,
     },
   },
-  bubblaRecieve: {
-    bubbla: {
+  bubbleRecieve: {
+    bubble: {
       justifyContent: 'center',
       alignSelf: 'flex-start',
       marginTop: 10,
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default BubblaView;
+export default BubbleView;

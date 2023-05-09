@@ -1,28 +1,27 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useState, useRef} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
   StyleSheet,
 } from 'react-native';
-import ChatBox from './ChatBox';
+import ChatBoxView from './ChatBoxView';
 import InputBarChatt from './InputbarChat';
-import ButtonSend from './ButtonSend';
-import SendMessage from './sendMessage';
+import SendButton from './SendButton';
+import handleSendMessage from './handleSendMessage';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import auth from '@react-native-firebase/auth';
-import {IsKuratorContext} from '../../firebase/isKuratorContext';
+import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 
 
-const ChatView = ({navigation, route}) => {
-  const isKurator = useContext(IsKuratorContext);
-  const [msgToSend, setMsgToSend] = useState();
+const ChatScreen = ({navigation, route}) => {
+  const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
+  const [messageToSend, setMessageToSend] = useState();
   const [refPath, setRefPath] = useState(false);
-  const [msgLimit, setMsgLimit] = useState(0);
+  const [messageLimit, setMessageLimit] = useState(0);
   const [roomId, setRoomId] = useState();
-  const flatListRef = useRef();
   const {id} = route.params;
   const user = auth().currentUser;
 
@@ -42,19 +41,19 @@ const ChatView = ({navigation, route}) => {
               clientUserId={id}
               user={user}
               refPath={refPath}
-              msgLimit={msgLimit}
-              setMsgLimit={setMsgLimit}
+              messageLimit={messageLimit}
+              setMessageLimit={setMessageLimit}
             />
           </View>
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
 
-            <ChatBox
+            <ChatBoxView
               clientUserId={id}
               refPath={refPath}
               setRefPath={setRefPath}
               setRoomId={setRoomId}
-              msgLimit={msgLimit}
-              setMsgLimit={setMsgLimit}
+              messageLimit={messageLimit}
+              setMessageLimit={setMessageLimit}
             />
           </View>
           <View
@@ -64,12 +63,12 @@ const ChatView = ({navigation, route}) => {
               width: '88%',
               marginBottom: '6%',
             }}>
-            <InputBarChatt msgToSend={msgToSend} setMsgToSend={setMsgToSend} />
-            <ButtonSend
+            <InputBarChatt messageToSend={messageToSend} setMessageToSend={setMessageToSend} />
+            <SendButton
               title="Skicka"
               onPress={() => {
-                SendMessage({isKurator, msgToSend, user, refPath, roomId});
-                setMsgToSend('');
+                handleSendMessage({isCurrentUserKurator, messageToSend, user, refPath, roomId});
+                setMessageToSend('');
               }}
             />
           </View>
@@ -92,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChatView;
+export default ChatScreen;

@@ -4,32 +4,31 @@ import getRefPath from './getRefPath';
 import roomName from './roomName';
 
 const useOpenChat = ({
-  isKurator,
+  isCurrentUserKurator,
   user,
   clientUserId,
   setRefPath,
   setMessages,
   setRoomId,
 }) => {
-  const openChat = async msgLimit => {
-    if (isKurator === undefined) return;
-    if (!isKurator) {
+  const openChat = async messageLimit => {
+    if (isCurrentUserKurator === undefined) return;
+    if (!isCurrentUserKurator) {
     clientUserId = user.uid;
-
-    if (rumNamn.empty) {
-      createRoom({clientUserId});
-      showMessage({
-        message: 'Välkommen!',
-        description: 'Du kan börja chatta direkt!',
-        type: 'info',
-        position: 'center',
-        floating: true,
-        duration: 3000,
-      });
-    }
+      if (rumNamn.empty) {
+        createRoom({clientUserId});
+        showMessage({
+          message: 'Välkommen!',
+          description: 'Du kan börja chatta direkt!',
+          type: 'info',
+          position: 'center',
+          floating: true,
+          duration: 3000,
+        });
+      }
     }
     const rumNamn = await roomName({clientUserId});
-    const unsubscribeList = getRefPath({isKurator, setRefPath, rumNamn, setMessages, msgLimit, setRoomId});
+    const unsubscribeList = getRefPath({isCurrentUserKurator, setRefPath, rumNamn, setMessages, messageLimit, setRoomId});
     return unsubscribeList;
   };
   return openChat;

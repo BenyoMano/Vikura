@@ -2,10 +2,10 @@ import React, {createContext, useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-const IsKuratorContext = createContext();
+const IsCurrentUserKuratorContext = createContext();
 
-const IsKuratorProvider = ({children}) => {
-  const [isKurator, setIsKurator] = useState(undefined);
+const IsCurrentUserKuratorProvider = ({children}) => {
+  const [isCurrentUserKurator, setIsCurrentUserKurator] = useState(undefined);
   const [user, setUser] = useState(auth().currentUser);
 
   useEffect(() => {
@@ -23,16 +23,16 @@ const IsKuratorProvider = ({children}) => {
         .doc(user.uid)
         .get();
       const kurator = firestoreUser.get('kurator');
-      setIsKurator(kurator);
+      setIsCurrentUserKurator(kurator);
     };
     getKurator();
   }, [user]);
 
   return (
-    <IsKuratorContext.Provider value={isKurator}>
+    <IsCurrentUserKuratorContext.Provider value={isCurrentUserKurator}>
       {children}
-    </IsKuratorContext.Provider>
+    </IsCurrentUserKuratorContext.Provider>
   );
 };
 
-export {IsKuratorContext, IsKuratorProvider};
+export {IsCurrentUserKuratorContext, IsCurrentUserKuratorProvider};

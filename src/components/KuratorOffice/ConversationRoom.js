@@ -4,11 +4,11 @@ import {View, Text, Pressable, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
-const Room = ({roomId, clientAlias, clientId}) => {
+const ConversationRoom = ({roomId, clientAlias, clientId}) => {
   const [latestMessage, setLatestMessage] = useState(undefined);
-  const animated = new Animated.Value(1);
+  const opacityAnimation = new Animated.Value(1);
   const fadeIn = () => {
-    Animated.timing(animated, {
+    Animated.timing(opacityAnimation, {
       toValue: 0.5,
       duration: 150,
       useNativeDriver: true,
@@ -16,7 +16,7 @@ const Room = ({roomId, clientAlias, clientId}) => {
   };
 
   const fadeOut = () => {
-    Animated.timing(animated, {
+    Animated.timing(opacityAnimation, {
       toValue: 1,
       duration: 200,
       useNativeDriver: true,
@@ -24,14 +24,14 @@ const Room = ({roomId, clientAlias, clientId}) => {
   };
 
   useEffect(() => {
-    let unsubscribe;
-    const getLatestMessage = async () => {
+    let unsubscribeFromLastMessage;
+    const subscribeToLastMessage = async () => {
       const pathToMessages = firestore()
         .collection('rooms')
         .doc(roomId)
         .collection('messages');
 
-      unsubscribe = pathToMessages
+      unsubscribeFromLastMessage = pathToMessages
         .orderBy('timestamp', 'desc')
         .limit(1)
         .onSnapshot(lastMessage => {
@@ -48,8 +48,8 @@ const Room = ({roomId, clientAlias, clientId}) => {
         });
     };
 
-    getLatestMessage();
-    return () => unsubscribe();
+    subscribeToLastMessage();
+    return () => unsubscribeFromLastMessage();
   }, []);
 
   const navigation = useNavigation();
@@ -57,14 +57,14 @@ const Room = ({roomId, clientAlias, clientId}) => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('ChatView', {id: latestMessage.id})}
+      onPress={() => navigation.navigate('ChatScreen', {id: latestMessage.id})}
       onPressIn={fadeIn}
       onPressOut={fadeOut}>
       <Animated.View
         style={[
-          styles.greyScale.item,
+          styles.conversationRoom.item,
           {
-            opacity: animated,
+            opacity: opacityAnimation,
           },
         ]}>
         <View style={styles.header}>
@@ -117,7 +117,7 @@ const styles = {
       fontFamily: 'NunitoSans-Bold',
     },
   },
-  greyScale: {
+  conversationRoom: {
     item: {
       padding: 15,
       marginHorizontal: 0,
@@ -130,4 +130,4 @@ const styles = {
   },
 };
 
-export default Room;
+export default ConversationRoom;

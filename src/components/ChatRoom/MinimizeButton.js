@@ -4,7 +4,7 @@ import {Animated} from 'react-native';
 import {Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const LogoutButton = ({setMsgLimit, flatListRef, closeAdjustButtons}) => {
+const LogoutButton = ({setMessageLimit, closeAdjustButtons}) => {
 
   const {btnContainerStyle} = styles;
   const animatedValue1 = new Animated.Value(0);
@@ -89,8 +89,7 @@ const LogoutButton = ({setMsgLimit, flatListRef, closeAdjustButtons}) => {
     <Animated.View style={[animatedTranslateStyle]}>
       <Pressable
         onPress={ () => {
-          setMsgLimit(0);
-          // flatListRef.current.scrollToOffset({animated: true, offset: 5000});
+          setMessageLimit(0);
           }
         }
         onPressIn={onPressIn}

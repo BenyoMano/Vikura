@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import roomName from '../../firebase/roomName';
 
-export const useMessages = ({setRoomId, isKurator, user, clientUserId}) => {
+export const useMessages = ({setRoomId, isCurrentUserKurator, user, clientUserId}) => {
 
     const [messages, setMessages] = useState([]);
 

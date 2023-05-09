@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 
 const ListenMsg = ({
-  isKurator,
+  isCurrentUserKurator,
   pathToMessages,
   setMessages,
-  msgLimit,
+  messageLimit,
 }) => {
 
   const unsubscribe = pathToMessages
       .orderBy('timestamp', 'desc')
-      .limit(15 + msgLimit)
+      .limit(100 + messageLimit)
       .onSnapshot(messageDetails => {
         const newData = messageDetails.docs.map(documentSnapshot => ({
           timestamp: documentSnapshot.data().timestamp.toMillis(),
@@ -20,12 +20,12 @@ const ListenMsg = ({
           id: documentSnapshot.data().id,
         }));
         setMessages(newData);
-        console.log('setMessages', msgLimit);
+        console.log('setMessages', messageLimit);
       });
 
-  console.log(isKurator);
+  console.log(isCurrentUserKurator);
 
-        if (isKurator) {
+        if (isCurrentUserKurator) {
         pathToMessages
           .where('isRead', '==', false)
           .get()

@@ -2,17 +2,16 @@ import firestore from '@react-native-firebase/firestore';
 import ListenMsg from './listenMsg';
 
 const getRefPath = ({
-  isKurator,
+  isCurrentUserKurator,
   setRefPath,
   rumNamn,
   setMessages,
-  msgLimit,
+  messageLimit,
   setRoomId,
 }) => {
     console.log('getRefPath');
     return rumNamn.docs.map(roomDetails => {
-      const splitRefPath = roomDetails.ref.path.split('/');
-      const roomId = splitRefPath[splitRefPath.length - 1];
+      const roomId = roomDetails.id;
       
       const pathToMessages = firestore()
         .collection('rooms')
@@ -20,7 +19,7 @@ const getRefPath = ({
         .collection('messages');
 
       setRefPath(pathToMessages);
-      const unsubscribe = ListenMsg({isKurator, pathToMessages, setMessages, msgLimit});
+      const unsubscribe = ListenMsg({isCurrentUserKurator, pathToMessages, setMessages, messageLimit});
       setRoomId(roomId);
       return unsubscribe;
     });

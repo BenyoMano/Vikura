@@ -9,7 +9,7 @@ import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
-import {IsKuratorContext} from '../../firebase/isKuratorContext';
+import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import LogoutButton from './LogoutButton';
 import AdjustChatButton from './AdjustChatButton';
 import HistoryButton from '../ChatRoom/HistoryButton';
@@ -20,11 +20,11 @@ export const HeaderView = ({
   clientUserId,
   hasAddedUser,
   setHasAddedUser,
-  msgLimit,
-  setMsgLimit,
+  messageLimit,
+  setMessageLimit,
 }) => {
   const route = useRoute();
-  const isKurator = useContext(IsKuratorContext);
+  const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
   const [showAdjustButtons, setShowAdjustButtons] = useState(true);
   const [closeAdjustButtons, setCloseAdjustButtons] = useState(false);
 
@@ -45,7 +45,7 @@ export const HeaderView = ({
         <Logo style={{width: 90, height: 35}} />
       </View>
 
-      {route.name === 'KuratorView' ? (
+      {route.name === 'KuratorScreen' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -58,15 +58,15 @@ export const HeaderView = ({
               title="Logga Ut"
               onPress={() => {
                 signOut();
-                navigation.navigate('Home');
+                navigation.navigate('HomeScreen');
               }}
             />
           </View>
           <View>
-            <AddUserButton onPress={() => navigation.navigate('AddUserView')} />
+            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
           </View>
         </View>
-      ) : route.name === 'AddUserView' ? (
+      ) : route.name === 'AddUserScreen' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -79,7 +79,7 @@ export const HeaderView = ({
               <LogoutButton
                 onPress={() => {
                   signOut();
-                  navigation.navigate('Home');
+                  navigation.navigate('HomeScreen');
                   setHasAddedUser(false);
                 }}
               />
@@ -88,7 +88,7 @@ export const HeaderView = ({
             ) : null}
           </View>
         </View>
-      ) : route.name === 'NewKurator' ? (
+      ) : route.name === 'NewKuratorScreen' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -100,7 +100,7 @@ export const HeaderView = ({
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
-      ) : route.name === 'NewClient' ? (
+      ) : route.name === 'NewClientScreen' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -112,7 +112,7 @@ export const HeaderView = ({
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
-      ) : route.name === 'ReportConcern' ? (
+      ) : route.name === 'ReportConcernScreen' ? (
         <View
           style={{
             flexDirection: 'row',
@@ -124,7 +124,7 @@ export const HeaderView = ({
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         </View>
-      ) : route.name === 'ChatView' && isKurator ? (
+      ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
         <View
           style={{
             flexDirection: 'row',
@@ -141,7 +141,7 @@ export const HeaderView = ({
           <View style={{position: 'absolute', right: '20%'}}>
             <ReportConcernButton
               onPress={() =>
-                navigation.navigate('ReportConcern', {
+                navigation.navigate('ReportConcernScreen', {
                   clientUserId: clientUserId,
                 })
               }
@@ -158,15 +158,15 @@ export const HeaderView = ({
           {showAdjustButtons ? (
             <View>
               <View style={{position: 'absolute', bottom: -80, right: -5}}>
-                <HistoryButton closeAdjustButtons={closeAdjustButtons} msgLimit={msgLimit} setMsgLimit={setMsgLimit} />
+                <HistoryButton closeAdjustButtons={closeAdjustButtons} messageLimit={messageLimit} setMessageLimit={setMessageLimit} />
               </View>
               <View style={{position: 'absolute', bottom: -140, right: -5}}>
-                <MinimizeButton closeAdjustButtons={closeAdjustButtons} setMsgLimit={setMsgLimit} />
+                <MinimizeButton closeAdjustButtons={closeAdjustButtons} setMessageLimit={setMessageLimit} />
               </View>
             </View>
           ) : null}
         </View>
-      ) : route.name === 'ChatView' && !isKurator ? (
+      ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
         <View
           style={{
             flexDirection: 'row',
@@ -178,7 +178,7 @@ export const HeaderView = ({
             title="Logga Ut"
             onPress={() => {
               signOut();
-              navigation.navigate('Home');
+              navigation.navigate('HomeScreen');
             }}
           />
         </View>

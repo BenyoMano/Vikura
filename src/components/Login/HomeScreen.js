@@ -15,7 +15,7 @@ import {DotsLoader} from 'react-native-indicator';
 import MainText from '../../atoms/MainText';
 import { useEffect } from 'react';
 
-const Home = ({navigation}) => {
+const HomeScreen = ({navigation}) => {
   const [loginDetails, setLoginDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {mejl, password} = loginDetails;
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = ({msgLimit, setMsgLimit, flatListRef, closeAdjustButtons}) => {
+const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
   const {btnContainerStyle} = styles;
   const animatedValue1 = new Animated.Value(0);
   const animatedValue2 = new Animated.Value(0);
@@ -85,8 +85,7 @@ const Button = ({msgLimit, setMsgLimit, flatListRef, closeAdjustButtons}) => {
     <Animated.View style={[animatedTranslateStyle]}>
       <Pressable 
       onPress={() => {
-        setMsgLimit(msgLimit + 15);
-        // flatListRef.current.scrollToOffset({animated: true, offset: 0});
+        setMessageLimit(messageLimit + 15);
       }}
       onPressIn={onPressIn}
       onPressOut={onPressOut}

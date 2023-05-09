@@ -12,16 +12,16 @@ const navigateAfterSignIn = async ({navigation}) => {
   const kuratorStatus = askNavigationConditions.get('kurator');
 
   if (newUserStatus && !kuratorStatus) {
-    navigation.navigate('NewClient');
+    navigation.navigate('NewClientScreen');
   }
   if (!newUserStatus && !kuratorStatus) {
-    navigation.navigate('ChatView', {id: user.uid});
+    navigation.navigate('ChatScreen', {id: user.uid});
   }
   if (!newUserStatus && kuratorStatus) {
-    navigation.navigate('KuratorView');
+    navigation.navigate('KuratorScreen');
   }
   if (newUserStatus && kuratorStatus) {
-    navigation.navigate('NewKurator');
+    navigation.navigate('NewKuratorScreen');
   }
 };
 

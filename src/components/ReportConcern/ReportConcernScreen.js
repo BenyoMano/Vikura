@@ -12,7 +12,7 @@ import {Linking} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import ClipboardHandler from './ClipboardHandler';
 
-const ReportConcern = ({navigation, route}) => {
+const ReportConcernScreen = ({navigation, route}) => {
   const [clipboardString, setClipboardString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReportConcern;
+export default ReportConcernScreen;

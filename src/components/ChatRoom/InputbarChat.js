@@ -1,15 +1,15 @@
 import React from 'react';
 import {TextInput, View} from 'react-native';
 
-const InputBarChatt = ({msgToSend, setMsgToSend}) => {
+const InputBarChatt = ({messageToSend, setMessageToSend}) => {
   const {viewStyle, barStyle} = styles;
 
   return (
     <View style={viewStyle}>
       <TextInput
         style={barStyle}
-        onChangeText={msgToSend => setMsgToSend(msgToSend)}
-        value={msgToSend}
+        onChangeText={messageToSend => setMessageToSend(messageToSend)}
+        value={messageToSend}
         autoFocus={true}
         multiline
         placeholder="Skriv något..."

@@ -1,10 +1,10 @@
 import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
-const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
-  if (!msgToSend) return;
-  if (msgToSend.trim() === '') return;
-  msgToSend = msgToSend.trim();
+const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, roomId}) => {
+  if (!messageToSend) return;
+  if (messageToSend.trim() === '') return;
+  messageToSend = messageToSend.trim();
   const timestamp = new Date();
 
   const addMessage = async () => {
@@ -16,8 +16,8 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
       .add({
         author: getUserData.get('alias'),
         kurator: getUserData.get('kurator'),
-        msg: msgToSend,
-        isRead: isKurator ? true : false,
+        msg: messageToSend,
+        isRead: isCurrentUserKurator ? true : false,
         timestamp: timestamp,
         id: user.uid,
       })
@@ -49,4 +49,4 @@ const SendMessage = ({isKurator, msgToSend, user, refPath, roomId}) => {
   addMessage();
 };
 
-export default SendMessage;
+export default handleSendMessage;

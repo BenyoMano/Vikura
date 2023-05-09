@@ -4,24 +4,24 @@ import {Animated} from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = props => {
-  const {btnContainerStyle} = styles;
-  const animatedValue = new Animated.Value(0);
-  const buttonTranslate = animatedValue.interpolate({
+const BackButton = props => {
+  const {backButtonContainerStyle} = styles;
+  const animationProgress = new Animated.Value(0);
+  const buttonTranslate = animationProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [0, -10],
   });
 
-  const onPressIn = () => {
-    Animated.timing(animatedValue, {
+  const handlePressInAnimation = () => {
+    Animated.timing(animationProgress, {
       toValue: 1,
       duration: 100,
       useNativeDriver: true,
     }).start();
   };
 
-  const onPressOut = () => {
-    Animated.timing(animatedValue, {
+  const handlePressOutAnimation = () => {
+    Animated.timing(animationProgress, {
       toValue: 0,
       duration: 50,
       easing: Easing.linear,
@@ -37,9 +37,9 @@ const Button = props => {
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
         onPress={props.onPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
-        style={btnContainerStyle}>
+        onPressIn={handlePressInAnimation}
+        onPressOut={handlePressOutAnimation}
+        style={backButtonContainerStyle}>
         <Animated.View style={[animatedTransform]}>
           <Icon name="arrow-back" type="ionicon" color="black" />
         </Animated.View>
@@ -49,7 +49,7 @@ const Button = props => {
 };
 
 const styles = StyleSheet.create({
-  btnContainerStyle: {
+  backButtonContainerStyle: {
     width: 65,
     height: 34,
     borderWidth: 1.5,
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default BackButton;

@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import {View, FlatList} from 'react-native';
 import ConvoLoader from './ConvoLoader';
-import {useRooms} from './useRooms';
-import Room from './Room';
+import {useRoomsData} from './useRoomsData';
+import ConversationRoom from './ConversationRoom';
 
-const Conv = () => {
+const ConversationView = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const rooms = useRooms({setIsLoaded});
+  const rooms = useRoomsData({setIsLoaded});
 
   const sortedRooms = rooms.sort(
     (a, b) => b.latestTimestamp - a.latestTimestamp,
   );
 
   const renderItem = ({item}) => (
-    <Room
+    <ConversationRoom
       roomId={item.roomId}
       clientAlias={item.clientAlias}
       clientId={item.clientId}
@@ -50,4 +50,4 @@ const styles = {
   },
 };
 
-export default Conv;
+export default ConversationView;

@@ -3,14 +3,14 @@ import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 const Button = props => {
-  const {btnContainerStyle} = styles;
+  const {buttonContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
     inputRange: [0, 0.5, 1],
     outputRange: ['0deg', '-20deg', '20deg'],
   });
 
-  const onPressIn = () => {
+  const handlePressInAnimation = () => {
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: 150,
@@ -19,7 +19,7 @@ const Button = props => {
     }).start();
   }
 
-  const onPressOut = () => {
+  const handlePressOutAnimation = () => {
     Animated.timing(animatedValue, {
       toValue: 0,
       duration: 50,
@@ -36,9 +36,9 @@ const Button = props => {
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable 
       onPress={props.onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={btnContainerStyle}
+      onPressIn={handlePressInAnimation}
+      onPressOut={handlePressOutAnimation}
+      style={buttonContainerStyle}
       >
         <Animated.View style={[animatedRotateStyle]}>
           <Icon name="warning" type="antdesign" color="#d12304" size={28} />
@@ -49,7 +49,7 @@ const Button = props => {
 };
 
 const styles = StyleSheet.create({
-  btnContainerStyle: {
+  buttonContainerStyle: {
     width: 40,
     height: 40,
     borderWidth: 1.5,

@@ -1,24 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {AppRegistry, Platform, StatusBar} from 'react-native';
-import Home from './src/components/Login/Home';
-import NewClient from './src/components/NewDetails/NewClient';
-import KuratorView from './src/components/KuratorOffice/KuratorView';
-import NewKurator from './src/components/NewDetails/NewKurator';
-import ChatView from './src/components/ChatRoom/ChatView';
-import ReportConcern from './src/components/ReportConcern/ReportConcernView';
+import HomeScreen from './src/components/Login/HomeScreen';
+import NewClientScreen from './src/components/NewDetails/NewClientScreen';
+import KuratorScreen from './src/components/KuratorOffice/KuratorScreen';
+import NewKuratorScreen from './src/components/NewDetails/NewKuratorScreen';
+import ChatScreen from './src/components/ChatRoom/ChatScreen';
+import ReportConcernScreen from './src/components/ReportConcern/ReportConcernScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AddUserView from './src/components/AddUser/AddUserView';
+import AddUserScreen from './src/components/AddUser/AddUserScreen';
 import FlashMessage from 'react-native-flash-message';
-import {IsKuratorProvider} from './src/firebase/isKuratorContext';
+import {IsCurrentUserKuratorProvider} from './src/firebase/isCurrentUserKuratorContext';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <IsKuratorProvider>
+    <IsCurrentUserKuratorProvider>
       <SafeAreaProvider>
         <StatusBar
           translucent
@@ -27,15 +27,15 @@ const App = () => {
         />
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="HomeScreen"
             screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="NewClient" component={NewClient} />
-            <Stack.Screen name="KuratorView" component={KuratorView} />
-            <Stack.Screen name="NewKurator" component={NewKurator} />
-            <Stack.Screen name="ChatView" component={ChatView} />
-            <Stack.Screen name="AddUserView" component={AddUserView} />
-            <Stack.Screen name="ReportConcern" component={ReportConcern} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="NewClientScreen" component={NewClientScreen} />
+            <Stack.Screen name="KuratorScreen" component={KuratorScreen} />
+            <Stack.Screen name="NewKuratorScreen" component={NewKuratorScreen} />
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
+            <Stack.Screen name="AddUserScreen" component={AddUserScreen} />
+            <Stack.Screen name="ReportConcernScreen" component={ReportConcernScreen} />
           </Stack.Navigator>
         </NavigationContainer>
         <FlashMessage
@@ -43,7 +43,7 @@ const App = () => {
           floating={Platform.OS === 'ios' ? true : false}
         />
       </SafeAreaProvider>
-    </IsKuratorProvider>
+    </IsCurrentUserKuratorProvider>
   );
 };
 

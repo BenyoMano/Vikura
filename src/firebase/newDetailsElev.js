@@ -71,7 +71,7 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
             alias: alias,
           });
       });
-    navigation.navigate('ChatView', {id: user.uid});
+    navigation.navigate('ChatScreen', {id: user.uid});
     setLoading(false);
     setSubmitted(false);
   };

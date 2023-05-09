@@ -14,7 +14,7 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import {AddUserModal} from './AddUserModal';
 
-const AddUserView = ({navigation}) => {
+const AddUserScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddUserView;
+export default AddUserScreen;

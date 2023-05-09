@@ -57,7 +57,7 @@ const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted
             firstLogin: false,
           });
       });
-      navigation.navigate('KuratorView');
+      navigation.navigate('KuratorScreen');
       setLoading(false);
       setSubmitted(false);
   };

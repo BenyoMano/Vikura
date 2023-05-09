@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
 
-const ButtonSend = ({title, onPress}) => {
+const SendButton = ({title, onPress}) => {
   const {viewStyle, greyScale, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
   const fadeIn = () => {
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ButtonSend;
+export default SendButton;

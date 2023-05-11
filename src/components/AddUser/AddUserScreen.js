@@ -16,7 +16,8 @@ import {AddUserModal} from './AddUserModal';
 
 const AddUserScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [checkboxState, setCheckboxState] = React.useState(false);
+  const [checkboxStateKurator, setCheckboxStateKurator] = useState(false);
+  const [checkboxStateAdmin, setCheckboxStateAdmin] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [hasAddedUser, setHasAddedUser] = useState(false);
   const [userPropToAdd, setUserPropToAdd] = useState({
@@ -26,7 +27,8 @@ const AddUserScreen = ({navigation}) => {
     password: '',
     personnummer: '',
     firstLogin: true,
-    kurator: checkboxState,
+    kurator: checkboxStateKurator,
+    admin: checkboxStateAdmin,
   });
 
   return (
@@ -58,7 +60,7 @@ const AddUserScreen = ({navigation}) => {
                 fontSize: 18,
                 color: 'grey',
                 top: 0,
-                marginTop: 60,
+                marginTop: 30,
                 marginBottom: 15,
               }}
             />
@@ -69,8 +71,10 @@ const AddUserScreen = ({navigation}) => {
               setModalVisible={setModalVisible}
               userPropToAdd={userPropToAdd}
               setUserPropToAdd={setUserPropToAdd}
-              checkboxState={checkboxState}
-              setCheckboxState={setCheckboxState}
+              checkboxStateKurator={checkboxStateKurator}
+              setCheckboxStateKurator={setCheckboxStateKurator}
+              checkboxStateAdmin={checkboxStateAdmin}
+              setCheckboxStateAdmin={setCheckboxStateAdmin}
               setSubmitted={setSubmitted}
               setHasAddedUser={setHasAddedUser}
             />
@@ -80,8 +84,10 @@ const AddUserScreen = ({navigation}) => {
             <Form
               userPropToAdd={userPropToAdd}
               setUserPropToAdd={setUserPropToAdd}
-              checkboxState={checkboxState}
-              setCheckboxState={setCheckboxState}
+              checkboxStateKurator={checkboxStateKurator}
+              setCheckboxStateKurator={setCheckboxStateKurator}
+              checkboxStateAdmin={checkboxStateAdmin}
+              setCheckboxStateAdmin={setCheckboxStateAdmin}
               submitted={submitted}
             />
           </ScrollView>

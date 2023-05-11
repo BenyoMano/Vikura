@@ -15,7 +15,6 @@ const useOpenChat = ({
 }) => {
   const openChat = async messageLimit => {
     setLoadingMessages(true);
-    console.log('OPEN CHAT - loadingMessages', loadingMessages);
 
     if (isCurrentUserKurator === undefined) return;
     if (!isCurrentUserKurator) {

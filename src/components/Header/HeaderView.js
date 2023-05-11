@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Logo from './Logo';
 import BackButton from './BackButton';
@@ -22,7 +22,7 @@ export const HeaderView = ({
   setHasAddedUser,
 }) => {
   const route = useRoute();
-  const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
+  const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(IsCurrentUserKuratorContext);
   // const [showAdjustButtons, setShowAdjustButtons] = useState(false);
   // const [closeAdjustButtons, setCloseAdjustButtons] = useState(true);
 
@@ -60,9 +60,11 @@ export const HeaderView = ({
               }}
             />
           </View>
-          <View>
-            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
-          </View>
+          {isCurrentUserAdmin ? (
+            <View>
+              <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
+            </View>
+          ) : null}
         </View>
       ) : route.name === 'AddUserScreen' ? (
         <View

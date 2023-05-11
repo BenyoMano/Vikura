@@ -5,7 +5,8 @@ import {showMessage} from 'react-native-flash-message';
 const createUser = ({
   userPropToAdd,
   setUserPropToAdd,
-  checkboxState,
+  checkboxStateKurator,
+  checkboxStateAdmin,
   setSubmitted,
   setHasAddedUser,
 }) => {
@@ -80,7 +81,7 @@ const createUser = ({
   ) {
     const addPersonalDetails = async user => {
       const refUID = firestore().collection('Users').doc(user.uid);
-      const userAlias = checkboxState ? 'KURATOR' : '';
+      const userAlias = checkboxStateKurator ? 'KURATOR' : '';
       await refUID.set({
         firstName: userPropToAdd.firstName,
         secondName: userPropToAdd.secondName,
@@ -88,7 +89,8 @@ const createUser = ({
         personNummer: userPropToAdd.personnummer,
         alias: userAlias,
         firstLogin: true,
-        kurator: checkboxState,
+        kurator: checkboxStateKurator,
+        admin: checkboxStateAdmin,
       });
     };
 

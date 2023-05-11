@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const ListenMsg = ({
+const listenMessages = ({
   isCurrentUserKurator,
   pathToMessages,
   setMessages,
@@ -8,10 +8,9 @@ const ListenMsg = ({
   loadingMessages,
   setLoadingMessages
 }) => {
-  console.log('listenMsg - loadingMessages', loadingMessages);
   const unsubscribe = pathToMessages
       .orderBy('timestamp', 'desc')
-      .limit(50 + messageLimit)
+      .limit(30 + messageLimit)
       .onSnapshot(messageDetails => {
         const newData = messageDetails.docs.map(documentSnapshot => ({
           timestamp: documentSnapshot.data().timestamp.toMillis(),
@@ -22,7 +21,6 @@ const ListenMsg = ({
           id: documentSnapshot.data().id,
         }));
         setMessages(newData);
-        console.log('setMessages', messageLimit);
         setLoadingMessages(false);
       });
 
@@ -42,4 +40,4 @@ const ListenMsg = ({
       return unsubscribe;
 };
 
-export default ListenMsg;
+export default listenMessages;

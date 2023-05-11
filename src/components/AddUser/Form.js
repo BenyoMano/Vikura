@@ -7,13 +7,15 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const Form = ({
   userPropToAdd,
   setUserPropToAdd,
-  checkboxState,
-  setCheckboxState,
+  checkboxStateKurator,
+  setCheckboxStateKurator,
+  checkboxStateAdmin,
+  setCheckboxStateAdmin,
   submitted,
 }) => {
   const {viewStyle} = styles;
   const capitalize = 'none';
-  const {firstName, secondName, mejl, password, personnummer, kurator} =
+  const {firstName, secondName, mejl, password, personnummer, kurator, admin} =
     userPropToAdd;
   const ref_input2 = useRef();
   const ref_input3 = useRef();
@@ -21,12 +23,17 @@ const Form = ({
   const ref_input5 = useRef();
 
   function kuratorCheck() {
-    if (!checkboxState) {
+    if (!checkboxStateKurator) {
       userPropToAdd.kurator = true;
     } else {
       userPropToAdd.kurator = false;
     }
     setUserPropToAdd({...userPropToAdd, kurator});
+  }
+
+  function adminCheck() {
+    !checkboxStateAdmin ? userPropToAdd.admin = true : false;
+    setUserPropToAdd({...userPropToAdd, admin});
   }
 
   return (
@@ -114,7 +121,7 @@ const Form = ({
           size={36}
           fillColor="#569253"
           unfillColor="#FFFFFF"
-          isChecked={checkboxState}
+          isChecked={checkboxStateKurator}
           text="Utökad behörighet"
           iconStyle={{borderRadius: 10}}
           innerIconStyle={{borderRadius: 10, borderWidth: 2}}
@@ -125,10 +132,34 @@ const Form = ({
           }}
           //disableBuiltInState
           onPress={() => {
-            setCheckboxState(!checkboxState);
+            setCheckboxStateKurator(!checkboxStateKurator);
             kuratorCheck();
           }}
           keys={'kurator'}
+          userPropToAdd={userPropToAdd}
+          setUserPropToAdd={setUserPropToAdd}
+        />
+      </View>
+      <View style={{paddingTop: 15, alignSelf: 'flex-start'}}>
+        <BouncyCheckbox
+          size={36}
+          fillColor="#569253"
+          unfillColor="#FFFFFF"
+          isChecked={checkboxStateAdmin}
+          text="Admin"
+          iconStyle={{borderRadius: 10}}
+          innerIconStyle={{borderRadius: 10, borderWidth: 2}}
+          textStyle={{
+            fontFamily: 'NunitoSans-SemiBold',
+            fontSize: 22,
+            textDecorationLine: 'none',
+          }}
+          //disableBuiltInState
+          onPress={() => {
+            setCheckboxStateAdmin(!checkboxStateAdmin);
+            kuratorCheck();
+          }}
+          keys={'admin'}
           userPropToAdd={userPropToAdd}
           setUserPropToAdd={setUserPropToAdd}
         />

@@ -10,12 +10,17 @@ const useOpenChat = ({
   setRefPath,
   setMessages,
   setRoomId,
+  loadingMessages,
+  setLoadingMessages
 }) => {
   const openChat = async messageLimit => {
+    setLoadingMessages(true);
+    console.log('OPEN CHAT - loadingMessages', loadingMessages);
+
     if (isCurrentUserKurator === undefined) return;
     if (!isCurrentUserKurator) {
     clientUserId = user.uid;
-      if (rumNamn.empty) {
+      if (fetchRoomName.empty) {
         createRoom({clientUserId});
         showMessage({
           message: 'Välkommen!',
@@ -27,8 +32,8 @@ const useOpenChat = ({
         });
       }
     }
-    const rumNamn = await roomName({clientUserId});
-    const unsubscribeList = getRefPath({isCurrentUserKurator, setRefPath, rumNamn, setMessages, messageLimit, setRoomId});
+    const fetchRoomName = await roomName({clientUserId});
+    const unsubscribeList = getRefPath({isCurrentUserKurator, setRefPath, fetchRoomName, setMessages, messageLimit, setRoomId, loadingMessages, setLoadingMessages});
     return unsubscribeList;
   };
   return openChat;

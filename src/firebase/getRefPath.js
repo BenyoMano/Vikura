@@ -4,13 +4,15 @@ import ListenMsg from './listenMsg';
 const getRefPath = ({
   isCurrentUserKurator,
   setRefPath,
-  rumNamn,
+  fetchRoomName,
   setMessages,
   messageLimit,
   setRoomId,
+  loadingMessages,
+  setLoadingMessages
 }) => {
-    console.log('getRefPath');
-    return rumNamn.docs.map(roomDetails => {
+    console.log('getRefPath - loadingMessages', loadingMessages);
+    return fetchRoomName.docs.map(roomDetails => {
       const roomId = roomDetails.id;
       
       const pathToMessages = firestore()
@@ -19,7 +21,7 @@ const getRefPath = ({
         .collection('messages');
 
       setRefPath(pathToMessages);
-      const unsubscribe = ListenMsg({isCurrentUserKurator, pathToMessages, setMessages, messageLimit});
+      const unsubscribe = ListenMsg({isCurrentUserKurator, pathToMessages, setMessages, messageLimit, loadingMessages, setLoadingMessages});
       setRoomId(roomId);
       return unsubscribe;
     });

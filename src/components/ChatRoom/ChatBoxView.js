@@ -1,20 +1,20 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useContext, useEffect, useState, useMemo, memo} from 'react';
 import auth from '@react-native-firebase/auth';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import useOpenChat from '../../firebase/openChat';
 import {useCallback} from 'react';
 import ChatBubble from './ChatBubble';
-import { onScroll, onMomentumScrollEnd } from './scrollHandlers';
+import {onMomentumScrollEnd} from './scrollHandlers';
 
 
-const ChatBoxView = ({messageLimit, refPath, setRefPath, clientUserId, setRoomId, setMessageLimit}) => {
+const ChatBoxView = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
   const [messages, setMessages] = useState([]);
-  // const [messageLimit, setMessageLimit] = useState(0);
-  console.log('messageLimit: ', messageLimit);
+  const [loadingMessages, setLoadingMessages] = useState(true);
+  const [messageLimit, setMessageLimit] = useState(0);
   const user = auth().currentUser;
 
   const openChat = useOpenChat({
@@ -25,6 +25,8 @@ const ChatBoxView = ({messageLimit, refPath, setRefPath, clientUserId, setRoomId
     setRefPath,
     setMessages,
     setRoomId,
+    loadingMessages,
+    setLoadingMessages
   });
 
   useEffect(() => {
@@ -59,6 +61,11 @@ const ChatBoxView = ({messageLimit, refPath, setRefPath, clientUserId, setRoomId
 
   return (
     <View style={styles.flatListStyle}>
+      <View style={styles.activityIndicatorStyle}>
+        {loadingMessages ? (
+          <ActivityIndicator size={'large'}/>
+        ) : null}
+      </View>
       <AutoScrollFlatList
         // ref={flatListRef}
         horizontal={false}
@@ -68,11 +75,7 @@ const ChatBoxView = ({messageLimit, refPath, setRefPath, clientUserId, setRoomId
         keyExtractor={item => item.timestamp}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-        onScroll={onScroll(messageLimit, setMessageLimit)}
-        onMomentumScrollEnd={onMomentumScrollEnd(messageLimit, setMessageLimit)}
-        // onScrollToTop={()=>{console.log("onScrollToTop")}}
-        // onEndReached={()=>{console.log("onEndReached")}}
-        // onScroll={onScroll(messageLimit, setMessageLimit)}
+        onMomentumScrollEnd={onMomentumScrollEnd(messageLimit, setMessageLimit, loadingMessages)}
       />
     </View>
   );
@@ -91,6 +94,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: 'white',
   },
+  activityIndicatorStyle: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    top: '0%',
+    paddingTop: 5,
+    position: 'absolute',
+  }
 });
 
 export default ChatBoxView;

@@ -20,7 +20,6 @@ const ChatScreen = ({navigation, route}) => {
   const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
   const [messageToSend, setMessageToSend] = useState();
   const [refPath, setRefPath] = useState(false);
-  const [messageLimit, setMessageLimit] = useState(0);
   const [roomId, setRoomId] = useState();
   const {id} = route.params;
   const user = auth().currentUser;
@@ -41,8 +40,6 @@ const ChatScreen = ({navigation, route}) => {
               clientUserId={id}
               user={user}
               refPath={refPath}
-              messageLimit={messageLimit}
-              setMessageLimit={setMessageLimit}
             />
           </View>
           <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
@@ -52,8 +49,6 @@ const ChatScreen = ({navigation, route}) => {
               refPath={refPath}
               setRefPath={setRefPath}
               setRoomId={setRoomId}
-              messageLimit={messageLimit}
-              setMessageLimit={setMessageLimit}
             />
           </View>
           <View

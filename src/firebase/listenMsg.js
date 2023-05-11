@@ -5,11 +5,13 @@ const ListenMsg = ({
   pathToMessages,
   setMessages,
   messageLimit,
+  loadingMessages,
+  setLoadingMessages
 }) => {
-
+  console.log('listenMsg - loadingMessages', loadingMessages);
   const unsubscribe = pathToMessages
       .orderBy('timestamp', 'desc')
-      .limit(100 + messageLimit)
+      .limit(50 + messageLimit)
       .onSnapshot(messageDetails => {
         const newData = messageDetails.docs.map(documentSnapshot => ({
           timestamp: documentSnapshot.data().timestamp.toMillis(),
@@ -21,9 +23,8 @@ const ListenMsg = ({
         }));
         setMessages(newData);
         console.log('setMessages', messageLimit);
+        setLoadingMessages(false);
       });
-
-  console.log(isCurrentUserKurator);
 
         if (isCurrentUserKurator) {
         pathToMessages
@@ -39,8 +40,6 @@ const ListenMsg = ({
       }
 
       return unsubscribe;
-
-
 };
 
 export default ListenMsg;

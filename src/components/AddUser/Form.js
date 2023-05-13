@@ -13,7 +13,7 @@ const Form = ({
   setCheckboxStateAdmin,
   submitted,
 }) => {
-  const {viewStyle} = styles;
+  const {container} = styles;
   const capitalize = 'none';
   const {firstName, secondName, mejl, password, personnummer, kurator, admin} =
     userPropToAdd;
@@ -37,8 +37,7 @@ const Form = ({
   }
 
   return (
-    <View style={viewStyle.container}>
-      <View>
+    <View style={container}>
         <InputbarAddUser
           autoFocus={false}
           blurOnSubmit={false}
@@ -52,8 +51,6 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
         />
-      </View>
-      <View>
         <InputbarAddUser
           autoFocus={false}
           blurOnSubmit={false}
@@ -68,8 +65,6 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
         />
-      </View>
-      <View>
         <InputbarAddUser
           autoFocus={false}
           blurOnSubmit={false}
@@ -85,8 +80,6 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
         />
-      </View>
-      <View>
         <InputbarAddUser
           autoFocus={false}
           blurOnSubmit={false}
@@ -101,8 +94,6 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
         />
-      </View>
-      <View>
         <InputbarAddUser
           autoFocus={false}
           blurOnSubmit={true}
@@ -115,8 +106,7 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
           submitted={submitted}
         />
-      </View>
-      <View style={{paddingTop: 15, alignSelf: 'flex-start'}}>
+      <View style={{paddingTop: 25, alignSelf: 'flex-start'}}>
         <BouncyCheckbox
           size={36}
           fillColor="#569253"
@@ -140,7 +130,7 @@ const Form = ({
           setUserPropToAdd={setUserPropToAdd}
         />
       </View>
-      <View style={{paddingTop: 15, alignSelf: 'flex-start'}}>
+      <View style={{paddingTop: 25, alignSelf: 'flex-start'}}>
         <BouncyCheckbox
           size={36}
           fillColor="#569253"
@@ -169,13 +159,12 @@ const Form = ({
 };
 
 const styles = {
-  viewStyle: {
-    container: {
-      flex: 1,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      overflow: 'hidden',
-    },
+  container: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    overflow: 'hidden',
   },
 };
 

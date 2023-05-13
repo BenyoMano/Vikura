@@ -70,7 +70,7 @@ const styles = {
     borderColor: '#D9534F',
     borderWidth: 3,
     borderRadius: 12,
-  }
+  },
 };
 
 export default InputBarLogIn;

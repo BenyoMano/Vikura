@@ -36,7 +36,7 @@ const AddUserScreen = ({navigation}) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
           style={[
-            styles.greyScale.mainContainer,
+            styles.mainContainer,
             {
               flexDirection: 'column',
             },
@@ -61,7 +61,7 @@ const AddUserScreen = ({navigation}) => {
                 color: 'grey',
                 top: 0,
                 marginTop: 30,
-                marginBottom: 15,
+                marginBottom: 5,
               }}
             />
           </View>
@@ -80,7 +80,8 @@ const AddUserScreen = ({navigation}) => {
             />
           </View>
           <ScrollView
-            contentContainerStyle={styles.greyScale.scrollViewContainer}>
+            contentContainerStyle={styles.scrollViewContainer}
+          >
             <Form
               userPropToAdd={userPropToAdd}
               setUserPropToAdd={setUserPropToAdd}
@@ -101,21 +102,17 @@ const AddUserScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  greyScale: {
-    scrollViewContainer: {
-      paddingHorizontal: 20,
-      paddingBottom: 15,
-      backgroundColor: '#EEEEEE',
-      borderRadius: 20,
-      width: '100%',
-    },
-    mainContainer: {
-      flex: 1,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: '#FFFFFF',
-      width: '100%',
-    },
+  mainContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  scrollViewContainer: {
+    width: '100%',
+    paddingBottom: 15,
+    borderRadius: 20,
   },
 });
 

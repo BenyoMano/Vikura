@@ -20,7 +20,7 @@ const getRefPath = ({
         .collection('messages');
 
       setRefPath(pathToMessages);
-      const unsubscribe = listenMessages({isCurrentUserKurator, pathToMessages, setMessages, messageLimit, loadingMessages, setLoadingMessages});
+      const unsubscribe = listenMessages({isCurrentUserKurator, pathToMessages, setMessages, messageLimit, setLoadingMessages});
       setRoomId(roomId);
       return unsubscribe;
     });

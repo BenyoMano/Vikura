@@ -17,13 +17,14 @@ import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorCo
 
 
 const ChatScreen = ({navigation, route}) => {
-  const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
+  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
   const [messageToSend, setMessageToSend] = useState();
   const [refPath, setRefPath] = useState(false);
   const [roomId, setRoomId] = useState();
   const {id} = route.params;
+  console.log('id', id);
   const user = auth().currentUser;
-
+  
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

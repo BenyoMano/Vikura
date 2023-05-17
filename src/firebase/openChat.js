@@ -15,10 +15,14 @@ const useOpenChat = ({
 }) => {
   const openChat = async messageLimit => {
     setLoadingMessages(true);
-
+    
+    console.log('BEFORE');
+    console.log('isCurrentUserKurator', isCurrentUserKurator);
     if (isCurrentUserKurator === undefined) return;
+    console.log('AFTER');
+    
     if (!isCurrentUserKurator) {
-    clientUserId = user.uid;
+      clientUserId = user.uid;
       if (fetchRoomName.empty) {
         createRoom({clientUserId});
         showMessage({

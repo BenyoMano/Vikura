@@ -11,7 +11,7 @@ import {onMomentumScrollEnd} from './scrollHandlers';
 
 
 const ChatBoxView = ({refPath, setRefPath, clientUserId, setRoomId}) => {
-  const isCurrentUserKurator = useContext(IsCurrentUserKuratorContext);
+  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
   const [messages, setMessages] = useState([]);
   const [loadingMessages, setLoadingMessages] = useState(true);
   const [messageLimit, setMessageLimit] = useState(0);

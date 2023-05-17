@@ -1,11 +1,8 @@
-import { useEffect } from "react";
-
 const listenMessages = ({
   isCurrentUserKurator,
   pathToMessages,
   setMessages,
   messageLimit,
-  loadingMessages,
   setLoadingMessages
 }) => {
   const unsubscribe = pathToMessages

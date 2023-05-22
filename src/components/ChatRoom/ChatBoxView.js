@@ -73,6 +73,7 @@ const ChatBoxView = ({refPath, setRefPath, clientUserId, setRoomId}) => {
         data={sortedMessages}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp}
+        scrollEnabled={true}
         scrollEventThrottle={160}
         showNewItemAlert={false}
         onMomentumScrollEnd={onMomentumScrollEnd(messageLimit, setMessageLimit, loadingMessages)}

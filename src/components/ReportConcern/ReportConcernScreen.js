@@ -33,7 +33,7 @@ const ReportConcernScreen = ({navigation, route}) => {
   return (
     <View
       style={[
-        styles.greyScale.container,
+        styles.container,
         {
           flexDirection: 'column',
         },
@@ -99,13 +99,11 @@ const ReportConcernScreen = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-  greyScale: {
-    container: {
-      flex: 1,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: 'white',
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
   viewStyle: {
     flex: 1,

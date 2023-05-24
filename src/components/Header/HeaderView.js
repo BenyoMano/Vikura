@@ -24,12 +24,7 @@ export const HeaderView = ({
 
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        width: '88%',
-        alignItems: 'center',
-        marginTop: '12%',
-      }}>
+      style={styles.viewStyle}>
       <Logo />
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
@@ -100,10 +95,10 @@ export const HeaderView = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
+  viewStyle: {
+    flexDirection: 'row',
+    width: '88%',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
+    marginTop: '12%',
+  }
 });

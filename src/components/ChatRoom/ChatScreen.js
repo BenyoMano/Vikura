@@ -28,7 +28,7 @@ const ChatScreen = ({navigation, route}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.greyScale.container}>
+        <View style={styles.container}>
           <View
             style={{
               flexDirection: 'row',
@@ -75,15 +75,13 @@ const ChatScreen = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-  greyScale: {
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      backgroundColor: 'white',
-      width: '100%',
-    },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    width: '100%',
   },
 });
 

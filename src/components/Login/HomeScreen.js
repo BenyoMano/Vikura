@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,22 +7,22 @@ import {
   Keyboard,
 } from 'react-native';
 import Button from '../../atoms/Button';
-import Logo from '../Header/Logo';
+import MainLogo from '../Header/MainLogo';
 import InputBarLogIn from './InputBarLogIn';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import signIn from '../../firebase/signIn';
 import {DotsLoader} from 'react-native-indicator';
 import MainText from '../../atoms/MainText';
-import { useEffect } from 'react';
 
 const HomeScreen = ({navigation}) => {
-  const [loginDetails, setLoginDetails] = useState({});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [loginDetails, setLoginDetails] = useState({});
   const {mejl, password} = loginDetails;
-  const ref_input2 = useRef();
-  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const ref_input2 = useRef();
 
+  
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -58,7 +58,7 @@ const HomeScreen = ({navigation}) => {
               flex: 0.3,
               justifyContent: 'center',
             }}>
-            <Logo style={{width: 220, height: 82, marginTop: 60}} />
+            <MainLogo />
           </View>
           <View style={styles.contcont}>
             {!isKeyboardVisible ? (
@@ -104,6 +104,7 @@ const HomeScreen = ({navigation}) => {
             <Button
               title="Logga in"
               onPress={() => {
+                setSubmitted(true);
                 signIn({
                   loginDetails,
                   setLoginDetails,
@@ -111,7 +112,6 @@ const HomeScreen = ({navigation}) => {
                   setLoading,
                   setSubmitted,
                 });
-                setSubmitted(true);
               }}
             />
           </View>

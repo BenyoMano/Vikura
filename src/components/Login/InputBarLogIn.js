@@ -20,8 +20,7 @@ const InputBarLogIn = React.forwardRef(
     ref,
   ) => {
     const {viewStyle, barStyle, redBarStyle} = styles;
-    var empty = false;
-    !value && submitted ? empty = true : false;
+    const empty = !value && submitted;
     
     return (
       <View style={viewStyle}>

@@ -11,9 +11,7 @@ import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import LogoutButton from './LogoutButton';
-// import AdjustChatButton from './AdjustChatButton';
-// import HistoryButton from '../ChatRoom/HistoryButton';
-// import MinimizeButton from '../ChatRoom/MinimizeButton';
+import StylingContainer from './StylingContainer';
 
 export const HeaderView = ({
   navigation,
@@ -23,8 +21,6 @@ export const HeaderView = ({
 }) => {
   const route = useRoute();
   const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(IsCurrentUserKuratorContext);
-  // const [showAdjustButtons, setShowAdjustButtons] = useState(false);
-  // const [closeAdjustButtons, setCloseAdjustButtons] = useState(true);
 
   return (
     <View
@@ -34,146 +30,9 @@ export const HeaderView = ({
         alignItems: 'center',
         marginTop: '12%',
       }}>
-      <View
-        style={{
-          position: 'absolute',
-          left: '50%',
-          right: '50%',
-        }}>
-        <Logo style={{width: 90, height: 35}} />
-      </View>
-
+      <Logo />
       {route.name === 'KuratorScreen' ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <LogoutButton
-              title="Logga Ut"
-              onPress={() => {
-                signOut();
-                navigation.navigate('HomeScreen');
-              }}
-            />
-          </View>
-          {isCurrentUserAdmin ? (
-            <View>
-              <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
-            </View>
-          ) : null}
-        </View>
-      ) : route.name === 'AddUserScreen' ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            {hasAddedUser === true ? (
-              <LogoutButton
-                onPress={() => {
-                  signOut();
-                  navigation.navigate('HomeScreen');
-                  setHasAddedUser(false);
-                }}
-              />
-            ) : hasAddedUser === false ? (
-              <BackButton onPress={() => navigation.goBack()} />
-            ) : null}
-          </View>
-        </View>
-      ) : route.name === 'NewKuratorScreen' ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-        </View>
-      ) : route.name === 'NewClientScreen' ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-        </View>
-      ) : route.name === 'ReportConcernScreen' ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-        </View>
-      ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-          {/* <View style={{position: 'absolute', right: '15%'}}>
-            <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
-          </View> */}
-          <View style={{position: 'absolute', right: '0%'}}>
-            <ReportConcernButton
-              onPress={() =>
-                navigation.navigate('ReportConcernScreen', {
-                  clientUserId: clientUserId,
-                })
-              }
-            />
-          </View>
-          {/* <View style={{position: 'absolute', right: '0%'}}>
-            <AdjustChatButton
-              onPress={() =>
-                {showAdjustButtons ? setTimeout(() => setShowAdjustButtons(false), 200) : setShowAdjustButtons(true)
-                !closeAdjustButtons ? setCloseAdjustButtons(true) : setCloseAdjustButtons(false)}
-              }
-            />
-          </View> */}
-          {/* {showAdjustButtons ? (
-            <View>
-              <View style={{position: 'absolute', bottom: -80, right: -5}}>
-                <HistoryButton closeAdjustButtons={closeAdjustButtons} messageLimit={messageLimit} setMessageLimit={setMessageLimit} />
-              </View>
-              <View style={{position: 'absolute', bottom: -140, right: -5}}>
-                <MinimizeButton closeAdjustButtons={closeAdjustButtons} setMessageLimit={setMessageLimit} />
-              </View>
-            </View>
-          ) : null} */}
-        </View>
-      ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+        <StylingContainer>
           <LogoutButton
             title="Logga Ut"
             onPress={() => {
@@ -181,7 +40,60 @@ export const HeaderView = ({
               navigation.navigate('HomeScreen');
             }}
           />
-        </View>
+          {isCurrentUserAdmin ? (
+            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
+          ) : null}
+        </StylingContainer>
+      ) : route.name === 'AddUserScreen' ? (
+        <StylingContainer>
+          {hasAddedUser === true ? (
+            <LogoutButton
+            onPress={() => {
+              signOut();
+              navigation.navigate('HomeScreen');
+              setHasAddedUser(false);
+            }}
+            />
+            ) : hasAddedUser === false ? (
+              <BackButton onPress={() => navigation.goBack()} />
+              ) : null}
+        </StylingContainer>
+      ) : route.name === 'NewKuratorScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'NewClientScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'ReportConcernScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+          {/* <View style={{position: 'absolute', right: '15%'}}>
+            <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
+          </View> */}
+          <ReportConcernButton
+            onPress={() =>
+              navigation.navigate('ReportConcernScreen', {
+                clientUserId: clientUserId,
+              })
+            }
+          />
+        </StylingContainer>
+      ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
+        <StylingContainer>
+          <LogoutButton
+            title="Logga Ut"
+            onPress={() => {
+              signOut();
+              navigation.navigate('HomeScreen');
+            }}
+            />
+        </StylingContainer>
       ) : null}
     </View>
   );

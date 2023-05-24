@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {Image, Animated} from 'react-native';
 
-const Logo = () => {
+const Logo = props => {
   const {ViewStyle} = styles;
   const fadeAnim = useRef(new Animated.Value(0)).current
 
@@ -20,7 +20,7 @@ const Logo = () => {
     <Animated.View style={[ViewStyle, {opacity: fadeAnim}]}>
       <Image
         source={require('./../../assets/images/transparent.png')}
-        style={{width: 90, height: 35}}
+        style={{width: 220, height: 82, marginTop: 60}}
       />
     </Animated.View>
   );
@@ -28,8 +28,8 @@ const Logo = () => {
 
 const styles = {
   ViewStyle: {
-    position: 'absolute',
-    left: '37.5%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 };
 

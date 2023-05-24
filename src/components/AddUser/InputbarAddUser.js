@@ -20,8 +20,7 @@ const InputBarAddUser = React.forwardRef(
     ref,
   ) => {
     const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
-    var empty = false;
-    !value && submitted ? (empty = true) : false;
+    const empty = !value && submitted;
 
     return (
       <View style={viewStyle}>
@@ -69,7 +68,7 @@ const styles = {
     height: 52,
     width: 320,
     color: 'black',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#C3C3C3',
     borderColor: '#D9534F',
     borderWidth: 3,
     borderRadius: 12,

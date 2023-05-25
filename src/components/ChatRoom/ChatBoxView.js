@@ -54,6 +54,7 @@ const ChatBoxView = ({refPath, setRefPath, clientUserId, setRoomId}) => {
       isCurrentUserKurator={isCurrentUserKurator}
     />
   ), [isCurrentUserKurator, user, clientUserId]);
+  
   const sortedMessages = useMemo(
     () => messages.sort((a, b) => a.timestamp - b.timestamp),
     [messages],

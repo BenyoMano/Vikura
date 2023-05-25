@@ -7,10 +7,7 @@ import {HeaderView} from '../Header/HeaderView';
 const KuratorScreen = ({navigation}) => {
   return (
     <View style={[styles.KuratorContainer, {flexDirection: 'column'}]}>
-      <View
-        style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
-        <HeaderView navigation={navigation} />
-      </View>
+      <HeaderView navigation={navigation} />
       <View style={{flex: 1}}>
         <ConversationView />
       </View>

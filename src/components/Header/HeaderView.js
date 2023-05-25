@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import Logo from './Logo';
+import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
 import ButtonClear from '../ChatRoom/ButtonClear';
@@ -25,7 +25,7 @@ export const HeaderView = ({
   return (
     <View
       style={styles.viewStyle}>
-      <Logo />
+      <SmallLogo />
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
           <LogoutButton

@@ -3,7 +3,7 @@ import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 const CopyButton = props => {
-  const {btnContainerStyle} = styles;
+  const {btnContainerStyle, viewStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
     inputRange: [0, 0.5, 1],
@@ -33,7 +33,7 @@ const CopyButton = props => {
   }
 
   return (
-    <View style={{borderRadius: 10, overflow: 'hidden'}}>
+    <View style={viewStyle}>
       <Pressable 
       onPress={props.onPress}
       onPressIn={onPressIn}
@@ -49,6 +49,13 @@ const CopyButton = props => {
 };
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    width: '88%',
+    marginTop: 10,
+    alignItems: 'flex-end',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
   btnContainerStyle: {
     width: 40,
     height: 40,

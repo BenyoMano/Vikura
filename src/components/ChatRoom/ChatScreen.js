@@ -6,21 +6,19 @@ import {
   Keyboard,
   StyleSheet,
 } from 'react-native';
-import ChatBoxView from './ChatBoxView';
-import InputBarChatt from './InputbarChat';
-import SendButton from './SendButton';
-import handleSendMessage from './handleSendMessage';
-import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import {HeaderView} from '../Header/HeaderView';
 import auth from '@react-native-firebase/auth';
+import ChatBoxView from './ChatBoxView';
+import {HeaderView} from '../Header/HeaderView';
+import ChatMessageComposer from './ChatMessageComposer';
+import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 
 
 const ChatScreen = ({navigation, route}) => {
   const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
   const [messageToSend, setMessageToSend] = useState();
-  const [refPath, setRefPath] = useState(false);
-  const [roomId, setRoomId] = useState();
+  const [refPath, setRefPath] = useState(false); //Context
+  const [roomId, setRoomId] = useState(); //Context
   const {id} = route.params;
   console.log('id', id);
   const user = auth().currentUser;
@@ -29,45 +27,26 @@ const ChatScreen = ({navigation, route}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              width: '100%',
-              zIndex: 2,
-            }}>
-            <HeaderView
-              navigation={navigation}
-              clientUserId={id}
-              user={user}
-              refPath={refPath}
-            />
-          </View>
-          <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
-
-            <ChatBoxView
-              clientUserId={id}
-              refPath={refPath}
-              setRefPath={setRefPath}
-              setRoomId={setRoomId}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '88%',
-              marginBottom: '6%',
-            }}>
-            <InputBarChatt messageToSend={messageToSend} setMessageToSend={setMessageToSend} />
-            <SendButton
-              title="Skicka"
-              onPress={() => {
-                handleSendMessage({isCurrentUserKurator, messageToSend, user, refPath, roomId});
-                setMessageToSend('');
-              }}
-            />
-          </View>
+          <HeaderView
+            navigation={navigation}
+            clientUserId={id}
+            user={user}
+            refPath={refPath}
+          />
+          <ChatBoxView
+            clientUserId={id}
+            refPath={refPath}
+            setRefPath={setRefPath}
+            setRoomId={setRoomId}
+          />
+          <ChatMessageComposer 
+            messageToSend={messageToSend}
+            setMessageToSend={setMessageToSend}
+            isCurrentUserKurator={isCurrentUserKurator}
+            user={user}
+            refPath={refPath}
+            roomId={roomId}
+          />
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>

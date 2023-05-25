@@ -41,30 +41,21 @@ const AddUserScreen = ({navigation}) => {
               flexDirection: 'column',
             },
           ]}>
-          <View
+          <HeaderView
+            navigation={navigation}
+            hasAddedUser={hasAddedUser}
+            setHasAddedUser={setHasAddedUser}
+          />
+          <MainText
+            title="Skapa konto:"
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              width: '100%',
-            }}>
-            <HeaderView
-              navigation={navigation}
-              hasAddedUser={hasAddedUser}
-              setHasAddedUser={setHasAddedUser}
-            />
-          </View>
-          <View style={{justifyContent: 'center'}}>
-            <MainText
-              title="Skapa konto:"
-              style={{
-                fontSize: 18,
-                color: 'grey',
-                top: 0,
-                marginTop: 30,
-                marginBottom: 5,
-              }}
-            />
-          </View>
+              fontSize: 18,
+              color: 'grey',
+              top: 0,
+              marginTop: 30,
+              marginBottom: 5,
+            }}
+          />
           <View style={{justifyContent: 'center'}}>
             <AddUserModal
               modalVisible={modalVisible}

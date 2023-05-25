@@ -47,8 +47,14 @@ const styles = {
   viewStyle: {
     container: {
       flex: 1,
+      justifyContent: 'flex-start',
+      width: '88%',
       paddingLeft: 5,
       backgroundColor: '#f7f5f5',
+      borderWidth: 2,
+      borderRadius: 12,
+      borderColor: 'grey',
+      overflow: 'hidden',
     },
     label: {
       marginLeft: 10,

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {Image, Animated} from 'react-native';
 
-const Logo = () => {
+const SmallLogo = () => {
   const {ViewStyle} = styles;
   const fadeAnim = useRef(new Animated.Value(0)).current
 
@@ -33,4 +33,4 @@ const styles = {
   },
 };
 
-export default Logo;
+export default SmallLogo;

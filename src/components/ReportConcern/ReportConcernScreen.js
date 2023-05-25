@@ -2,15 +2,13 @@
 import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MainText from '../../atoms/MainText';
-import Button from '../../atoms/Button';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
 import {HeaderView} from '../Header/HeaderView';
 import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
-import {Linking} from 'react-native';
-import {showMessage} from 'react-native-flash-message';
 import ClipboardHandler from './ClipboardHandler';
+import SendMailButton from './SendMailButton';
 
 const ReportConcernScreen = ({navigation, route}) => {
   const [clipboardString, setClipboardString] = useClipboard();
@@ -31,34 +29,14 @@ const ReportConcernScreen = ({navigation, route}) => {
   ];
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          flexDirection: 'column',
-        },
-      ]}>
-      <View
-        style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
-        <HeaderView navigation={navigation} />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'baseline',
-          justifyContent: 'center',
-          flex: 0.4,
-          width: 360,
-        }}>
-        <View>
-          <MainText
-            title="Orosanmälan"
-            style={{fontSize: 32, marginRight: 10, top: 40, color: 'black'}}
-          />
-        </View>
-        <>
-          <Icon name="warning" type="antdesign" color="#db4035" size={35} />
-        </>
+    <View style={styles.container}>
+      <HeaderView navigation={navigation} />
+      <View style={styles.subHeader}>
+        <MainText
+          title="Orosanmälan"
+          style={{fontSize: 32, marginRight: 10, top: 40, color: 'black'}}
+        />
+        <Icon name="warning" type="antdesign" color="#db4035" size={35} />
       </View>
       <View style={{flex: 0.3}}>
         <MainText
@@ -66,55 +44,34 @@ const ReportConcernScreen = ({navigation, route}) => {
           style={{fontSize: 18, top: 0, color: 'grey'}}
         />
       </View>
-      <View style={styles.viewStyle}>
-        <PersonalInfo userDetails={userDetails} />
-      </View>
-      <View style={{width: '88%', marginTop: 10, alignItems: 'flex-end'}}>
-        <ClipboardHandler
-          clipboardString={clipboardString}
-          setClipboardString={setClipboardString}
-          userDetails={userDetails}
-        />
-      </View>
-      <View style={{flex: 0.5, justifyContent: 'center'}}>
-        <Button
-          title="Skicka mejl"
-          onPress={() => {
-            Linking.openURL(
-              'mailto:?subject=Orosanm%C3%A4lan&body=' +
-                encodeURIComponent(detailsToSend),
-            ).catch(error => {
-              showMessage({
-                message: 'Misslyckades!',
-                description: String(error),
-                type: 'danger',
-                duration: 5000,
-              });
-            });
-          }}
-        />
-      </View>
+      <PersonalInfo userDetails={userDetails} />
+      <ClipboardHandler
+        clipboardString={clipboardString}
+        setClipboardString={setClipboardString}
+        userDetails={userDetails}
+      />
+      <SendMailButton
+        title="Skicka mejl"
+        detailsToSend={detailsToSend}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  subHeader: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    flex: 0.4,
+    width: 360,
+  },
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
-  viewStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    overflow: 'hidden',
-    marginTop: 0,
-    height: '61%',
-    width: '88%',
-    borderColor: 'grey',
-    borderWidth: 2,
-    borderRadius: 12,
   },
 });
 

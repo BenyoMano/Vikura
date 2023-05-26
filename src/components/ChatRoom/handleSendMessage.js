@@ -6,12 +6,14 @@ const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, 
   if (messageToSend.trim() === '') return;
   messageToSend = messageToSend.trim();
   const timestamp = new Date();
+  console.log('refpath', refPath);
 
   const addMessage = async () => {
     const getUserData = await firestore()
       .collection('Users')
       .doc(user.uid)
       .get();
+      
     await refPath
       .add({
         author: getUserData.get('alias'),

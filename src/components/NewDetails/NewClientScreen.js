@@ -45,17 +45,9 @@ const NewClientScreen = ({navigation}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={[
-            styles.container,
-            {
-              flexDirection: 'column',
-            },
-          ]}>
-          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
-            <HeaderView navigation={navigation} />
-          </View>
-          <View style={{marginTop: 40, marginBottom: 50}}>
+        <View style={styles.container}>
+          <HeaderView navigation={navigation} />
+          <View style={{marginTop: 40}}>
             <MainText
               title="Välkommen!"
               style={{fontSize: 38, color: 'black'}}
@@ -69,6 +61,7 @@ const NewClientScreen = ({navigation}) => {
                   style={{
                     fontSize: 19,
                     color: '#7f7f7f',
+                    marginTop: 40,
                     marginBottom: 40,
                     paddingHorizontal: 40,
                   }}
@@ -141,6 +134,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',

@@ -44,16 +44,8 @@ const NewKuratorScreen = ({navigation}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={[
-            styles.container,
-            {
-              flexDirection: 'column',
-            },
-          ]}>
-          <View style={{flexDirection: 'row', justifyContent: 'center', width: '100%'}}>
-            <HeaderView navigation={navigation} />
-          </View>
+        <View style={styles.container}>
+          <HeaderView navigation={navigation} />
           <View style={{marginTop: 40}}>
             <MainText
               title="Välkommen!"
@@ -68,6 +60,7 @@ const NewKuratorScreen = ({navigation}) => {
                   style={{
                     fontSize: 19,
                     color: '#7f7f7f',
+                    marginTop: 40,
                     marginBottom: 40,
                     paddingHorizontal: 40,
                   }}

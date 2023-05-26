@@ -1,9 +1,11 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
+import createRoom from './createRoom';
 
 const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmitted, setLoading}) => {
   const user = auth().currentUser;
+  const userId = user.uid;
 
   if (!password) {
     showMessage({
@@ -42,38 +44,31 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
   if (rePassword === password) {
     setLoading(true);
 
-    await auth()
-      .currentUser.updatePassword(password)
-      .catch(error => {
+    try {
+      await Promise.all([
+        await auth().currentUser.updatePassword(password),
+        await auth().currentUser.updateProfile({
+          displayName: alias,
+        }),   
+        await firestore().collection('Users').doc(userId).update({
+          firstLogin: false,
+          alias: alias,
+        }),
+      ]);
+        
+      createRoom({userId});
+      navigation.navigate('ChatScreen', {id: userId});
+      setLoading(false);
+      setSubmitted(false);
+
+    } catch (error) {
         showMessage({
           message: 'Varning!',
           description: String(error),
           type: 'danger',
           duration: 3200,
         });
-      });
-
-    await auth().currentUser.updateProfile({
-      displayName: alias,
-    });
-
-    firestore()
-      .collection('Users')
-      .doc(auth().currentUser.uid)
-      .onSnapshot(querySnapshot => {
-        const currentData = querySnapshot.data();
-        firestore()
-          .collection('Users')
-          .doc(auth().currentUser.uid)
-          .set({
-            ...currentData,
-            firstLogin: false,
-            alias: alias,
-          });
-      });
-    navigation.navigate('ChatScreen', {id: user.uid});
-    setLoading(false);
-    setSubmitted(false);
+    }
   };
 };
 

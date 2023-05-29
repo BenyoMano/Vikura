@@ -16,6 +16,7 @@ const ChatBoxView = ({refPath, setRefPath, clientUserId, setRoomId}) => {
   const [loadingMessages, setLoadingMessages] = useState(true);
   const [messageLimit, setMessageLimit] = useState(0);
   const user = auth().currentUser;
+  console.log('BoxView isKurator', isCurrentUserKurator);
 
   const openChat = useOpenChat({
     isCurrentUserKurator,

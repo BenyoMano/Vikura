@@ -1,5 +1,5 @@
-import {} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import { showMessage } from 'react-native-flash-message';
 
 const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, roomId}) => {
   if (!messageToSend) return;
@@ -9,12 +9,15 @@ const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, 
   console.log('refpath', refPath);
 
   const addMessage = async () => {
-    const getUserData = await firestore()
+    let getUserData;
+
+    try {
+      await Promise.all([
+      getUserData = await firestore()
       .collection('Users')
       .doc(user.uid)
-      .get();
-      
-    await refPath
+      .get(),
+      await refPath
       .add({
         author: getUserData.get('alias'),
         kurator: getUserData.get('kurator'),
@@ -22,30 +25,22 @@ const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, 
         isRead: isCurrentUserKurator ? true : false,
         timestamp: timestamp,
         id: user.uid,
-      })
-      .catch(error => {
-        showMessage({
-          message: 'Varning!',
-          description: String(error),
-          type: 'danger',
-          duration: 3200,
-        });
-      });
-
-    await firestore()
+      }),
+      await firestore()
       .collection('rooms')
       .doc(roomId)
       .update({
         latestTimestamp: timestamp,
-      })
-      .catch(error => {
-        showMessage({
-          message: 'Varning!',
-          description: String(error),
-          type: 'danger',
-          duration: 3200,
-        });
+      }),
+      ])
+    } catch (error) {
+      showMessage({
+        message: 'Varning!',
+        description: String(error),
+        type: 'danger',
+        duration: 3200,
       });
+    }
   };
 
   addMessage();

@@ -27,26 +27,27 @@ const signIn = async ({
   if (loginDetails.mejl && loginDetails.password) {
     setLoading(true);
 
-    await auth()
-      .signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password)
-      .then(() => {
-        navigateAfterSignIn({navigation});
-        setLoginDetails({
-          mejl: '',
-          password: '',
-        });
-      })
-      .catch(error => {
-        showMessage({
-          message: 'Varning!',
-          description: String(error),
-          type: 'danger',
-          duration: 3800,
-        });
+    try {
+      await auth().signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password);
+     
+      navigateAfterSignIn({navigation});
+      setLoginDetails({
+        mejl: '',
+        password: '',
       });
 
-    setLoading(false);
-    setSubmitted(false);
+      setLoading(false);
+      setSubmitted(false);
+
+    } catch (error) {
+      showMessage({
+        message: 'Varning!',
+        description: String(error),
+        type: 'danger',
+        duration: 3800,
+      });
+      setLoading(false);
+    }
   }
 };
 

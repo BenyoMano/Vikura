@@ -5,7 +5,9 @@ import createRoom from './createRoom';
 
 const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmitted, setLoading}) => {
   const user = auth().currentUser;
-  const userId = user.uid;
+  console.log('User', user);
+  const userId = auth().currentUser.uid;
+  console.log('userID', userId);
 
   if (!password) {
     showMessage({
@@ -46,11 +48,11 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
 
     try {
       await Promise.all([
-        await auth().currentUser.updatePassword(password),
-        await auth().currentUser.updateProfile({
+        user.updatePassword(password),
+        user.updateProfile({
           displayName: alias,
         }),   
-        await firestore().collection('Users').doc(userId).update({
+        firestore().collection('Users').doc(userId).update({
           firstLogin: false,
           alias: alias,
         }),
@@ -68,6 +70,7 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
           type: 'danger',
           duration: 3200,
         });
+        setLoading(false);
     }
   };
 };

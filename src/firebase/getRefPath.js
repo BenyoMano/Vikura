@@ -12,6 +12,7 @@ const getRefPath = ({
   setLoadingMessages
 }) => {
     return fetchRoomName.docs.map(roomDetails => {
+      console.log('Inside fetchRoomName')
       const roomId = roomDetails.id;
       
       const pathToMessages = firestore()
@@ -22,6 +23,7 @@ const getRefPath = ({
       setRefPath(pathToMessages);
       const unsubscribe = listenMessages({isCurrentUserKurator, pathToMessages, setMessages, messageLimit, setLoadingMessages});
       setRoomId(roomId);
+      console.log('End of fetcRoomName');
       return unsubscribe;
     });
   };

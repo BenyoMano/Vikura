@@ -3,6 +3,9 @@ import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 
 const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted, setLoading}) => {
+  const user = auth().currentUser;
+  const userId = user.uid;
+
 
   if (!password) {
     showMessage({
@@ -33,33 +36,28 @@ const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted
   if (rePassword === password) {
     setLoading(true);
 
-    await auth()
-      .currentUser.updatePassword(password)
-      .catch(error => {
+    try {
+      await Promise.all([
+        await user.updatePassword(password),
+        await firestore().collection('Users').doc(userId).update({
+          firstLogin: false,
+        }),
+      ]);
+
+      navigation.navigate('KuratorScreen');
+      setLoading(false);
+      setSubmitted(false);
+
+    } catch (error) {
         showMessage({
           message: 'Varning!',
           description: String(error),
           type: 'danger',
           duration: 3200,
         });
-      });
-
-    firestore()
-      .collection('Users')
-      .doc(auth().currentUser.id)
-      .onSnapshot(querySnapshot => {
-        const currentData = querySnapshot.data();
-        firestore()
-          .collection('Users')
-          .doc(auth().currentUser.id)
-          .set({
-            ...currentData,
-            firstLogin: false,
-          });
-      });
-      navigation.navigate('KuratorScreen');
-      setLoading(false);
-      setSubmitted(false);
+        setLoading(false);
+    }
   };
 };
+
 export default newDetailsKurator;

@@ -21,7 +21,9 @@ const useOpenChat = ({
     
     if (!isCurrentUserKurator) {
       clientUserId = user.uid;
+      console.log('Changing uid');
     }
+    console.log('uid', clientUserId);
     const fetchRoomName = await roomName({clientUserId});
     const unsubscribeList = getRefPath({isCurrentUserKurator, setRefPath, fetchRoomName, setMessages, messageLimit, setRoomId, loadingMessages, setLoadingMessages});
     return unsubscribeList;

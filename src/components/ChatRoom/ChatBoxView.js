@@ -30,6 +30,7 @@ const ChatBoxView = ({ refPath, setRefPath, clientUserId, setRoomId }) => {
 
   const { messages, isLoading } = useOpenChat({
     setRoomId,
+    messageLimit,
   });
 
   const renderItem = useCallback(

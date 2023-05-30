@@ -1,6 +1,6 @@
 import getRoomName from "./roomName";
-import { useContext } from "react";
-import { IsCurrentUserKuratorContext } from "../../firebase/isCurrentUserKuratorContext";
+import { useContext, useState, useEffect } from "react";
+import { IsCurrentUserKuratorContext } from "./isCurrentUserKuratorContext";
 import auth from "@react-native-firebase/auth";
 
 const useOpenChat = ({ setRoomId }) => {

@@ -17,7 +17,10 @@ const handleSendMessage = ({isCurrentUserKurator, messageToSend, user, refPath, 
       .collection('Users')
       .doc(user.uid)
       .get(),
-      await refPath
+      await firestore()
+      .collection('rooms')
+      .doc(roomId)
+      .collection('messages')
       .add({
         author: getUserData.get('alias'),
         kurator: getUserData.get('kurator'),

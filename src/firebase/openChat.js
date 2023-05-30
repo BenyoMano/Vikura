@@ -2,11 +2,11 @@ import getRoomName from "./roomName";
 import { useContext, useState, useEffect } from "react";
 import { IsCurrentUserKuratorContext } from "./isCurrentUserKuratorContext";
 import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 
-const useOpenChat = ({ setRoomId, messageLimit }) => {
+const useOpenChat = ({ setRoomId, messageLimit, clientUserId }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const user = auth().currentUser;
-  const clientUserId = user.uid;
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,11 +15,10 @@ const useOpenChat = ({ setRoomId, messageLimit }) => {
 
     if (isCurrentUserKurator === undefined) return;
 
-    if (!isCurrentUserKurator) {
-      clientUserId = user.uid;
-    }
-
     const roomName = await getRoomName({ clientUserId });
+
+    
+
 
     const unsubscribeList = roomName.docs.map((roomDetails) => {
       const roomId = roomDetails.id;
@@ -42,7 +41,7 @@ const useOpenChat = ({ setRoomId, messageLimit }) => {
             id: documentSnapshot.data().id,
           }));
           setMessages(newData);
-          setLoadingMessages(false);
+          setIsLoading(false);
         });
 
       if (isCurrentUserKurator) {

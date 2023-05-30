@@ -1,26 +1,25 @@
-import firestore from '@react-native-firebase/firestore';
-import { showMessage } from 'react-native-flash-message';
+import firestore from "@react-native-firebase/firestore";
+import { showMessage } from "react-native-flash-message";
 
-const roomName = async ({clientUserId}) => {
-  console.log('Inside roomName');
-  let getRoomName;
+const getRoomName = async ({ clientUserId }) => {
+  console.log("Inside roomName");
+  let roomName;
   try {
-    getRoomName = await firestore()
-    .collection('rooms')
-    .where('users.client.id', '==', clientUserId)
-    .get();
-    console.log('try getRoomName');
+    roomName = await firestore()
+      .collection("rooms")
+      .where("users.client.id", "==", clientUserId)
+      .get();
+    console.log("try getRoomName");
   } catch (error) {
     showMessage({
-      message: 'Varning!',
+      message: "Varning!",
       description: String(error),
-      type: 'danger',
+      type: "danger",
       duration: 3200,
     });
   }
-  console.log('Before return roomName');
-  return getRoomName;
-  
+  console.log("Before return roomName");
+  return roomName;
 };
 
-export default roomName;
+export default getRoomName;

@@ -1,34 +1,84 @@
-import getRefPath from './getRefPath';
-import roomName from './roomName';
+import getRoomName from "./roomName";
+import { useContext } from "react";
+import { IsCurrentUserKuratorContext } from "../../firebase/isCurrentUserKuratorContext";
+import auth from "@react-native-firebase/auth";
 
-const useOpenChat = ({
-  isCurrentUserKurator,
-  user,
-  clientUserId,
-  setRefPath,
-  setMessages,
-  setRoomId,
-  loadingMessages,
-  setLoadingMessages
-}) => {
-  const openChat = async messageLimit => {
-    setLoadingMessages(true);
-    
-    console.log('BEFORE', clientUserId);
-    console.log('isCurrentUserKurator', isCurrentUserKurator);
+const useOpenChat = ({ setRoomId }) => {
+  const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
+  const user = auth().currentUser;
+  const clientUserId = user.uid;
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const openChat = async (messageLimit) => {
+    setIsLoading(true);
+
     if (isCurrentUserKurator === undefined) return;
-    console.log('AFTER');
-    
+
     if (!isCurrentUserKurator) {
       clientUserId = user.uid;
-      console.log('Changing uid');
     }
-    console.log('uid', clientUserId);
-    const fetchRoomName = await roomName({clientUserId});
-    const unsubscribeList = getRefPath({isCurrentUserKurator, setRefPath, fetchRoomName, setMessages, messageLimit, setRoomId, loadingMessages, setLoadingMessages});
+
+    const roomName = await getRoomName({ clientUserId });
+
+    const unsubscribeList = roomName.docs.map((roomDetails) => {
+      const roomId = roomDetails.id;
+
+      const pathToMessages = firestore()
+        .collection("rooms")
+        .doc(roomId)
+        .collection("messages");
+
+      const unsubscribe = pathToMessages
+        .orderBy("timestamp", "desc")
+        .limit(30 + messageLimit)
+        .onSnapshot((messageDetails) => {
+          const newData = messageDetails.docs.map((documentSnapshot) => ({
+            timestamp: documentSnapshot.data().timestamp.toMillis(),
+            displayTimestamp: documentSnapshot.data().timestamp.toDate(),
+            text: documentSnapshot.data().msg,
+            isRead: documentSnapshot.data().isRead,
+            author: documentSnapshot.data().author,
+            id: documentSnapshot.data().id,
+          }));
+          setMessages(newData);
+          setLoadingMessages(false);
+        });
+
+      if (isCurrentUserKurator) {
+        pathToMessages
+          .where("isRead", "==", false)
+          .get()
+          .then((a) => {
+            a.forEach((doc) => {
+              doc.ref.update({
+                isRead: true,
+              });
+            });
+          });
+      }
+
+      setRoomId(roomId);
+      return unsubscribe;
+    });
+
     return unsubscribeList;
   };
-  return openChat;
+
+  useEffect(() => {
+    const unsubscribeList = openChat(messageLimit);
+    return () => {
+      const unsubscribeToListener = async () => {
+        const list = await unsubscribeList;
+        list.forEach((unsubscribe) => {
+          unsubscribe();
+        });
+      };
+      unsubscribeToListener();
+    };
+  }, [messageLimit]);
+
+  return { messages, isLoading };
 };
 
 export default useOpenChat;

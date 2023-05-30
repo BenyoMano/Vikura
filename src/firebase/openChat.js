@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { IsCurrentUserKuratorContext } from "../../firebase/isCurrentUserKuratorContext";
 import auth from "@react-native-firebase/auth";
 
-const useOpenChat = ({ setRoomId }) => {
+const useOpenChat = ({ setRoomId, messageLimit }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const user = auth().currentUser;
   const clientUserId = user.uid;

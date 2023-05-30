@@ -1,77 +1,72 @@
-import getRoomName from "./roomName";
 import { useContext, useState, useEffect } from "react";
 import { IsCurrentUserKuratorContext } from "./isCurrentUserKuratorContext";
-import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import { useRoomId } from "./useRoomId";
 
-const useOpenChat = ({ setRoomId, messageLimit, clientUserId }) => {
+const useOpenChat = ({ messageLimit, clientUserId }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
-  const user = auth().currentUser;
+
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const roomId = useRoomId(clientUserId);
 
-  const openChat = async (messageLimit) => {
+  const handleSnapshot = (messageDetails) => {
+    const newMessages = messageDetails.docs.map((documentSnapshot) => ({
+      timestamp: documentSnapshot.data().timestamp.toMillis(),
+      displayTimestamp: documentSnapshot.data().timestamp.toDate(),
+      text: documentSnapshot.data().msg,
+      isRead: documentSnapshot.data().isRead,
+      author: documentSnapshot.data().author,
+      id: documentSnapshot.data().id,
+    }));
+
+    setMessages(newMessages);
+    setIsLoading(false);
+  };
+
+  const listenForMessages = async (messageLimit) => {
     setIsLoading(true);
 
-    if (isCurrentUserKurator === undefined) return;
+    if (isCurrentUserKurator === undefined) {
+      return;
+    }
 
-    const roomName = await getRoomName({ clientUserId });
+    if (!roomId) {
+      return;
+    }
 
-    
+    const pathToMessages = firestore()
+      .collection("rooms")
+      .doc(roomId)
+      .collection("messages");
 
+    const unsubscribe = pathToMessages
+      .orderBy("timestamp", "desc")
+      .limit(30 + messageLimit)
+      .onSnapshot(handleSnapshot);
 
-    const unsubscribeList = roomName.docs.map((roomDetails) => {
-      const roomId = roomDetails.id;
-
-      const pathToMessages = firestore()
-        .collection("rooms")
-        .doc(roomId)
-        .collection("messages");
-
-      const unsubscribe = pathToMessages
-        .orderBy("timestamp", "desc")
-        .limit(30 + messageLimit)
-        .onSnapshot((messageDetails) => {
-          const newData = messageDetails.docs.map((documentSnapshot) => ({
-            timestamp: documentSnapshot.data().timestamp.toMillis(),
-            displayTimestamp: documentSnapshot.data().timestamp.toDate(),
-            text: documentSnapshot.data().msg,
-            isRead: documentSnapshot.data().isRead,
-            author: documentSnapshot.data().author,
-            id: documentSnapshot.data().id,
-          }));
-          setMessages(newData);
-          setIsLoading(false);
-        });
-
-      if (isCurrentUserKurator) {
-        pathToMessages
-          .where("isRead", "==", false)
-          .get()
-          .then((a) => {
-            a.forEach((doc) => {
-              doc.ref.update({
-                isRead: true,
-              });
+    if (isCurrentUserKurator) {
+      pathToMessages
+        .where("isRead", "==", false)
+        .get()
+        .then((a) => {
+          a.forEach((doc) => {
+            doc.ref.update({
+              isRead: true,
             });
           });
-      }
+        });
+    }
 
-      setRoomId(roomId);
-      return unsubscribe;
-    });
-
-    return unsubscribeList;
+    return unsubscribe;
   };
 
   useEffect(() => {
-    const unsubscribeList = openChat(messageLimit);
+    const unsubscribe = listenForMessages(messageLimit);
     return () => {
       const unsubscribeToListener = async () => {
-        const list = await unsubscribeList;
-        list.forEach((unsubscribe) => {
-          unsubscribe();
-        });
+        const awaitedUnsubscribe = await unsubscribe;
+        awaitedUnsubscribe();
       };
       unsubscribeToListener();
     };

@@ -9,27 +9,14 @@ import { useCallback } from "react";
 import ChatBubble from "./ChatBubble";
 import { onMomentumScrollEnd } from "./scrollHandlers";
 
-const ChatBoxView = ({ refPath, setRefPath, clientUserId, setRoomId }) => {
+const ChatBoxView = ({ refPath, setRefPath, clientUserId }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   //const [messages, setMessages] = useState([]);
   const [messageLimit, setMessageLimit] = useState(0);
   const user = auth().currentUser;
   console.log("BoxView isKurator", isCurrentUserKurator);
 
-  // const openChat = useOpenChat({
-  //   isCurrentUserKurator,
-  //   user,
-  //   clientUserId,
-  //   refPath, // antagligen onödig
-  //   setRefPath,
-  //   setMessages,
-  //   setRoomId,
-  //   loadingMessages,
-  //   setLoadingMessages
-  // });
-
   const { messages, isLoading } = useOpenChat({
-    setRoomId,
     messageLimit,
     clientUserId,
   });

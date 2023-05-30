@@ -1,51 +1,48 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from "react";
 import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
   StyleSheet,
-} from 'react-native';
-import auth from '@react-native-firebase/auth';
-import ChatBoxView from './ChatBoxView';
-import {HeaderView} from '../Header/HeaderView';
-import ChatMessageComposer from './ChatMessageComposer';
-import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
+} from "react-native";
+import auth from "@react-native-firebase/auth";
+import ChatBoxView from "./ChatBoxView";
+import { HeaderView } from "../Header/HeaderView";
+import ChatMessageComposer from "./ChatMessageComposer";
+import { MyKeyboardAvoidingView } from "../../atoms/MyKeyboardAvoidingView";
+import { IsCurrentUserKuratorContext } from "../../firebase/isCurrentUserKuratorContext";
+import { useRoomId } from "../../firebase/useRoomId";
 
-
-const ChatScreen = ({navigation, route}) => {
-  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
-  const [messageToSend, setMessageToSend] = useState();
+const ChatScreen = ({ navigation, route }) => {
+  const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const [refPath, setRefPath] = useState(false); //Context
-  const [roomId, setRoomId] = useState(); //Context
-  const {id} = route.params;
-  console.log('id', id);
+  const clientUserId = route.params.id;
+
+  const roomId = useRoomId(clientUserId);
+  console.log("id", clientUserId);
   const user = auth().currentUser;
-  
+
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <HeaderView
             navigation={navigation}
-            clientUserId={id}
+            clientUserId={clientUserId}
             user={user}
             refPath={refPath}
           />
           <ChatBoxView
-            clientUserId={id}
+            clientUserId={clientUserId}
             refPath={refPath}
             setRefPath={setRefPath}
-            setRoomId={setRoomId}
           />
-          <ChatMessageComposer 
-            messageToSend={messageToSend}
-            setMessageToSend={setMessageToSend}
+          <ChatMessageComposer
             isCurrentUserKurator={isCurrentUserKurator}
             user={user}
-            refPath={refPath}
             roomId={roomId}
+            refPath={refPath}
           />
         </View>
       </TouchableWithoutFeedback>
@@ -56,11 +53,11 @@ const ChatScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: '100%',
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: "white",
+    width: "100%",
   },
 });
 

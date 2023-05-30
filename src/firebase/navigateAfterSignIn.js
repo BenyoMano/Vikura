@@ -1,27 +1,27 @@
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import firestore from "@react-native-firebase/firestore";
+import auth from "@react-native-firebase/auth";
 
-const navigateAfterSignIn = async ({navigation}) => {
+const navigateAfterSignIn = async ({ navigation }) => {
   const user = auth().currentUser;
   const askNavigationConditions = await firestore()
-    .collection('Users')
+    .collection("Users")
     .doc(user.uid)
     .get();
 
-  const newUserStatus = askNavigationConditions.get('firstLogin');
-  const kuratorStatus = askNavigationConditions.get('kurator');
+  const newUserStatus = askNavigationConditions.get("firstLogin");
+  const kuratorStatus = askNavigationConditions.get("kurator");
 
   if (newUserStatus && !kuratorStatus) {
-    navigation.navigate('NewClientScreen');
+    navigation.navigate("NewClientScreen");
   }
   if (!newUserStatus && !kuratorStatus) {
-    navigation.navigate('ChatScreen', {id: user.uid});
+    navigation.navigate("ChatScreen", { id: user.uid });
   }
   if (!newUserStatus && kuratorStatus) {
-    navigation.navigate('KuratorScreen');
+    navigation.navigate("KuratorScreen");
   }
   if (newUserStatus && kuratorStatus) {
-    navigation.navigate('NewKuratorScreen');
+    navigation.navigate("NewKuratorScreen");
   }
 };
 

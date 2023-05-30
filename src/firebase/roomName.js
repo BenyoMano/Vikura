@@ -19,7 +19,7 @@ const getRoomName = async ({ clientUserId }) => {
     });
   }
   console.log("Before return roomName");
-  return roomName;
+  return roomName?.docs[0];
 };
 
 export default getRoomName;

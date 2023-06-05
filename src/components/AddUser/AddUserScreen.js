@@ -56,20 +56,18 @@ const AddUserScreen = ({navigation}) => {
               marginBottom: 5,
             }}
           />
-          <View style={{justifyContent: 'center'}}>
-            <AddUserModal
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
-              userPropToAdd={userPropToAdd}
-              setUserPropToAdd={setUserPropToAdd}
-              checkboxStateKurator={checkboxStateKurator}
-              setCheckboxStateKurator={setCheckboxStateKurator}
-              checkboxStateAdmin={checkboxStateAdmin}
-              setCheckboxStateAdmin={setCheckboxStateAdmin}
-              setSubmitted={setSubmitted}
-              setHasAddedUser={setHasAddedUser}
-            />
-          </View>
+          <AddUserModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            userPropToAdd={userPropToAdd}
+            setUserPropToAdd={setUserPropToAdd}
+            checkboxStateKurator={checkboxStateKurator}
+            setCheckboxStateKurator={setCheckboxStateKurator}
+            checkboxStateAdmin={checkboxStateAdmin}
+            setCheckboxStateAdmin={setCheckboxStateAdmin}
+            setSubmitted={setSubmitted}
+            setHasAddedUser={setHasAddedUser}
+          />
           <ScrollView
             contentContainerStyle={styles.scrollViewContainer}
           >

@@ -1,6 +1,9 @@
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import { showMessage } from "react-native-flash-message";
+import { firebase } from '@react-native-firebase/app';
+
+firebase.setLogLevel('debug');
 
 const createUser = ({
   userPropToAdd,
@@ -10,13 +13,13 @@ const createUser = ({
   setSubmitted,
   setHasAddedUser,
 }) => {
-  userPropToAdd.firstName = userPropToAdd.firstName.trim();
-  userPropToAdd.secondName = userPropToAdd.secondName.trim();
-  userPropToAdd.mejl = userPropToAdd.mejl.trim();
-  userPropToAdd.password = userPropToAdd.password.trim();
-  userPropToAdd.personnummer = userPropToAdd.personnummer.trim();
+  userPropToAdd.trimmedFirstName = userPropToAdd.firstName.trim();
+  userPropToAdd.trimmedSecondName = userPropToAdd.secondName.trim();
+  userPropToAdd.trimmedMejl = userPropToAdd.mejl.trim();
+  userPropToAdd.trimmedPassword = userPropToAdd.password.trim();
+  userPropToAdd.trimmedPersonnummer = userPropToAdd.personnummer.trim();
 
-  if (!userPropToAdd.firstName) {
+  if (!userPropToAdd.trimmedFirstName) {
     showMessage({
       message: "Varning!",
       description: "Namn saknas!",
@@ -25,7 +28,7 @@ const createUser = ({
     });
     return;
   }
-  if (!userPropToAdd.secondName) {
+  if (!userPropToAdd.trimmedSecondName) {
     showMessage({
       message: "Varning!",
       description: "Efternamn saknas!",
@@ -34,7 +37,7 @@ const createUser = ({
     });
     return;
   }
-  if (!userPropToAdd.mejl) {
+  if (!userPropToAdd.trimmedMejl) {
     showMessage({
       message: "Varning!",
       description: "Mejl saknas!",
@@ -43,7 +46,7 @@ const createUser = ({
     });
     return;
   }
-  if (!userPropToAdd.password) {
+  if (!userPropToAdd.trimmedPassword) {
     showMessage({
       message: "Varning!",
       description: "Lösenord saknas!",
@@ -52,7 +55,7 @@ const createUser = ({
     });
     return;
   }
-  if (!userPropToAdd.personnummer) {
+  if (!userPropToAdd.trimmedPersonnummer) {
     showMessage({
       message: "Varning!",
       description: "Personnummer saknas!",
@@ -61,7 +64,7 @@ const createUser = ({
     });
     return;
   }
-  if (userPropToAdd.personnummer.length !== 12) {
+  if (userPropToAdd.trimmedPersonnummer.length !== 12) {
     showMessage({
       message: "Varning!",
       description:
@@ -73,20 +76,20 @@ const createUser = ({
   }
 
   if (
-    userPropToAdd.firstName &&
-    userPropToAdd.secondName &&
-    userPropToAdd.mejl &&
-    userPropToAdd.password &&
-    userPropToAdd.personnummer
+    userPropToAdd.trimmedFirstName &&
+    userPropToAdd.trimmedSecondName &&
+    userPropToAdd.trimmedMejl &&
+    userPropToAdd.trimmedPassword &&
+    userPropToAdd.trimmedPersonnummer
   ) {
     const addPersonalDetails = async (user) => {
       const refUID = firestore().collection("Users").doc(user.uid);
       const userAlias = checkboxStateKurator ? "KURATOR" : "";
       await refUID.set({
-        firstName: userPropToAdd.firstName,
-        secondName: userPropToAdd.secondName,
-        mejl: userPropToAdd.mejl,
-        personNummer: userPropToAdd.personnummer,
+        firstName: userPropToAdd.trimmedFirstName,
+        secondName: userPropToAdd.trimmedSecondName,
+        mejl: userPropToAdd.trimmedMejl,
+        personNummer: userPropToAdd.trimmedPersonnummer,
         alias: userAlias,
         firstLogin: true,
         kurator: checkboxStateKurator,
@@ -97,15 +100,24 @@ const createUser = ({
     async function createNewUser() {
       try {
         await auth().createUserWithEmailAndPassword(
-          userPropToAdd.mejl,
-          userPropToAdd.password
+          userPropToAdd.trimmedMejl,
+          userPropToAdd.trimmedPassword
         );
-
+        console.log('After "createUser"')
         const user = auth().currentUser;
-
+        console.log('After "auth()currentUser"')
+        
         await addPersonalDetails(user);
+        console.log('After "addPersinalDetails"')
 
-        await auth().signOut();
+        try {
+          await auth().signOut();
+          console.log('Success!');
+          console.log('User:', auth.currentUser);
+
+        } catch {
+          console.log('Failed');
+        }
 
         setUserPropToAdd({
           firstName: "",
@@ -124,6 +136,8 @@ const createUser = ({
           duration: 2000,
         });
       } catch (error) {
+        console.error(error);
+        console.error(error.stack);
         showMessage({
           message: "Misslyckades!",
           description: String(error),

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import firestore from '@react-native-firebase/firestore';
+import { showMessage } from "react-native-flash-message";
 import InputBarChatt from "./InputbarChat";
 import SendButton from "./SendButton";
+import { useRoomId } from "../../firebase/useRoomId";
+
 
 const ChatMessageComposer = ({
   isCurrentUserKurator,
   user,
-  refPath,
-  roomId,
+  clientUserId
+  // roomId,
 }) => {
   const [messageToSend, setMessageToSend] = useState();
+  const roomId = useRoomId(clientUserId);
 
   const handleSendMessage = () => {
     if (!messageToSend) return;
@@ -18,11 +23,10 @@ const ChatMessageComposer = ({
     const trimmedMessageToSend = messageToSend.trim();
 
     const timestamp = new Date();
-    console.log("refpath", refPath);
 
     const addMessage = async () => {
       try {
-        const getUserData = firestore().collection("Users").doc(user.uid).get();
+        const getUserData = await firestore().collection("Users").doc(user.uid).get();
 
         await Promise.all([
           getUserData,
@@ -47,8 +51,9 @@ const ChatMessageComposer = ({
           message: "Varning!",
           description: String(error),
           type: "danger",
-          duration: 3200,
+          duration: 5000,
         });
+        console.log(error);
       }
     };
 

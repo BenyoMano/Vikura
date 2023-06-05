@@ -5,12 +5,13 @@ import { useRoomId } from "./useRoomId";
 
 const useOpenChat = ({ messageLimit, clientUserId }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
-
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const roomId = useRoomId(clientUserId);
+  console.log('useOpenChat - roomId', roomId);
 
   const handleSnapshot = (messageDetails) => {
+    console.log('Inside handleSnapshot');
     const newMessages = messageDetails.docs.map((documentSnapshot) => ({
       timestamp: documentSnapshot.data().timestamp.toMillis(),
       displayTimestamp: documentSnapshot.data().timestamp.toDate(),
@@ -26,14 +27,15 @@ const useOpenChat = ({ messageLimit, clientUserId }) => {
 
   const listenForMessages = async (messageLimit) => {
     setIsLoading(true);
-
+    
     if (isCurrentUserKurator === undefined) {
       return;
     }
-
+    
     if (!roomId) {
       return;
     }
+    console.log('Inside listenForMessages', isCurrentUserKurator, roomId);
 
     const pathToMessages = firestore()
       .collection("rooms")
@@ -66,11 +68,12 @@ const useOpenChat = ({ messageLimit, clientUserId }) => {
     return () => {
       const unsubscribeToListener = async () => {
         const awaitedUnsubscribe = await unsubscribe;
+        if (awaitedUnsubscribe === undefined) return;
         awaitedUnsubscribe();
       };
       unsubscribeToListener();
     };
-  }, [messageLimit]);
+  }, [messageLimit, roomId, isCurrentUserKurator]);
 
   return { messages, isLoading };
 };

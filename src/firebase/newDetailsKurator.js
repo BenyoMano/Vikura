@@ -38,15 +38,15 @@ const newDetailsKurator = async ({navigation, password, rePassword, setSubmitted
 
     try {
       await Promise.all([
-        await user.updatePassword(password),
-        await firestore().collection('Users').doc(userId).update({
+        firestore().collection('Users').doc(userId).update({
           firstLogin: false,
         }),
+        user.updatePassword(password),
       ]);
 
-      navigation.navigate('KuratorScreen');
       setLoading(false);
       setSubmitted(false);
+      navigation.navigate('KuratorScreen');
 
     } catch (error) {
         showMessage({

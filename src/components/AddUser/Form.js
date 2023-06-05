@@ -32,7 +32,7 @@ const Form = ({
   }
 
   function adminCheck() {
-    !checkboxStateAdmin ? userPropToAdd.admin = true : false;
+    !checkboxStateAdmin ? (userPropToAdd.admin = true) : (userPropToAdd.admin = false);
     setUserPropToAdd({...userPropToAdd, admin});
   }
 
@@ -147,7 +147,7 @@ const Form = ({
           //disableBuiltInState
           onPress={() => {
             setCheckboxStateAdmin(!checkboxStateAdmin);
-            kuratorCheck();
+            adminCheck();
           }}
           keys={'admin'}
           userPropToAdd={userPropToAdd}

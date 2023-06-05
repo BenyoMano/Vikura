@@ -16,10 +16,9 @@ import { useRoomId } from "../../firebase/useRoomId";
 
 const ChatScreen = ({ navigation, route }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
-  const [refPath, setRefPath] = useState(false); //Context
   const clientUserId = route.params.id;
 
-  const roomId = useRoomId(clientUserId);
+  // const roomId = useRoomId(clientUserId);
   console.log("id", clientUserId);
   const user = auth().currentUser;
 
@@ -30,19 +29,15 @@ const ChatScreen = ({ navigation, route }) => {
           <HeaderView
             navigation={navigation}
             clientUserId={clientUserId}
-            user={user}
-            refPath={refPath}
           />
           <ChatBoxView
             clientUserId={clientUserId}
-            refPath={refPath}
-            setRefPath={setRefPath}
           />
           <ChatMessageComposer
             isCurrentUserKurator={isCurrentUserKurator}
             user={user}
-            roomId={roomId}
-            refPath={refPath}
+            // roomId={roomId}
+            clientUserId={clientUserId}
           />
         </View>
       </TouchableWithoutFeedback>

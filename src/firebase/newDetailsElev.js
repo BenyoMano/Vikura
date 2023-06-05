@@ -48,7 +48,6 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
 
     try {
       await Promise.all([
-        user.updatePassword(password),
         user.updateProfile({
           displayName: alias,
         }),   
@@ -56,12 +55,13 @@ const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmi
           firstLogin: false,
           alias: alias,
         }),
+        user.updatePassword(password),
       ]);
         
       createRoom({userId});
-      navigation.navigate('ChatScreen', {id: userId});
       setLoading(false);
       setSubmitted(false);
+      navigation.navigate('ChatScreen', {id: userId});
 
     } catch (error) {
         showMessage({

@@ -5,9 +5,7 @@ import createRoom from './createRoom';
 
 const newDetailsElev = async ({navigation, password, rePassword, alias, setSubmitted, setLoading}) => {
   const user = auth().currentUser;
-  console.log('User', user);
   const userId = auth().currentUser.uid;
-  console.log('userID', userId);
 
   if (!password) {
     showMessage({

@@ -4,6 +4,7 @@ import firestore from "@react-native-firebase/firestore";
 import { useRoomId } from "./useRoomId";
 
 const useOpenChat = ({ messageLimit, clientUserId }) => {
+  console.log('OPEN CHAT');
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +28,7 @@ const useOpenChat = ({ messageLimit, clientUserId }) => {
 
   const listenForMessages = async (messageLimit) => {
     setIsLoading(true);
+    console.log('LISTEN FOR MESSAGES');
     
     if (isCurrentUserKurator === undefined) {
       return;

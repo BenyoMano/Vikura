@@ -18,8 +18,7 @@ const ChatScreen = ({ navigation, route }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const clientUserId = route.params.id;
 
-  // const roomId = useRoomId(clientUserId);
-  console.log("id", clientUserId);
+  const roomId = useRoomId(clientUserId);
   const user = auth().currentUser;
 
   return (
@@ -36,8 +35,7 @@ const ChatScreen = ({ navigation, route }) => {
           <ChatMessageComposer
             isCurrentUserKurator={isCurrentUserKurator}
             user={user}
-            // roomId={roomId}
-            clientUserId={clientUserId}
+            roomId={roomId}
           />
         </View>
       </TouchableWithoutFeedback>

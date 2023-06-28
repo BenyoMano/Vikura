@@ -13,7 +13,6 @@ const ChatBoxView = ({ clientUserId }) => {
   const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
   const [messageLimit, setMessageLimit] = useState(0);
   const user = auth().currentUser;
-  console.log("BoxView isKurator", isCurrentUserKurator);
 
   const { messages, isLoading } = useOpenChat({
     messageLimit,

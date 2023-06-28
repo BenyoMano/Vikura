@@ -34,7 +34,7 @@ export const useRoomId = (clientUserId) => {
     };
 
     fetchRoom();
-  }, [clientUserId]);
+  }, [clientUserId, roomId]);
   console.log('useRoomId', roomId);
   return roomId;
 };

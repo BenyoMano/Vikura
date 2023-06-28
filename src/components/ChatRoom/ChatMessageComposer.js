@@ -4,17 +4,15 @@ import firestore from '@react-native-firebase/firestore';
 import { showMessage } from "react-native-flash-message";
 import InputBarChatt from "./InputbarChat";
 import SendButton from "./SendButton";
-import { useRoomId } from "../../firebase/useRoomId";
 
 
 const ChatMessageComposer = ({
   isCurrentUserKurator,
   user,
-  clientUserId
-  // roomId,
+  roomId,
 }) => {
+  console.log('COMPOSER');
   const [messageToSend, setMessageToSend] = useState();
-  const roomId = useRoomId(clientUserId);
 
   const handleSendMessage = () => {
     if (!messageToSend) return;

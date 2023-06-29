@@ -25,6 +25,7 @@ const Button = props => {
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable
         onPress={props.onPress}
+        testID='button'
         onPressIn={fadeIn}
         onPressOut={fadeOut}>
         <Animated.View

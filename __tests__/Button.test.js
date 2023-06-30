@@ -1,42 +1,46 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import Button from "../src/atoms/Button";
-import { test, expect } from "@jest/globals";
+import '@testing-library/jest-native/extend-expect';
 
 
-test('should have the correct text style', () => {
+describe('functionality', () => {
 
-    const title = 'Any Title';
+    test('calls onPress callback when pressed', () => {
+        const onPressMock = jest.fn();
+       
+        const { getByTestId } = render(
+            <Button title="Test Button" onPress={onPressMock} />
+        );
+        const buttonElement = getByTestId('button');
+        fireEvent.press(buttonElement);
     
-    const { getByText } = render(<Button title={title} onPress={() => {}} />);
-    const buttonElement = getByText(title);
-    const buttonTextStyle = buttonElement.props.style;
+        expect(onPressMock).toHaveBeenCalledTimes(1);
+    });
 
-    expect(buttonTextStyle).toHaveProperty('fontSize', 18);
-    expect(buttonTextStyle).toHaveProperty('color', 'black');
-    expect(buttonTextStyle).toHaveProperty('textAlign', 'center');
-    expect(buttonTextStyle).toHaveProperty('textTransform', 'uppercase');
-    expect(buttonTextStyle).toHaveProperty('fontFamily', 'NunitoSans-Regular');
 });
 
-test('should display the title given as a prop', () => {
-   
-    const title = 'Any Title';
-    
-    const { getByText } = render(<Button title={title} onPress={() => {}} />);
-    const buttonElement = getByText(title);
+describe('visuals', () => {
 
-    expect(buttonElement).toBeDefined();
-});
-
-test('should sucessfully pass the onPress prop', () => {
-    const onPressMock = jest.fn();
-   
-    const { getByTestId } = render(
-        <Button title="Test Button" onPress={onPressMock} />
-    );
-    const buttonElement = getByTestId('button');
-    fireEvent.press(buttonElement);
+    test('should have the correct styling', () => {
     
-    expect(onPressMock).toHaveBeenCalledTimes(1);
+        const { getByTestId } = render(<Button />);
+        const buttonElement = getByTestId('button');
+    
+        expect(buttonElement).toHaveStyle('fontSize', 18);
+        expect(buttonElement).toHaveStyle('color', 'black');
+        expect(buttonElement).toHaveStyle('textAlign', 'center');
+        expect(buttonElement).toHaveStyle('textTransform', 'uppercase');
+        expect(buttonElement).toHaveStyle('fontFamily', 'NunitoSans-Regular');
+    });
+    
+    test('should display the title given as a prop', () => {
+    
+        const title = 'Any Title';
+        
+        const { getByText } = render(<Button title={title} onPress={() => {}} />);
+        const buttonElement = getByText(title);
+    
+        expect(buttonElement).toBeDefined();
+    });
 });

@@ -36,7 +36,7 @@ export const HeaderView = ({
             }}
           />
           {isCurrentUserAdmin ? (
-            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} />
+            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} testID='adduserbutton' />
           ) : null}
         </StylingContainer>
       ) : route.name === 'AddUserScreen' ? (

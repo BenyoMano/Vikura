@@ -1,0 +1,22 @@
+// console.error = jest.fn();
+
+// import React from 'react';
+// import { render } from '@testing-library/react';
+// import Button from '../src/atoms/Button';
+
+// test('Button component renders correctly', () => {
+//   const title = 'Any Title';
+  
+//   const { getAllByText } = render(<Button title={title} />);
+  
+//   expect(getAllByText).toMatchSnapshot();
+// });
+
+// test('Button onPress callback is called when clicked', () => {
+//   const onPressMock = jest.fn();
+//   const component = render(<Button onPress={onPressMock} />);
+//   const button = component.root.findByType('button');
+  
+//   fireEvent.press(button);
+//   expect(onPressMock).toHaveBeenCalledTimes(1);
+// });

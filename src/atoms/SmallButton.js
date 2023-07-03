@@ -22,7 +22,11 @@ const SmallButton = ({title, onPress}) => {
 
   return (
     <View style={viewStyle}>
-      <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={onPress}>
+      <Pressable
+        onPressIn={fadeIn}
+        onPressOut={fadeOut}
+        onPress={onPress}
+        testID="smallbutton">
         <Animated.View
           style={[
             greyScale.btnContainerStyle,

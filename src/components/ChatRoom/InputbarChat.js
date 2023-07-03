@@ -7,6 +7,7 @@ const InputBarChatt = ({messageToSend, setMessageToSend}) => {
   return (
     <View style={viewStyle}>
       <TextInput
+      testID='inputbarChat'
         style={barStyle}
         onChangeText={messageToSend => setMessageToSend(messageToSend)}
         value={messageToSend}
@@ -20,7 +21,7 @@ const InputBarChatt = ({messageToSend, setMessageToSend}) => {
     </View>
   );
 };
-const styles = {
+export const styles = {
   viewStyle: {
     justifyContent: 'center',
     alignItems: 'flex-start',

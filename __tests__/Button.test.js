@@ -27,6 +27,11 @@ describe('visuals', () => {
         const { getByTestId } = render(<Button />);
         const buttonElement = getByTestId('button');
     
+        expect(buttonElement).toHaveStyle('backgroundColor', '#C4C4C4');
+        expect(buttonElement).toHaveStyle('paddingVertical', 18);
+        expect(buttonElement).toHaveStyle('width', 230);
+        expect(buttonElement).toHaveStyle('borderRadius', 12);
+        
         expect(buttonElement).toHaveStyle('fontSize', 18);
         expect(buttonElement).toHaveStyle('color', 'black');
         expect(buttonElement).toHaveStyle('textAlign', 'center');

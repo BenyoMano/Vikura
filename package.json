@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --verbose",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -61,6 +61,7 @@
     "jest-react-native": "^18.0.0",
     "jsdom": "^22.1.0",
     "metro-react-native-babel-preset": "0.66.0",
+    "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "^18.2.0"
   }
 }

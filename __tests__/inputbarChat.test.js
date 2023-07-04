@@ -38,12 +38,13 @@ test('should have correct styling', () => {
     const barStyle = inputbarComponent.props.style;
 
     expect(barStyle).toEqual(styles.barStyle);
-    expect(inputbarComponent).toHaveStyle('width', '100%');
-    expect(inputbarComponent).toHaveStyle('color', 'black');
-    expect(inputbarComponent).toHaveStyle('backgroundColor', '#EEEEEE');
-    expect(inputbarComponent).toHaveStyle('borderColor', 'gray');
-    expect(inputbarComponent).toHaveStyle('borderWidth', 2);
-    expect(inputbarComponent).toHaveStyle('borderRadius', 12);
-    expect(inputbarComponent).toHaveStyle('padding', 10);
-    expect(inputbarComponent).toHaveStyle('fontFamily', 'NunitoSans-Regular');
+    expect(barStyle.maxHeight).toBe(250);
+    expect(barStyle.width).toBe('100%');
+    expect(barStyle.color).toBe('black');
+    expect(barStyle.backgroundColor).toBe('#EEEEEE');
+    expect(barStyle.borderColor).toBe('gray');
+    expect(barStyle.borderWidth).toBe(2);
+    expect(barStyle.borderRadius).toBe(12);
+    expect(barStyle.padding).toBe(10);
+    expect(barStyle.fontFamily).toBe('NunitoSans-Regular');
 });

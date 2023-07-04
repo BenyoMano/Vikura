@@ -16,9 +16,11 @@ describe('visuals', () => {
     test('should have correct base styling', () => {
         const { getByTestId } = render(<MainText />);
         const mainTextComponent = getByTestId('maintext');
-    
-        expect(mainTextComponent).toHaveStyle('alignItems', 'center');
-        expect(mainTextComponent).toHaveStyle('fontFamily', 'NunitoSans-Regular');
+        const viewstyle = mainTextComponent.props.style;
+        const fontfamily = mainTextComponent.props.children.props.style[1].fontFamily;
+
+        expect(viewstyle.alignItems).toBe('center');
+        expect(fontfamily).toBe('NunitoSans-Regular');
     
     });
 });
@@ -34,9 +36,11 @@ describe('functionality', () => {
 
         const { getByTestId } = render(<MainText title={title} style={style} />);
         const mainTextComponent = getByTestId('maintext');
+        const componentTitle = mainTextComponent.props.children.props.children;
+        const compomentStyle = mainTextComponent.props.children.props.style[0];
 
-        expect(mainTextComponent.props.children).toBe(title);
-        expect(mainTextComponent).toHaveStyle('fontSize', 24);
-        expect(mainTextComponent).toHaveStyle('color', 'black');
+        expect(componentTitle).toBe(title);
+        expect(compomentStyle.fontSize).toBe(24);
+        expect(compomentStyle.color).toBe('black');
     });
 });

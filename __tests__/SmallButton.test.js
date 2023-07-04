@@ -26,21 +26,20 @@ describe('visuals', () => {
     
         const { getByTestId } = render(<SmallButton />);
         const SmallButtonElement = getByTestId('smallbutton');
-        console.log('F', SmallButtonElement);
-        console.log('S', SmallButtonElement.props.style.backgroundColor);
-        // screen.debug();
 
-        expect(SmallButtonElement.props.style.backgroundColor).toBe('lightgrey');
-        expect(SmallButtonElement).toHaveStyle('backgroundColor', '#C4C4C4');
-        expect(SmallButtonElement).toHaveStyle('paddingVertical', 18);
-        expect(SmallButtonElement).toHaveStyle('width', 230);
-        expect(SmallButtonElement).toHaveStyle('borderRadius', 12);
+        const buttonContainerStyle = SmallButtonElement.props.children[0].props.style[0];
+        const textStyle = SmallButtonElement.props.children[0].props.children.props.style;
+
+        expect(buttonContainerStyle.borderRadius).toBe(12);
+        expect(buttonContainerStyle.borderWidth).toBe(1);
+        expect(buttonContainerStyle.borderColor).toBe('black');
+        expect(buttonContainerStyle.padding).toBe(10);
+        expect(buttonContainerStyle.backgroundColor).toBe('lightgrey');
         
-        expect(SmallButtonElement).toHaveStyle('fontSize', 18);
-        expect(SmallButtonElement).toHaveStyle('color', 'black');
-        expect(SmallButtonElement).toHaveStyle('textAlign', 'center');
-        expect(SmallButtonElement).toHaveStyle('textTransform', 'uppercase');
-        expect(SmallButtonElement).toHaveStyle('fontFamily', 'NunitoSans-Regular');
+        expect(textStyle.color).toBe('black');
+        expect(textStyle.fontSize).toBe(18);
+        expect(textStyle.textAlign).toBe('center');
+        expect(textStyle.fontFamily).toBe('NunitoSans-Regular');
     });
     
     test('should display the title given as a prop', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
 
 const SmallButton = ({title, onPress}) => {
-  const {viewStyle, greyScale, btnTextStyle} = styles;
+  const {viewStyle, btnContainerStyle, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
   const fadeIn = () => {
     Animated.timing(animated, {
@@ -29,7 +29,7 @@ const SmallButton = ({title, onPress}) => {
         testID="smallbutton">
         <Animated.View
           style={[
-            greyScale.btnContainerStyle,
+            btnContainerStyle,
             {
               opacity: animated,
             },
@@ -41,19 +41,17 @@ const SmallButton = ({title, onPress}) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   viewStyle: {
     borderRadius: 12,
     overflow: 'hidden',
   },
-  greyScale: {
-    btnContainerStyle: {
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: 'black',
-      padding: 10,
-      backgroundColor: 'lightgrey',
-    },
+  btnContainerStyle: {
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    backgroundColor: 'lightgrey',
   },
   btnTextStyle: {
     color: 'black',

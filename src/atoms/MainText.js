@@ -4,8 +4,8 @@ import {Text, View} from 'react-native';
 const MainText = props => {
   const {textStyling, viewStyle} = styles;
   return (
-    <View style={viewStyle}>
-      <Text style={[props.style, textStyling]} testID='maintext'>{props.title}</Text>
+    <View style={viewStyle} testID='maintext'>
+      <Text style={[props.style, textStyling]}>{props.title}</Text>
     </View>
   );
 };

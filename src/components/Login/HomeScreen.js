@@ -15,6 +15,7 @@ import MainText from '../../atoms/MainText';
 import LoginForm from './LoginForm';
 
 const HomeScreen = ({navigation}) => {
+  console.log('NAVIGATION', navigation);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [loginDetails, setLoginDetails] = useState({});
   const {mejl, password} = loginDetails;
@@ -45,7 +46,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.mainContainer}>
+        <View style={styles.mainContainer} testID='homescreen'>
           <MainLogo />
           <View style={styles.contentContainer}>
             {!isKeyboardVisible ? (

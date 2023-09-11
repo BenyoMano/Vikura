@@ -1,5 +1,4 @@
 # Vikura
-> Simple chat app tool
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -13,24 +12,29 @@
 * [Contact](#contact)
 
 
-## General Information
-Simple and functional chat app intended to provide a platform for hosting conversations between client and [School Welfare Officer], an essential tool for Vikura Welfare Officers to conduct their work.  
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
+## Description
 
+Chat app designed to facilitate conversations between clients and School Welfare Officers/School Counselors. An essential tool for professionals working in student welfare at Vikura, creating new possibilities to overcome limitations of time and location.
 
 ## Technologies Used
-- React Native
-- Firestore/Firebase
-- Node.js
+**Environment:** React Native
 
+**Database:** Cloud Firestore
 
-## Features
+**Authentication:** Firebase Authentication
+
+**Testing Library:** Jest 
+
+## Project Features
+### Features
+
 - Direct messaging
 - Anonymous yet personal and distinguishable
 - Full conversation history available
 - Report of concern possible
 
+### Examples
+....
 
 ## Screenshots
 ![Example screenshot](./src/assets/images/vikuraCut.jpg)

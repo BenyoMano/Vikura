@@ -1,4 +1,4 @@
-# Vikura
+<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg">
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -28,10 +28,9 @@ Chat app designed to facilitate conversations between clients and School Welfare
 ## Project Features
 ### Features
 
-- Direct messaging
-- Anonymous yet personal and distinguishable
-- Full conversation history available
-- Report of concern possible
+- Direct messaging between client and school counselor
+- In-app account creation
+- Abillity to report a concern (child protection referral)
 
 ### Examples
 ....

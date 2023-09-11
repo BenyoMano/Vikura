@@ -1,4 +1,6 @@
-<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg">
+<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg"> <text style="font-size: 42px; margin-left: 20; font-style: italic">Vikura</text>
+
+# Vikura
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -10,7 +12,7 @@
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Contact](#contact)
-
+¤
 
 ## Description
 

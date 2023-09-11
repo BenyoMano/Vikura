@@ -1,4 +1,4 @@
-<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg"> <text style="font-size: 42px; margin-left: 20; font-style: italic">Vikura</text>
+<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg"> <p style="font-size: 42px; margin-left: 20; font-style: italic">Vikura</p>
 
 # Vikura
 

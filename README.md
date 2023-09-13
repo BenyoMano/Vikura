@@ -33,15 +33,12 @@ Chat app designed to facilitate conversations between clients and School Welfare
 
 ### Examples
 
-<table style="border:0px solid white;">
+<table width="100%" style="border:0px solid white; width:100%;">
   <tr style="border: 0px;">
-    <td style="border:0px;"><img src="./src/assets/images/Vikura-chat.png" width="200px"></td>
-    <td style="border:0px;"><img src="./src/assets/images/Vikura-addUser.png" width="200px"></td>
+    <td width="50%" style="border:0px; width:50%"><img src="./src/assets/images/Vikura-chat.png" width="200px"></td>
+    <td width="50%" style="border:0px; width:50%"><img src="./src/assets/images/Vikura-addUser.png" width="200px"></td>
   </tr>
 </table>
-
-<img style="width: 200px; max-width: 100%" src="./src/assets/images/Vikura-chat.png">
-<img style="width: 200px; max-width: 100%" src="./src/assets/images/Vikura-addUser.png">
 
 ## Setup
 What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?

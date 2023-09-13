@@ -1,4 +1,4 @@
-<img style="width: 150px" src="./src/assets/images/transparent.png">
+<img style="width: 150px" src="./src/assets/images/transparent-slim.png">
 
 ## Table of Contents
 * [General Info](#general-information)

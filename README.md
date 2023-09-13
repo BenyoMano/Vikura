@@ -1,19 +1,62 @@
 <img style="width: 150px" src="./src/assets/images/transparent-slim.png">
 
 ## Table of Contents
-* [General Info](#general-information)
+* [Description](#description)
+* [Project Features](#project-features)
+* [Installation and Setup](#installation-and-setup)
 * [Technologies Used](#technologies-used)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
 * [Contact and links](#contact-and-links)
 
 ## Description
 
 Chat app designed to facilitate conversations between clients and School Welfare Officers/School Counselors. An essential tool for professionals working in student welfare at Vikura, creating new possibilities to overcome limitations of time and location.
+
+
+
+## Project Features
+### Features:
+
+- Direct messaging between client and school counselor
+- In-app account creation
+- Abillity to report a concern (child protection referral)
+
+### Examples:
+
+<table>
+  <tr>
+    <td><img src="./src/assets/images/Vikura-chat.png" width="250px"></td>
+    <td><img src="./src/assets/images/Vikura-addUser.png" width="250px"></td>
+  </tr>
+</table>
+
+## Installation and Setup
+Make sure you have the following software installed:
+
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+
+
+Clone the repository:
+```bash
+git clone https://github.com/BenyoMano/Vikura.git
+```
+Enter the project directory:
+````bash
+cd vikura
+````
+Install dependencies:
+````bash
+npm install
+````
+#### Start the app:
+*For Windows and Android:*
+````bash
+npx react-native run-android
+````
+*For Mac and iOS:*
+````bash
+npx react-native run-ios
+````
 
 ## Technologies Used
 **Framework:** React Native
@@ -23,51 +66,6 @@ Chat app designed to facilitate conversations between clients and School Welfare
 **Authentication:** Firebase Authentication
 
 **Testing Library:** Jest 
-
-## Project Features
-### Features
-
-- Direct messaging between client and school counselor
-- In-app account creation
-- Abillity to report a concern (child protection referral)
-
-### Examples
-
-<table>
-  <tr>
-    <td><img src="./src/assets/images/Vikura-chat.png" width="300px"></td>
-    <td><img src="./src/assets/images/Vikura-addUser.png" width="300px"></td>
-  </tr>
-</table>
-
-## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
-
-
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
-
-
-## Project Status
-Project is: _in progress_ 
-
-
-## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
-Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
-
 
 ## Contact and links
 Created by [@BenyoMano](https://github.com/BenyoMano) - feel free to contact me!

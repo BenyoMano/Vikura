@@ -32,9 +32,8 @@ Chat app designed to facilitate conversations between clients and School Welfare
 - Abillity to report a concern (child protection referral)
 
 ### Examples
-....
 
-<table>
+<table border="0">
   <tr>
     <td><img src="./src/assets/images/Vikura-chat.png" width="200px"></td>
     <td><img src="./src/assets/images/Vikura-addUser.png" width="200px"></td>

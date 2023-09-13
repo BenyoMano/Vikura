@@ -36,7 +36,7 @@ Chat app designed to facilitate conversations between clients and School Welfare
 
 ## Screenshots
 <img style="width: 200px" src="./src/assets/images/Vikura-chat.png">
-<img style="width: 200px; margin-left:10px" src="./src/assets/images/Vikura-addUser.png">
+<img style="width: 200px" src="./src/assets/images/Vikura-addUser.png">
 
 ## Setup
 What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?

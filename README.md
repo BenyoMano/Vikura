@@ -1,6 +1,4 @@
-<img style="width: 150px" src="./src/assets/images/vikuraCut.jpg"> <p style="font-size: 42px; margin-left: 20; font-style: italic">Vikura</p>
-
-# Vikura
+<img style="width: 150px" src="./src/assets/images/transparent.png">
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -11,15 +9,14 @@
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Contact](#contact)
-¤
+* [Contact and links](#contact-and-links)
 
 ## Description
 
 Chat app designed to facilitate conversations between clients and School Welfare Officers/School Counselors. An essential tool for professionals working in student welfare at Vikura, creating new possibilities to overcome limitations of time and location.
 
 ## Technologies Used
-**Environment:** React Native
+**Framework:** React Native
 
 **Database:** Cloud Firestore
 
@@ -38,8 +35,8 @@ Chat app designed to facilitate conversations between clients and School Welfare
 ....
 
 ## Screenshots
-![Example screenshot](./src/assets/images/vikuraCut.jpg)
-
+<img style="width: 150" src="./src/assets/images/Vikura-chat.png">
+<img style="width: 150" src="./src/assets/images/Vikura-addUser.png">
 
 ## Setup
 What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
@@ -70,5 +67,9 @@ To do:
 - Feature to be added 2
 
 
-## Contact
+## Contact and links
 Created by [@BenyoMano](https://github.com/BenyoMano) - feel free to contact me!
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjamin-berg-b82b6717a/)
+
+[Vikura Website](https://vikura.se)

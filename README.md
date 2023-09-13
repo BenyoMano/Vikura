@@ -33,9 +33,9 @@ Chat app designed to facilitate conversations between clients and School Welfare
 
 ### Examples
 
-<table>
+<table style="border: 0px">
   <tr>
-    <td style="border-style: none;"><img src="./src/assets/images/Vikura-chat.png" width="200px"></td>
+    <td><img src="./src/assets/images/Vikura-chat.png" width="200px"></td>
     <td><img src="./src/assets/images/Vikura-addUser.png" width="200px"></td>
   </tr>
 </table>

@@ -47,6 +47,8 @@ const styles = {
     backgroundColor: 'white',
     borderRadius: 25,
     overflow: 'hidden',
+    position: 'relative',
+    zIndex: 1,
   },
 };
 

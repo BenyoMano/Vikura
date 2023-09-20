@@ -3,9 +3,18 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import {DeleteUserModal} from './DeleteUserModal';
 
 const ConversationRoom = ({roomId, clientAlias, clientId}) => {
   const [latestMessage, setLatestMessage] = useState(undefined);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const modalStyle = {
+    backgroundColor: modalVisible ? 'lightgrey' : '#EEEEEE',
+    borderBottomWidth: modalVisible ? 2 : 1,
+    borderTopColor: modalVisible ? 'black' : null,
+  };
+
   const opacityAnimation = new Animated.Value(1);
   const fadeIn = () => {
     Animated.timing(opacityAnimation, {
@@ -59,14 +68,24 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
     <Pressable
       onPress={() => navigation.navigate('ChatScreen', {id: latestMessage.id})}
       onPressIn={fadeIn}
-      onPressOut={fadeOut}>
+      onPressOut={fadeOut}
+      onLongPress={() => {
+        setModalVisible(!modalVisible);
+      }}>
       <Animated.View
         style={[
           styles.conversationRoom.item,
+          modalStyle,
           {
             opacity: opacityAnimation,
           },
         ]}>
+        {modalVisible && (
+          <DeleteUserModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
+        )}
         <View style={styles.header}>
           <Text style={styles.title}>{latestMessage.alias}</Text>
           <Text style={styles.timestamp}>
@@ -78,7 +97,9 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
             style={
               latestMessage.isRead ? styles.isRead.text : styles.notIsRead.text
             }>
-            {latestMessage.text.length < 100 ? latestMessage.text : latestMessage.text.substring(0, 100) + "..."}
+            {latestMessage.text.length < 100
+              ? latestMessage.text
+              : latestMessage.text.substring(0, 100) + '...'}
           </Text>
         </View>
       </Animated.View>
@@ -119,6 +140,7 @@ const styles = {
   },
   conversationRoom: {
     item: {
+      position: 'relative',
       padding: 15,
       marginHorizontal: 0,
       marginVertical: 0,
@@ -126,6 +148,9 @@ const styles = {
       borderWidth: 1,
       borderColor: '#EEEEEE',
       borderBottomColor: 'black',
+      zIndex: 1,
+      elevation: 1,
+      overflow: 'visible',
     },
   },
 };

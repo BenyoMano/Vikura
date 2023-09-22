@@ -84,6 +84,7 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
           <DeleteUserModal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            clientId={clientId}
           />
         )}
         <View style={styles.header}>

@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Modal, Animated} from 'react-native';
 import DeleteUserButton from '../KuratorOffice/DeleteUserButton';
 import CancelButton from '../KuratorOffice/CancelButton';
 
-export const DeleteUserModal = ({modalVisible, setModalVisible}) => {
+export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
   const [closingModal, setClosingModal] = useState(false);
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
@@ -58,13 +58,13 @@ export const DeleteUserModal = ({modalVisible, setModalVisible}) => {
       <Animated.View style={[styles.viewStyle, animatedTranslateStyle]}>
         <View style={styles.info}>
           <Text style={styles.textStyle}>
-            Delete user account, profile and linked rooms?
+            Delete user profile and linked rooms (not account)?
           </Text>
         </View>
         <View style={styles.coupledButtons}>
           <DeleteUserButton
-            onPress={() => alert('Deleting...')}
             closingModal={closingModal}
+            clientId={clientId}
           />
           <CancelButton
             closingModal={closingModal}
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 18,
+    color: 'grey',
   },
   coupledButtons: {
     flexDirection: 'column',

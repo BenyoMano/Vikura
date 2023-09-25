@@ -1,58 +1,60 @@
 import React, {useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {useState} from 'react';
-import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {Pressable, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 const Button = ({closingModal, clientId}) => {
-  const {btnContainerStyle} = styles;
   const [delFinished, setDelFinished] = useState(false);
+  const [delAnimFinished, setDelAnimFinished] = useState(false);
   const animatedValue1 = new Animated.Value(0);
   const animatedValue2 = new Animated.Value(0);
   const [animatedValue3, setAnimatedValue3] = useState(new Animated.Value(0));
   const [animatedValue4, setAnimatedValue4] = useState(new Animated.Value(0));
   const [animatedValue5, setAnimatedValue5] = useState(new Animated.Value(0));
-  const [animatedValue6, setAnimatedValue6] = useState(new Animated.Value(0));
 
   const handlePress = async () => {
-    setDelFinished(false);
-    console.log(clientId);
-    const fetchRoomName = await firestore()
-      .collection('rooms')
-      .where('users.client.id', '==', clientId)
-      .get();
+    // console.log(clientId);
+    // const fetchRoomName = await firestore()
+    //   .collection('rooms')
+    //   .where('users.client.id', '==', clientId)
+    //   .get();
 
-    const docID = fetchRoomName.docs[0].id;
-    const db = fetchRoomName.docs[0].ref.collection('messages');
+    // const docID = fetchRoomName.docs[0].id;
+    // const db = fetchRoomName.docs[0].ref.collection('messages');
 
     try {
       try {
-        await db.get().then(querySnapshot => {
-          querySnapshot.forEach(element => {
-            element.ref.delete();
-            console.log('Successfully deleted messages!');
-          });
-        });
+        // await db.get().then(querySnapshot => {
+        //   querySnapshot.forEach(element => {
+        //     element.ref.delete();
+        //   });
+        // });
+        console.log('Successfully deleted messages!');
       } catch (error) {
         console.error('Error deleting messages: ', error);
       }
       try {
-        await firestore().collection('rooms').doc(docID).delete();
+        // await firestore().collection('rooms').doc(docID).delete();
         console.log('Room successfully deleted!');
-        setDelFinished(true);
       } catch (error) {
         console.error('Error deleting room: ', error);
       }
       try {
-        await firestore().collection('Users').doc(clientId).delete();
+        // await firestore().collection('Users').doc(clientId).delete();
         console.log('User successfully deleted!');
+        console.log('del finished TRY', delFinished);
+        // throw new Error('kasta error');
       } catch (error) {
         console.error('Error deleting user: ', error);
+        setDelFinished(false);
       }
+      setDelFinished(true);
     } catch (error) {
       console.error('Error in deleting sequence: ', error);
     }
   };
+
 
   const buttonRotatePressIn = animatedValue1.interpolate({
     inputRange: [0, 1],
@@ -71,12 +73,8 @@ const Button = ({closingModal, clientId}) => {
     outputRange: [0, 0.0, 1],
   });
   const buttonFinishedColor = animatedValue5.interpolate({
-    inputRange: [0, 0.9, 1],
-    outputRange: ['black', 'lightgreen', 'black'],
-  });
-  const buttonFinishedBorderWidth = animatedValue6.interpolate({
-    inputRange: [0, 0.9, 1],
-    outputRange: [1.5, 3, 1.5],
+    inputRange: [0, 0.5, 0.8, 1],
+    outputRange: ['black', 'lightgreen', 'lightgreen', 'black'],
   });
 
   useEffect(() => {
@@ -106,14 +104,7 @@ const Button = ({closingModal, clientId}) => {
   }
   if (delFinished) {
     animatedValue5.setValue(0);
-    animatedValue6.setValue(0);
     Animated.timing(animatedValue5, {
-      toValue: 1,
-      easing: Easing.linear,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(animatedValue6, {
       toValue: 1,
       easing: Easing.linear,
       duration: 400,
@@ -132,12 +123,18 @@ const Button = ({closingModal, clientId}) => {
   const onPressOut = () => {
     animatedValue2.setValue(0);
     animatedValue1.setValue(0);
+    console.log('del anim', delAnimFinished);
     Animated.timing(animatedValue2, {
       toValue: 1,
       duration: 250,
       easing: Easing.linear,
       useNativeDriver: false,
-    }).start();
+    }).start(() => {
+      setDelAnimFinished(true);
+      console.log('del anim', delAnimFinished);
+      setDelAnimFinished(false);
+      console.log('del anim', delAnimFinished);
+    });
   };
 
   const animatedRotateStylePressIn = {
@@ -154,8 +151,7 @@ const Button = ({closingModal, clientId}) => {
 
   const animatedColorStyle = {
     borderColor: buttonFinishedColor,
-    borderWidth: buttonFinishedBorderWidth,
-
+    borderWidth: 1.5,
     width: 45,
     height: 45,
     borderRadius: 10,
@@ -178,18 +174,5 @@ const Button = ({closingModal, clientId}) => {
     </Animated.View>
   );
 };
-
-const styles = StyleSheet.create({
-  btnContainerStyle: {
-    width: 45,
-    height: 45,
-    borderWidth: 1.5,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    position: 'relative',
-    elevation: 30,
-  },
-});
 
 export default Button;

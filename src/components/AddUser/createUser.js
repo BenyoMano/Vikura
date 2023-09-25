@@ -116,7 +116,7 @@ const createUser = ({
           console.log('User:', auth.currentUser);
 
         } catch {
-          console.log('Failed');
+          console.log('Failed signing out!');
         }
 
         setUserPropToAdd({

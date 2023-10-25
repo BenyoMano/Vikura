@@ -3,12 +3,13 @@ const listenMessages = ({
   pathToMessages,
   setMessages,
   messageLimit,
-  setLoadingMessages
+  setLoadingMessages,
 }) => {
   const unsubscribe = pathToMessages
-      .orderBy('timestamp', 'desc')
-      .limit(30 + messageLimit)
-      .onSnapshot(messageDetails => {
+    .orderBy('timestamp', 'desc')
+    .limit(30 + messageLimit)
+    .onSnapshot(
+      messageDetails => {
         const newData = messageDetails.docs.map(documentSnapshot => ({
           timestamp: documentSnapshot.data().timestamp.toMillis(),
           displayTimestamp: documentSnapshot.data().timestamp.toDate(),
@@ -19,22 +20,26 @@ const listenMessages = ({
         }));
         setMessages(newData);
         setLoadingMessages(false);
-      });
+      },
+      error => {
+        console.error('messageDetails:', error);
+      },
+    );
 
-        if (isCurrentUserKurator) {
-        pathToMessages
-          .where('isRead', '==', false)
-          .get()
-          .then(a => {
-            a.forEach(doc => {
-              doc.ref.update({
-                isRead: true,
-              });
-            });
+  if (isCurrentUserKurator) {
+    pathToMessages
+      .where('isRead', '==', false)
+      .get()
+      .then(a => {
+        a.forEach(doc => {
+          doc.ref.update({
+            isRead: true,
           });
-      }
+        });
+      });
+  }
 
-      return unsubscribe;
+  return unsubscribe;
 };
 
 export default listenMessages;

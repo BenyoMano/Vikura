@@ -14,34 +14,34 @@ const Button = ({closingModal, clientId}) => {
   const [animatedValue5, setAnimatedValue5] = useState(new Animated.Value(0));
 
   const handlePress = async () => {
-    // console.log(clientId);
-    // const fetchRoomName = await firestore()
-    //   .collection('rooms')
-    //   .where('users.client.id', '==', clientId)
-    //   .get();
+    console.log(clientId);
+    const fetchRoomName = await firestore()
+      .collection('rooms')
+      .where('users.client.id', '==', clientId)
+      .get();
 
-    // const docID = fetchRoomName.docs[0].id;
-    // const db = fetchRoomName.docs[0].ref.collection('messages');
+    const docID = fetchRoomName.docs[0].id;
+    const db = fetchRoomName.docs[0].ref.collection('messages');
 
     try {
       try {
-        // await db.get().then(querySnapshot => {
-        //   querySnapshot.forEach(element => {
-        //     element.ref.delete();
-        //   });
-        // });
+        await db.get().then(querySnapshot => {
+          querySnapshot.forEach(element => {
+            element.ref.delete();
+          });
+        });
         console.log('Successfully deleted messages!');
       } catch (error) {
         console.error('Error deleting messages: ', error);
       }
       try {
-        // await firestore().collection('rooms').doc(docID).delete();
+        await firestore().collection('rooms').doc(docID).delete();
         console.log('Room successfully deleted!');
       } catch (error) {
         console.error('Error deleting room: ', error);
       }
       try {
-        // await firestore().collection('Users').doc(clientId).delete();
+        await firestore().collection('Users').doc(clientId).delete();
         console.log('User successfully deleted!');
         console.log('del finished TRY', delFinished);
         // throw new Error('kasta error');
@@ -54,7 +54,6 @@ const Button = ({closingModal, clientId}) => {
       console.error('Error in deleting sequence: ', error);
     }
   };
-
 
   const buttonRotatePressIn = animatedValue1.interpolate({
     inputRange: [0, 1],

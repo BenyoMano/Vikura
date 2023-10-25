@@ -13,6 +13,7 @@ import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import {AddUserModal} from './AddUserModal';
+import {AddUserScreenHeaderView} from '../Header/AddUserScreenHeaderView';
 
 const AddUserScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,11 +42,12 @@ const AddUserScreen = ({navigation}) => {
               flexDirection: 'column',
             },
           ]}>
-          <HeaderView
+          {/* <HeaderView
             navigation={navigation}
             hasAddedUser={hasAddedUser}
             setHasAddedUser={setHasAddedUser}
-          />
+          /> */}
+          <AddUserScreenHeaderView navigation={navigation} />
           <MainText
             title="Skapa konto:"
             style={{
@@ -68,9 +70,7 @@ const AddUserScreen = ({navigation}) => {
             setSubmitted={setSubmitted}
             setHasAddedUser={setHasAddedUser}
           />
-          <ScrollView
-            contentContainerStyle={styles.scrollViewContainer}
-          >
+          <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <Form
               userPropToAdd={userPropToAdd}
               setUserPropToAdd={setUserPropToAdd}

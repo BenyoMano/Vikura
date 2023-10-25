@@ -32,7 +32,8 @@ const IsCurrentUserKuratorProvider = ({children}) => {
   }, [user]);
 
   return (
-    <IsCurrentUserKuratorContext.Provider value={{isCurrentUserKurator, isCurrentUserAdmin}}>
+    <IsCurrentUserKuratorContext.Provider
+      value={{isCurrentUserKurator, isCurrentUserAdmin}}>
       {children}
     </IsCurrentUserKuratorContext.Provider>
   );

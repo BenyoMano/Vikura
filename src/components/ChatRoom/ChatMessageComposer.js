@@ -6,7 +6,6 @@ import InputBarChatt from './InputbarChat';
 import SendButton from './SendButton';
 
 const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
-  console.log('COMPOSER');
   const [messageToSend, setMessageToSend] = useState();
 
   const handleSendMessage = () => {
@@ -24,9 +23,9 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
           .doc(user.uid)
           .get();
 
-          if (!getUserData.exists) {
-            throw new Error('Användare inte hittad!');
-          }
+        if (!getUserData.exists) {
+          throw new Error('Användare inte hittad!');
+        }
 
         const addMessageData = await firestore()
           .collection('rooms')
@@ -48,12 +47,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
             latestTimestamp: timestamp,
           });
 
-        await Promise.all([
-            getUserData,
-            addMessageData,
-            updateLatestTimestamp,
-          ]);
-
+        await Promise.all([getUserData, addMessageData, updateLatestTimestamp]);
       } catch (error) {
         showMessage({
           message: 'Varning!',

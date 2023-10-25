@@ -1,19 +1,16 @@
-import { useContext, useState, useEffect } from "react";
-import { IsCurrentUserKuratorContext } from "./isCurrentUserKuratorContext";
-import firestore from "@react-native-firebase/firestore";
-import { useRoomId } from "./useRoomId";
+import {useContext, useState, useEffect} from 'react';
+import {IsCurrentUserKuratorContext} from './isCurrentUserKuratorContext';
+import firestore from '@react-native-firebase/firestore';
+import {useRoomId} from './useRoomId';
 
-const useOpenChat = ({ messageLimit, clientUserId }) => {
-  console.log('OPEN CHAT');
-  const { isCurrentUserKurator } = useContext(IsCurrentUserKuratorContext);
+const useOpenChat = ({messageLimit, clientUserId}) => {
+  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const roomId = useRoomId(clientUserId);
-  console.log('useOpenChat - roomId', roomId);
 
-  const handleSnapshot = (messageDetails) => {
-    console.log('Inside handleSnapshot');
-    const newMessages = messageDetails.docs.map((documentSnapshot) => ({
+  const handleSnapshot = messageDetails => {
+    const newMessages = messageDetails.docs.map(documentSnapshot => ({
       timestamp: documentSnapshot.data().timestamp.toMillis(),
       displayTimestamp: documentSnapshot.data().timestamp.toDate(),
       text: documentSnapshot.data().msg,
@@ -26,35 +23,35 @@ const useOpenChat = ({ messageLimit, clientUserId }) => {
     setIsLoading(false);
   };
 
-  const listenForMessages = async (messageLimit) => {
+  const listenForMessages = async messageLimit => {
     setIsLoading(true);
-    console.log('LISTEN FOR MESSAGES');
-    
+
     if (isCurrentUserKurator === undefined) {
       return;
     }
-    
+
     if (!roomId) {
       return;
     }
-    console.log('Inside listenForMessages', isCurrentUserKurator, roomId);
 
     const pathToMessages = firestore()
-      .collection("rooms")
+      .collection('rooms')
       .doc(roomId)
-      .collection("messages");
+      .collection('messages');
 
     const unsubscribe = pathToMessages
-      .orderBy("timestamp", "desc")
+      .orderBy('timestamp', 'desc')
       .limit(30 + messageLimit)
-      .onSnapshot(handleSnapshot);
+      .onSnapshot(handleSnapshot, error => {
+        console.error('messageDetails', error);
+      });
 
     if (isCurrentUserKurator) {
       pathToMessages
-        .where("isRead", "==", false)
+        .where('isRead', '==', false)
         .get()
-        .then((a) => {
-          a.forEach((doc) => {
+        .then(a => {
+          a.forEach(doc => {
             doc.ref.update({
               isRead: true,
             });
@@ -77,7 +74,7 @@ const useOpenChat = ({ messageLimit, clientUserId }) => {
     };
   }, [messageLimit, roomId, isCurrentUserKurator]);
 
-  return { messages, isLoading };
+  return {messages, isLoading};
 };
 
 export default useOpenChat;

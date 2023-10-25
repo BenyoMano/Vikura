@@ -1,40 +1,35 @@
-import { useState, useEffect } from "react";
-import firestore from "@react-native-firebase/firestore";
-import { showMessage } from "react-native-flash-message";
+import {useState, useEffect} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import {showMessage} from 'react-native-flash-message';
 
-const getRoomName = async ({ clientUserId }) => {
-  
-  const roomName = await firestore().collection("rooms").where("users.client.id", "==", clientUserId).get();
-  
+const getRoomName = async ({clientUserId}) => {
   try {
-    roomName;
+    const roomName = await firestore()
+      .collection('rooms')
+      .where('users.client.id', '==', clientUserId)
+      .get();
+    return roomName?.docs[0];
   } catch (error) {
     showMessage({
-      message: "Varning!",
+      message: 'Varning!',
       description: String(error),
-      type: "danger",
+      type: 'danger',
       duration: 3200,
     });
   }
-  return roomName?.docs[0];
 };
 
-
-export const useRoomId = (clientUserId) => {
+export const useRoomId = clientUserId => {
   const [roomId, setRoomId] = useState();
 
   useEffect(() => {
     const fetchRoom = async () => {
-      const roomName = await getRoomName({ clientUserId });
-      console.log('roomName', roomName);
-      console.log('roomName.id', roomName.id);
+      const roomName = await getRoomName({clientUserId});
       const newRoomId = roomName?.id;
-      console.log('newRoomId', newRoomId);
       setRoomId(newRoomId);
     };
 
     fetchRoom();
   }, [clientUserId, roomId]);
-  console.log('useRoomId', roomId);
   return roomId;
 };

@@ -1,9 +1,8 @@
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import { showMessage } from "react-native-flash-message";
-import { firebase } from '@react-native-firebase/app';
-
-firebase.setLogLevel('debug');
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {showMessage} from 'react-native-flash-message';
+import signOut from '../../firebase/signOut';
+import createRoom from '../../firebase/createRoom';
 
 const createUser = ({
   userPropToAdd,
@@ -21,55 +20,55 @@ const createUser = ({
 
   if (!userPropToAdd.trimmedFirstName) {
     showMessage({
-      message: "Varning!",
-      description: "Namn saknas!",
-      type: "danger",
+      message: 'Varning!',
+      description: 'Namn saknas!',
+      type: 'danger',
       duration: 2500,
     });
     return;
   }
   if (!userPropToAdd.trimmedSecondName) {
     showMessage({
-      message: "Varning!",
-      description: "Efternamn saknas!",
-      type: "danger",
+      message: 'Varning!',
+      description: 'Efternamn saknas!',
+      type: 'danger',
       duration: 2500,
     });
     return;
   }
   if (!userPropToAdd.trimmedMejl) {
     showMessage({
-      message: "Varning!",
-      description: "Mejl saknas!",
-      type: "danger",
+      message: 'Varning!',
+      description: 'Mejl saknas!',
+      type: 'danger',
       duration: 2500,
     });
     return;
   }
   if (!userPropToAdd.trimmedPassword) {
     showMessage({
-      message: "Varning!",
-      description: "Lösenord saknas!",
-      type: "danger",
+      message: 'Varning!',
+      description: 'Lösenord saknas!',
+      type: 'danger',
       duration: 2500,
     });
     return;
   }
   if (!userPropToAdd.trimmedPersonnummer) {
     showMessage({
-      message: "Varning!",
-      description: "Personnummer saknas!",
-      type: "danger",
+      message: 'Varning!',
+      description: 'Personnummer saknas!',
+      type: 'danger',
       duration: 2500,
     });
     return;
   }
   if (userPropToAdd.trimmedPersonnummer.length !== 12) {
     showMessage({
-      message: "Varning!",
+      message: 'Varning!',
       description:
-        "Personnummret måste innehålla 12 siffror, utan bindestreck!",
-      type: "danger",
+        'Personnummret måste innehålla 12 siffror, utan bindestreck!',
+      type: 'danger',
       duration: 3500,
     });
     return;
@@ -82,72 +81,81 @@ const createUser = ({
     userPropToAdd.trimmedPassword &&
     userPropToAdd.trimmedPersonnummer
   ) {
-    const addPersonalDetails = async (user) => {
-      const refUID = firestore().collection("Users").doc(user.uid);
-      const userAlias = checkboxStateKurator ? "KURATOR" : "";
+    const addPersonalDetails = async user => {
+      const refUID = firestore().collection('Users').doc(user.uid);
+      console.log('After refUID');
       await refUID.set({
         firstName: userPropToAdd.trimmedFirstName,
         secondName: userPropToAdd.trimmedSecondName,
         mejl: userPropToAdd.trimmedMejl,
         personNummer: userPropToAdd.trimmedPersonnummer,
-        alias: userAlias,
+        alias: '',
         firstLogin: true,
         kurator: checkboxStateKurator,
         admin: checkboxStateAdmin,
       });
+      console.log('After refUID.set()');
     };
 
     async function createNewUser() {
       try {
         await auth().createUserWithEmailAndPassword(
           userPropToAdd.trimmedMejl,
-          userPropToAdd.trimmedPassword
+          userPropToAdd.trimmedPassword,
         );
-        console.log('After "createUser"')
+        console.log('After "createUser"');
         const user = auth().currentUser;
-        console.log('After "auth()currentUser"')
-        
+        const userId = auth().currentUser.uid;
+
         await addPersonalDetails(user);
-        console.log('After "addPersinalDetails"')
+        console.log('After "addPersinalDetails"');
+
+        createRoom({userId});
 
         try {
           await auth().signOut();
-          console.log('Success!');
-          console.log('User:', auth.currentUser);
-
+          console.log('After signOut');
         } catch {
           console.log('Failed signing out!');
         }
 
         setUserPropToAdd({
-          firstName: "",
-          secondName: "",
-          mejl: "",
-          password: "",
-          personnummer: "",
-          kurator: "",
+          firstName: '',
+          secondName: '',
+          mejl: '',
+          password: '',
+          personnummer: '',
+          kurator: '',
         });
 
         setHasAddedUser(true);
 
         showMessage({
-          message: "Kontot skapades framgångsrikt!",
-          type: "success",
+          message: 'Kontot skapades framgångsrikt!',
+          type: 'success',
           duration: 2000,
         });
       } catch (error) {
-        console.error(error);
-        console.error(error.stack);
+        console.error('createUser Error: ', error);
         showMessage({
-          message: "Misslyckades!",
+          message: 'Misslyckades!',
           description: String(error),
-          type: "danger",
+          type: 'danger',
           duration: 5000,
         });
         setSubmitted(false);
       }
     }
-    createNewUser();
+    if (auth().currentUser) {
+      async () => {
+        await auth().signOut();
+      };
+      setTimeout(() => {
+        createNewUser();
+      }, 3000);
+    } else {
+      createNewUser();
+    }
   }
 };
 export default createUser;

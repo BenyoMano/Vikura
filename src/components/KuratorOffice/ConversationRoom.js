@@ -4,10 +4,13 @@ import {View, Text, Pressable, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {DeleteUserModal} from './DeleteUserModal';
+import {useContext} from 'react';
+import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 
 const ConversationRoom = ({roomId, clientAlias, clientId}) => {
   const [latestMessage, setLatestMessage] = useState(undefined);
   const [modalVisible, setModalVisible] = useState(false);
+  const {isCurrentUserAdmin} = useContext(IsCurrentUserKuratorContext);
 
   const modalStyle = {
     backgroundColor: modalVisible ? 'lightgrey' : '#EEEEEE',
@@ -43,18 +46,23 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
       unsubscribeFromLastMessage = pathToMessages
         .orderBy('timestamp', 'desc')
         .limit(1)
-        .onSnapshot(lastMessage => {
-          lastMessage.docs.forEach(lastMessageDetails => {
-            setLatestMessage({
-              timestamp: lastMessageDetails.data().timestamp.toMillis(),
-              displayTimestamp: lastMessageDetails.data().timestamp.toDate(),
-              text: lastMessageDetails.data().msg,
-              isRead: lastMessageDetails.data().isRead,
-              alias: clientAlias,
-              id: clientId,
+        .onSnapshot(
+          lastMessage => {
+            lastMessage.docs.forEach(lastMessageDetails => {
+              setLatestMessage({
+                timestamp: lastMessageDetails.data().timestamp.toMillis(),
+                displayTimestamp: lastMessageDetails.data().timestamp.toDate(),
+                text: lastMessageDetails.data().msg,
+                isRead: lastMessageDetails.data().isRead,
+                alias: clientAlias,
+                id: clientId,
+              });
             });
-          });
-        });
+          },
+          error => {
+            console.error('lastMessage:', error);
+          },
+        );
     };
 
     subscribeToLastMessage();
@@ -70,7 +78,9 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
       onPressIn={fadeIn}
       onPressOut={fadeOut}
       onLongPress={() => {
-        setModalVisible(!modalVisible);
+        if (isCurrentUserAdmin) {
+          setModalVisible(!modalVisible);
+        }
       }}>
       <Animated.View
         style={[

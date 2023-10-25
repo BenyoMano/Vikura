@@ -32,10 +32,16 @@ const App = () => {
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="NewClientScreen" component={NewClientScreen} />
             <Stack.Screen name="KuratorScreen" component={KuratorScreen} />
-            <Stack.Screen name="NewKuratorScreen" component={NewKuratorScreen} />
+            <Stack.Screen
+              name="NewKuratorScreen"
+              component={NewKuratorScreen}
+            />
             <Stack.Screen name="ChatScreen" component={ChatScreen} />
             <Stack.Screen name="AddUserScreen" component={AddUserScreen} />
-            <Stack.Screen name="ReportConcernScreen" component={ReportConcernScreen} />
+            <Stack.Screen
+              name="ReportConcernScreen"
+              component={ReportConcernScreen}
+            />
           </Stack.Navigator>
         </NavigationContainer>
         <FlashMessage

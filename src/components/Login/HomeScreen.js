@@ -15,14 +15,12 @@ import MainText from '../../atoms/MainText';
 import LoginForm from './LoginForm';
 
 const HomeScreen = ({navigation}) => {
-  console.log('NAVIGATION', navigation);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [loginDetails, setLoginDetails] = useState({});
   const {mejl, password} = loginDetails;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -46,13 +44,13 @@ const HomeScreen = ({navigation}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.mainContainer} testID='homescreen'>
+        <View style={styles.mainContainer} testID="homescreen">
           <MainLogo />
           <View style={styles.contentContainer}>
             {!isKeyboardVisible ? (
               <MainText
-              title="Välkommen!"
-              style={{fontSize: 30, color: 'black'}}
+                title="Välkommen!"
+                style={{fontSize: 30, color: 'black'}}
               />
             ) : null}
             <LoginForm

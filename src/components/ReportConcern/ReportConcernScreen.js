@@ -50,10 +50,7 @@ const ReportConcernScreen = ({navigation, route}) => {
         setClipboardString={setClipboardString}
         userDetails={userDetails}
       />
-      <SendMailButton
-        title="Skicka mejl"
-        detailsToSend={detailsToSend}
-      />
+      <SendMailButton title="Skicka mejl" detailsToSend={detailsToSend} />
     </View>
   );
 };

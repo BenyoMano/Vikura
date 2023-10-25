@@ -20,11 +20,12 @@ export const HeaderView = ({
   setHasAddedUser,
 }) => {
   const route = useRoute();
-  const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(IsCurrentUserKuratorContext);
+  const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(
+    IsCurrentUserKuratorContext,
+  );
 
   return (
-    <View
-      style={styles.viewStyle}>
+    <View style={styles.viewStyle}>
       <SmallLogo />
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
@@ -36,22 +37,25 @@ export const HeaderView = ({
             }}
           />
           {isCurrentUserAdmin ? (
-            <AddUserButton onPress={() => navigation.navigate('AddUserScreen')} testID='adduserbutton' />
+            <AddUserButton
+              onPress={() => navigation.navigate('AddUserScreen')}
+              testID="adduserbutton"
+            />
           ) : null}
         </StylingContainer>
       ) : route.name === 'AddUserScreen' ? (
         <StylingContainer>
           {hasAddedUser === true ? (
             <LogoutButton
-            onPress={() => {
-              signOut();
-              navigation.navigate('HomeScreen');
-              setHasAddedUser(false);
-            }}
+              onPress={() => {
+                signOut();
+                navigation.navigate('HomeScreen');
+                setHasAddedUser(false);
+              }}
             />
-            ) : hasAddedUser === false ? (
-              <BackButton onPress={() => navigation.goBack()} />
-              ) : null}
+          ) : hasAddedUser === false ? (
+            <BackButton onPress={() => navigation.goBack()} />
+          ) : null}
         </StylingContainer>
       ) : route.name === 'NewKuratorScreen' ? (
         <StylingContainer>
@@ -87,7 +91,7 @@ export const HeaderView = ({
               signOut();
               navigation.navigate('HomeScreen');
             }}
-            />
+          />
         </StylingContainer>
       ) : null}
     </View>
@@ -100,5 +104,5 @@ const styles = StyleSheet.create({
     width: '88%',
     alignItems: 'center',
     marginTop: '12%',
-  }
+  },
 });

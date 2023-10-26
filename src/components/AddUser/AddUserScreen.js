@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
@@ -11,7 +10,6 @@ import Button from '../../atoms/Button';
 import Form from './Form';
 import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import {HeaderView} from '../Header/HeaderView';
 import {AddUserModal} from './AddUserModal';
 import {AddUserScreenHeaderView} from '../Header/AddUserScreenHeaderView';
 
@@ -42,11 +40,6 @@ const AddUserScreen = ({navigation}) => {
               flexDirection: 'column',
             },
           ]}>
-          {/* <HeaderView
-            navigation={navigation}
-            hasAddedUser={hasAddedUser}
-            setHasAddedUser={setHasAddedUser}
-          /> */}
           <AddUserScreenHeaderView navigation={navigation} />
           <MainText
             title="Skapa konto:"
@@ -64,9 +57,7 @@ const AddUserScreen = ({navigation}) => {
             userPropToAdd={userPropToAdd}
             setUserPropToAdd={setUserPropToAdd}
             checkboxStateKurator={checkboxStateKurator}
-            setCheckboxStateKurator={setCheckboxStateKurator}
             checkboxStateAdmin={checkboxStateAdmin}
-            setCheckboxStateAdmin={setCheckboxStateAdmin}
             setSubmitted={setSubmitted}
             setHasAddedUser={setHasAddedUser}
           />

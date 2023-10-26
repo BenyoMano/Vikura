@@ -9,23 +9,27 @@ const getRefPath = ({
   messageLimit,
   setRoomId,
   loadingMessages,
-  setLoadingMessages
+  setLoadingMessages,
 }) => {
-    return fetchRoomName.docs.map(roomDetails => {
-      console.log('Inside fetchRoomName')
-      const roomId = roomDetails.id;
-      
-      const pathToMessages = firestore()
-        .collection('rooms')
-        .doc(roomId)
-        .collection('messages');
+  return fetchRoomName.docs.map(roomDetails => {
+    const roomId = roomDetails.id;
 
-      setRefPath(pathToMessages);
-      const unsubscribe = listenMessages({isCurrentUserKurator, pathToMessages, setMessages, messageLimit, setLoadingMessages});
-      setRoomId(roomId);
-      console.log('End of fetcRoomName');
-      return unsubscribe;
+    const pathToMessages = firestore()
+      .collection('rooms')
+      .doc(roomId)
+      .collection('messages');
+
+    setRefPath(pathToMessages);
+    const unsubscribe = listenMessages({
+      isCurrentUserKurator,
+      pathToMessages,
+      setMessages,
+      messageLimit,
+      setLoadingMessages,
     });
-  };
+    setRoomId(roomId);
+    return unsubscribe;
+  });
+};
 
 export default getRefPath;

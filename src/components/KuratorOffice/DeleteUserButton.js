@@ -14,7 +14,6 @@ const Button = ({closingModal, clientId}) => {
   const [animatedValue5, setAnimatedValue5] = useState(new Animated.Value(0));
 
   const handlePress = async () => {
-    console.log(clientId);
     const fetchRoomName = await firestore()
       .collection('rooms')
       .where('users.client.id', '==', clientId)
@@ -30,21 +29,16 @@ const Button = ({closingModal, clientId}) => {
             element.ref.delete();
           });
         });
-        console.log('Successfully deleted messages!');
       } catch (error) {
         console.error('Error deleting messages: ', error);
       }
       try {
         await firestore().collection('rooms').doc(docID).delete();
-        console.log('Room successfully deleted!');
       } catch (error) {
         console.error('Error deleting room: ', error);
       }
       try {
         await firestore().collection('Users').doc(clientId).delete();
-        console.log('User successfully deleted!');
-        console.log('del finished TRY', delFinished);
-        // throw new Error('kasta error');
       } catch (error) {
         console.error('Error deleting user: ', error);
         setDelFinished(false);

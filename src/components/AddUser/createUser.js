@@ -1,7 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {showMessage} from 'react-native-flash-message';
-import signOut from '../../firebase/signOut';
 import createRoom from '../../firebase/createRoom';
 
 const createUser = ({
@@ -83,7 +82,6 @@ const createUser = ({
   ) {
     const addPersonalDetails = async user => {
       const refUID = firestore().collection('Users').doc(user.uid);
-      console.log('After refUID');
       await refUID.set({
         firstName: userPropToAdd.trimmedFirstName,
         secondName: userPropToAdd.trimmedSecondName,
@@ -94,7 +92,6 @@ const createUser = ({
         kurator: checkboxStateKurator,
         admin: checkboxStateAdmin,
       });
-      console.log('After refUID.set()');
     };
 
     async function createNewUser() {
@@ -103,18 +100,15 @@ const createUser = ({
           userPropToAdd.trimmedMejl,
           userPropToAdd.trimmedPassword,
         );
-        console.log('After "createUser"');
         const user = auth().currentUser;
         const userId = auth().currentUser.uid;
 
         await addPersonalDetails(user);
-        console.log('After "addPersinalDetails"');
 
         createRoom({userId});
 
         try {
           await auth().signOut();
-          console.log('After signOut');
         } catch {
           console.log('Failed signing out!');
         }
@@ -133,7 +127,7 @@ const createUser = ({
         showMessage({
           message: 'Kontot skapades framgångsrikt!',
           type: 'success',
-          duration: 2000,
+          duration: 3000,
         });
       } catch (error) {
         console.error('createUser Error: ', error);
@@ -150,9 +144,7 @@ const createUser = ({
       async () => {
         await auth().signOut();
       };
-      setTimeout(() => {
-        createNewUser();
-      }, 3000);
+      createNewUser();
     } else {
       createNewUser();
     }

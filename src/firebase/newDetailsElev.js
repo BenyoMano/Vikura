@@ -53,9 +53,6 @@ const newDetailsElev = async ({
 
     try {
       await Promise.all([
-        user.updateProfile({
-          displayName: alias,
-        }),
         firestore().collection('Users').doc(userId).update({
           firstLogin: false,
           alias: alias,
@@ -83,7 +80,7 @@ const newDetailsElev = async ({
         type: 'danger',
         duration: 3200,
       });
-      console.error(error);
+      console.error('newDetailsElev error: ', error);
       setLoading(false);
     }
   }

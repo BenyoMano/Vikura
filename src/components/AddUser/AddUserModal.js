@@ -1,5 +1,4 @@
 import React from 'react';
-import auth from '@react-native-firebase/auth';
 import {Modal, Text, View, StyleSheet} from 'react-native';
 import createUser from './createUser';
 import SmallButton from '../../atoms/SmallButton';
@@ -10,9 +9,7 @@ export const AddUserModal = ({
   userPropToAdd,
   setUserPropToAdd,
   checkboxStateKurator,
-  setCheckboxStateKurator,
   checkboxStateAdmin,
-  setCheckboxStateAdmin,
   setSubmitted,
   setHasAddedUser,
 }) => {

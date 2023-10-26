@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useCallback} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -9,13 +9,11 @@ export const useRoomsData = ({setIsLoaded}) => {
     useCallback(() => {
       let unsubscribeFromAllRoomNames;
       const fetchRooms = async () => {
-        console.log('Inside fetchRooms');
         unsubscribeFromAllRoomNames = firestore()
           .collection('rooms')
           .where('users.client.id', '!=', '')
           .onSnapshot(
             roomNames => {
-              console.log('Inside onSnapshot');
               const newRooms = roomNames.docs.map(roomDoc => {
                 const {alias: clientAlias, id: clientId} =
                   roomDoc.data().users.client;
@@ -34,7 +32,6 @@ export const useRoomsData = ({setIsLoaded}) => {
       fetchRooms();
 
       return () => {
-        console.log('Cleanup roomNames!!!');
         unsubscribeFromAllRoomNames();
       };
     }, []),

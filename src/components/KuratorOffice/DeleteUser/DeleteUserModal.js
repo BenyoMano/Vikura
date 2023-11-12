@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Modal, Animated} from 'react-native';
-import DeleteUserButton from '../KuratorOffice/DeleteUserButton';
-import CancelButton from '../KuratorOffice/CancelButton';
+import DeleteUserButton from './DeleteUserButton';
+import CancelButton from './CancelButton';
 
 export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
   const [closingModal, setClosingModal] = useState(false);
@@ -32,14 +32,14 @@ export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
 
   if (closingModal) {
     Animated.timing(animatedValue1, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: true,
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
     }).start();
     Animated.timing(animatedValue2, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: true,
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
     }).start();
   }
 
@@ -64,6 +64,9 @@ export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
         <View style={styles.coupledButtons}>
           <DeleteUserButton
             closingModal={closingModal}
+            setClosingModal={setClosingModal}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
             clientId={clientId}
           />
           <CancelButton

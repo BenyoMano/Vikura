@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = ({
+const CancelButton = ({
   closingModal,
   setClosingModal,
   modalVisible,
@@ -63,7 +63,7 @@ const Button = ({
       duration: 320,
       useNativeDriver: true,
     }).start();
-  };
+  }
 
   const onPressIn = () => {
     Animated.timing(animatedValue1, {
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default CancelButton;

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
-import {DeleteUserModal} from './DeleteUserModal';
+import {DeleteUserModal} from './DeleteUser/DeleteUserModal';
 import {useContext} from 'react';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 

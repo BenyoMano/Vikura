@@ -1,6 +1,6 @@
 import {showMessage} from 'react-native-flash-message';
 
-export const useDynamicErrorHandling = ({
+export const useDynamicDeleteUserErrorHandling = ({
   error,
   clientId,
   subject,

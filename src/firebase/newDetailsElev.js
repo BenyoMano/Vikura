@@ -78,7 +78,7 @@ const newDetailsElev = async ({
         message: 'Varning!',
         description: String(error),
         type: 'danger',
-        duration: 3200,
+        autoHide: false,
       });
       console.error('newDetailsElev error: ', error);
       setLoading(false);

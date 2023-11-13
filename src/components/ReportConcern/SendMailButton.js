@@ -28,17 +28,17 @@ const SendMailButton = ({title, detailsToSend}) => {
     <View style={viewStyle}>
       <Pressable
         onPress={() => {
-            Linking.openURL(
-                'mailto:?subject=Orosanm%C3%A4lan&body=' +
-                encodeURIComponent(detailsToSend),
-            ).catch(error => {
-                showMessage({
-                    message: 'Misslyckades!',
-                    description: String(error),
-                    type: 'danger',
-                    duration: 5000,
-                });
+          Linking.openURL(
+            'mailto:?subject=Orosanm%C3%A4lan&body=' +
+              encodeURIComponent(detailsToSend),
+          ).catch(error => {
+            showMessage({
+              message: 'Misslyckades!',
+              description: String(error),
+              type: 'danger',
+              autoHide: false,
             });
+          });
         }}
         onPressIn={fadeIn}
         onPressOut={fadeOut}>
@@ -57,25 +57,25 @@ const SendMailButton = ({title, detailsToSend}) => {
 };
 
 const styles = StyleSheet.create({
-    viewStyle: {
-        flex: 0.5,
-        justifyContent: 'center',
-        borderRadius: 12,
-        overflow: 'hidden'
-    },
-    btnContainerStyle: {
-        backgroundColor: '#C4C4C4',
-        paddingVertical: 18,
-        width: 230,
-        borderRadius: 12,
-    },
-    btnTextStyle: {
-        color: 'black',
-        fontSize: 18,
-        textAlign: 'center',
-        textTransform: 'uppercase',
-        fontFamily: 'NunitoSans-Regular',
-    },
+  viewStyle: {
+    flex: 0.5,
+    justifyContent: 'center',
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  btnContainerStyle: {
+    backgroundColor: '#C4C4C4',
+    paddingVertical: 18,
+    width: 230,
+    borderRadius: 12,
+  },
+  btnTextStyle: {
+    color: 'black',
+    fontSize: 18,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    fontFamily: 'NunitoSans-Regular',
+  },
 });
 
 export default SendMailButton;

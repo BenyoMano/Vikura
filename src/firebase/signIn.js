@@ -28,8 +28,11 @@ const signIn = async ({
     setLoading(true);
 
     try {
-      await auth().signInWithEmailAndPassword(loginDetails.mejl, loginDetails.password);
-     
+      await auth().signInWithEmailAndPassword(
+        loginDetails.mejl,
+        loginDetails.password,
+      );
+
       navigateAfterSignIn({navigation});
       setLoginDetails({
         mejl: '',
@@ -38,13 +41,12 @@ const signIn = async ({
 
       setLoading(false);
       setSubmitted(false);
-
     } catch (error) {
       showMessage({
         message: 'Varning!',
         description: String(error),
         type: 'danger',
-        duration: 3800,
+        autoHide: false,
       });
       setLoading(false);
     }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Modal, Animated} from 'react-native';
-import DeleteUserButton from './DeleteUserButton';
+import DeleteUserButton from './DeleteButton/DeleteUserButton';
 import CancelButton from './CancelButton';
 
 export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {

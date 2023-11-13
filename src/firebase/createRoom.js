@@ -18,7 +18,7 @@ const createRoom = async ({userId}) => {
       message: 'Varning!',
       description: String(error),
       type: 'danger',
-      duration: 3200,
+      autoHide: false,
     });
   }
 };

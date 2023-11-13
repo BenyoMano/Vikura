@@ -7,9 +7,9 @@ import {useClipboard} from '@react-native-clipboard/clipboard';
 import {useSuccessFailAnim} from './useSuccessFailAnim';
 import {useIntroOutroAnim} from './useIntroOutroAnim';
 import {
-  useDynamicErrorHandling,
+  useDynamicDeleteUserErrorHandling,
   useGeneralErrorHandling,
-} from './errorHandling';
+} from '../../../../ErrorHandling/errorHandling';
 
 const DeleteUserButton = ({
   closingModal,
@@ -58,21 +58,36 @@ const DeleteUserButton = ({
         operationsCount.current += 1;
       } catch (error) {
         let subject = 'meddelanden';
-        useDynamicErrorHandling({error, clientId, subject, setDelFinished});
+        useDynamicDeleteUserErrorHandling({
+          error,
+          clientId,
+          subject,
+          setDelFinished,
+        });
       }
       try {
         await firestore().collection('rooms').doc(docID).delete();
         operationsCount.current += 1;
       } catch (error) {
         let subject = 'chatt-rummet';
-        useDynamicErrorHandling({error, clientId, subject, setDelFinished});
+        useDynamicDeleteUserErrorHandling({
+          error,
+          clientId,
+          subject,
+          setDelFinished,
+        });
       }
       try {
         await firestore().collection('Users').doc(clientId).delete();
         operationsCount.current += 1;
       } catch (error) {
         let subject = 'användarprofilen';
-        useDynamicErrorHandling({error, clientId, subject, setDelFinished});
+        useDynamicDeleteUserErrorHandling({
+          error,
+          clientId,
+          subject,
+          setDelFinished,
+        });
       }
       if (operationsCount.current === 3) {
         setDelFinished('success');

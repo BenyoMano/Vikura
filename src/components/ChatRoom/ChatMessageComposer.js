@@ -53,7 +53,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
           message: 'Varning!',
           description: String(error),
           type: 'danger',
-          duration: 5000,
+          autoHide: false,
         });
         console.log(error);
       }

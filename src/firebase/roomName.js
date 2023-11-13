@@ -13,7 +13,7 @@ const getRoomName = async ({clientUserId}) => {
       message: 'Varning!',
       description: String(error),
       type: 'danger',
-      duration: 3200,
+      autoHide: false,
     });
   }
   return roomName?.docs[0];

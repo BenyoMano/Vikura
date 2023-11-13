@@ -135,7 +135,7 @@ const createUser = ({
           message: 'Misslyckades!',
           description: String(error),
           type: 'danger',
-          duration: 5000,
+          autoHide: false,
         });
         setSubmitted(false);
       }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal, Text, View, StyleSheet} from 'react-native';
-import createUser from './createUser';
+import addUser from './addUser';
 import SmallButton from '../../atoms/SmallButton';
 
 export const AddUserModal = ({
@@ -11,7 +11,8 @@ export const AddUserModal = ({
   checkboxStateKurator,
   checkboxStateAdmin,
   setSubmitted,
-  setHasAddedUser,
+  setActionStates,
+  setSuccessProtocol,
 }) => {
   const {textStyling, viewStyle} = styles;
   const showIfKurator = checkboxStateKurator ? 'JA' : 'NEJ';
@@ -79,15 +80,16 @@ export const AddUserModal = ({
             <SmallButton
               title="Bekräfta"
               onPress={() => {
-                createUser({
+                setSubmitted(true);
+                addUser({
                   userPropToAdd,
                   setUserPropToAdd,
                   checkboxStateKurator,
                   checkboxStateAdmin,
                   setSubmitted,
-                  setHasAddedUser,
+                  setSuccessProtocol,
+                  setActionStates,
                 });
-                setSubmitted(true);
                 setModalVisible(!modalVisible);
               }}
             />
@@ -126,6 +128,7 @@ const styles = StyleSheet.create({
       },
       shadowOpacity: 0.25,
       shadowRadius: 4,
+      zIndex: 30,
       elevation: 30,
     },
     label: {

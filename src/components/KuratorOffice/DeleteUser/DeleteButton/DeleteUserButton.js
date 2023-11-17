@@ -18,7 +18,7 @@ const DeleteUserButton = ({
   setModalVisible,
   clientId,
 }) => {
-  const [delFinished, setDelFinished] = useState('initial');
+  const [actionFinished, setactionFinished] = useState('initial');
   const [clipboardString, setClipboardString] = useClipboard();
   const operationsCount = useRef(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -34,8 +34,18 @@ const DeleteUserButton = ({
     setModalVisible,
   });
 
+  const successFailAnimStyling = {
+    iconSize: 24,
+    elevation: 30,
+  };
+
   const {animatedColorStyleFailed, animatedColorStyleSuccess} =
-    useSuccessFailAnim({delFinished, closingModal, setClosingModal});
+    useSuccessFailAnim({
+      actionFinished,
+      closingModal,
+      setClosingModal,
+      successFailAnimStyling,
+    });
 
   const handlePress = async () => {
     setIsRunning(true);
@@ -62,7 +72,7 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setDelFinished,
+          setactionFinished,
         });
       }
       try {
@@ -74,7 +84,7 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setDelFinished,
+          setactionFinished,
         });
       }
       try {
@@ -86,11 +96,11 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setDelFinished,
+          setactionFinished,
         });
       }
       if (operationsCount.current === 3) {
-        setDelFinished('success');
+        setactionFinished('success');
       } else {
         setTimeout(() => {
           setIsRunning(false);
@@ -98,7 +108,7 @@ const DeleteUserButton = ({
       }
     } catch (error) {
       setIsRunning(false);
-      useGeneralErrorHandling({error, setDelFinished});
+      useGeneralErrorHandling({error, setactionFinished});
     }
   };
 
@@ -114,7 +124,7 @@ const DeleteUserButton = ({
     <Animated.View
       style={[
         animatedTranslateStyle,
-        delFinished === 'success'
+        actionFinished === 'success'
           ? animatedColorStyleSuccess
           : animatedColorStyleFailed,
       ]}>

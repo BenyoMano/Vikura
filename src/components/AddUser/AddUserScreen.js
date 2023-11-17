@@ -12,13 +12,20 @@ import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {AddUserModal} from './AddUserModal';
 import {AddUserScreenHeaderView} from '../Header/AddUserScreenHeaderView';
+import SuccessProtocol from './SuccessProtocol/SuccessProtocol';
 
 const AddUserScreen = ({navigation}) => {
+  const [successProtocol, setSuccessProtocol] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [checkboxStateKurator, setCheckboxStateKurator] = useState(false);
   const [checkboxStateAdmin, setCheckboxStateAdmin] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [hasAddedUser, setHasAddedUser] = useState(false);
+  const [actionStates, setActionStates] = useState({
+    action1: 'initial',
+    action2: 'initial',
+    action3: 'initial',
+    action4: 'initial',
+  });
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
     secondName: '',
@@ -40,6 +47,13 @@ const AddUserScreen = ({navigation}) => {
               flexDirection: 'column',
             },
           ]}>
+          {successProtocol ? (
+            <SuccessProtocol
+              actionStates={actionStates}
+              successProtocol={successProtocol}
+              setSuccessProtocol={setSuccessProtocol}
+            />
+          ) : null}
           <AddUserScreenHeaderView navigation={navigation} />
           <MainText
             title="Skapa konto:"
@@ -59,7 +73,8 @@ const AddUserScreen = ({navigation}) => {
             checkboxStateKurator={checkboxStateKurator}
             checkboxStateAdmin={checkboxStateAdmin}
             setSubmitted={setSubmitted}
-            setHasAddedUser={setHasAddedUser}
+            setSuccessProtocol={setSuccessProtocol}
+            setActionStates={setActionStates}
           />
           <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <Form

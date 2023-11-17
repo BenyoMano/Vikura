@@ -3,8 +3,6 @@ import {Animated, Easing} from 'react-native';
 
 export const useSuccessFailAnim = ({
   actionFinished,
-  closingModal,
-  setClosingModal,
   successFailAnimStyling,
 }) => {
   const {iconSize, elevation} = successFailAnimStyling;
@@ -13,30 +11,30 @@ export const useSuccessFailAnim = ({
 
   const anim1 = Animated.timing(animatedValue1, {
     toValue: 1,
-    easing: Easing.linear,
-    duration: 1500,
+    easing: Easing.bounce,
+    duration: 500,
     useNativeDriver: false,
   });
 
   const anim2 = Animated.timing(animatedValue2, {
     toValue: 1,
-    easing: Easing.linear,
-    duration: 2000,
+    easing: Easing.bounce,
+    duration: 500,
     useNativeDriver: false,
   });
 
   const buttonSuccessColor = animatedValue1.interpolate({
-    inputRange: [0, 0.1, 0.6, 1],
-    outputRange: ['black', '#5CB85C', '#5CB85C', 'black'],
+    inputRange: [0, 1],
+    outputRange: ['white', '#5CB85C'],
   });
   const buttonFailedColor = animatedValue2.interpolate({
-    inputRange: [0, 0.1, 0.7, 1],
-    outputRange: ['black', 'red', 'red', 'black'],
+    inputRange: [0, 1],
+    outputRange: ['white', '#D9534F'],
   });
 
   const animatedColorStyleFailed = {
     borderColor: buttonFailedColor,
-    borderWidth: 1.5,
+    borderWidth: 2.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,
     borderRadius: 10,
@@ -47,7 +45,7 @@ export const useSuccessFailAnim = ({
   };
   const animatedColorStyleSuccess = {
     borderColor: buttonSuccessColor,
-    borderWidth: 1.5,
+    borderWidth: 2.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,
     borderRadius: 10,
@@ -60,9 +58,6 @@ export const useSuccessFailAnim = ({
   useEffect(() => {
     if (actionFinished === 'success') {
       anim1.start();
-      setTimeout(() => {
-        setClosingModal(!closingModal);
-      }, 400);
     }
     if (actionFinished === 'failed') {
       anim2.start();

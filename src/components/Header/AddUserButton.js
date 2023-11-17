@@ -17,7 +17,7 @@ const AddUserButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const handlePressOutAnimation = () => {
     Animated.timing(animatedValue, {
@@ -26,23 +26,23 @@ const AddUserButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const rotateAnimationStyle = {
     transform: [{rotateZ: rotateAnimation}],
-  }
+  };
 
   return (
-    <View style={{
-      borderRadius: 10,
-      overflow: 'hidden'
+    <View
+      style={{
+        borderRadius: 10,
+        overflow: 'hidden',
       }}>
-      <Pressable 
-      onPress={props.onPress}
-      onPressIn={handlePressInAnimation}
-      onPressOut={handlePressOutAnimation}
-      style={btnContainerStyle}
-      >
+      <Pressable
+        onPress={props.onPress}
+        onPressIn={handlePressInAnimation}
+        onPressOut={handlePressOutAnimation}
+        style={btnContainerStyle}>
         <Animated.View style={[rotateAnimationStyle]}>
           <Icon name="adduser" type="antdesign" color="black" size={35} />
         </Animated.View>

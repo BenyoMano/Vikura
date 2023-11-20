@@ -13,6 +13,7 @@ import signIn from '../../firebase/signIn';
 import {DotsLoader} from 'react-native-indicator';
 import MainText from '../../atoms/MainText';
 import LoginForm from './LoginForm';
+import {MotiView} from 'moti';
 
 const HomeScreen = ({navigation}) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -45,14 +46,21 @@ const HomeScreen = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainContainer} testID="homescreen">
-          <MainLogo />
+          <MainLogo isKeyboardVisible={isKeyboardVisible} />
           <View style={styles.contentContainer}>
-            {!isKeyboardVisible ? (
+            <MotiView
+              animate={{
+                scale: !isKeyboardVisible ? 1 : 0,
+              }}
+              transition={{
+                type: 'spring',
+                duration: 350,
+              }}>
               <MainText
                 title="Välkommen!"
                 style={{fontSize: 30, color: 'black'}}
               />
-            ) : null}
+            </MotiView>
             <LoginForm
               mejl={mejl}
               password={password}

@@ -2,20 +2,14 @@ import {MotiView} from 'moti';
 import React from 'react';
 import {Image} from 'react-native';
 
-const Logo = ({isKeyboardVisible}) => {
+const Logo = () => {
   const {ViewStyle} = styles;
 
   return (
-    <MotiView
-      style={ViewStyle}
-      animate={{opacity: 1, translateY: !isKeyboardVisible ? 0 : 47}}
-      transition={{
-        type: 'timing',
-        duration: 0,
-      }}>
+    <MotiView style={ViewStyle} animate={{opacity: 1}}>
       <Image
         source={require('./../../assets/images/transparent.png')}
-        style={{width: 220, height: 82, marginTop: 60}}
+        style={{width: 220, height: 82, marginTop: 110}}
       />
     </MotiView>
   );

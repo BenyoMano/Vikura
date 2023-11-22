@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 
 const InputBarAddUser = React.forwardRef(
   (
@@ -21,14 +21,8 @@ const InputBarAddUser = React.forwardRef(
     const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
     const empty = !value && submitted;
 
-    const windowHeight = Dimensions.get('window').height;
-    // console.log('Window', windowHeight);
-    const onLayout = event => {
-      console.log('Comp Height', event.nativeEvent.layout.height);
-    };
-
     return (
-      <View style={viewStyle} onLayout={onLayout}>
+      <View style={viewStyle}>
         <Text style={textStyle}>{title}</Text>
         <TextInput
           style={empty ? redBarStyle : barStyle}

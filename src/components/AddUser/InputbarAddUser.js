@@ -53,7 +53,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    // height: '12%',
+    height: '12%',
   },
   textStyle: {
     fontSize: 12,
@@ -65,7 +65,7 @@ const styles = {
   },
   barStyle: {
     // height: 52,
-    // height: '20%',
+    height: '75%',
     width: 320,
     paddingLeft: 5,
     color: 'black',

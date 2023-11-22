@@ -59,7 +59,7 @@ const styles = {
   barStyle: {
     height: 52,
     width: 320,
-    paddingLeft: 50,
+    paddingLeft: 5,
     color: 'black',
     backgroundColor: '#C3C3C3',
     borderRadius: 12,

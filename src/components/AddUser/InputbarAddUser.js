@@ -4,15 +4,15 @@ import {Dimensions, Text, TextInput, View} from 'react-native';
 const InputBarAddUser = React.forwardRef(
   (
     {
-      blurOnSubmit,
       title,
-      keys,
-      value,
-      userPropToAdd,
-      setUserPropToAdd,
-      capitalize,
+      blurOnSubmit,
       keyType,
       returnKeyType,
+      capitalize,
+      value,
+      keys,
+      userPropToAdd,
+      setUserPropToAdd,
       onSubmitEditing,
       submitted,
     },
@@ -33,13 +33,13 @@ const InputBarAddUser = React.forwardRef(
         <TextInput
           style={empty ? redBarStyle : barStyle}
           blurOnSubmit={blurOnSubmit}
-          autoCapitalize={capitalize}
-          returnKeyType={returnKeyType}
           keyboardType={keyType}
+          returnKeyType={returnKeyType}
+          autoCapitalize={capitalize}
+          value={value}
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
-          value={value}
         />
       </View>
     );
@@ -62,8 +62,7 @@ const styles = {
     fontFamily: 'NunitoSans-Regular',
   },
   barStyle: {
-    height: 52,
-    // height: '75%',
+    height: '70%',
     width: 320,
     paddingLeft: 5,
     color: 'black',
@@ -72,8 +71,7 @@ const styles = {
     fontFamily: 'NunitoSans-Regular',
   },
   redBarStyle: {
-    // height: '75%',
-    height: 52,
+    height: '70%',
     width: 320,
     color: 'black',
     backgroundColor: '#C3C3C3',

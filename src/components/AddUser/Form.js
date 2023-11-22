@@ -53,8 +53,8 @@ const Form = ({
   return (
     <View style={containerStyle} onLayout={onLayout}>
       <InputbarAddUser
-        blurOnSubmit={false}
         title="Förnamn:"
+        blurOnSubmit={false}
         returnKeyType="next"
         capitalize="words"
         keys={'firstName'}
@@ -65,8 +65,8 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        blurOnSubmit={false}
         title="Efternamn:"
+        blurOnSubmit={false}
         returnKeyType="next"
         capitalize="words"
         keys={'secondName'}
@@ -78,10 +78,10 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        blurOnSubmit={false}
         title="Mejl:"
-        returnKeyType="next"
+        blurOnSubmit={false}
         keyType="email-address"
+        returnKeyType="next"
         capitalize="none"
         keys={'mejl'}
         value={mejl}
@@ -92,8 +92,8 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        blurOnSubmit={false}
         title="Lösenord:"
+        blurOnSubmit={false}
         returnKeyType="next"
         capitalize="none"
         keys={'password'}
@@ -105,9 +105,10 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        blurOnSubmit={true}
         title="Personnummer:"
+        blurOnSubmit={true}
         keyType="numeric"
+        returnKeyType="done"
         keys={'personnummer'}
         value={personnummer}
         ref={ref_input5}

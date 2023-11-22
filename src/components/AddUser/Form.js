@@ -32,80 +32,82 @@ const Form = ({
   }
 
   function adminCheck() {
-    !checkboxStateAdmin ? (userPropToAdd.admin = true) : (userPropToAdd.admin = false);
+    !checkboxStateAdmin
+      ? (userPropToAdd.admin = true)
+      : (userPropToAdd.admin = false);
     setUserPropToAdd({...userPropToAdd, admin});
   }
 
   return (
     <View style={container}>
-        <InputbarAddUser
-          autoFocus={false}
-          blurOnSubmit={false}
-          title="Förnamn:"
-          returnKeyType="next"
-          capitalize="words"
-          keys={'firstName'}
-          value={firstName}
-          onSubmitEditing={() => ref_input2.current.focus()}
-          userPropToAdd={userPropToAdd}
-          setUserPropToAdd={setUserPropToAdd}
-          submitted={submitted}
-        />
-        <InputbarAddUser
-          autoFocus={false}
-          blurOnSubmit={false}
-          title="Efternamn:"
-          returnKeyType="next"
-          capitalize="words"
-          keys={'secondName'}
-          value={secondName}
-          ref={ref_input2}
-          onSubmitEditing={() => ref_input3.current.focus()}
-          userPropToAdd={userPropToAdd}
-          setUserPropToAdd={setUserPropToAdd}
-          submitted={submitted}
-        />
-        <InputbarAddUser
-          autoFocus={false}
-          blurOnSubmit={false}
-          title="Mejl:"
-          returnKeyType="next"
-          keyType="email-address"
-          capitalize={capitalize}
-          keys={'mejl'}
-          value={mejl}
-          ref={ref_input3}
-          onSubmitEditing={() => ref_input4.current.focus()}
-          userPropToAdd={userPropToAdd}
-          setUserPropToAdd={setUserPropToAdd}
-          submitted={submitted}
-        />
-        <InputbarAddUser
-          autoFocus={false}
-          blurOnSubmit={false}
-          title="Lösenord:"
-          returnKeyType="next"
-          capitalize={capitalize}
-          keys={'password'}
-          value={password}
-          ref={ref_input4}
-          onSubmitEditing={() => ref_input5.current.focus()}
-          userPropToAdd={userPropToAdd}
-          setUserPropToAdd={setUserPropToAdd}
-          submitted={submitted}
-        />
-        <InputbarAddUser
-          autoFocus={false}
-          blurOnSubmit={true}
-          title="Personnummer:"
-          keyType="numeric"
-          keys={'personnummer'}
-          value={personnummer}
-          ref={ref_input5}
-          userPropToAdd={userPropToAdd}
-          setUserPropToAdd={setUserPropToAdd}
-          submitted={submitted}
-        />
+      <InputbarAddUser
+        autoFocus={false}
+        blurOnSubmit={false}
+        title="Förnamn:"
+        returnKeyType="next"
+        capitalize="words"
+        keys={'firstName'}
+        value={firstName}
+        onSubmitEditing={() => ref_input2.current.focus()}
+        userPropToAdd={userPropToAdd}
+        setUserPropToAdd={setUserPropToAdd}
+        submitted={submitted}
+      />
+      <InputbarAddUser
+        autoFocus={false}
+        blurOnSubmit={false}
+        title="Efternamn:"
+        returnKeyType="next"
+        capitalize="words"
+        keys={'secondName'}
+        value={secondName}
+        ref={ref_input2}
+        onSubmitEditing={() => ref_input3.current.focus()}
+        userPropToAdd={userPropToAdd}
+        setUserPropToAdd={setUserPropToAdd}
+        submitted={submitted}
+      />
+      <InputbarAddUser
+        autoFocus={false}
+        blurOnSubmit={false}
+        title="Mejl:"
+        returnKeyType="next"
+        keyType="email-address"
+        capitalize={capitalize}
+        keys={'mejl'}
+        value={mejl}
+        ref={ref_input3}
+        onSubmitEditing={() => ref_input4.current.focus()}
+        userPropToAdd={userPropToAdd}
+        setUserPropToAdd={setUserPropToAdd}
+        submitted={submitted}
+      />
+      <InputbarAddUser
+        autoFocus={false}
+        blurOnSubmit={false}
+        title="Lösenord:"
+        returnKeyType="next"
+        capitalize={capitalize}
+        keys={'password'}
+        value={password}
+        ref={ref_input4}
+        onSubmitEditing={() => ref_input5.current.focus()}
+        userPropToAdd={userPropToAdd}
+        setUserPropToAdd={setUserPropToAdd}
+        submitted={submitted}
+      />
+      <InputbarAddUser
+        autoFocus={false}
+        blurOnSubmit={true}
+        title="Personnummer:"
+        keyType="numeric"
+        keys={'personnummer'}
+        value={personnummer}
+        ref={ref_input5}
+        userPropToAdd={userPropToAdd}
+        setUserPropToAdd={setUserPropToAdd}
+        submitted={submitted}
+      />
       <View style={{paddingTop: 25, alignSelf: 'flex-start'}}>
         <BouncyCheckbox
           size={36}
@@ -162,6 +164,7 @@ const styles = {
   container: {
     flex: 1,
     width: '100%',
+    // height: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     overflow: 'hidden',

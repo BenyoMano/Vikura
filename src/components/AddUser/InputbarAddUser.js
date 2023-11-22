@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {Dimensions, Text, TextInput, View} from 'react-native';
 
 const InputBarAddUser = React.forwardRef(
   (
@@ -22,8 +22,14 @@ const InputBarAddUser = React.forwardRef(
     const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
     const empty = !value && submitted;
 
+    const windowHeight = Dimensions.get('window').height;
+    // console.log('Window', windowHeight);
+    const onLayout = event => {
+      console.log('Comp Height', event.nativeEvent.layout.height);
+    };
+
     return (
-      <View style={viewStyle}>
+      <View style={viewStyle} onLayout={onLayout}>
         <Text style={textStyle}>{title}</Text>
         <TextInput
           style={empty ? redBarStyle : barStyle}
@@ -47,6 +53,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
+    // height: '12%',
   },
   textStyle: {
     fontSize: 12,
@@ -57,7 +64,8 @@ const styles = {
     fontFamily: 'NunitoSans-Regular',
   },
   barStyle: {
-    height: 52,
+    // height: 52,
+    // height: '20%',
     width: 320,
     paddingLeft: 5,
     color: 'black',

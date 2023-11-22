@@ -196,16 +196,7 @@ const addUser = ({
       }
     }
 
-    const signOutBefore = async () => {
-      await auth().signOut();
-      createNewUser();
-    };
-
-    // if (auth().currentUser) {
-    //   signOutBefore();
-    // } else {
     createNewUser();
-    // }
   }
 };
 export default addUser;

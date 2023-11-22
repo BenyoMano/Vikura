@@ -42,6 +42,17 @@ const HomeScreen = ({navigation}) => {
     };
   }, []);
 
+  const handleLogin = () => {
+    setSubmitted(true);
+    signIn({
+      loginDetails,
+      setLoginDetails,
+      navigation,
+      setLoading,
+      setSubmitted,
+    });
+  };
+
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -69,6 +80,7 @@ const HomeScreen = ({navigation}) => {
               loginDetails={loginDetails}
               setLoginDetails={setLoginDetails}
               submitted={submitted}
+              handleLogin={handleLogin}
             />
           </View>
           <View style={styles.dotsLoader}>
@@ -77,19 +89,7 @@ const HomeScreen = ({navigation}) => {
             ) : null}
           </View>
           <View style={{flex: 0.2}}>
-            <Button
-              title="Logga in"
-              onPress={() => {
-                setSubmitted(true);
-                signIn({
-                  loginDetails,
-                  setLoginDetails,
-                  navigation,
-                  setLoading,
-                  setSubmitted,
-                });
-              }}
-            />
+            <Button title="Logga in" onPress={handleLogin} />
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -4,8 +4,6 @@ import {View, StyleSheet} from 'react-native';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
-import ButtonClear from '../ChatRoom/ButtonClear';
-import clearMessages from './clearMessages';
 import ReportConcernButton from './ReportConcernButton';
 import {useRoute} from '@react-navigation/native';
 import signOut from '../../firebase/signOut';
@@ -72,9 +70,6 @@ export const HeaderView = ({
       ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
         <StylingContainer>
           <BackButton onPress={() => navigation.goBack()} />
-          {/* <View style={{position: 'absolute', right: '15%'}}>
-            <ButtonClear title="Clear" onPress={() => clearMessages({user, refPath})} />
-          </View> */}
           <ReportConcernButton
             onPress={() =>
               navigation.navigate('ReportConcernScreen', {
@@ -103,6 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '88%',
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: '12%',
   },
 });

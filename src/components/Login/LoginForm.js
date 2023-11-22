@@ -9,6 +9,7 @@ const LoginForm = ({
   loginDetails,
   setLoginDetails,
   submitted,
+  handleLogin,
 }) => {
   const ref_input2 = useRef();
 
@@ -30,9 +31,11 @@ const LoginForm = ({
       <InputBarLogIn
         title="Lösenord"
         security={true}
+        returnKeyType="done"
         keys={'password'}
         value={password}
         ref={ref_input2}
+        onSubmitEditing={handleLogin}
         loginDetails={loginDetails}
         setLoginDetails={setLoginDetails}
         submitted={submitted}

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '88%',
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: '12%',
   },
 });

@@ -42,6 +42,13 @@ export const useSuccessFailAnim = ({
     backgroundColor: 'white',
     position: 'relative',
     elevation: elevation || 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   };
   const animatedColorStyleSuccess = {
     borderColor: buttonSuccessColor,
@@ -53,6 +60,13 @@ export const useSuccessFailAnim = ({
     backgroundColor: 'white',
     position: 'relative',
     elevation: elevation || 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   };
 
   useEffect(() => {

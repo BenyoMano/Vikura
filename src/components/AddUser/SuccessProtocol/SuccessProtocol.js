@@ -67,7 +67,7 @@ const SuccessProtocol = ({
 
   const expandStyle = animatedValue1.interpolate({
     inputRange: [0, 1],
-    outputRange: ['0%', '90%'],
+    outputRange: [0, 370],
   });
   const paddingStyle1 = animatedValue1.interpolate({
     inputRange: [0, 1],
@@ -83,11 +83,19 @@ const SuccessProtocol = ({
       position: 'absolute',
       top: '40%',
       width: expandStyle,
+      maxWidth: '100%',
       backgroundColor: 'white',
       borderColor: 'grey',
       borderWidth: 1,
       borderRadius: 12,
       zIndex: 30,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 12,
+      },
+      shadowOpacity: 0.4,
+      shadowRadius: 15,
       elevation: 30,
     },
     innerContainer: {

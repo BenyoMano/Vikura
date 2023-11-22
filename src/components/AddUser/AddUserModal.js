@@ -1,7 +1,9 @@
 import React from 'react';
-import {Modal, Text, View, StyleSheet} from 'react-native';
+import {Modal, View, StyleSheet} from 'react-native';
 import addUser from './addUser';
 import SmallButton from '../../atoms/SmallButton';
+import {Label} from './Label';
+import {UserPropInfo} from './UserPropInfo';
 
 export const AddUserModal = ({
   modalVisible,
@@ -14,7 +16,6 @@ export const AddUserModal = ({
   setActionStates,
   setSuccessProtocol,
 }) => {
-  const {textStyling, viewStyle} = styles;
   const showIfKurator = checkboxStateKurator ? 'JA' : 'NEJ';
   const showIfAdmin = checkboxStateAdmin ? 'JA' : 'NEJ';
 
@@ -25,75 +26,42 @@ export const AddUserModal = ({
       onRequestClose={() => {
         setModalVisible(!modalVisible);
       }}>
-      <View style={viewStyle.modalContainer}>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Namn:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}>
-            {userPropToAdd.firstName} {userPropToAdd.secondName}
-          </Text>
-        </View>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Mail:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}>{userPropToAdd.mejl}</Text>
-        </View>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Lösenord:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}>{userPropToAdd.password}</Text>
-        </View>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Personnummer:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}>{userPropToAdd.personnummer}</Text>
-        </View>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Utökad behörighet:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}> {showIfKurator} </Text>
-        </View>
-        <View style={viewStyle.label}>
-          <Text style={textStyling.label}>Admin:</Text>
-        </View>
-        <View style={viewStyle.info}>
-          <Text style={textStyling.info}> {showIfAdmin} </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: 15,
-          }}>
-          <View style={{margin: 10}}>
-            <SmallButton
-              title="Tillbaka"
-              onPress={() => setModalVisible(!modalVisible)}
-            />
-          </View>
-          <View style={{margin: 10}}>
-            <SmallButton
-              title="Bekräfta"
-              onPress={() => {
-                setSubmitted(true);
-                addUser({
-                  userPropToAdd,
-                  setUserPropToAdd,
-                  checkboxStateKurator,
-                  checkboxStateAdmin,
-                  setSubmitted,
-                  setSuccessProtocol,
-                  setActionStates,
-                });
-                setModalVisible(!modalVisible);
-              }}
-            />
-          </View>
+      <View style={styles.modalContainer}>
+        <Label labelTitle={'Namn:'} />
+        <UserPropInfo
+          userProp={userPropToAdd.firstName + ' ' + userPropToAdd.secondName}
+        />
+        <Label labelTitle={'Mejl:'} />
+        <UserPropInfo userProp={userPropToAdd.mejl} />
+        <Label labelTitle={'Lösenord:'} />
+        <UserPropInfo userProp={userPropToAdd.password} />
+        <Label labelTitle={'Personnummer:'} />
+        <UserPropInfo userProp={userPropToAdd.personnummer} />
+        <Label labelTitle={'Utökad behörighet:'} />
+        <UserPropInfo userProp={showIfKurator} />
+        <Label labelTitle={'Admin:'} />
+        <UserPropInfo userProp={showIfAdmin} />
+        <View style={styles.buttonContainer}>
+          <SmallButton
+            title="Tillbaka"
+            onPress={() => setModalVisible(!modalVisible)}
+          />
+          <SmallButton
+            title="Bekräfta"
+            onPress={() => {
+              setSubmitted(true);
+              addUser({
+                userPropToAdd,
+                setUserPropToAdd,
+                checkboxStateKurator,
+                checkboxStateAdmin,
+                setSubmitted,
+                setSuccessProtocol,
+                setActionStates,
+              });
+              setModalVisible(!modalVisible);
+            }}
+          />
         </View>
       </View>
     </Modal>
@@ -101,43 +69,29 @@ export const AddUserModal = ({
 };
 
 const styles = StyleSheet.create({
-  textStyling: {
-    label: {
-      fontSize: 20,
-      color: 'black',
-      fontFamily: 'NunitoSans-Regular',
+  modalContainer: {
+    height: '80%',
+    minWidth: '70%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+    marginTop: '20%',
+    paddingHorizontal: 25,
+    paddingBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    info: {
-      fontSize: 20,
-      color: 'grey',
-      fontFamily: 'NunitoSans-Regular',
-    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    zIndex: 30,
+    elevation: 30,
   },
-  viewStyle: {
-    modalContainer: {
-      backgroundColor: 'white',
-      borderRadius: 20,
-      alignSelf: 'center',
-      marginTop: '20%',
-      paddingHorizontal: 15,
-      paddingBottom: 15,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      zIndex: 30,
-      elevation: 30,
-    },
-    label: {
-      marginLeft: 10,
-      marginTop: 30,
-    },
-    info: {
-      marginLeft: 10,
-      marginTop: 5,
-    },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
   },
 });

@@ -4,7 +4,6 @@ import {Dimensions, Text, TextInput, View} from 'react-native';
 const InputBarAddUser = React.forwardRef(
   (
     {
-      autoFocus,
       blurOnSubmit,
       title,
       keys,
@@ -33,7 +32,6 @@ const InputBarAddUser = React.forwardRef(
         <Text style={textStyle}>{title}</Text>
         <TextInput
           style={empty ? redBarStyle : barStyle}
-          autoFocus={autoFocus}
           blurOnSubmit={blurOnSubmit}
           autoCapitalize={capitalize}
           returnKeyType={returnKeyType}
@@ -64,8 +62,8 @@ const styles = {
     fontFamily: 'NunitoSans-Regular',
   },
   barStyle: {
-    // height: 52,
-    height: '75%',
+    height: 52,
+    // height: '75%',
     width: 320,
     paddingLeft: 5,
     color: 'black',
@@ -74,6 +72,7 @@ const styles = {
     fontFamily: 'NunitoSans-Regular',
   },
   redBarStyle: {
+    // height: '75%',
     height: 52,
     width: 320,
     color: 'black',

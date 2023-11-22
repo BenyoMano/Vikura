@@ -43,6 +43,7 @@ const SmallButton = ({title, onPress}) => {
 
 export const styles = StyleSheet.create({
   viewStyle: {
+    marginVertical: 10,
     borderRadius: 12,
     overflow: 'hidden',
   },

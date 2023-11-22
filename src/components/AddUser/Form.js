@@ -3,6 +3,7 @@ import React, {useRef} from 'react';
 import {View} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {useState} from 'react';
 
 const Form = ({
   userPropToAdd,
@@ -13,8 +14,7 @@ const Form = ({
   setCheckboxStateAdmin,
   submitted,
 }) => {
-  const {container} = styles;
-  const capitalize = 'none';
+  const [calculatedHeight, setCalculatedHeight] = useState(null);
   const {firstName, secondName, mejl, password, personnummer, kurator, admin} =
     userPropToAdd;
   const ref_input2 = useRef();
@@ -38,10 +38,21 @@ const Form = ({
     setUserPropToAdd({...userPropToAdd, admin});
   }
 
+  const onLayout = event => {
+    setCalculatedHeight(event.nativeEvent.layout.height);
+  };
+
+  const containerStyle = {
+    height: calculatedHeight,
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    overflow: 'hidden',
+  };
+
   return (
-    <View style={container}>
+    <View style={containerStyle} onLayout={onLayout}>
       <InputbarAddUser
-        autoFocus={false}
         blurOnSubmit={false}
         title="Förnamn:"
         returnKeyType="next"
@@ -54,7 +65,6 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        autoFocus={false}
         blurOnSubmit={false}
         title="Efternamn:"
         returnKeyType="next"
@@ -68,12 +78,11 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        autoFocus={false}
         blurOnSubmit={false}
         title="Mejl:"
         returnKeyType="next"
         keyType="email-address"
-        capitalize={capitalize}
+        capitalize="none"
         keys={'mejl'}
         value={mejl}
         ref={ref_input3}
@@ -83,11 +92,10 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        autoFocus={false}
         blurOnSubmit={false}
         title="Lösenord:"
         returnKeyType="next"
-        capitalize={capitalize}
+        capitalize="none"
         keys={'password'}
         value={password}
         ref={ref_input4}
@@ -97,7 +105,6 @@ const Form = ({
         submitted={submitted}
       />
       <InputbarAddUser
-        autoFocus={false}
         blurOnSubmit={true}
         title="Personnummer:"
         keyType="numeric"
@@ -122,7 +129,6 @@ const Form = ({
             fontSize: 22,
             textDecorationLine: 'none',
           }}
-          //disableBuiltInState
           onPress={() => {
             setCheckboxStateKurator(!checkboxStateKurator);
             kuratorCheck();
@@ -146,7 +152,6 @@ const Form = ({
             fontSize: 22,
             textDecorationLine: 'none',
           }}
-          //disableBuiltInState
           onPress={() => {
             setCheckboxStateAdmin(!checkboxStateAdmin);
             adminCheck();
@@ -158,17 +163,6 @@ const Form = ({
       </View>
     </View>
   );
-};
-
-const styles = {
-  container: {
-    flex: 1,
-    width: '100%',
-    // height: '100%',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
 };
 
 export default Form;

@@ -40,13 +40,7 @@ const AddUserScreen = ({navigation}) => {
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={[
-            styles.mainContainer,
-            {
-              flexDirection: 'column',
-            },
-          ]}>
+        <View style={styles.mainContainer}>
           {successProtocol ? (
             <SuccessProtocol
               actionStates={actionStates}
@@ -99,6 +93,7 @@ const AddUserScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    flexDirection: 'column',
     width: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -106,6 +101,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     width: '100%',
+    flexGrow: 1,
     paddingBottom: 15,
     borderRadius: 20,
   },

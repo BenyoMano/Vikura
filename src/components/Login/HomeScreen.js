@@ -59,7 +59,6 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.mainContainer} testID="homescreen">
           <MainLogo isKeyboardVisible={isKeyboardVisible} />
           <View style={styles.contentContainer}>
-            {/* {!isKeyboardVisible ? ( */}
             <MotiView
               animate={{
                 scale: !isKeyboardVisible ? 1 : 0,
@@ -73,7 +72,6 @@ const HomeScreen = ({navigation}) => {
                 style={{fontSize: 30, color: 'black'}}
               />
             </MotiView>
-            {/* ) : null} */}
             <LoginForm
               mejl={mejl}
               password={password}

@@ -2,7 +2,10 @@ import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import createRoom from '../../firebase/UserManagement/createRoom';
 import createUser from '../../firebase/UserManagement/createUser';
-import {useDynamicAddUserErrorHandling} from '../../ErrorHandling/errorHandling';
+import {
+  useDynamicAddUserErrorHandling,
+  useGeneralErrorHandling,
+} from '../../ErrorHandling/errorHandling';
 import addPersonalDetails from '../../firebase/UserManagement/addPersonalDetails';
 
 const addUser = ({
@@ -94,12 +97,18 @@ const addUser = ({
           userId = auth().currentUser.uid;
           setActionStates(prev => ({
             ...prev,
-            action1: 'success',
+            action1: {
+              ...prev.action1,
+              status: 'success',
+            },
           }));
         } catch (error) {
           setActionStates(prev => ({
             ...prev,
-            action1: 'failed',
+            action1: {
+              ...prev.action1,
+              status: 'failed',
+            },
           }));
           let subject = 'skapa användare';
           useDynamicAddUserErrorHandling({error, subject, userId});
@@ -115,12 +124,18 @@ const addUser = ({
           });
           setActionStates(prev => ({
             ...prev,
-            action2: 'success',
+            action2: {
+              ...prev.action2,
+              status: 'success',
+            },
           }));
         } catch (error) {
           setActionStates(prev => ({
             ...prev,
-            action2: 'failed',
+            action2: {
+              ...prev.action2,
+              status: 'failed',
+            },
           }));
           let subject = 'lägga till användaruppgifter';
           useDynamicAddUserErrorHandling({error, subject, userId});
@@ -130,28 +145,39 @@ const addUser = ({
           await createRoom({userId});
           setActionStates(prev => ({
             ...prev,
-            action3: 'success',
+            action3: {
+              ...prev.action3,
+              status: 'success',
+            },
           }));
         } catch (error) {
           setActionStates(prev => ({
             ...prev,
-            action3: 'failed',
+            action3: {
+              ...prev.action3,
+              status: 'failed',
+            },
           }));
           let subject = 'skapa chatt-rum';
           useDynamicAddUserErrorHandling({error, subject, userId});
           return;
         }
-
         try {
           await auth().signOut();
           setActionStates(prev => ({
             ...prev,
-            action4: 'success',
+            action4: {
+              ...prev.action4,
+              status: 'success',
+            },
           }));
         } catch (error) {
           setActionStates(prev => ({
             ...prev,
-            action4: 'failed',
+            action4: {
+              ...prev.action4,
+              status: 'failed',
+            },
           }));
           let subject = 'logga ut användaren';
           useDynamicAddUserErrorHandling({error, subject, userId});
@@ -159,12 +185,25 @@ const addUser = ({
         }
 
         setTimeout(() => {
-          setActionStates({
-            action1: 'initial',
-            action2: 'initial',
-            action3: 'initial',
-            action4: 'initial',
-          });
+          setActionStates(prev => ({
+            ...prev,
+            action1: {
+              ...prev.action1,
+              status: 'initial',
+            },
+            action2: {
+              ...prev.action2,
+              status: 'initial',
+            },
+            action3: {
+              ...prev.action3,
+              status: 'initial',
+            },
+            action4: {
+              ...prev.action4,
+              status: 'initial',
+            },
+          }));
         }, 2000);
 
         setUserPropToAdd({
@@ -185,13 +224,7 @@ const addUser = ({
 
         setSubmitted(false);
       } catch (error) {
-        console.error('createUser Error: ', error);
-        showMessage({
-          message: 'Misslyckades!',
-          description: String(error),
-          type: 'danger',
-          autoHide: false,
-        });
+        useGeneralErrorHandling({error, position: 'top'});
         setSubmitted(false);
       }
     }

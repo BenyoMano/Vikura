@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {showMessage} from 'react-native-flash-message';
+import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 const getRoomName = async ({clientUserId}) => {
   try {
@@ -10,12 +11,8 @@ const getRoomName = async ({clientUserId}) => {
       .get();
     return roomName?.docs[0];
   } catch (error) {
-    showMessage({
-      message: 'Varning!',
-      description: String(error),
-      type: 'danger',
-      autoHide: false,
-    });
+    useGeneralErrorHandling({error, position: 'top'});
+    return;
   }
 };
 

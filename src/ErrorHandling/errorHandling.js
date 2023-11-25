@@ -9,7 +9,7 @@ export const useDynamicAddUserErrorHandling = ({error, subject, userId}) => {
     ),
     type: 'danger',
     autoHide: false,
-    position: 'bottom',
+    position: 'top',
     floating: true,
     icon: 'danger',
   });
@@ -19,7 +19,7 @@ export const useDynamicDeleteUserErrorHandling = ({
   error,
   clientId,
   subject,
-  setactionFinished,
+  setActionFinished,
 }) => {
   console.error('Error deleting room: ', error);
   showMessage({
@@ -33,18 +33,17 @@ export const useDynamicDeleteUserErrorHandling = ({
     floating: true,
     icon: 'danger',
   });
-  setactionFinished('failed');
+  setActionFinished('failed');
 };
 
-export const useGeneralErrorHandling = ({error, setactionFinished}) => {
+export const useGeneralErrorHandling = ({error, position}) => {
   showMessage({
     message: 'Ojdå! Något gick fel :(',
     description: String(error.message),
     type: 'danger',
     autoHide: false,
-    position: 'bottom',
+    position: String(position),
     floating: true,
     icon: 'danger',
   });
-  setactionFinished('failed');
 };

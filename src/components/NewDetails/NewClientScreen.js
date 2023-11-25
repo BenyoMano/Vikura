@@ -11,7 +11,9 @@ import InputBarNewDetails from './InputBarNewDetails';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import newDetailsElev from '../../firebase/newDetailsElev';
-import {DotsLoader} from 'react-native-indicator';
+import SuccessProtocol from '../AddUser/SuccessProtocol/SuccessProtocol';
+import auth from '@react-native-firebase/auth';
+import {showMessage} from 'react-native-flash-message';
 
 const NewClientScreen = ({navigation}) => {
   const [newDetails, setNewDetails] = useState({});
@@ -19,8 +21,26 @@ const NewClientScreen = ({navigation}) => {
   const {password, rePassword, alias} = newDetails;
   const ref_input2 = useRef();
   const ref_input3 = useRef();
-  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [successProtocol, setSuccessProtocol] = useState(false);
+  const [allDone, setAllDone] = useState(false);
+  const userId = auth().currentUser.uid;
+
+  const action1 = {
+    status: 'initial',
+    name: 'account-key-outline',
+    type: 'material-community',
+  };
+  const action2 = {
+    status: 'initial',
+    name: 'card-account-details-outline',
+    type: 'material-community',
+  };
+
+  const [actionStates, setActionStates] = useState({
+    action1,
+    action2,
+  });
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -42,12 +62,36 @@ const NewClientScreen = ({navigation}) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (allDone) {
+      navigation.navigate('ChatScreen', {id: userId});
+      setTimeout(() => {
+        showMessage({
+          message: 'Välkommen!',
+          description: 'Du kan börja chatta direkt!',
+          type: 'info',
+          position: 'center',
+          floating: true,
+          duration: 3000,
+        });
+      }, 1500);
+    }
+  }, [allDone]);
+
   return (
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          {successProtocol ? (
+            <SuccessProtocol
+              actionStates={actionStates}
+              successProtocol={successProtocol}
+              setSuccessProtocol={setSuccessProtocol}
+              setAllDone={setAllDone}
+            />
+          ) : null}
           <HeaderView navigation={navigation} />
-          <View style={{marginTop: 40}}>
+          <View style={{marginTop: '10%'}}>
             <MainText
               title="Välkommen!"
               style={{fontSize: 38, color: 'black'}}
@@ -55,7 +99,7 @@ const NewClientScreen = ({navigation}) => {
           </View>
           <View style={styles.contentContainer}>
             {!isKeyboardVisible ? (
-              <View style={{ backgroundColor: 'transparent'}}>
+              <View style={{backgroundColor: 'transparent'}}>
                 <MainText
                   title="Första gången du loggar in behöver du skapa ett nytt lösenord samt ett nickname för att det ska kännas mer personligt."
                   style={{
@@ -68,7 +112,7 @@ const NewClientScreen = ({navigation}) => {
                 />
               </View>
             ) : null}
-            
+
             <View style={styles.loginContainer}>
               <InputBarNewDetails
                 autoFocus={false}
@@ -82,7 +126,7 @@ const NewClientScreen = ({navigation}) => {
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
-                />
+              />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
@@ -96,7 +140,7 @@ const NewClientScreen = ({navigation}) => {
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
-                />
+              />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
@@ -108,22 +152,25 @@ const NewClientScreen = ({navigation}) => {
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
-                />
-            </View>
-          </View>
-            {loading ? (
-              <View style={{height: 22, marginBottom: 20, marginTop: 10}}>
-                <DotsLoader size={20} color={'green'} betweenSpace={20} />
-              </View>
-            ) : null}
-            <View style={{flex: 0.3}}>
-              <Button
-                title="Bekräfta"
-                onPress={() => {
-                  {newDetailsElev({navigation, password, rePassword, alias, setSubmitted, setLoading}); setSubmitted(true)};
-                }}
               />
             </View>
+          </View>
+          <Button
+            title="Bekräfta"
+            onPress={() => {
+              newDetailsElev({
+                navigation,
+                password,
+                rePassword,
+                alias,
+                setSubmitted,
+                actionStates,
+                setActionStates,
+                setSuccessProtocol,
+              });
+              setSubmitted(true);
+            }}
+          />
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>

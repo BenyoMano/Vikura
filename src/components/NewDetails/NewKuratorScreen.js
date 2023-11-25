@@ -46,7 +46,7 @@ const NewKuratorScreen = ({navigation}) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <HeaderView navigation={navigation} />
-          <View style={{marginTop: 40}}>
+          <View style={{marginTop: '10%'}}>
             <MainText
               title="Välkommen!"
               style={{fontSize: 38, color: 'black'}}
@@ -54,7 +54,7 @@ const NewKuratorScreen = ({navigation}) => {
           </View>
           <View style={styles.contentContainer}>
             {!isKeyboardVisible ? (
-              <View style={{ backgroundColor: 'transparent'}}>
+              <View style={{backgroundColor: 'transparent'}}>
                 <MainText
                   title="Första gången du loggar in behöver du skapa ett nytt lösenord."
                   style={{
@@ -65,7 +65,7 @@ const NewKuratorScreen = ({navigation}) => {
                     paddingHorizontal: 40,
                   }}
                 />
-            </View>
+              </View>
             ) : null}
 
             <View style={styles.loginContainer}>
@@ -81,7 +81,7 @@ const NewKuratorScreen = ({navigation}) => {
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
-                />
+              />
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
@@ -96,17 +96,24 @@ const NewKuratorScreen = ({navigation}) => {
               />
             </View>
           </View>
-            {loading ? (
-              <View style={{height: 22, marginBottom: 80, marginTop: 10}}>
-                <DotsLoader size={20} color={'green'} betweenSpace={20} />
-              </View>
-            ) : null}
-            <View style={{flex: 0.3}}>
-              <Button
-                title="Bekräfta"
-                onPress={() => {newDetailsKurator({navigation, password, rePassword, setSubmitted, setLoading}); setSubmitted(true)}}
-              />
+          {loading ? (
+            <View style={{height: 22, marginBottom: 80, marginTop: 10}}>
+              <DotsLoader size={20} color={'green'} betweenSpace={20} />
             </View>
+          ) : null}
+          <Button
+            title="Bekräfta"
+            onPress={() => {
+              newDetailsKurator({
+                navigation,
+                password,
+                rePassword,
+                setSubmitted,
+                setLoading,
+              });
+              setSubmitted(true);
+            }}
+          />
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>
@@ -129,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 });
 

@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
+import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 const newDetailsKurator = async ({
   navigation,
@@ -39,27 +40,19 @@ const newDetailsKurator = async ({
   }
 
   if (rePassword === password) {
-    setLoading(true);
-
     try {
       await Promise.all([
+        user.updatePassword(password),
         firestore().collection('Users').doc(userId).update({
           firstLogin: false,
         }),
-        user.updatePassword(password),
       ]);
 
       setLoading(false);
       setSubmitted(false);
       navigation.navigate('KuratorScreen');
     } catch (error) {
-      showMessage({
-        message: 'Varning!',
-        description: String(error),
-        type: 'danger',
-        autoHide: false,
-      });
-      setLoading(false);
+      useGeneralErrorHandling({error, position: 'top'});
     }
   }
 };

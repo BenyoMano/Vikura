@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import {showMessage} from 'react-native-flash-message';
 import InputBarChatt from './InputbarChat';
 import SendButton from './SendButton';
+import {useGeneralErrorHandling} from '../../ErrorHandling/errorHandling';
 
 const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
   const [messageToSend, setMessageToSend] = useState();
@@ -49,13 +50,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
 
         await Promise.all([getUserData, addMessageData, updateLatestTimestamp]);
       } catch (error) {
-        showMessage({
-          message: 'Varning!',
-          description: String(error),
-          type: 'danger',
-          autoHide: false,
-        });
-        console.log(error);
+        useGeneralErrorHandling({error, position: 'top'});
       }
     };
 

@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import navigateAfterSignIn from './navigateAfterSignIn';
 import {showMessage} from 'react-native-flash-message';
+import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 const signIn = async ({
   navigation,
@@ -42,12 +43,7 @@ const signIn = async ({
       setLoading(false);
       setSubmitted(false);
     } catch (error) {
-      showMessage({
-        message: 'Varning!',
-        description: String(error),
-        type: 'danger',
-        autoHide: false,
-      });
+      useGeneralErrorHandling({error, position: 'top'});
       setLoading(false);
     }
   }

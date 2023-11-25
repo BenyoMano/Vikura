@@ -2083,6 +2083,11 @@
   dependencies:
     nanoid "^3.1.23"
 
+"@rneui/themed@^4.0.0-rc.8":
+  version "4.0.0-rc.8"
+  resolved "https://registry.npmjs.org/@rneui/themed/-/themed-4.0.0-rc.8.tgz"
+  integrity sha512-8L/XOrL9OK/r+/iBLvx63TbIdZOXF8SIjN9eArMYm6kRbMr8m4BitXllDN8nBhBsSPNYvL6EAgjk+i2MfY4sBA==
+
 "@rnx-kit/align-deps@^2.2.4":
   version "2.2.4"
   resolved "https://registry.npmjs.org/@rnx-kit/align-deps/-/align-deps-2.2.4.tgz"

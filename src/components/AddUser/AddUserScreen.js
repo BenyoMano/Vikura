@@ -20,12 +20,6 @@ const AddUserScreen = ({navigation}) => {
   const [checkboxStateKurator, setCheckboxStateKurator] = useState(false);
   const [checkboxStateAdmin, setCheckboxStateAdmin] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [actionStates, setActionStates] = useState({
-    action1: 'initial',
-    action2: 'initial',
-    action3: 'initial',
-    action4: 'initial',
-  });
   const [userPropToAdd, setUserPropToAdd] = useState({
     firstName: '',
     secondName: '',
@@ -35,6 +29,34 @@ const AddUserScreen = ({navigation}) => {
     firstLogin: true,
     kurator: checkboxStateKurator,
     admin: checkboxStateAdmin,
+  });
+
+  const action1 = {
+    status: 'initial',
+    name: 'adduser',
+    type: 'antdesign',
+  };
+  const action2 = {
+    status: 'initial',
+    name: 'card-account-details-outline',
+    type: 'material-community',
+  };
+  const action3 = {
+    status: 'initial',
+    name: 'chatbubbles-outline',
+    type: 'ionicon',
+  };
+  const action4 = {
+    status: 'initial',
+    name: 'log-out',
+    type: 'feather',
+  };
+
+  const [actionStates, setActionStates] = useState({
+    action1,
+    action2,
+    action3,
+    action4,
   });
 
   return (
@@ -81,9 +103,7 @@ const AddUserScreen = ({navigation}) => {
               submitted={submitted}
             />
           </ScrollView>
-          <View style={{marginVertical: 10}}>
-            <Button title="Registrera" onPress={() => setModalVisible(true)} />
-          </View>
+          <Button title="Registrera" onPress={() => setModalVisible(true)} />
         </View>
       </TouchableWithoutFeedback>
     </MyKeyboardAvoidingView>

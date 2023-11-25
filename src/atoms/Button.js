@@ -25,7 +25,7 @@ const Button = props => {
     <View style={{borderRadius: 12, overflow: 'hidden'}}>
       <Pressable
         onPress={props.onPress}
-        testID='button'
+        testID="button"
         onPressIn={fadeIn}
         onPressOut={fadeOut}>
         <Animated.View
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     btnContainerStyle: {
       backgroundColor: '#C4C4C4',
       paddingVertical: 18,
+      marginVertical: 10,
       width: 230,
       borderRadius: 12,
     },

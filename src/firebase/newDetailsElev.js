@@ -2,17 +2,18 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import updateRoomAlias from './updateRoomAlias';
+import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 const newDetailsElev = async ({
-  navigation,
   password,
   rePassword,
   alias,
   setSubmitted,
-  setLoading,
+  setActionStates,
+  setSuccessProtocol,
 }) => {
   const user = auth().currentUser;
-  const userId = auth().currentUser.uid;
+  const userId = user.uid;
 
   if (!password) {
     showMessage({
@@ -49,40 +50,60 @@ const newDetailsElev = async ({
   }
 
   if (rePassword === password) {
-    setLoading(true);
-
-    try {
-      await Promise.all([
-        firestore().collection('Users').doc(userId).update({
-          firstLogin: false,
-          alias: alias,
-        }),
-        user.updatePassword(password),
-        updateRoomAlias({alias, userId}),
-      ]);
-
-      showMessage({
-        message: 'Välkommen!',
-        description: 'Du kan börja chatta direkt!',
-        type: 'info',
-        position: 'center',
-        floating: true,
-        duration: 3000,
-      });
-
-      setLoading(false);
-      setSubmitted(false);
-      navigation.navigate('ChatScreen', {id: userId});
-    } catch (error) {
-      showMessage({
-        message: 'Varning!',
-        description: String(error),
-        type: 'danger',
-        autoHide: false,
-      });
-      console.error('newDetailsElev error: ', error);
-      setLoading(false);
+    async function updateUser() {
+      setSuccessProtocol(true);
+      try {
+        try {
+          await user.updatePassword(password);
+          setActionStates(prev => ({
+            ...prev,
+            action1: {
+              ...prev.action1,
+              status: 'success',
+            },
+          }));
+        } catch (error) {
+          setActionStates(prev => ({
+            ...prev,
+            action1: {
+              ...prev.action1,
+              status: 'failed',
+            },
+          }));
+          useGeneralErrorHandling({error, position: 'top'});
+          return;
+        }
+        try {
+          await updateRoomAlias({alias, userId});
+          await firestore().collection('Users').doc(userId).update({
+            firstLogin: false,
+            alias: alias,
+          });
+          setActionStates(prev => ({
+            ...prev,
+            action2: {
+              ...prev.action2,
+              status: 'success',
+            },
+          }));
+        } catch (error) {
+          setActionStates(prev => ({
+            ...prev,
+            action2: {
+              ...prev.action2,
+              status: 'failed',
+            },
+          }));
+          useGeneralErrorHandling({error, position: 'top'});
+          return;
+        }
+        setSubmitted(false);
+      } catch (error) {
+        useGeneralErrorHandling({error, position: 'top'});
+      }
     }
+
+    updateUser();
   }
 };
 

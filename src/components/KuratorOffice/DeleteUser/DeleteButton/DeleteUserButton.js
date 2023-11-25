@@ -18,7 +18,7 @@ const DeleteUserButton = ({
   setModalVisible,
   clientId,
 }) => {
-  const [actionFinished, setactionFinished] = useState('initial');
+  const [actionFinished, setActionFinished] = useState('initial');
   const [clipboardString, setClipboardString] = useClipboard();
   const operationsCount = useRef(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -72,8 +72,9 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setactionFinished,
+          setActionFinished,
         });
+        return;
       }
       try {
         await firestore().collection('rooms').doc(docID).delete();
@@ -84,8 +85,9 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setactionFinished,
+          setActionFinished,
         });
+        return;
       }
       try {
         await firestore().collection('Users').doc(clientId).delete();
@@ -96,11 +98,12 @@ const DeleteUserButton = ({
           error,
           clientId,
           subject,
-          setactionFinished,
+          setActionFinished,
         });
+        return;
       }
       if (operationsCount.current === 3) {
-        setactionFinished('success');
+        setActionFinished('success');
       } else {
         setTimeout(() => {
           setIsRunning(false);
@@ -108,7 +111,8 @@ const DeleteUserButton = ({
       }
     } catch (error) {
       setIsRunning(false);
-      useGeneralErrorHandling({error, setactionFinished});
+      useGeneralErrorHandling({error, position: 'bottom'});
+      setActionFinished('failed');
     }
   };
 

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, {useEffect} from 'react';
+import {useState} from 'react';
 import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
 import {Icon} from 'react-native-elements';
 
@@ -20,11 +20,11 @@ const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
   });
   const buttonTranslate = animatedValue3.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: [-15, -15, 0]
+    outputRange: [-15, -15, 0],
   });
   const buttonOpacity = animatedValue4.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: [0, 0.0, 1]
+    outputRange: [0, 0.0, 1],
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
       duration: 450,
       useNativeDriver: true,
     }).start();
-  }, [])
+  }, []);
 
   if (closeAdjustButtons) {
     Animated.timing(animatedValue3, {
@@ -59,7 +59,7 @@ const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
       duration: 150,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const onPressOut = () => {
     animatedValue2.setValue(0);
@@ -70,10 +70,13 @@ const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const animatedRotateStylePressIn = {
-    transform: [{rotateZ: buttonRotatePressIn}, {rotateZ: buttonRotatePressOut}],
+    transform: [
+      {rotateZ: buttonRotatePressIn},
+      {rotateZ: buttonRotatePressOut},
+    ],
   };
 
   const animatedTranslateStyle = {
@@ -83,14 +86,13 @@ const Button = ({messageLimit, setMessageLimit, closeAdjustButtons}) => {
 
   return (
     <Animated.View style={[animatedTranslateStyle]}>
-      <Pressable 
-      onPress={() => {
-        setMessageLimit(messageLimit + 15);
-      }}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={btnContainerStyle}
-      >
+      <Pressable
+        onPress={() => {
+          setMessageLimit(messageLimit + 15);
+        }}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={btnContainerStyle}>
         <Animated.View style={[animatedRotateStylePressIn]}>
           <Icon name="history" type="materialicons" size={28} />
         </Animated.View>

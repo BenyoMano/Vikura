@@ -1,37 +1,37 @@
-import React from "react"
+import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {useFontSize} from '../Header/FontSizeContext';
 
 const BubbleView = ({isCurrentUserKurator, text, id, clientUserId, user}) => {
+  const {fontSize} = useFontSize();
 
-    return !isCurrentUserKurator ? (
-        <View
-        style={[
-         id === user.uid
-            ? styles.bubbleSend.bubble
-            : styles.bubbleRecieve.bubble,
-        ]}>
-        <Text style={styles.text.message}>{text}</Text>
-        </View>
-
-    ) : isCurrentUserKurator ? (
-        <View
-        style={[
-          id === clientUserId
-            ? styles.bubbleRecieve.bubble
-            : styles.bubbleSend.bubble,
-        ]}>
-        <Text style={styles.text.message}>{text}</Text>
-      </View>
-    ) : null;
-}
+  const messageText = {
+    color: 'black',
+    fontFamily: 'NunitoSans-Regular',
+    fontSize: Number(fontSize),
+  };
+  return !isCurrentUserKurator ? (
+    <View
+      style={[
+        id === user.uid
+          ? styles.bubbleSend.bubble
+          : styles.bubbleRecieve.bubble,
+      ]}>
+      <Text style={messageText}>{text}</Text>
+    </View>
+  ) : isCurrentUserKurator ? (
+    <View
+      style={[
+        id === clientUserId
+          ? styles.bubbleRecieve.bubble
+          : styles.bubbleSend.bubble,
+      ]}>
+      <Text style={messageText}>{text}</Text>
+    </View>
+  ) : null;
+};
 
 const styles = StyleSheet.create({
-  text: {
-    message: {
-      color: 'black',
-      fontFamily: 'NunitoSans-Regular',
-    },
-  },
   bubbleSend: {
     bubble: {
       justifyContent: 'center',
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
       borderRadius: 12,
     },
   },
-})
+});
 
 export default BubbleView;

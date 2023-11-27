@@ -17,7 +17,7 @@ const Button = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const handlePressOutAnimation = () => {
     Animated.timing(animatedValue, {
@@ -26,20 +26,19 @@ const Button = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const animatedRotateStyle = {
     transform: [{rotateZ: buttonRotate}],
-  }
+  };
 
   return (
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
-      <Pressable 
-      onPress={props.onPress}
-      onPressIn={handlePressInAnimation}
-      onPressOut={handlePressOutAnimation}
-      style={buttonContainerStyle}
-      >
+      <Pressable
+        onPress={props.onPress}
+        onPressIn={handlePressInAnimation}
+        onPressOut={handlePressOutAnimation}
+        style={buttonContainerStyle}>
         <Animated.View style={[animatedRotateStyle]}>
           <Icon name="warning" type="antdesign" color="#d12304" size={28} />
         </Animated.View>
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     borderColor: 'black',
     justifyContent: 'center',
+    marginHorizontal: 20,
   },
 });
 

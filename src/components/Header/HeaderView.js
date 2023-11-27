@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
@@ -10,6 +10,9 @@ import signOut from '../../firebase/signOut';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import LogoutButton from './LogoutButton';
 import StylingContainer from './StylingContainer';
+import AdjustSizeButton from './AdjustSizeButton';
+import {FontSizeSlider} from './FontSizeSlider';
+import {AnimatePresence} from 'moti';
 
 export const HeaderView = ({
   navigation,
@@ -18,6 +21,7 @@ export const HeaderView = ({
   setHasAddedUser,
 }) => {
   const route = useRoute();
+  const [isToggled, setIsToggled] = useState(false);
   const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(
     IsCurrentUserKuratorContext,
   );
@@ -37,7 +41,6 @@ export const HeaderView = ({
           {isCurrentUserAdmin ? (
             <AddUserButton
               onPress={() => navigation.navigate('AddUserScreen')}
-              testID="adduserbutton"
             />
           ) : null}
         </StylingContainer>
@@ -70,13 +73,20 @@ export const HeaderView = ({
       ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
         <StylingContainer>
           <BackButton onPress={() => navigation.goBack()} />
-          <ReportConcernButton
-            onPress={() =>
-              navigation.navigate('ReportConcernScreen', {
-                clientUserId: clientUserId,
-              })
-            }
-          />
+          <View style={styles.adjustSize}>
+            <ReportConcernButton
+              onPress={() =>
+                navigation.navigate('ReportConcernScreen', {
+                  clientUserId: clientUserId,
+                })
+              }
+            />
+            <AdjustSizeButton
+              isToggled={isToggled}
+              setIsToggled={setIsToggled}
+            />
+            <AnimatePresence>{isToggled && <FontSizeSlider />}</AnimatePresence>
+          </View>
         </StylingContainer>
       ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
         <StylingContainer>
@@ -87,6 +97,13 @@ export const HeaderView = ({
               navigation.navigate('HomeScreen');
             }}
           />
+          <View style={styles.adjustSize}>
+            <AdjustSizeButton
+              isToggled={isToggled}
+              setIsToggled={setIsToggled}
+            />
+            <AnimatePresence>{isToggled && <FontSizeSlider />}</AnimatePresence>
+          </View>
         </StylingContainer>
       ) : null}
     </View>
@@ -100,5 +117,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '12%',
+  },
+  adjustSize: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    zIndex: 3,
   },
 });

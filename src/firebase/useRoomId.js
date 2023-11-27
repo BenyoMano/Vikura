@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {showMessage} from 'react-native-flash-message';
 import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 const getRoomName = async ({clientUserId}) => {

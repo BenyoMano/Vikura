@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useContext, useState, useMemo} from 'react';
 import auth from '@react-native-firebase/auth';
-import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import useOpenChat from '../../firebase/openChat';

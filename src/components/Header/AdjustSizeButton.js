@@ -1,9 +1,10 @@
 import React from 'react';
 import {useEffect} from 'react';
 import {View, Pressable, StyleSheet, Easing, Animated} from 'react-native';
+import {Icon} from 'react-native-elements';
 import {Path, Svg} from 'react-native-svg';
 
-const AdjustSizeButton = ({isToggled, setIsToggled}) => {
+const AdjustSizeButton = ({isToggled, setIsToggled, setIsVisible}) => {
   const {btnContainerStyle} = styles;
 
   const animatedValue = new Animated.Value(0);
@@ -50,6 +51,7 @@ const AdjustSizeButton = ({isToggled, setIsToggled}) => {
 
   const onPress = () => {
     setIsToggled(prev => !prev);
+    setIsVisible(true);
   };
 
   const handlePressInAnimation = () => {
@@ -82,15 +84,22 @@ const AdjustSizeButton = ({isToggled, setIsToggled}) => {
   }, [isToggled]);
 
   return (
-    <Pressable
-      onPress={onPress}
-      onPressIn={handlePressInAnimation}
-      onPressOut={handlePressOutAnimation}
-      style={btnContainerStyle}>
-      <Svg height="35" width="35" viewBox="0 0 24 24">
-        <AnimatedPath d={pathInterpolation} />
-      </Svg>
-    </Pressable>
+    <View>
+      <Pressable
+        onPress={onPress}
+        onPressIn={handlePressInAnimation}
+        onPressOut={handlePressOutAnimation}
+        style={btnContainerStyle}>
+        <Svg height="35" width="35" viewBox="0 0 24 24">
+          <AnimatedPath d={pathInterpolation} />
+        </Svg>
+      </Pressable>
+      {isToggled && (
+        <View style={styles.arrow}>
+          <Icon name="arrow-drop-down" type="materialicons" size={30} />
+        </View>
+      )}
+    </View>
   );
 };
 
@@ -103,6 +112,11 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  arrow: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: 43,
   },
 });
 

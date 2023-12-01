@@ -83,7 +83,6 @@ export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'relative',

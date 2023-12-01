@@ -9,7 +9,8 @@
     "test": "jest --verbose",
     "lint": "eslint .",
     "check-dependencies": "rnx-align-deps",
-    "fix-dependencies": "rnx-align-deps --write"
+    "fix-dependencies": "rnx-align-deps --write",
+    "react-devtools": "react-devtools"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.3.1",
@@ -69,6 +70,7 @@
     "jsdom": "^22.1.0",
     "metro-react-native-babel-preset": "^0.73.7",
     "npm": "^10.1.0",
+    "react-devtools": "^4.28.5",
     "react-native-cli": "^2.0.1",
     "react-native-gradle-plugin": "^0.71.19",
     "react-native-testing-library": "^6.0.0",

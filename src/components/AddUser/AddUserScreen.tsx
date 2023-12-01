@@ -14,13 +14,41 @@ import {AddUserModal} from './AddUserModal';
 import {AddUserScreenHeaderView} from '../Header/AddUserScreenHeaderView';
 import SuccessProtocol from './SuccessProtocol/SuccessProtocol';
 
-const AddUserScreen = ({navigation}) => {
+type Action = {
+  status: string;
+  name: String;
+  type: String;
+};
+
+type ActionStates = {
+  action1: Action;
+  action2: Action;
+  action3: Action;
+  action4: Action;
+};
+
+type UserPropToAdd = {
+  firstName: String;
+  secondName: String;
+  mejl: String;
+  password: String;
+  personnummer: String;
+  firstLogin: Boolean;
+  kurator: Boolean;
+  admin: Boolean;
+};
+
+type AddUserScreenProps = {
+  navigation: any;
+};
+
+const AddUserScreen: React.FC<AddUserScreenProps> = ({navigation}) => {
   const [successProtocol, setSuccessProtocol] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [checkboxStateKurator, setCheckboxStateKurator] = useState(false);
   const [checkboxStateAdmin, setCheckboxStateAdmin] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [userPropToAdd, setUserPropToAdd] = useState({
+  const [userPropToAdd, setUserPropToAdd] = useState<UserPropToAdd>({
     firstName: '',
     secondName: '',
     mejl: '',
@@ -52,7 +80,7 @@ const AddUserScreen = ({navigation}) => {
     type: 'feather',
   };
 
-  const [actionStates, setActionStates] = useState({
+  const [actionStates, setActionStates] = useState<ActionStates>({
     action1,
     action2,
     action3,

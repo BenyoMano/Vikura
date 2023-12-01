@@ -12,7 +12,6 @@ import LogoutButton from './LogoutButton';
 import StylingContainer from './StylingContainer';
 import AdjustSizeButton from './AdjustSizeButton';
 import {FontSizeSlider} from './FontSizeSlider';
-import {AnimatePresence} from 'moti';
 
 export const HeaderView = ({
   navigation,
@@ -22,6 +21,7 @@ export const HeaderView = ({
 }) => {
   const route = useRoute();
   const [isToggled, setIsToggled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(
     IsCurrentUserKuratorContext,
   );
@@ -84,8 +84,14 @@ export const HeaderView = ({
             <AdjustSizeButton
               isToggled={isToggled}
               setIsToggled={setIsToggled}
+              setIsVisible={setIsVisible}
             />
-            <AnimatePresence>{isToggled && <FontSizeSlider />}</AnimatePresence>
+            {isVisible && (
+              <FontSizeSlider
+                isToggled={isToggled}
+                setIsVisible={setIsVisible}
+              />
+            )}
           </View>
         </StylingContainer>
       ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
@@ -101,8 +107,14 @@ export const HeaderView = ({
             <AdjustSizeButton
               isToggled={isToggled}
               setIsToggled={setIsToggled}
+              setIsVisible={setIsVisible}
             />
-            <AnimatePresence>{isToggled && <FontSizeSlider />}</AnimatePresence>
+            {isVisible && (
+              <FontSizeSlider
+                isToggled={isToggled}
+                setIsVisible={setIsVisible}
+              />
+            )}
           </View>
         </StylingContainer>
       ) : null}

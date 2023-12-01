@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 10,
+    color: 'grey',
   },
 });

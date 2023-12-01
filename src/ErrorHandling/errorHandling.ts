@@ -1,6 +1,16 @@
-import {showMessage} from 'react-native-flash-message';
+import {showMessage, Position} from 'react-native-flash-message';
 
-export const useDynamicAddUserErrorHandling = ({error, subject, userId}) => {
+interface ErrorHandlingProps {
+  error: Error;
+  position?: 'top' | 'bottom' | 'center';
+  subject?: string;
+  userId?: string;
+  clientId?: string;
+  setActionFinished?: (status: string) => void;
+   
+}
+
+export const useDynamicAddUserErrorHandling = ({error, subject, userId}: ErrorHandlingProps) => {
   console.error('Error skapa användare: ', error);
   showMessage({
     message: 'Ojdå! Något gick fel :(',
@@ -20,7 +30,7 @@ export const useDynamicDeleteUserErrorHandling = ({
   clientId,
   subject,
   setActionFinished,
-}) => {
+}: ErrorHandlingProps) => {
   console.error('Error deleting room: ', error);
   showMessage({
     message: 'Ojdå! Något gick fel :(',
@@ -33,16 +43,19 @@ export const useDynamicDeleteUserErrorHandling = ({
     floating: true,
     icon: 'danger',
   });
-  setActionFinished('failed');
+  setActionFinished && setActionFinished('failed');
 };
 
-export const useGeneralErrorHandling = ({error, position}) => {
+export const useGeneralErrorHandling = ({
+  error,
+  position,
+}: ErrorHandlingProps) => {
   showMessage({
     message: 'Ojdå! Något gick fel :(',
     description: String(error.message),
     type: 'danger',
     autoHide: false,
-    position: String(position),
+    position: position as Position,
     floating: true,
     icon: 'danger',
   });

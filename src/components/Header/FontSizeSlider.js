@@ -1,17 +1,24 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, Pressable, Easing} from 'react-native';
 import {useFontSize} from './FontSizeContext';
-import {MotiView} from 'moti';
 import {Slider} from '@miblanchard/react-native-slider';
 import {CustomTrackIndicator, CustomTrackMark} from './CustomTrackMark';
 import {Icon} from 'react-native-elements';
 import {Animated} from 'react-native';
 
-export const FontSizeSlider = () => {
+export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
   const {fontSize, updateFontSize} = useFontSize();
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
+  const [animatedValue3, setAnimatedValue3] = useState(new Animated.Value(0));
 
+  const MemoizedTrackMark = React.memo(() => (
+    <CustomTrackMark index={'default'} />
+  ));
+
+  const MemoizedTrackIndicator = React.memo(() => (
+    <CustomTrackIndicator index={fontSize} />
+  ));
   const minimumValue = 8;
   const maximumValue = 26;
 
@@ -30,6 +37,18 @@ export const FontSizeSlider = () => {
     duration: 200,
     useNativeDriver: true,
   });
+  const introAnim = Animated.timing(animatedValue3, {
+    toValue: 1,
+    duration: 300,
+    easing: Easing.elastic(1.5),
+    useNativeDriver: true,
+  });
+  const outroAnim = Animated.timing(animatedValue3, {
+    toValue: 0,
+    duration: 75,
+    useNativeDriver: true,
+  });
+
   const buttonRotatePressIn = animatedValue1.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '60deg'],
@@ -37,6 +56,14 @@ export const FontSizeSlider = () => {
   const buttonRotatePress = animatedValue2.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '-360deg'],
+  });
+  const componentOpacity = animatedValue3.interpolate({
+    inputRange: [0.5, 1],
+    outputRange: [0, 1],
+  });
+  const componentTranslate = animatedValue3.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 20],
   });
 
   const onPress = () => {
@@ -54,15 +81,29 @@ export const FontSizeSlider = () => {
   const rotateStyling = {
     transform: [{rotateZ: buttonRotatePressIn}, {rotateZ: buttonRotatePress}],
   };
+  const componentStyling = {
+    opacity: componentOpacity,
+    transform: [{translateY: componentTranslate}],
+  };
+
+  useEffect(() => {
+    if (isToggled) {
+      introAnim.start();
+    }
+    if (!isToggled) {
+      outroAnim.start();
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 25);
+    }
+    return () => {
+      introAnim.stop();
+      outroAnim.stop();
+    };
+  }, [isToggled]);
 
   return (
-    <MotiView
-      from={{opacity: 0, translateY: 0}}
-      animate={{opacity: 1, translateY: 20}}
-      exit={{opacity: 0, translateY: 0}}
-      transition={{type: 'spring', duration: 500}}
-      exitTransition={{type: 'timing', duration: 75}}
-      style={styles.constainer}>
+    <Animated.View style={[styles.constainer, componentStyling]}>
       <View style={{width: '70%'}}>
         <Slider
           minimumValue={minimumValue}
@@ -70,17 +111,12 @@ export const FontSizeSlider = () => {
           value={fontSize}
           onValueChange={updateFontSize}
           step={1}
-          // maximumTrackTintColor="#FD924D"
           minimumTrackTintColor="lightblue"
-          // minimumTrackTintColor="#156C17"
           thumbStyle={{width: 20, height: 20, borderRadius: 30, left: -7}}
           thumbTintColor="lightblue"
-          // thumbTouchSize={{width: 100, height: 40}}
           trackClickable={true}
-          renderTrackMarkComponent={() => <CustomTrackMark index={'default'} />}
-          renderAboveThumbComponent={() => (
-            <CustomTrackIndicator index={fontSize} />
-          )}
+          renderTrackMarkComponent={() => <MemoizedTrackMark />}
+          renderAboveThumbComponent={() => <MemoizedTrackIndicator />}
           trackMarks={[14]}
         />
       </View>
@@ -96,9 +132,9 @@ export const FontSizeSlider = () => {
           </View>
         </Animated.View>
       </View>
-    </MotiView>
+    </Animated.View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   constainer: {

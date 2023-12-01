@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import {showMessage} from 'react-native-flash-message';
 import InputBarChatt from './InputbarChat';
 import SendButton from './SendButton';
 import {useGeneralErrorHandling} from '../../ErrorHandling/errorHandling';

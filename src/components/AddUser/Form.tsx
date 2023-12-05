@@ -1,11 +1,26 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useRef} from 'react';
-import {View} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {
+  LayoutChangeEvent,
+  StyleProp,
+  TextInput,
+  View,
+  ViewStyle,
+} from 'react-native';
 import InputbarAddUser from './InputbarAddUser';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {useState} from 'react';
+import {UserPropToAdd} from './AddUserScreen';
 
-const Form = ({
+type FormProps = {
+  userPropToAdd: UserPropToAdd;
+  setUserPropToAdd: React.Dispatch<React.SetStateAction<UserPropToAdd>>;
+  checkboxStateKurator: boolean;
+  setCheckboxStateKurator: React.Dispatch<React.SetStateAction<boolean>>;
+  checkboxStateAdmin: boolean;
+  setCheckboxStateAdmin: React.Dispatch<React.SetStateAction<boolean>>;
+  submitted: boolean;
+};
+
+const Form: React.FC<FormProps> = ({
   userPropToAdd,
   setUserPropToAdd,
   checkboxStateKurator,
@@ -14,13 +29,13 @@ const Form = ({
   setCheckboxStateAdmin,
   submitted,
 }) => {
-  const [calculatedHeight, setCalculatedHeight] = useState(null);
+  const [calculatedHeight, setCalculatedHeight] = useState<number | null>(null);
   const {firstName, secondName, mejl, password, personnummer, kurator, admin} =
     userPropToAdd;
-  const ref_input2 = useRef();
-  const ref_input3 = useRef();
-  const ref_input4 = useRef();
-  const ref_input5 = useRef();
+  const ref_input2 = useRef<TextInput>(null);
+  const ref_input3 = useRef<TextInput>(null);
+  const ref_input4 = useRef<TextInput>(null);
+  const ref_input5 = useRef<TextInput>(null);
 
   function kuratorCheck() {
     if (!checkboxStateKurator) {
@@ -38,12 +53,12 @@ const Form = ({
     setUserPropToAdd({...userPropToAdd, admin});
   }
 
-  const onLayout = event => {
+  const onLayout = (event: LayoutChangeEvent) => {
     setCalculatedHeight(event.nativeEvent.layout.height);
   };
 
-  const containerStyle = {
-    height: calculatedHeight,
+  const containerStyle: StyleProp<ViewStyle> = {
+    height: calculatedHeight || undefined,
     width: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -59,7 +74,7 @@ const Form = ({
         capitalize="words"
         keys={'firstName'}
         value={firstName}
-        onSubmitEditing={() => ref_input2.current.focus()}
+        onSubmitEditing={() => ref_input2.current?.focus()}
         userPropToAdd={userPropToAdd}
         setUserPropToAdd={setUserPropToAdd}
         submitted={submitted}
@@ -72,7 +87,7 @@ const Form = ({
         keys={'secondName'}
         value={secondName}
         ref={ref_input2}
-        onSubmitEditing={() => ref_input3.current.focus()}
+        onSubmitEditing={() => ref_input3.current?.focus()}
         userPropToAdd={userPropToAdd}
         setUserPropToAdd={setUserPropToAdd}
         submitted={submitted}
@@ -86,7 +101,7 @@ const Form = ({
         keys={'mejl'}
         value={mejl}
         ref={ref_input3}
-        onSubmitEditing={() => ref_input4.current.focus()}
+        onSubmitEditing={() => ref_input4.current?.focus()}
         userPropToAdd={userPropToAdd}
         setUserPropToAdd={setUserPropToAdd}
         submitted={submitted}
@@ -99,7 +114,7 @@ const Form = ({
         keys={'password'}
         value={password}
         ref={ref_input4}
-        onSubmitEditing={() => ref_input5.current.focus()}
+        onSubmitEditing={() => ref_input5.current?.focus()}
         userPropToAdd={userPropToAdd}
         setUserPropToAdd={setUserPropToAdd}
         submitted={submitted}

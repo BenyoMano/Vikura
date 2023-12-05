@@ -5,40 +5,46 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  ViewStyle,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import Form from './Form';
 import MainText from '../../atoms/MainText';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
-import {AddUserModal} from './AddUserModal';
-import {AddUserScreenHeaderView} from '../Header/AddUserScreenHeaderView';
+import AddUserModal from './AddUserModal';
+import AddUserScreenHeaderView from '../Header/AddUserScreenHeaderView';
 import SuccessProtocol from './SuccessProtocol/SuccessProtocol';
 
-type Action = {
+export type Action = {
   status: string;
-  name: String;
-  type: String;
+  name: string;
+  type: string;
 };
 
-type ActionStates = {
+export type ActionStates = {
   action1: Action;
   action2: Action;
   action3: Action;
   action4: Action;
 };
 
-type UserPropToAdd = {
-  firstName: String;
-  secondName: String;
-  mejl: String;
-  password: String;
-  personnummer: String;
-  firstLogin: Boolean;
-  kurator: Boolean;
-  admin: Boolean;
+export type UserPropToAdd = {
+  firstName: string;
+  secondName: string;
+  mejl: string;
+  password: string;
+  personnummer: string;
+  firstLogin: boolean;
+  kurator: boolean;
+  admin: boolean;
+  trimmedFirstName?: string;
+  trimmedSecondName?: string;
+  trimmedMejl?: string;
+  trimmedPassword?: string;
+  trimmedPersonnummer?: string;
 };
 
-type AddUserScreenProps = {
+export type AddUserScreenProps = {
   navigation: any;
 };
 
@@ -146,13 +152,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-  },
+  } as ViewStyle,
   scrollViewContainer: {
     width: '100%',
     flexGrow: 1,
     paddingBottom: 15,
     borderRadius: 20,
-  },
+  } as ViewStyle,
 });
 
 export default AddUserScreen;

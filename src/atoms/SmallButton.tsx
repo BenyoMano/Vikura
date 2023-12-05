@@ -1,9 +1,23 @@
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 
-const SmallButton = ({title, onPress}) => {
+type SmallButtonProps = {
+  title: string;
+  onPress: () => void;
+};
+
+const SmallButton: React.FC<SmallButtonProps> = ({title, onPress}) => {
   const {viewStyle, btnContainerStyle, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
+
   const fadeIn = () => {
     Animated.timing(animated, {
       toValue: 0.4,
@@ -46,20 +60,20 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 12,
     overflow: 'hidden',
-  },
+  } as ViewStyle,
   btnContainerStyle: {
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'black',
     padding: 10,
     backgroundColor: 'lightgrey',
-  },
+  } as ViewStyle,
   btnTextStyle: {
     color: 'black',
     fontSize: 18,
     textAlign: 'center',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as TextStyle,
 });
 
 export default SmallButton;

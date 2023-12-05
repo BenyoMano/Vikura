@@ -1,7 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 
-export const Label = ({labelTitle}) => {
+type LabelProps = {
+  labelTitle: string;
+};
+
+export const Label: React.FC<LabelProps> = ({labelTitle}) => {
   return (
     <View style={styles.viewStyle}>
       <Text style={styles.textStyling}>{labelTitle}</Text>
@@ -12,10 +16,10 @@ export const Label = ({labelTitle}) => {
 const styles = StyleSheet.create({
   viewStyle: {
     marginTop: 30,
-  },
+  } as ViewStyle,
   textStyling: {
     fontSize: 20,
     color: 'black',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as TextStyle,
 });

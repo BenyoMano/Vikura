@@ -1,10 +1,18 @@
 import {useEffect, useState} from 'react';
 import {Animated, Easing} from 'react-native';
 
+type SuccessFailAnimProps = {
+  actionFinished: 'success' | 'failed';
+  successFailAnimStyling: {
+    iconSize: number;
+    elevation: number;
+  };
+};
+
 export const useSuccessFailAnim = ({
   actionFinished,
   successFailAnimStyling,
-}) => {
+}: SuccessFailAnimProps) => {
   const {iconSize, elevation} = successFailAnimStyling;
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));

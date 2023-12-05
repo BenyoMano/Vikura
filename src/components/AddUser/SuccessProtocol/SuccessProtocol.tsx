@@ -1,10 +1,27 @@
 import React, {useState} from 'react';
-import {Animated, Pressable} from 'react-native';
+import {Animated, Pressable, ViewStyle} from 'react-native';
 import {AnimatedIcon} from './AnimatedIcon';
 import {useEffect} from 'react';
 import {Easing} from 'react-native';
 
-const SuccessProtocol = ({
+import {Action} from '../AddUserScreen';
+
+export type AnimatedIconObject = {
+  actionFinished: string;
+  name: string;
+  type: string;
+  color: string;
+  size: number;
+};
+
+export type SuccessProtocolProps = {
+  actionStates: Record<string, Action>;
+  successProtocol: boolean;
+  setSuccessProtocol: React.Dispatch<React.SetStateAction<boolean>>;
+  setAllDone?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
   actionStates,
   successProtocol,
   setSuccessProtocol,
@@ -15,13 +32,15 @@ const SuccessProtocol = ({
   const [allActionsFinished, setAllActionsFinished] = useState(false);
   const numberOfIcons = Object.keys(actionStates).length;
 
-  const animatedIcons = Object.values(actionStates).map((action, index) => ({
-    actionFinished: action.status,
-    name: action.name,
-    type: action.type,
-    color: 'black',
-    size: 35,
-  }));
+  const animatedIcons: AnimatedIconObject[] = Object.values(actionStates).map(
+    (action, index) => ({
+      actionFinished: action.status,
+      name: action.name,
+      type: action.type,
+      color: 'black',
+      size: 35,
+    }),
+  );
 
   const introAnim = Animated.sequence([
     Animated.timing(animatedValue2, {
@@ -60,7 +79,7 @@ const SuccessProtocol = ({
 
   const styles = {
     outerContainer: {
-      position: 'absolute',
+      position: 'absolute' as const,
       top: '40%',
       width: expandStyle,
       maxWidth: '100%',

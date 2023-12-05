@@ -1,8 +1,19 @@
-import React from 'react';
-import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
+import React, {ReactNode} from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 import {useHeaderHeight} from '@react-navigation/elements';
 
-export const MyKeyboardAvoidingView = ({children}) => {
+type MyKeyboardAvoidingViewProps = {
+  children: ReactNode;
+};
+
+export const MyKeyboardAvoidingView: React.FC<MyKeyboardAvoidingViewProps> = ({
+  children,
+}) => {
   const headerHeight = useHeaderHeight();
   return (
     <KeyboardAvoidingView
@@ -20,5 +31,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-  },
+  } as ViewStyle,
 });

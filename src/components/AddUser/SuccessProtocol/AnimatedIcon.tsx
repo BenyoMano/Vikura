@@ -1,12 +1,19 @@
 import React from 'react';
-import {Animated} from 'react-native';
+import {Animated, ViewStyle} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {useSuccessFailAnim} from './useSuccessFailAnim';
 import {useState} from 'react';
 import {Easing} from 'react-native';
 import {useEffect} from 'react';
+import {AnimatedIconObject} from './SuccessProtocol';
 
-export const AnimatedIcon = ({
+type AnimatedIconProps = {
+  animatedIconObject: AnimatedIconObject;
+  successProtocol: boolean;
+  allActionsFinished: boolean;
+};
+
+export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
   animatedIconObject,
   successProtocol,
   allActionsFinished,
@@ -45,8 +52,8 @@ export const AnimatedIcon = ({
     outputRange: [0, 1],
   });
 
-  const visibilityStyle = {
-    opacity: opacityStyle,
+  const visibilityStyle: ViewStyle = {
+    opacity: +opacityStyle,
   };
 
   useEffect(() => {

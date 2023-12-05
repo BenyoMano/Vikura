@@ -1,4 +1,4 @@
-import auth from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import createRoom from '../../firebase/UserManagement/createRoom';
 import createUser from '../../firebase/UserManagement/createUser';
@@ -7,6 +7,18 @@ import {
   useGeneralErrorHandling,
 } from '../../ErrorHandling/errorHandling';
 import addPersonalDetails from '../../firebase/UserManagement/addPersonalDetails';
+import { ActionStates, UserPropToAdd } from './AddUserScreen';
+import React from 'react';
+
+type AddUserProps = {
+  userPropToAdd: UserPropToAdd;
+  setUserPropToAdd: React.Dispatch<React.SetStateAction<UserPropToAdd>>;
+  checkboxStateKurator: boolean;
+  checkboxStateAdmin: boolean;
+  setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setActionStates: React.Dispatch<React.SetStateAction<ActionStates>>;
+  setSuccessProtocol: React.Dispatch<React.SetStateAction<boolean>>; 
+}
 
 const addUser = ({
   userPropToAdd,
@@ -14,16 +26,16 @@ const addUser = ({
   checkboxStateKurator,
   checkboxStateAdmin,
   setSubmitted,
-  setSuccessProtocol,
   setActionStates,
-}) => {
+  setSuccessProtocol,
+}: AddUserProps) => {
   userPropToAdd.trimmedFirstName = userPropToAdd.firstName.trim();
   userPropToAdd.trimmedSecondName = userPropToAdd.secondName.trim();
   userPropToAdd.trimmedMejl = userPropToAdd.mejl.trim();
   userPropToAdd.trimmedPassword = userPropToAdd.password.trim();
   userPropToAdd.trimmedPersonnummer = userPropToAdd.personnummer.trim();
-  let user;
-  let userId;
+  let user: FirebaseAuthTypes.User | null;
+  let userId: string | undefined;
 
   if (!userPropToAdd.trimmedFirstName) {
     showMessage({
@@ -94,7 +106,7 @@ const addUser = ({
         try {
           await createUser({userPropToAdd});
           user = auth().currentUser;
-          userId = auth().currentUser.uid;
+          userId = auth().currentUser?.uid;
           setActionStates(prev => ({
             ...prev,
             action1: {
@@ -212,7 +224,9 @@ const addUser = ({
           mejl: '',
           password: '',
           personnummer: '',
-          kurator: '',
+          firstLogin: true,
+          kurator: false,
+          admin: false,
         });
 
         showMessage({

@@ -1,7 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-// import 'react-native-reanimated'
-// import 'react-native-gesture-handler';
 import {AppRegistry, Platform, StatusBar} from 'react-native';
 import HomeScreen from './src/components/Login/HomeScreen';
 import NewClientScreen from './src/components/NewDetails/NewClientScreen';

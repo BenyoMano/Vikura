@@ -1,7 +1,30 @@
-import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import React, {ForwardedRef} from 'react';
+import {
+  Text,
+  TextInput,
+  TextInputSubmitEditingEventData,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
+import {UserPropToAdd} from './AddUserScreen';
 
-const InputBarAddUser = React.forwardRef(
+type InputBarAddUserProps = {
+  title: string;
+  blurOnSubmit: boolean;
+  keyType?: React.ComponentProps<typeof TextInput>['keyboardType'];
+  returnKeyType: React.ComponentProps<typeof TextInput>['returnKeyType'];
+  capitalize?: React.ComponentProps<typeof TextInput>['autoCapitalize'];
+  value: string;
+  keys: string;
+  userPropToAdd: UserPropToAdd;
+  setUserPropToAdd: React.Dispatch<React.SetStateAction<UserPropToAdd>>;
+  onSubmitEditing?: (e: TextInputSubmitEditingEventData) => void;
+  submitted: boolean;
+  ref?: ForwardedRef<TextInput>;
+};
+
+const InputBarAddUser: React.FC<InputBarAddUserProps> = React.forwardRef(
   (
     {
       title,
@@ -15,7 +38,7 @@ const InputBarAddUser = React.forwardRef(
       setUserPropToAdd,
       onSubmitEditing,
       submitted,
-    },
+    }: InputBarAddUserProps,
     ref,
   ) => {
     const {viewStyle, textStyle, barStyle, redBarStyle} = styles;
@@ -32,7 +55,7 @@ const InputBarAddUser = React.forwardRef(
           autoCapitalize={capitalize}
           value={value}
           ref={ref}
-          onSubmitEditing={onSubmitEditing}
+          onSubmitEditing={onSubmitEditing as any}
           onChangeText={v => setUserPropToAdd({...userPropToAdd, [keys]: v})}
         />
       </View>
@@ -46,7 +69,7 @@ const styles = {
     alignItems: 'center',
     marginTop: 20,
     height: '12%',
-  },
+  } as ViewStyle,
   textStyle: {
     fontSize: 12,
     color: 'black',
@@ -54,7 +77,7 @@ const styles = {
     justifyContent: 'flex-start',
     alignSelf: 'flex-start',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as TextStyle,
   barStyle: {
     height: '70%',
     width: 320,
@@ -64,7 +87,7 @@ const styles = {
     backgroundColor: '#C3C3C3',
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
   redBarStyle: {
     height: '70%',
     width: 320,
@@ -74,7 +97,7 @@ const styles = {
     borderWidth: 3,
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
 };
 
 export default InputBarAddUser;

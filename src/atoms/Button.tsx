@@ -1,10 +1,23 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 
-const Button = props => {
-  const {greyScale, btnTextStyle} = styles;
+type ButtonProps = {
+  title: string;
+  onPress: () => void;
+};
+
+const Button: React.FC<ButtonProps> = ({title, onPress}) => {
+  const {containerStyle, btnTextStyle, btnContainerStyle} = styles;
   const animated = new Animated.Value(1);
+
   const fadeIn = () => {
     Animated.timing(animated, {
       toValue: 0.4,
@@ -22,20 +35,20 @@ const Button = props => {
   };
 
   return (
-    <View style={{borderRadius: 12, overflow: 'hidden'}}>
+    <View style={containerStyle}>
       <Pressable
-        onPress={props.onPress}
+        onPress={onPress}
         testID="button"
         onPressIn={fadeIn}
         onPressOut={fadeOut}>
         <Animated.View
           style={[
-            greyScale.btnContainerStyle,
+            btnContainerStyle,
             {
               opacity: animated,
             },
           ]}>
-          <Text style={btnTextStyle}>{props.title}</Text>
+          <Text style={btnTextStyle}>{title}</Text>
         </Animated.View>
       </Pressable>
     </View>
@@ -43,22 +56,24 @@ const Button = props => {
 };
 
 const styles = StyleSheet.create({
-  greyScale: {
-    btnContainerStyle: {
-      backgroundColor: '#C4C4C4',
-      paddingVertical: 18,
-      marginVertical: 10,
-      width: 230,
-      borderRadius: 12,
-    },
-  },
+  containerStyle: {
+    borderRadius: 12,
+    overflow: 'hidden',
+  } as ViewStyle,
+  btnContainerStyle: {
+    backgroundColor: '#C4C4C4',
+    paddingVertical: 18,
+    marginVertical: 10,
+    width: 230,
+    borderRadius: 12,
+  } as ViewStyle,
   btnTextStyle: {
     color: 'black',
     fontSize: 18,
     textAlign: 'center',
     textTransform: 'uppercase',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as TextStyle,
 });
 
 export default Button;

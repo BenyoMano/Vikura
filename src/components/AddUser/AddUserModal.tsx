@@ -1,11 +1,24 @@
 import React from 'react';
-import {Modal, View, StyleSheet} from 'react-native';
+import {Modal, View, StyleSheet, ViewStyle} from 'react-native';
 import addUser from './addUser';
 import SmallButton from '../../atoms/SmallButton';
 import {Label} from './Label';
 import {UserPropInfo} from './UserPropInfo';
+import {ActionStates, UserPropToAdd} from './AddUserScreen';
 
-export const AddUserModal = ({
+type AddUserModalProos = {
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  userPropToAdd: UserPropToAdd;
+  setUserPropToAdd: React.Dispatch<React.SetStateAction<UserPropToAdd>>;
+  checkboxStateKurator: boolean;
+  checkboxStateAdmin: boolean;
+  setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setActionStates: React.Dispatch<React.SetStateAction<ActionStates>>;
+  setSuccessProtocol: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AddUserModal: React.FC<AddUserModalProos> = ({
   modalVisible,
   setModalVisible,
   userPropToAdd,
@@ -88,10 +101,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     zIndex: 30,
     elevation: 30,
-  },
+  } as ViewStyle,
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 15,
-  },
+  } as ViewStyle,
 });
+
+export default AddUserModal;

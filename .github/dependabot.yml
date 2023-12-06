@@ -8,4 +8,11 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "daily"
+  - package-ecosystem: "cocoapods"
+    directory: "ios/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "android/"
+      interval: "daily"

@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
@@ -10,21 +9,24 @@ import signOut from '../../firebase/signOut';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import LogoutButton from './LogoutButton';
 import StylingContainer from './StylingContainer';
-import AdjustSizeButton from './AdjustSizeButton';
-import {FontSizeSlider} from './FontSizeSlider';
+import AdjustSizeButton from './AdjustSizeButton/AdjustSizeButton';
+import {FontSizeSlider} from './FontSizeSlider/FontSizeSlider';
 
-export const HeaderView = ({
+type HeaderViewProps = {
+  navigation: any;
+  clientUserId: string;
+};
+
+export const HeaderView: React.FC<HeaderViewProps> = ({
   navigation,
   clientUserId,
-  hasAddedUser,
-  setHasAddedUser,
 }) => {
   const route = useRoute();
   const [isToggled, setIsToggled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const {isCurrentUserKurator, isCurrentUserAdmin} = useContext(
-    IsCurrentUserKuratorContext,
-  );
+  const contextValue = useContext(IsCurrentUserKuratorContext);
+  const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
+  const isCurrentUserAdmin = contextValue?.isCurrentUserAdmin;
 
   return (
     <View style={styles.viewStyle}>
@@ -42,20 +44,6 @@ export const HeaderView = ({
             <AddUserButton
               onPress={() => navigation.navigate('AddUserScreen')}
             />
-          ) : null}
-        </StylingContainer>
-      ) : route.name === 'AddUserScreen' ? (
-        <StylingContainer>
-          {hasAddedUser === true ? (
-            <LogoutButton
-              onPress={() => {
-                signOut();
-                navigation.navigate('HomeScreen');
-                setHasAddedUser(false);
-              }}
-            />
-          ) : hasAddedUser === false ? (
-            <BackButton onPress={() => navigation.goBack()} />
           ) : null}
         </StylingContainer>
       ) : route.name === 'NewKuratorScreen' ? (
@@ -129,11 +117,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '12%',
-  },
+  } as ViewStyle,
   adjustSize: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     zIndex: 3,
-  },
+  } as ViewStyle,
 });

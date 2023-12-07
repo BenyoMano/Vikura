@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
-const getRoomName = async ({clientUserId}) => {
+const getRoomName = async (clientUserId: string) => {
   try {
     const roomName = await firestore()
       .collection('rooms')
@@ -15,12 +15,12 @@ const getRoomName = async ({clientUserId}) => {
   }
 };
 
-export const useRoomId = clientUserId => {
-  const [roomId, setRoomId] = useState();
+export const useRoomId = (clientUserId: string) => {
+  const [roomId, setRoomId] = useState<string>();
 
   useEffect(() => {
     const fetchRoom = async () => {
-      const roomName = await getRoomName({clientUserId});
+      const roomName = await getRoomName(clientUserId);
       const newRoomId = roomName?.id;
       setRoomId(newRoomId);
     };

@@ -1,13 +1,21 @@
 import React from 'react';
-import {TextInput, View} from 'react-native';
+import {TextInput, View, ViewStyle} from 'react-native';
 
-const InputBarChatt = ({messageToSend, setMessageToSend}) => {
+type InputBarChattProps = {
+  messageToSend: string;
+  setMessageToSend: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const InputBarChatt: React.FC<InputBarChattProps> = ({
+  messageToSend,
+  setMessageToSend,
+}) => {
   const {viewStyle, barStyle} = styles;
 
   return (
     <View style={viewStyle}>
       <TextInput
-      testID='inputbarChat'
+        testID="inputbarChat"
         style={barStyle}
         onChangeText={messageToSend => setMessageToSend(messageToSend)}
         value={messageToSend}
@@ -27,7 +35,7 @@ export const styles = {
     alignItems: 'flex-start',
     width: '69%',
     paddingRight: 10,
-  },
+  } as ViewStyle,
   barStyle: {
     maxHeight: 250,
     width: '100%',
@@ -38,7 +46,7 @@ export const styles = {
     borderRadius: 12,
     padding: 10,
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
 };
 
 export default InputBarChatt;

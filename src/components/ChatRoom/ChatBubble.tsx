@@ -1,10 +1,19 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React, {memo} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ViewStyle} from 'react-native';
 import BubbleView from './BubbleView';
-import {useFontSize} from '../Header/FontSizeContext';
+import {useFontSize} from '../Header/FontSizeSlider/FontSizeContext';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-const ChatBubble = memo(
+export type ChatBubbleProps = {
+  user: FirebaseAuthTypes.User | null;
+  id: string;
+  text: string;
+  clientUserId: string;
+  displayTimestamp?: Date;
+  isCurrentUserKurator: boolean;
+};
+
+const ChatBubble: React.FC<ChatBubbleProps> = memo(
   ({user, id, text, clientUserId, displayTimestamp, isCurrentUserKurator}) => {
     const {fontSize} = useFontSize();
     const authorText = {
@@ -21,7 +30,7 @@ const ChatBubble = memo(
     const currentYear = new Date().toLocaleString([], {year: 'numeric'});
 
     const isSameDay =
-      displayTimestamp.toLocaleString([], {
+      displayTimestamp?.toLocaleString([], {
         year: 'numeric',
         month: 'numeric',
         day: 'numeric',
@@ -29,17 +38,17 @@ const ChatBubble = memo(
         ? true
         : false;
     const isSameYear =
-      displayTimestamp.toLocaleString([], {year: 'numeric'}) === currentYear
+      displayTimestamp?.toLocaleString([], {year: 'numeric'}) === currentYear
         ? true
         : false;
 
     return !isCurrentUserKurator ? (
       <View style={id === user.uid ? styles.bubbleSend : styles.bubbleRecieve}>
         <BubbleView
-          text={text}
           id={id}
-          clientUserId={clientUserId}
+          text={text}
           user={user}
+          clientUserId={clientUserId}
           isCurrentUserKurator={isCurrentUserKurator}
         />
         <View
@@ -50,18 +59,18 @@ const ChatBubble = memo(
           }>
           <Text style={authorText}>
             {isSameDay
-              ? displayTimestamp.toLocaleString([], {
+              ? displayTimestamp?.toLocaleString([], {
                   hour: 'numeric',
                   minute: 'numeric',
                 })
               : isSameYear
-              ? displayTimestamp.toLocaleString([], {
+              ? displayTimestamp?.toLocaleString([], {
                   month: 'short',
                   day: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric',
                 })
-              : displayTimestamp.toLocaleString([], {
+              : displayTimestamp?.toLocaleString([], {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -73,10 +82,10 @@ const ChatBubble = memo(
       <View
         style={id === clientUserId ? styles.bubbleRecieve : styles.bubbleSend}>
         <BubbleView
-          text={text}
           id={id}
-          clientUserId={clientUserId}
+          text={text}
           user={user}
+          clientUserId={clientUserId}
           isCurrentUserKurator={isCurrentUserKurator}
         />
         <View
@@ -87,18 +96,18 @@ const ChatBubble = memo(
           }>
           <Text style={authorText}>
             {isSameDay
-              ? displayTimestamp.toLocaleString([], {
+              ? displayTimestamp?.toLocaleString([], {
                   hour: 'numeric',
                   minute: 'numeric',
                 })
               : isSameYear
-              ? displayTimestamp.toLocaleString([], {
+              ? displayTimestamp?.toLocaleString([], {
                   month: 'short',
                   day: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric',
                 })
-              : displayTimestamp.toLocaleString([], {
+              : displayTimestamp?.toLocaleString([], {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -114,45 +123,22 @@ const styles = StyleSheet.create({
   bubbleSend: {
     flexDirection: 'row-reverse',
     alignSelf: 'flex-end',
-    bubbla: {
-      justifyContent: 'center',
-      marginTop: 10,
-      marginBottom: 5,
-      marginRight: 10,
-      padding: 9,
-      minWidth: 0,
-      maxWidth: '70%',
-      backgroundColor: '#b5ccf7',
-      borderRadius: 12,
-    },
     timestamp: {
       justifyContent: 'center',
       alignSelf: 'flex-end',
       marginBottom: 8,
       marginRight: 10,
-    },
+    } as ViewStyle,
   },
   bubbleRecieve: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    bubbla: {
-      justifyContent: 'center',
-      alignSelf: 'flex-start',
-      marginTop: 10,
-      marginBottom: 5,
-      marginLeft: 10,
-      padding: 9,
-      minWidth: 0,
-      maxWidth: '70%',
-      backgroundColor: '#ffd933',
-      borderRadius: 12,
-    },
     timestamp: {
       justifyContent: 'center',
       alignSelf: 'flex-end',
       marginBottom: 8,
       marginLeft: 10,
-    },
+    } as ViewStyle,
   },
 });
 

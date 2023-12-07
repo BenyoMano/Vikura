@@ -1,10 +1,27 @@
 import React from 'react';
 import {useEffect} from 'react';
-import {View, Pressable, StyleSheet, Easing, Animated} from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Easing,
+  Animated,
+  ViewStyle,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {Path, Svg} from 'react-native-svg';
 
-const AdjustSizeButton = ({isToggled, setIsToggled, setIsVisible}) => {
+type AdjustSizeButtonProps = {
+  isToggled: boolean;
+  setIsToggled: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AdjustSizeButton: React.FC<AdjustSizeButtonProps> = ({
+  isToggled,
+  setIsToggled,
+  setIsVisible,
+}) => {
   const {btnContainerStyle} = styles;
 
   const animatedValue = new Animated.Value(0);
@@ -112,12 +129,12 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   arrow: {
     position: 'absolute',
     alignSelf: 'center',
     top: 43,
-  },
+  } as ViewStyle,
 });
 
 export default AdjustSizeButton;

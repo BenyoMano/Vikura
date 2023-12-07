@@ -3,27 +3,50 @@ import {IsCurrentUserKuratorContext} from './isCurrentUserKuratorContext';
 import firestore from '@react-native-firebase/firestore';
 import {useRoomId} from './useRoomId';
 
-const useOpenChat = ({messageLimit, clientUserId}) => {
-  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
-  const [messages, setMessages] = useState([]);
+export type Message = {
+  id: string;
+  text: string;
+  author: string;
+  isRead: boolean;
+  timestamp: number;
+  displayTimestamp: Date;
+};
+
+type UseOpenChatProps = {
+  messageLimit: number;
+  clientUserId: string;
+};
+
+type UseOpenChatResult = {
+  messages: Message[];
+  isLoading: boolean;
+};
+
+const useOpenChat = ({
+  messageLimit,
+  clientUserId,
+}: UseOpenChatProps): UseOpenChatResult => {
+  const contextValue = useContext(IsCurrentUserKuratorContext);
+  const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const roomId = useRoomId(clientUserId);
 
-  const handleSnapshot = messageDetails => {
-    const newMessages = messageDetails.docs.map(documentSnapshot => ({
+  const handleSnapshot = (messageDetails: any) => {
+    const newMessages = messageDetails.docs.map((documentSnapshot: any) => ({
+      id: documentSnapshot.data().id,
+      text: documentSnapshot.data().msg,
+      author: documentSnapshot.data().author,
+      isRead: documentSnapshot.data().isRead,
       timestamp: documentSnapshot.data().timestamp.toMillis(),
       displayTimestamp: documentSnapshot.data().timestamp.toDate(),
-      text: documentSnapshot.data().msg,
-      isRead: documentSnapshot.data().isRead,
-      author: documentSnapshot.data().author,
-      id: documentSnapshot.data().id,
     }));
 
     setMessages(newMessages);
     setIsLoading(false);
   };
 
-  const listenForMessages = async messageLimit => {
+  const listenForMessages = async (messageLimit: number) => {
     setIsLoading(true);
 
     if (isCurrentUserKurator === undefined) {

@@ -4,7 +4,11 @@ import {Animated} from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const LogoutButton = props => {
+type LogoutButtonProps = {
+  onPress: () => void;
+};
+
+const LogoutButton: React.FC<LogoutButtonProps> = ({onPress}) => {
   const {btnContainerStyle, rightSideStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const arrowTranslate = animatedValue.interpolate({
@@ -46,7 +50,7 @@ const LogoutButton = props => {
   return (
     <View style={btnContainerStyle}>
       <Pressable
-        onPress={props.onPress}
+        onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         style={{flexDirection: 'row', alignItems: 'center'}}>

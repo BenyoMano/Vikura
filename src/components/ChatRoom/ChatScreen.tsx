@@ -4,6 +4,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   StyleSheet,
+  ViewStyle,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import ChatBoxView from './ChatBoxView';
@@ -12,10 +13,20 @@ import ChatMessageComposer from './ChatMessageComposer';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {useRoomId} from '../../firebase/useRoomId';
-import {FontSizeProvider} from '../Header/FontSizeContext';
+import {FontSizeProvider} from '../Header/FontSizeSlider/FontSizeContext';
 
-const ChatScreen = ({navigation, route}) => {
-  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
+type ChatScreenProps = {
+  navigation: any;
+  route: {
+    params: {
+      id: string;
+    };
+  };
+};
+
+const ChatScreen: React.FC<ChatScreenProps> = ({navigation, route}) => {
+  const contextValue = useContext(IsCurrentUserKuratorContext);
+  const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
   const clientUserId = route.params.id;
 
   const roomId = useRoomId(clientUserId);
@@ -48,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     width: '100%',
-  },
+  } as ViewStyle,
 });
 
 export default ChatScreen;

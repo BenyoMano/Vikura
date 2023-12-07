@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {Image, Animated, View} from 'react-native';
+import {Image, Animated, View, ViewStyle} from 'react-native';
 
 const SmallLogo = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -28,7 +28,7 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
 };
 
 export default SmallLogo;

@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import InputBarChatt from './InputbarChat';
 import SendButton from './SendButton';
 import {useGeneralErrorHandling} from '../../ErrorHandling/errorHandling';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
-  const [messageToSend, setMessageToSend] = useState();
+type ChatMessageComposerProps = {
+  isCurrentUserKurator: boolean | undefined;
+  user: FirebaseAuthTypes.User | null;
+  roomId: string | undefined;
+};
+
+const ChatMessageComposer: React.FC<ChatMessageComposerProps> = ({
+  user,
+  roomId,
+  isCurrentUserKurator,
+}) => {
+  const [messageToSend, setMessageToSend] = useState<string>();
 
   const handleSendMessage = () => {
     if (!messageToSend) return;
@@ -20,7 +31,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
       try {
         const getUserData = await firestore()
           .collection('Users')
-          .doc(user.uid)
+          .doc(user?.uid)
           .get();
 
         if (!getUserData.exists) {
@@ -37,7 +48,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
             msg: trimmedMessageToSend,
             isRead: isCurrentUserKurator ? true : false,
             timestamp: timestamp,
-            id: user.uid,
+            id: user?.uid,
           });
 
         const updateLatestTimestamp = await firestore()
@@ -47,7 +58,7 @@ const ChatMessageComposer = ({isCurrentUserKurator, user, roomId}) => {
             latestTimestamp: timestamp,
           });
 
-        await Promise.all([getUserData, addMessageData, updateLatestTimestamp]);
+        await Promise.all([addMessageData, updateLatestTimestamp]);
       } catch (error) {
         useGeneralErrorHandling({error, position: 'top'});
       }
@@ -74,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '88%',
     marginBottom: '6%',
-  },
+  } as ViewStyle,
 });
 
 export default ChatMessageComposer;

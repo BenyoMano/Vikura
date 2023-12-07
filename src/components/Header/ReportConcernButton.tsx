@@ -1,8 +1,19 @@
 import React from 'react';
-import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  Easing,
+  ViewStyle,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const Button = props => {
+type ButtonProps = {
+  onPress: () => void;
+};
+
+const Button: React.FC<ButtonProps> = ({onPress}) => {
   const {buttonContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
@@ -35,7 +46,7 @@ const Button = props => {
   return (
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
-        onPress={props.onPress}
+        onPress={onPress}
         onPressIn={handlePressInAnimation}
         onPressOut={handlePressOutAnimation}
         style={buttonContainerStyle}>
@@ -57,7 +68,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     justifyContent: 'center',
     marginHorizontal: 20,
-  },
+  } as ViewStyle,
 });
 
 export default Button;

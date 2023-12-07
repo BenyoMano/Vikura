@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '12%',
-  },
+  } as ViewStyle,
 });
 export default AddUserScreenHeaderView;

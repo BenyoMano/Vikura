@@ -1,5 +1,6 @@
 import {MotiView} from 'moti';
 import React from 'react';
+import {ViewStyle} from 'react-native';
 import {Image} from 'react-native';
 
 const Logo = () => {
@@ -20,7 +21,7 @@ const styles = {
     flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
 };
 
 export default Logo;

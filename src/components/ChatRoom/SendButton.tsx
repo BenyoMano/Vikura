@@ -1,8 +1,20 @@
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  ViewStyle,
+} from 'react-native';
 
-const SendButton = ({title, onPress}) => {
-  const {viewStyle, greyScale, btnTextStyle} = styles;
+type SendButtonProps = {
+  title: string;
+  onPress: () => void;
+};
+
+const SendButton: React.FC<SendButtonProps> = ({title, onPress}) => {
+  const {viewStyle, btnTextStyle, btnContainerStyle} = styles;
   const animated = new Animated.Value(1);
   const fadeIn = () => {
     Animated.timing(animated, {
@@ -25,7 +37,7 @@ const SendButton = ({title, onPress}) => {
       <Pressable onPressIn={fadeIn} onPressOut={fadeOut} onPress={onPress}>
         <Animated.View
           style={[
-            greyScale.btnContainerStyle,
+            btnContainerStyle,
             {
               opacity: animated,
             },
@@ -41,23 +53,21 @@ const styles = StyleSheet.create({
   viewStyle: {
     borderRadius: 12,
     overflow: 'hidden',
-  },
-  greyScale: {
-    btnContainerStyle: {
-      width: 100,
-      height: 52,
-      backgroundColor: 'lightgrey',
-      borderRadius: 12,
-      justifyContent: 'center',
-    },
-  },
+  } as ViewStyle,
+  btnContainerStyle: {
+    width: 100,
+    height: 52,
+    backgroundColor: 'lightgrey',
+    borderRadius: 12,
+    justifyContent: 'center',
+  } as ViewStyle,
   btnTextStyle: {
     color: 'black',
     fontSize: 18,
     textAlign: 'center',
     textTransform: 'uppercase',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
 });
 
 export default SendButton;

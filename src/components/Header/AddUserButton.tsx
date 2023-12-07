@@ -1,8 +1,19 @@
 import React from 'react';
-import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  Easing,
+  ViewStyle,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const AddUserButton = props => {
+type AddUserButtonProps = {
+  onPress: () => void;
+};
+
+const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
   const {btnContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const rotateAnimation = animatedValue.interpolate({
@@ -39,7 +50,7 @@ const AddUserButton = props => {
         overflow: 'hidden',
       }}>
       <Pressable
-        onPress={props.onPress}
+        onPress={onPress}
         onPressIn={handlePressInAnimation}
         onPressOut={handlePressOutAnimation}
         style={btnContainerStyle}>
@@ -59,7 +70,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#166C1B',
     justifyContent: 'center',
-  },
+  } as ViewStyle,
 });
 
 export default AddUserButton;

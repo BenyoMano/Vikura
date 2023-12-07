@@ -1,10 +1,14 @@
 import React from 'react';
-import {Easing} from 'react-native';
+import {Easing, ViewStyle} from 'react-native';
 import {Animated} from 'react-native';
 import {View, Pressable, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const BackButton = props => {
+type BackButtonProps = {
+  onPress: () => void;
+};
+
+const BackButton: React.FC<BackButtonProps> = ({onPress}) => {
   const {backButtonContainerStyle} = styles;
   const animationProgress = new Animated.Value(0);
   const buttonTranslate = animationProgress.interpolate({
@@ -36,7 +40,7 @@ const BackButton = props => {
   return (
     <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
-        onPress={props.onPress}
+        onPress={onPress}
         onPressIn={handlePressInAnimation}
         onPressOut={handlePressOutAnimation}
         style={backButtonContainerStyle}>
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'black',
     justifyContent: 'center',
-  },
+  } as ViewStyle,
 });
 
 export default BackButton;

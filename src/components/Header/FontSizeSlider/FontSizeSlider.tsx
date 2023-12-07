@@ -1,16 +1,39 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Pressable, Easing} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  ViewStyle,
+  TextStyle,
+  Animated,
+} from 'react-native';
 import {useFontSize} from './FontSizeContext';
 import {Slider} from '@miblanchard/react-native-slider';
-import {CustomTrackIndicator, CustomTrackMark} from './CustomTrackMark';
+import {CustomTrackIndicator, CustomTrackMark} from '../CustomTrackMark';
 import {Icon} from 'react-native-elements';
-import {Animated} from 'react-native';
+import {
+  animatedValue2,
+  buttonRotatePress,
+  buttonRotatePressIn,
+  componentOpacity,
+  componentTranslate,
+  introAnim,
+  outroAnim,
+  rotateInAnim,
+  rotateOutAnim,
+  rotatePressedAnim,
+} from './SliderAnimations';
 
-export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
+type FontSizeSliderProps = {
+  isToggled: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
+  isToggled,
+  setIsVisible,
+}) => {
   const {fontSize, updateFontSize} = useFontSize();
-  const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
-  const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
-  const [animatedValue3, setAnimatedValue3] = useState(new Animated.Value(0));
 
   const MemoizedTrackMark = React.memo(() => (
     <CustomTrackMark index={'default'} />
@@ -21,50 +44,6 @@ export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
   ));
   const minimumValue = 8;
   const maximumValue = 26;
-
-  const rotateInAnim = Animated.timing(animatedValue1, {
-    toValue: 1,
-    duration: 50,
-    useNativeDriver: true,
-  });
-  const rotateOutAnim = Animated.timing(animatedValue1, {
-    toValue: 0,
-    duration: 50,
-    useNativeDriver: true,
-  });
-  const rotatePressedAnim = Animated.timing(animatedValue2, {
-    toValue: 1,
-    duration: 200,
-    useNativeDriver: true,
-  });
-  const introAnim = Animated.timing(animatedValue3, {
-    toValue: 1,
-    duration: 300,
-    easing: Easing.elastic(1.5),
-    useNativeDriver: true,
-  });
-  const outroAnim = Animated.timing(animatedValue3, {
-    toValue: 0,
-    duration: 75,
-    useNativeDriver: true,
-  });
-
-  const buttonRotatePressIn = animatedValue1.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '60deg'],
-  });
-  const buttonRotatePress = animatedValue2.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '-360deg'],
-  });
-  const componentOpacity = animatedValue3.interpolate({
-    inputRange: [0.5, 1],
-    outputRange: [0, 1],
-  });
-  const componentTranslate = animatedValue3.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 20],
-  });
 
   const onPress = () => {
     updateFontSize(14);
@@ -81,6 +60,7 @@ export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
   const rotateStyling = {
     transform: [{rotateZ: buttonRotatePressIn}, {rotateZ: buttonRotatePress}],
   };
+
   const componentStyling = {
     opacity: componentOpacity,
     transform: [{translateY: componentTranslate}],
@@ -121,7 +101,7 @@ export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
         />
       </View>
       <View style={{justifyContent: 'center', paddingHorizontal: 10}}>
-        <Animated.View style={[rotateStyling, styles.buttonContainer]}>
+        <Animated.View style={rotateStyling}>
           <View style={{transform: [{scaleX: -1}, {rotate: '60deg'}]}}>
             <Pressable
               onPress={onPress}
@@ -134,7 +114,7 @@ export const FontSizeSlider = React.memo(({isToggled, setIsVisible}) => {
       </View>
     </Animated.View>
   );
-});
+};
 
 const styles = StyleSheet.create({
   constainer: {
@@ -157,8 +137,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 30,
     zIndex: 3,
-  },
+  } as ViewStyle,
   textStyle: {
     fontSize: 14,
-  },
+  } as TextStyle,
 });

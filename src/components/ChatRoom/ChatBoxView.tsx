@@ -1,16 +1,19 @@
-/* eslint-disable react/no-unstable-nested-components */
-import React, {useContext, useState, useMemo} from 'react';
+import React, {useContext, useState, useMemo, useCallback} from 'react';
 import auth from '@react-native-firebase/auth';
-import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, ActivityIndicator, ViewStyle} from 'react-native';
 import {AutoScrollFlatList} from 'react-native-autoscroll-flatlist';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
-import useOpenChat from '../../firebase/openChat';
-import {useCallback} from 'react';
+import useOpenChat, {Message} from '../../firebase/openChat';
 import ChatBubble from './ChatBubble';
 import {onMomentumScrollEnd} from './scrollHandlers';
 
-const ChatBoxView = ({clientUserId}) => {
-  const {isCurrentUserKurator} = useContext(IsCurrentUserKuratorContext);
+type ChatBoxViewProps = {
+  clientUserId: string;
+};
+
+const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
+  const contextValue = useContext(IsCurrentUserKuratorContext);
+  const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
   const [messageLimit, setMessageLimit] = useState(0);
   const user = auth().currentUser;
 
@@ -20,13 +23,11 @@ const ChatBoxView = ({clientUserId}) => {
   });
 
   const renderItem = useCallback(
-    ({item}) => (
+    ({item}: {item: Message}) => (
       <ChatBubble
         user={user}
         id={item.id}
         text={item.text}
-        author={item.author}
-        timestamp={item.timestamp}
         clientUserId={clientUserId}
         displayTimestamp={item.displayTimestamp}
         isCurrentUserKurator={isCurrentUserKurator}
@@ -54,11 +55,11 @@ const ChatBoxView = ({clientUserId}) => {
         scrollEnabled={true}
         scrollEventThrottle={160}
         showNewItemAlert={false}
-        onMomentumScrollEnd={onMomentumScrollEnd(
+        onMomentumScrollEnd={onMomentumScrollEnd({
           messageLimit,
           setMessageLimit,
           isLoading,
-        )}
+        })}
       />
     </View>
   );
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 12,
     backgroundColor: 'white',
-  },
+  } as ViewStyle,
   activityIndicatorStyle: {
     width: '100%',
     display: 'flex',
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     top: '0%',
     paddingTop: 5,
     position: 'absolute',
-  },
+  } as ViewStyle,
 });
 
 export default ChatBoxView;

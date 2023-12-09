@@ -13,7 +13,17 @@ import AddUserScreen from './src/components/AddUser/AddUserScreen';
 import FlashMessage from 'react-native-flash-message';
 import {IsCurrentUserKuratorProvider} from './src/firebase/isCurrentUserKuratorContext';
 
-const Stack = createNativeStackNavigator();
+export type StackParamList = {
+  HomeScreen: any;
+  NewClientScreen: any;
+  KuratorScreen: any;
+  NewKuratorScreen: any;
+  ChatScreen: {id: string};
+  AddUserScreen: any;
+  ReportConcernScreen: {clientUserId: string};
+};
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 const App = () => {
   return (

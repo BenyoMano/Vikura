@@ -1,8 +1,17 @@
-import firestore from '@react-native-firebase/firestore';
+import firestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
 import {useEffect, useState} from 'react';
 
-const useUserPersonalDetails = ({clientUserId}) => {
-  const [userDetails, setUserDetails] = useState(undefined);
+type UserDetails = {
+  firstName: FirebaseFirestoreTypes.DocumentFieldType;
+  secondName: FirebaseFirestoreTypes.DocumentFieldType;
+  mail: FirebaseFirestoreTypes.DocumentFieldType;
+  personNummer: FirebaseFirestoreTypes.DocumentFieldType;
+};
+
+const useUserPersonalDetails = ({clientUserId}: {clientUserId: string}) => {
+  const [userDetails, setUserDetails] = useState<UserDetails>();
 
   useEffect(() => {
     const getUserDetails = async () => {

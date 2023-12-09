@@ -14,6 +14,8 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import AddUserModal from './AddUserModal';
 import AddUserScreenHeaderView from '../Header/AddUserScreenHeaderView';
 import SuccessProtocol from './SuccessProtocol/SuccessProtocol';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
 
 export type Action = {
   status: string;
@@ -44,11 +46,16 @@ export type UserPropToAdd = {
   trimmedPersonnummer?: string;
 };
 
-export type AddUserScreenProps = {
-  navigation: any;
+type AddUserScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'AddUserScreen'
+>;
+
+type AddUSerScreenProps = {
+  navigation: AddUserScreenNavigationProp;
 };
 
-const AddUserScreen: React.FC<AddUserScreenProps> = ({navigation}) => {
+const AddUserScreen: React.FC<AddUSerScreenProps> = ({navigation}) => {
   const [successProtocol, setSuccessProtocol] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [checkboxStateKurator, setCheckboxStateKurator] = useState(false);

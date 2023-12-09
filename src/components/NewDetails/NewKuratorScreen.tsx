@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  ViewStyle,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -12,9 +13,20 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {HeaderView} from '../Header/HeaderView';
 import newDetailsKurator from '../../firebase/newDetailsKurator';
 import {DotsLoader} from 'react-native-indicator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
 
-const NewKuratorScreen = ({navigation}) => {
-  const [newDetails, setNewDetails] = useState({});
+type NewKuratorScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'NewKuratorScreen'
+>;
+
+type NewKuratorScreenProps = {
+  navigation: NewKuratorScreenNavigationProp;
+};
+
+const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
+  const [newDetails, setNewDetails] = useState({password: '', rePassword: ''});
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {password, rePassword} = newDetails;
   const ref_input2 = useRef();
@@ -127,17 +139,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',
-  },
+  } as ViewStyle,
   loginContainer: {
     width: '80%',
     paddingTop: 40,
-  },
+  } as ViewStyle,
   contentContainer: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  } as ViewStyle,
 });
 
 export default NewKuratorScreen;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, ViewStyle} from 'react-native';
 import ConvoLoader from './ConvoLoader';
-import {useRoomsData} from './useRoomsData';
+import {RoomData, useRoomsData} from './useRoomsData';
 import ConversationRoom from './ConversationRoom';
 
 const ConversationView = () => {
@@ -12,12 +12,11 @@ const ConversationView = () => {
     (a, b) => b.latestTimestamp - a.latestTimestamp,
   );
 
-  const renderItem = ({item}) => (
+  const renderItem = ({item}: {item: RoomData}) => (
     <ConversationRoom
       roomId={item.roomId}
       clientAlias={item.clientAlias}
       clientId={item.clientId}
-      key={item}
     />
   );
 
@@ -31,7 +30,6 @@ const ConversationView = () => {
           numColumns={1}
           data={sortedRooms}
           renderItem={renderItem}
-          keyExtractor={item => item.roomId}
         />
       )}
     </View>
@@ -49,7 +47,7 @@ const styles = {
     overflow: 'hidden',
     position: 'relative',
     zIndex: 1,
-  },
+  } as ViewStyle,
 };
 
 export default ConversationView;

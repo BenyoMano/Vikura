@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet, Alert, ViewStyle} from 'react-native';
 import MainText from '../../atoms/MainText';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
@@ -9,8 +9,26 @@ import {useClipboard} from '@react-native-clipboard/clipboard';
 import useUserPersonalDetails from '../../firebase/userDetails';
 import ClipboardHandler from './ClipboardHandler';
 import SendMailButton from './SendMailButton';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
+import {RouteProp} from '@react-navigation/native';
 
-const ReportConcernScreen = ({navigation, route}) => {
+type ReportConcernNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'ReportConcernScreen'
+>;
+
+type ReportConcernRouteProp = RouteProp<StackParamList, 'ReportConcernScreen'>;
+
+type ReportConcernProps = {
+  navigation: ReportConcernNavigationProp;
+  route: ReportConcernRouteProp;
+};
+
+const ReportConcernScreen: React.FC<ReportConcernProps> = ({
+  navigation,
+  route,
+}) => {
   const [clipboardString, setClipboardString] = useClipboard();
   const {clientUserId} = route.params;
   const userDetails = useUserPersonalDetails({clientUserId});
@@ -62,14 +80,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 0.4,
     width: 360,
-  },
+  } as ViewStyle,
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
+  } as ViewStyle,
 });
 
 export default ReportConcernScreen;

@@ -11,14 +11,24 @@ import {
   useGeneralErrorHandling,
 } from '../../../../ErrorHandling/errorHandling';
 
-const DeleteUserButton = ({
+type DeleteUserButtonProps = {
+  closingModal: boolean;
+  setClosingModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  clientId: string;
+};
+
+export type ActionState = 'initial' | 'success' | 'failed';
+
+const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
   closingModal,
   setClosingModal,
   modalVisible,
   setModalVisible,
   clientId,
 }) => {
-  const [actionFinished, setActionFinished] = useState('initial');
+  const [actionFinished, setActionFinished] = useState<ActionState>('initial');
   const [clipboardString, setClipboardString] = useClipboard();
   const operationsCount = useRef(0);
   const [isRunning, setIsRunning] = useState(false);

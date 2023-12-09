@@ -1,12 +1,24 @@
 import {useEffect, useState} from 'react';
-import {Animated, Easing} from 'react-native';
+import {Animated, Easing, ViewStyle} from 'react-native';
+import {ActionState} from './DeleteUserButton';
+import {ColorValue} from 'react-native';
+
+type SuccessFailAnimProps = {
+  actionFinished: ActionState;
+  successFailAnimStyling: {
+    iconSize: number;
+    elevation: number;
+  };
+  closingModal: boolean;
+  setClosingModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export const useSuccessFailAnim = ({
   actionFinished,
+  successFailAnimStyling,
   closingModal,
   setClosingModal,
-  successFailAnimStyling,
-}) => {
+}: SuccessFailAnimProps) => {
   const {iconSize, elevation} = successFailAnimStyling;
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
@@ -34,8 +46,8 @@ export const useSuccessFailAnim = ({
     outputRange: ['black', 'red', 'red', 'black'],
   });
 
-  const animatedColorStyleFailed = {
-    borderColor: buttonFailedColor,
+  const animatedColorStyleFailed: ViewStyle = {
+    borderColor: buttonFailedColor as unknown as ColorValue,
     borderWidth: 1.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,
@@ -45,8 +57,8 @@ export const useSuccessFailAnim = ({
     position: 'relative',
     elevation: elevation || 30,
   };
-  const animatedColorStyleSuccess = {
-    borderColor: buttonSuccessColor,
+  const animatedColorStyleSuccess: ViewStyle = {
+    borderColor: buttonSuccessColor as unknown as ColorValue,
     borderWidth: 1.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,

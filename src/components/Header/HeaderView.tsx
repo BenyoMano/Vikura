@@ -14,7 +14,7 @@ import {FontSizeSlider} from './FontSizeSlider/FontSizeSlider';
 
 type HeaderViewProps = {
   navigation: any;
-  clientUserId: string;
+  clientUserId?: string;
 };
 
 export const HeaderView: React.FC<HeaderViewProps> = ({
@@ -34,7 +34,6 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
           <LogoutButton
-            title="Logga Ut"
             onPress={() => {
               signOut();
               navigation.navigate('HomeScreen');
@@ -85,7 +84,6 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
       ) : route.name === 'ChatScreen' && !isCurrentUserKurator ? (
         <StylingContainer>
           <LogoutButton
-            title="Logga Ut"
             onPress={() => {
               signOut();
               navigation.navigate('HomeScreen');

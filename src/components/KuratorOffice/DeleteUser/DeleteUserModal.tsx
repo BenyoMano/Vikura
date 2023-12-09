@@ -1,9 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Modal, Animated} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  Animated,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import DeleteUserButton from './DeleteButton/DeleteUserButton';
 import CancelButton from './CancelButton';
 
-export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
+type DeleteUserModalProps = {
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  clientId: string;
+};
+
+export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
+  modalVisible,
+  setModalVisible,
+  clientId,
+}) => {
   const [closingModal, setClosingModal] = useState(false);
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
@@ -63,17 +81,17 @@ export const DeleteUserModal = ({modalVisible, setModalVisible, clientId}) => {
         </View>
         <View style={styles.coupledButtons}>
           <DeleteUserButton
-            closingModal={closingModal}
-            setClosingModal={setClosingModal}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             clientId={clientId}
-          />
-          <CancelButton
             closingModal={closingModal}
             setClosingModal={setClosingModal}
+          />
+          <CancelButton
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            closingModal={closingModal}
+            setClosingModal={setClosingModal}
           />
         </View>
       </Animated.View>
@@ -99,7 +117,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     zIndex: 30,
     overflow: 'visible',
-  },
+  } as ViewStyle,
   info: {
     backgroundColor: 'white',
     width: 280,
@@ -114,14 +132,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-  },
+  } as ViewStyle,
   textStyle: {
     fontSize: 18,
     color: 'grey',
-  },
+  } as TextStyle,
   coupledButtons: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: 95,
-  },
+  } as ViewStyle,
 });

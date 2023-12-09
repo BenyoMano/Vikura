@@ -1,22 +1,45 @@
-/* eslint-disable curly */
 import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable, Animated} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Animated,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {DeleteUserModal} from './DeleteUser/DeleteUserModal';
 import {useContext} from 'react';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
+import {RoomData} from './useRoomsData';
 
-const ConversationRoom = ({roomId, clientAlias, clientId}) => {
-  const [latestMessage, setLatestMessage] = useState(undefined);
+type LatestMessage = {
+  timestamp: number;
+  displayTimestamp: Date;
+  text: string;
+  isRead: boolean;
+  alias: string;
+  id: string;
+};
+
+const ConversationRoom: React.FC<RoomData> = ({
+  roomId,
+  clientAlias,
+  clientId,
+}) => {
+  const [latestMessage, setLatestMessage] = useState<LatestMessage | undefined>(
+    undefined,
+  );
   const [modalVisible, setModalVisible] = useState(false);
-  const {isCurrentUserAdmin} = useContext(IsCurrentUserKuratorContext);
+  const contextValue = useContext(IsCurrentUserKuratorContext);
+  const isCurrentUserAdmin = contextValue?.isCurrentUserAdmin;
 
   const modalStyle = {
     backgroundColor: modalVisible ? 'lightgrey' : '#EEEEEE',
     borderBottomWidth: modalVisible ? 2 : 1,
     borderTopColor: modalVisible ? 'black' : null,
-  };
+  } as ViewStyle;
 
   const opacityAnimation = new Animated.Value(1);
   const fadeIn = () => {
@@ -36,7 +59,7 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
   };
 
   useEffect(() => {
-    let unsubscribeFromLastMessage;
+    let unsubscribeFromLastMessage: () => void;
     const subscribeToLastMessage = async () => {
       const pathToMessages = firestore()
         .collection('rooms')
@@ -74,7 +97,11 @@ const ConversationRoom = ({roomId, clientAlias, clientId}) => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('ChatScreen', {id: latestMessage.id})}
+      onPress={() =>
+        navigation.navigate('ChatScreen', {
+          id: latestMessage.id,
+        })
+      }
       onPressIn={fadeIn}
       onPressOut={fadeOut}
       onLongPress={() => {
@@ -123,31 +150,31 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-  },
+  } as ViewStyle,
   title: {
     fontSize: 22,
     color: 'black',
     fontFamily: 'NunitoSans-Regular',
     paddingBottom: 5,
-  },
+  } as TextStyle,
   timestamp: {
     fontSize: 14,
     color: 'black',
     paddingTop: 5,
-  },
+  } as TextStyle,
   isRead: {
     text: {
       fontSize: 14,
       color: 'black',
       fontFamily: 'NunitoSans-Regular',
-    },
+    } as TextStyle,
   },
   notIsRead: {
     text: {
       fontSize: 14,
       color: 'black',
       fontFamily: 'NunitoSans-Bold',
-    },
+    } as TextStyle,
   },
   conversationRoom: {
     item: {
@@ -162,7 +189,7 @@ const styles = {
       zIndex: 1,
       elevation: 1,
       overflow: 'visible',
-    },
+    } as ViewStyle,
   },
 };
 

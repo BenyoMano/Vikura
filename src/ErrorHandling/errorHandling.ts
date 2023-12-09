@@ -1,4 +1,5 @@
 import {showMessage, Position} from 'react-native-flash-message';
+import {ActionState} from '../components/KuratorOffice/DeleteUser/DeleteButton/DeleteUserButton';
 
 interface ErrorHandlingProps {
   error: Error;
@@ -6,11 +7,14 @@ interface ErrorHandlingProps {
   subject?: string;
   userId?: string;
   clientId?: string;
-  setActionFinished?: (status: string) => void;
-   
+  setActionFinished?: React.Dispatch<React.SetStateAction<ActionState>>;
 }
 
-export const useDynamicAddUserErrorHandling = ({error, subject, userId}: ErrorHandlingProps) => {
+export const useDynamicAddUserErrorHandling = ({
+  error,
+  subject,
+  userId,
+}: ErrorHandlingProps) => {
   console.error('Error skapa användare: ', error);
   showMessage({
     message: 'Ojdå! Något gick fel :(',

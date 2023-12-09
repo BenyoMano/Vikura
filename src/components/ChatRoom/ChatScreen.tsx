@@ -14,14 +14,20 @@ import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {useRoomId} from '../../firebase/useRoomId';
 import {FontSizeProvider} from '../Header/FontSizeSlider/FontSizeContext';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
+import {RouteProp} from '@react-navigation/native';
+
+type ChatScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'ChatScreen'
+>;
+
+type ChatScreenRouteProp = RouteProp<StackParamList, 'ChatScreen'>;
 
 type ChatScreenProps = {
-  navigation: any;
-  route: {
-    params: {
-      id: string;
-    };
-  };
+  navigation: ChatScreenNavigationProp;
+  route: ChatScreenRouteProp;
 };
 
 const ChatScreen: React.FC<ChatScreenProps> = ({navigation, route}) => {

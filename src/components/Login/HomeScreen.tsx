@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  ViewStyle,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainLogo from '../Header/MainLogo';
@@ -13,10 +14,24 @@ import {DotsLoader} from 'react-native-indicator';
 import MainText from '../../atoms/MainText';
 import LoginForm from './LoginForm';
 import {MotiView} from 'moti';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
 
-const HomeScreen = ({navigation}) => {
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'HomeScreen'
+>;
+
+type HomeScreenProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const [loginDetails, setLoginDetails] = useState({});
+  const [loginDetails, setLoginDetails] = useState({
+    mejl: '',
+    password: '',
+  });
   const {mejl, password} = loginDetails;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -56,7 +71,7 @@ const HomeScreen = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainContainer} testID="homescreen">
-          <MainLogo isKeyboardVisible={isKeyboardVisible} />
+          <MainLogo />
           <View style={styles.contentContainer}>
             <MotiView
               animate={{
@@ -102,19 +117,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',
-  },
+  } as ViewStyle,
   contentContainer: {
     flex: 0.4,
     marginTop: 30,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',
-  },
+  } as ViewStyle,
   dotsLoader: {
     height: 22,
     marginBottom: 40,
     marginTop: 10,
-  },
+  } as ViewStyle,
 });
 
 export default HomeScreen;

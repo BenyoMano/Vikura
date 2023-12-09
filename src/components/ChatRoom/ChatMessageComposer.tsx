@@ -17,7 +17,7 @@ const ChatMessageComposer: React.FC<ChatMessageComposerProps> = ({
   roomId,
   isCurrentUserKurator,
 }) => {
-  const [messageToSend, setMessageToSend] = useState<string>();
+  const [messageToSend, setMessageToSend] = useState<string>('');
 
   const handleSendMessage = () => {
     if (!messageToSend) return;

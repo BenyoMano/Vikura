@@ -2,7 +2,15 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import {Animated, Easing} from 'react-native';
 
-export const useSpinAnimation = ({isRunning, isPressing}) => {
+type SpinAnimationProps = {
+  isRunning: boolean;
+  isPressing: boolean;
+};
+
+export const useSpinAnimation = ({
+  isRunning,
+  isPressing,
+}: SpinAnimationProps) => {
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const animatedValue2 = new Animated.Value(0);
 

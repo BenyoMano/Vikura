@@ -1,9 +1,20 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import ConversationView from './ConversationView';
 import {HeaderView} from '../Header/HeaderView';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
 
-const KuratorScreen = ({navigation}) => {
+type KuratorScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'KuratorScreen'
+>;
+
+type KuratorScreenProps = {
+  navigation: KuratorScreenNavigationProp;
+};
+
+const KuratorScreen: React.FC<KuratorScreenProps> = ({navigation}) => {
   return (
     <View style={[styles.KuratorContainer, {flexDirection: 'column'}]}>
       <HeaderView navigation={navigation} />
@@ -20,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
+  } as ViewStyle,
 });
 
 export default KuratorScreen;

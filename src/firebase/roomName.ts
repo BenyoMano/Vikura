@@ -1,9 +1,16 @@
-import firestore from '@react-native-firebase/firestore';
-import {showMessage} from 'react-native-flash-message';
+import firestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
 import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
-const getRoomName = async ({clientUserId}) => {
-  let roomName;
+type RoomNameProps = {
+  clientUserId: string;
+};
+
+const getRoomName = async ({clientUserId}: RoomNameProps) => {
+  let roomName:
+    | FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>
+    | undefined;
   try {
     roomName = await firestore()
       .collection('rooms')

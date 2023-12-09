@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  ViewStyle,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -14,9 +15,24 @@ import newDetailsElev from '../../firebase/newDetailsElev';
 import SuccessProtocol from '../AddUser/SuccessProtocol/SuccessProtocol';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../..';
 
-const NewClientScreen = ({navigation}) => {
-  const [newDetails, setNewDetails] = useState({});
+type NewClientScreenNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'NewClientScreen'
+>;
+
+type NewClientScreenProps = {
+  navigation: NewClientScreenNavigationProp;
+};
+
+const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
+  const [newDetails, setNewDetails] = useState({
+    password: '',
+    rePassword: '',
+    alias: '',
+  });
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {password, rePassword, alias} = newDetails;
   const ref_input2 = useRef();
@@ -24,7 +40,7 @@ const NewClientScreen = ({navigation}) => {
   const [submitted, setSubmitted] = useState(false);
   const [successProtocol, setSuccessProtocol] = useState(false);
   const [allDone, setAllDone] = useState(false);
-  const userId = auth().currentUser.uid;
+  const userId = auth().currentUser?.uid;
 
   const action1 = {
     status: 'initial',
@@ -64,7 +80,7 @@ const NewClientScreen = ({navigation}) => {
 
   useEffect(() => {
     if (allDone) {
-      navigation.navigate('ChatScreen', {id: userId});
+      navigation.navigate('ChatScreen', {clientUserId: userId});
       setTimeout(() => {
         showMessage({
           message: 'Välkommen!',
@@ -185,16 +201,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#EEEEEE',
-  },
+  } as ViewStyle,
   loginContainer: {
     width: '80%',
     paddingTop: 20,
-  },
+  } as ViewStyle,
   contentContainer: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-  },
+  } as ViewStyle,
 });
 
 export default NewClientScreen;

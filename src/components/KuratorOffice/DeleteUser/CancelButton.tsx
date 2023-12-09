@@ -1,9 +1,16 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
-import {Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {Pressable, StyleSheet, Animated, Easing, ViewStyle} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const CancelButton = ({
+type CancelButtonProps = {
+  closingModal: boolean;
+  setClosingModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const CancelButton: React.FC<CancelButtonProps> = ({
   closingModal,
   setClosingModal,
   modalVisible,
@@ -16,7 +23,7 @@ const CancelButton = ({
   const [animatedValue4, setAnimatedValue4] = useState(new Animated.Value(0));
 
   const onPressFn = () => {
-    setClosingModal(true);
+    setClosingModal?.(true);
     setTimeout(() => {
       setModalVisible(!modalVisible);
     }, 120);
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'relative',
     elevation: 30,
-  },
+  } as ViewStyle,
 });
 
 export default CancelButton;

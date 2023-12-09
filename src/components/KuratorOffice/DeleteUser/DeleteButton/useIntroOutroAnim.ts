@@ -1,11 +1,17 @@
 import {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
 
+type IntroOutroAnimProps = {
+  closingModal: boolean;
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export const useIntroOutroAnim = ({
   closingModal,
   modalVisible,
   setModalVisible,
-}) => {
+}: IntroOutroAnimProps) => {
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
   const [animatedValue2, setAnimatedValue2] = useState(new Animated.Value(0));
 

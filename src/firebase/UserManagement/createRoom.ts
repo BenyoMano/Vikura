@@ -1,5 +1,4 @@
 import firestore from '@react-native-firebase/firestore';
-import {showMessage} from 'react-native-flash-message';
 
 const createRoom = async ({userId}) => {
   const roomRef = firestore().collection('rooms');

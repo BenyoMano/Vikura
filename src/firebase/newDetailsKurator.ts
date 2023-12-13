@@ -11,7 +11,7 @@ const newDetailsKurator = async ({
   setLoading,
 }) => {
   const user = auth().currentUser;
-  const userId = user.uid;
+  const userId = user?.uid;
 
   if (!password) {
     showMessage({
@@ -42,7 +42,7 @@ const newDetailsKurator = async ({
   if (rePassword === password) {
     try {
       await Promise.all([
-        user.updatePassword(password),
+        user?.updatePassword(password),
         firestore().collection('Users').doc(userId).update({
           firstLogin: false,
         }),

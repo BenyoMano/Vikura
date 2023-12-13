@@ -25,6 +25,7 @@ const InputBarChatt: React.FC<InputBarChattProps> = ({
         placeholderTextColor="grey"
         textBreakStrategy="simple"
         underlineColorAndroid="transparent"
+        pointerEvents="none"
       />
     </View>
   );

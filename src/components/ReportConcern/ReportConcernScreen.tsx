@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Alert, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import MainText from '../../atoms/MainText';
 import {Icon} from 'react-native-elements';
 import PersonalInfo from './PersonalInfo';
@@ -45,6 +44,7 @@ const ReportConcernScreen: React.FC<ReportConcernProps> = ({
       'Personnummer: ' +
       userDetails.personNummer,
   ];
+  const detailsString: string = detailsToSend.join('\n');
 
   return (
     <View style={styles.container}>
@@ -68,7 +68,7 @@ const ReportConcernScreen: React.FC<ReportConcernProps> = ({
         setClipboardString={setClipboardString}
         userDetails={userDetails}
       />
-      <SendMailButton title="Skicka mejl" detailsToSend={detailsToSend} />
+      <SendMailButton title="Skicka mejl" detailsToSend={detailsString} />
     </View>
   );
 };

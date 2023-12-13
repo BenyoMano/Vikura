@@ -3,7 +3,7 @@ import firestore, {
 } from '@react-native-firebase/firestore';
 import {useEffect, useState} from 'react';
 
-type UserDetails = {
+export type UserDetails = {
   firstName: FirebaseFirestoreTypes.DocumentFieldType;
   secondName: FirebaseFirestoreTypes.DocumentFieldType;
   mail: FirebaseFirestoreTypes.DocumentFieldType;

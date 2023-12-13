@@ -7,7 +7,7 @@ import {Easing} from 'react-native';
 import {Action} from '../AddUserScreen';
 
 export type AnimatedIconObject = {
-  actionFinished: string;
+  actionFinished: 'initial' | 'failed' | 'success';
   name: string;
   type: string;
   color: string;
@@ -33,8 +33,8 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
   const numberOfIcons = Object.keys(actionStates).length;
 
   const animatedIcons: AnimatedIconObject[] = Object.values(actionStates).map(
-    (action, index) => ({
-      actionFinished: action.status,
+    (action, index): AnimatedIconObject => ({
+      actionFinished: action.status as 'initial' | 'failed' | 'success',
       name: action.name,
       type: action.type,
       color: 'black',
@@ -81,7 +81,7 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
     outerContainer: {
       position: 'absolute' as const,
       top: '40%',
-      width: expandStyle,
+      width: expandStyle as unknown as 'string' | 'number',
       maxWidth: '100%',
       backgroundColor: 'white',
       borderColor: 'grey',
@@ -104,8 +104,8 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
       justifyContent: 'space-between',
       alignItems: 'center',
       alignSelf: 'center',
-      paddingHorizontal: paddingStyle1,
-      paddingVertical: paddingStyle2,
+      paddingHorizontal: paddingStyle1 as unknown as 'string' | 'number',
+      paddingVertical: paddingStyle2 as unknown as 'string' | 'number',
     },
   };
 
@@ -142,12 +142,12 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
   }, [successProtocol, allActionsFinished]);
 
   return (
-    <Animated.View style={styles.outerContainer}>
+    <Animated.View style={[styles.outerContainer]}>
       <Pressable onPress={onPress}>
         <Animated.View style={styles.innerContainer}>
-          {animatedIcons.map((animatedIcon, index) => (
+          {animatedIcons.map(animatedIcon => (
             <AnimatedIcon
-              key={index}
+              key={animatedIcon.name}
               animatedIconObject={animatedIcon}
               successProtocol={successProtocol}
               allActionsFinished={allActionsFinished}

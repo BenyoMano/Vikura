@@ -1,10 +1,24 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, View, Pressable, StyleSheet, Animated} from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  ViewStyle,
+} from 'react-native';
 import {Linking} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 
-const SendMailButton = ({title, detailsToSend}) => {
+type SendMailButtonProps = {
+  title: string;
+  detailsToSend: string;
+};
+
+const SendMailButton: React.FC<SendMailButtonProps> = ({
+  title,
+  detailsToSend,
+}) => {
   const {viewStyle, btnContainerStyle, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
 
@@ -62,20 +76,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 12,
     overflow: 'hidden',
-  },
+  } as ViewStyle,
   btnContainerStyle: {
     backgroundColor: '#C4C4C4',
     paddingVertical: 18,
     width: 230,
     borderRadius: 12,
-  },
+  } as ViewStyle,
   btnTextStyle: {
     color: 'black',
     fontSize: 18,
     textAlign: 'center',
     textTransform: 'uppercase',
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
 });
 
 export default SendMailButton;

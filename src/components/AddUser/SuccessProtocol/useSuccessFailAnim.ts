@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
-import {Animated, Easing} from 'react-native';
+import {Animated, ColorValue, Easing, ViewStyle} from 'react-native';
 
 type SuccessFailAnimProps = {
-  actionFinished: 'success' | 'failed';
+  actionFinished: 'initial' | 'success' | 'failed';
   successFailAnimStyling: {
     iconSize: number;
     elevation: number;
@@ -40,8 +40,8 @@ export const useSuccessFailAnim = ({
     outputRange: ['white', '#D9534F'],
   });
 
-  const animatedColorStyleFailed = {
-    borderColor: buttonFailedColor,
+  const animatedColorStyleFailed: ViewStyle = {
+    borderColor: buttonFailedColor as unknown as ColorValue,
     borderWidth: 2.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,
@@ -58,8 +58,8 @@ export const useSuccessFailAnim = ({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   };
-  const animatedColorStyleSuccess = {
-    borderColor: buttonSuccessColor,
+  const animatedColorStyleSuccess: ViewStyle = {
+    borderColor: buttonSuccessColor as unknown as ColorValue,
     borderWidth: 2.5,
     width: iconSize + 21 || 45,
     height: iconSize + 21 || 45,

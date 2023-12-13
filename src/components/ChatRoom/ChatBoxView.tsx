@@ -6,6 +6,7 @@ import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorCo
 import useOpenChat, {Message} from '../../firebase/openChat';
 import ChatBubble from './ChatBubble';
 import {onMomentumScrollEnd} from './scrollHandlers';
+import PressableKeyboardDismissOverlay from './PressableKeyboardDismissOverlay';
 
 type ChatBoxViewProps = {
   clientUserId: string;
@@ -43,6 +44,7 @@ const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
 
   return (
     <View style={styles.flatListStyle}>
+      <PressableKeyboardDismissOverlay />
       <View style={styles.activityIndicatorStyle}>
         {isLoading ? <ActivityIndicator size={'large'} /> : null}
       </View>

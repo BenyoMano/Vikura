@@ -53,7 +53,7 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
   });
 
   const visibilityStyle: ViewStyle = {
-    opacity: +opacityStyle,
+    opacity: opacityStyle as unknown as number,
   };
 
   useEffect(() => {

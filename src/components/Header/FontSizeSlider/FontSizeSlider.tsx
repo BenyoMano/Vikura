@@ -84,7 +84,7 @@ export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
 
   return (
     <Animated.View style={[styles.constainer, componentStyling]}>
-      <View style={{width: '70%'}}>
+      <View style={{width: '70%', paddingRight: 10}}>
         <Slider
           minimumValue={minimumValue}
           maximumValue={maximumValue}
@@ -92,7 +92,12 @@ export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
           onValueChange={updateFontSize}
           step={1}
           minimumTrackTintColor="lightblue"
-          thumbStyle={{width: 20, height: 20, borderRadius: 30, left: -7}}
+          thumbStyle={{
+            width: 20,
+            height: 20,
+            borderRadius: 30,
+            left: 10,
+          }}
           thumbTintColor="lightblue"
           trackClickable={true}
           renderTrackMarkComponent={() => <MemoizedTrackMark />}
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     borderRadius: 12,
-    width: 150,
+    width: 170,
     padding: 10,
     backgroundColor: 'white',
     shadowColor: '#000',

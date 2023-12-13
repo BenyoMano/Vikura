@@ -8,7 +8,6 @@ const getRefPath = ({
   setMessages,
   messageLimit,
   setRoomId,
-  loadingMessages,
   setLoadingMessages,
 }) => {
   return fetchRoomName.docs.map(roomDetails => {

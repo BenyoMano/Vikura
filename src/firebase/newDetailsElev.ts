@@ -13,7 +13,7 @@ const newDetailsElev = async ({
   setSuccessProtocol,
 }) => {
   const user = auth().currentUser;
-  const userId = user.uid;
+  const userId = user?.uid;
 
   if (!password) {
     showMessage({
@@ -54,7 +54,7 @@ const newDetailsElev = async ({
       setSuccessProtocol(true);
       try {
         try {
-          await user.updatePassword(password);
+          await user?.updatePassword(password);
           setActionStates(prev => ({
             ...prev,
             action1: {

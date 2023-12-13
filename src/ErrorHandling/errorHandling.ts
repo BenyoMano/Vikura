@@ -15,7 +15,6 @@ export const useDynamicAddUserErrorHandling = ({
   subject,
   userId,
 }: ErrorHandlingProps) => {
-  console.error('Error skapa användare: ', error);
   showMessage({
     message: 'Ojdå! Något gick fel :(',
     description: String(
@@ -35,7 +34,6 @@ export const useDynamicDeleteUserErrorHandling = ({
   subject,
   setActionFinished,
 }: ErrorHandlingProps) => {
-  console.error('Error deleting room: ', error);
   showMessage({
     message: 'Ojdå! Något gick fel :(',
     description: String(

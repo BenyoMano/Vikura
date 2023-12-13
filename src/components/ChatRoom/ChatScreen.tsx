@@ -1,11 +1,5 @@
 import React, {useContext} from 'react';
-import {
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import ChatBoxView from './ChatBoxView';
 import {HeaderView} from '../Header/HeaderView';
@@ -41,17 +35,15 @@ const ChatScreen: React.FC<ChatScreenProps> = ({navigation, route}) => {
   return (
     <FontSizeProvider>
       <MyKeyboardAvoidingView>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.container}>
-            <HeaderView navigation={navigation} clientUserId={clientUserId} />
-            <ChatBoxView clientUserId={clientUserId} />
-            <ChatMessageComposer
-              isCurrentUserKurator={isCurrentUserKurator}
-              user={user}
-              roomId={roomId}
-            />
-          </View>
-        </TouchableWithoutFeedback>
+        <View style={styles.container}>
+          <HeaderView navigation={navigation} clientUserId={clientUserId} />
+          <ChatBoxView clientUserId={clientUserId} />
+          <ChatMessageComposer
+            isCurrentUserKurator={isCurrentUserKurator}
+            user={user}
+            roomId={roomId}
+          />
+        </View>
       </MyKeyboardAvoidingView>
     </FontSizeProvider>
   );

@@ -1,7 +1,20 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TextStyle, View, ViewStyle} from 'react-native';
+import {UserDetails} from '../../firebase/userDetails';
 
-const PersonalInfo = ({userDetails}) => {
+type PersonalInfoStyles = {
+  textStyling: {
+    label: TextStyle;
+    info: TextStyle;
+  };
+  viewStyle: {
+    container: ViewStyle;
+    label: ViewStyle;
+    info: ViewStyle;
+  };
+};
+
+const PersonalInfo = ({userDetails}: {userDetails: UserDetails}) => {
   const {textStyling, viewStyle} = styles;
 
   return (
@@ -11,26 +24,26 @@ const PersonalInfo = ({userDetails}) => {
       </View>
       <View style={viewStyle.info}>
         <Text style={textStyling.info}>
-          {userDetails.firstName} {userDetails.secondName}
+          {`${userDetails.firstName} ${userDetails.secondName}`}
         </Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Mail:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>{userDetails.mail}</Text>
+        <Text style={textStyling.info}>{String(userDetails.mail)}</Text>
       </View>
       <View style={viewStyle.label}>
         <Text style={textStyling.label}>Personnummer:</Text>
       </View>
       <View style={viewStyle.info}>
-        <Text style={textStyling.info}>{userDetails.personNummer}</Text>
+        <Text style={textStyling.info}>{Number(userDetails.personNummer)}</Text>
       </View>
     </View>
   );
 };
 
-const styles = {
+const styles: PersonalInfoStyles = {
   textStyling: {
     label: {
       fontSize: 16,

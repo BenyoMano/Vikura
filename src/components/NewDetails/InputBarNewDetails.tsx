@@ -1,23 +1,31 @@
-import React from 'react';
-import {TextInput, View} from 'react-native';
+import React, {ForwardedRef, RefObject} from 'react';
+import {TextInput, View, ViewStyle, TextInputProps} from 'react-native';
+import {NewDetailsProps} from './NewClientScreen';
 
-const InputBarNewDetails = React.forwardRef(
+interface InputBarNewDetailsProps extends TextInputProps {
+  keys: 'alias' | 'password' | 'rePassword';
+  newDetails: NewDetailsProps;
+  setNewDetails: React.Dispatch<React.SetStateAction<NewDetailsProps>>;
+  submitted: boolean;
+}
+
+const InputBarNewDetails: React.FC<InputBarNewDetailsProps> = React.forwardRef(
   (
     {
       autoFocus,
       blurOnSubmit,
-      title,
+      placeholder,
       keys,
       value,
       newDetails,
       setNewDetails,
-      security,
-      capitalize,
+      secureTextEntry,
+      autoCapitalize,
       returnKeyType,
       onSubmitEditing,
-      submitted
+      submitted,
     },
-    ref,
+    ref: ForwardedRef<TextInput>,
   ) => {
     const {viewStyle, barStyle, redBarStyle} = styles;
     const empty = !value && submitted;
@@ -29,14 +37,14 @@ const InputBarNewDetails = React.forwardRef(
           autoFocus={autoFocus}
           blurOnSubmit={blurOnSubmit}
           autoCorrect={false}
-          autoCapitalize={capitalize}
+          autoCapitalize={autoCapitalize}
           returnKeyType={returnKeyType}
-          secureTextEntry={security}
+          secureTextEntry={secureTextEntry}
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setNewDetails({...newDetails, [keys]: v})}
           value={value}
-          placeholder={title}
+          placeholder={placeholder}
           placeholderTextColor={'#575757'}
         />
       </View>
@@ -50,7 +58,7 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     marginTop: 15,
-  },
+  } as ViewStyle,
   barStyle: {
     paddingLeft: 10,
     height: 52,
@@ -59,7 +67,7 @@ const styles = {
     backgroundColor: '#C3C3C3',
     borderRadius: 12,
     fontFamily: 'NunitoSans-Regular',
-  },
+  } as ViewStyle,
   redBarStyle: {
     paddingLeft: 10,
     height: 52,
@@ -68,7 +76,7 @@ const styles = {
     borderColor: '#D9534F',
     borderWidth: 3,
     borderRadius: 12,
-  }
+  } as ViewStyle,
 };
 
 export default InputBarNewDetails;

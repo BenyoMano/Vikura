@@ -1,8 +1,19 @@
 import React from 'react';
-import {View, Pressable, StyleSheet, Animated, Easing} from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  Easing,
+  ViewStyle,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-const CopyButton = props => {
+type CopyButtonProps = {
+  onPress: () => void;
+};
+
+const CopyButton: React.FC<CopyButtonProps> = ({onPress}) => {
   const {btnContainerStyle, viewStyle} = styles;
   const animatedValue = new Animated.Value(0);
   const buttonRotate = animatedValue.interpolate({
@@ -17,7 +28,7 @@ const CopyButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const onPressOut = () => {
     Animated.timing(animatedValue, {
@@ -26,20 +37,19 @@ const CopyButton = props => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   const animatedRotateStyle = {
     transform: [{rotateZ: buttonRotate}],
-  }
+  };
 
   return (
     <View style={viewStyle}>
-      <Pressable 
-      onPress={props.onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={btnContainerStyle}
-      >
+      <Pressable
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={btnContainerStyle}>
         <Animated.View style={[animatedRotateStyle]}>
           <Icon name="copy" type="font-awesome" color="black" size={28} />
         </Animated.View>
@@ -55,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     borderRadius: 10,
     overflow: 'hidden',
-  },
+  } as ViewStyle,
   btnContainerStyle: {
     width: 40,
     height: 40,
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'lightblue',
     justifyContent: 'center',
-  },
+  } as ViewStyle,
 });
 
 export default CopyButton;

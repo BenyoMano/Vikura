@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ViewStyle,
+  TextInput,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -15,6 +16,7 @@ import newDetailsKurator from '../../firebase/newDetailsKurator';
 import {DotsLoader} from 'react-native-indicator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../../..';
+import {NewDetailsProps} from './NewClientScreen';
 
 type NewKuratorScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -26,10 +28,13 @@ type NewKuratorScreenProps = {
 };
 
 const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
-  const [newDetails, setNewDetails] = useState({password: '', rePassword: ''});
+  const [newDetails, setNewDetails] = useState<NewDetailsProps>({
+    password: '',
+    rePassword: '',
+  });
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {password, rePassword} = newDetails;
-  const ref_input2 = useRef();
+  const ref_input2 = useRef<TextInput>(null);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -84,12 +89,12 @@ const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
-                title="Ange nytt lösenord:"
+                placeholder="Ange nytt lösenord:"
                 returnKeyType="next"
-                security={true}
+                secureTextEntry={true}
                 keys={'password'}
                 value={password}
-                onSubmitEditing={() => ref_input2.current.focus()}
+                onSubmitEditing={() => ref_input2.current?.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
@@ -97,8 +102,8 @@ const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
-                title="Repetera lösenord:"
-                security={true}
+                placeholder="Repetera lösenord:"
+                secureTextEntry={true}
                 keys={'rePassword'}
                 value={rePassword}
                 ref={ref_input2}

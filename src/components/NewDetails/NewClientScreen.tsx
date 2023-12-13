@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ViewStyle,
+  TextInput,
 } from 'react-native';
 import Button from '../../atoms/Button';
 import MainText from '../../atoms/MainText';
@@ -27,16 +28,22 @@ type NewClientScreenProps = {
   navigation: NewClientScreenNavigationProp;
 };
 
+export type NewDetailsProps = {
+  password: string;
+  rePassword: string;
+  alias?: string;
+};
+
 const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
-  const [newDetails, setNewDetails] = useState({
+  const [newDetails, setNewDetails] = useState<NewDetailsProps>({
     password: '',
     rePassword: '',
     alias: '',
   });
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {password, rePassword, alias} = newDetails;
-  const ref_input2 = useRef();
-  const ref_input3 = useRef();
+  const ref_input2 = useRef<TextInput>(null);
+  const ref_input3 = useRef<TextInput>(null);
   const [submitted, setSubmitted] = useState(false);
   const [successProtocol, setSuccessProtocol] = useState(false);
   const [allDone, setAllDone] = useState(false);
@@ -133,12 +140,12 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
-                title="Ange nytt lösenord:"
+                placeholder="Ange nytt lösenord:"
                 returnKeyType="next"
-                security={true}
+                secureTextEntry={true}
                 keys={'password'}
                 value={password}
-                onSubmitEditing={() => ref_input2.current.focus()}
+                onSubmitEditing={() => ref_input2.current?.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
@@ -146,13 +153,13 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={false}
-                title="Repetera lösenord:"
+                placeholder="Repetera lösenord:"
                 returnKeyType="next"
-                security={true}
+                secureTextEntry={true}
                 keys={'rePassword'}
                 value={rePassword}
                 ref={ref_input2}
-                onSubmitEditing={() => ref_input3.current.focus()}
+                onSubmitEditing={() => ref_input3.current?.focus()}
                 newDetails={newDetails}
                 setNewDetails={setNewDetails}
                 submitted={submitted}
@@ -160,8 +167,8 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
               <InputBarNewDetails
                 autoFocus={false}
                 blurOnSubmit={true}
-                title="Ange ett nickname:"
-                capitalize="words"
+                placeholder="Ange ett nickname:"
+                autoCapitalize="words"
                 keys={'alias'}
                 value={alias}
                 ref={ref_input3}

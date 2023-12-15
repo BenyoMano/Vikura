@@ -104,9 +104,9 @@ const styles = {
       height: 0,
     },
     shadowOpacity: 0.5,
-    shadowRadius: 1,
-    zIndex: 5,
-    elevation: 5,
+    shadowRadius: 5,
+    zIndex: 15,
+    elevation: 15,
     borderRadius: 35,
   } as ViewStyle,
   shadowContainerOff: {

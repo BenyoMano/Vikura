@@ -83,7 +83,7 @@ export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
   }, [isToggled]);
 
   return (
-    <Animated.View style={[styles.constainer, componentStyling]}>
+    <View style={{flexDirection: 'row'}}>
       <View style={{width: '70%', paddingRight: 10}}>
         <Slider
           minimumValue={minimumValue}
@@ -117,7 +117,7 @@ export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
           </View>
         </Animated.View>
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: '100%',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     borderWidth: 1,
     borderRadius: 12,

@@ -31,7 +31,7 @@ const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
         text={item.text}
         clientUserId={clientUserId}
         displayTimestamp={item.displayTimestamp}
-        isCurrentUserKurator={isCurrentUserKurator}
+        isCurrentUserKurator={isCurrentUserKurator!}
       />
     ),
     [isCurrentUserKurator, user, clientUserId],
@@ -53,7 +53,7 @@ const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
         numColumns={1}
         data={sortedMessages}
         renderItem={renderItem}
-        keyExtractor={item => item.timestamp}
+        keyExtractor={item => String(item.timestamp)}
         scrollEnabled={true}
         scrollEventThrottle={160}
         showNewItemAlert={false}

@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, ViewStyle} from 'react-native';
-import {useFontSize} from '../Header/FontSizeSlider/FontSizeContext';
+import {useFontSize} from '../Header/ThemeAndSizePicker/FontSizeContext';
 import {ChatBubbleProps} from './ChatBubble';
+import {useBubbleColor} from '../Header/ThemeAndSizePicker/BubbleColorContext';
 
 const BubbleView: React.FC<ChatBubbleProps> = ({
   user,
@@ -11,6 +12,16 @@ const BubbleView: React.FC<ChatBubbleProps> = ({
   isCurrentUserKurator,
 }) => {
   const {fontSize} = useFontSize();
+  const {backgroundColorSend, backgroundColorRecieve} = useBubbleColor();
+
+  const sendColorStyle = {
+    backgroundColor: backgroundColorSend,
+    // backgroundColor: '#b5ccf7',
+  };
+  const recieveColorStyle = {
+    backgroundColor: backgroundColorRecieve,
+    // backgroundColor: '#ffd933',
+  };
 
   const messageText = {
     color: 'black',
@@ -18,12 +29,21 @@ const BubbleView: React.FC<ChatBubbleProps> = ({
     fontSize: Number(fontSize),
   };
   return !isCurrentUserKurator ? (
-    <View style={[id === user.uid ? styles.bubbleSend : styles.bubbleRecieve]}>
+    <View
+      style={[
+        id === user?.uid
+          ? [styles.bubbleSend, sendColorStyle]
+          : [styles.bubbleRecieve, recieveColorStyle],
+      ]}>
       <Text style={messageText}>{text}</Text>
     </View>
   ) : isCurrentUserKurator ? (
     <View
-      style={[id === clientUserId ? styles.bubbleRecieve : styles.bubbleSend]}>
+      style={[
+        id === clientUserId
+          ? [styles.bubbleRecieve, recieveColorStyle]
+          : [styles.bubbleSend, sendColorStyle],
+      ]}>
       <Text style={messageText}>{text}</Text>
     </View>
   ) : null;
@@ -38,7 +58,6 @@ const styles = StyleSheet.create({
     padding: 9,
     minWidth: 0,
     maxWidth: '70%',
-    backgroundColor: '#b5ccf7',
     borderRadius: 12,
   } as ViewStyle,
   bubbleRecieve: {
@@ -50,7 +69,6 @@ const styles = StyleSheet.create({
     padding: 9,
     minWidth: 0,
     maxWidth: '70%',
-    backgroundColor: '#ffd933',
     borderRadius: 12,
   } as ViewStyle,
 });

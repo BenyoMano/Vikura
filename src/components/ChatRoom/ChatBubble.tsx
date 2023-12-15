@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {Text, View, StyleSheet, ViewStyle} from 'react-native';
 import BubbleView from './BubbleView';
-import {useFontSize} from '../Header/FontSizeSlider/FontSizeContext';
+import {useFontSize} from '../Header/ThemeAndSizePicker/FontSizeContext';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 export type ChatBubbleProps = {
@@ -43,7 +43,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = memo(
         : false;
 
     return !isCurrentUserKurator ? (
-      <View style={id === user.uid ? styles.bubbleSend : styles.bubbleRecieve}>
+      <View style={id === user?.uid ? styles.bubbleSend : styles.bubbleRecieve}>
         <BubbleView
           id={id}
           text={text}
@@ -53,7 +53,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = memo(
         />
         <View
           style={
-            id === user.uid
+            id === user?.uid
               ? styles.bubbleSend.timestamp
               : styles.bubbleRecieve.timestamp
           }>

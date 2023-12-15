@@ -10,7 +10,7 @@ import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorCo
 import LogoutButton from './LogoutButton';
 import StylingContainer from './StylingContainer';
 import AdjustSizeButton from './AdjustSizeButton/AdjustSizeButton';
-import {FontSizeSlider} from './FontSizeSlider/FontSizeSlider';
+import {ThemeAndSizePicker} from './ThemeAndSizePicker/ThemeAndSizePicker';
 
 type HeaderViewProps = {
   navigation: any;
@@ -74,7 +74,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
               setIsVisible={setIsVisible}
             />
             {isVisible && (
-              <FontSizeSlider
+              <ThemeAndSizePicker
                 isToggled={isToggled}
                 setIsVisible={setIsVisible}
               />
@@ -96,7 +96,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
               setIsVisible={setIsVisible}
             />
             {isVisible && (
-              <FontSizeSlider
+              <ThemeAndSizePicker
                 isToggled={isToggled}
                 setIsVisible={setIsVisible}
               />

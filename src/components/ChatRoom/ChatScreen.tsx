@@ -7,10 +7,11 @@ import ChatMessageComposer from './ChatMessageComposer';
 import {MyKeyboardAvoidingView} from '../../atoms/MyKeyboardAvoidingView';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {useRoomId} from '../../firebase/useRoomId';
-import {FontSizeProvider} from '../Header/FontSizeSlider/FontSizeContext';
+import {FontSizeProvider} from '../Header/ThemeAndSizePicker/FontSizeContext';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../../..';
 import {RouteProp} from '@react-navigation/native';
+import {BubbleColorProvider} from '../Header/ThemeAndSizePicker/BubbleColorContext';
 
 type ChatScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -34,17 +35,19 @@ const ChatScreen: React.FC<ChatScreenProps> = ({navigation, route}) => {
 
   return (
     <FontSizeProvider>
-      <MyKeyboardAvoidingView>
-        <View style={styles.container}>
-          <HeaderView navigation={navigation} clientUserId={clientUserId} />
-          <ChatBoxView clientUserId={clientUserId} />
-          <ChatMessageComposer
-            isCurrentUserKurator={isCurrentUserKurator}
-            user={user}
-            roomId={roomId}
-          />
-        </View>
-      </MyKeyboardAvoidingView>
+      <BubbleColorProvider>
+        <MyKeyboardAvoidingView>
+          <View style={styles.container}>
+            <HeaderView navigation={navigation} clientUserId={clientUserId} />
+            <ChatBoxView clientUserId={clientUserId} />
+            <ChatMessageComposer
+              isCurrentUserKurator={isCurrentUserKurator}
+              user={user}
+              roomId={roomId}
+            />
+          </View>
+        </MyKeyboardAvoidingView>
+      </BubbleColorProvider>
     </FontSizeProvider>
   );
 };

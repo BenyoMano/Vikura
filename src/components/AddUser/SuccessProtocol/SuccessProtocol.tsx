@@ -106,7 +106,7 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
       alignSelf: 'center',
       paddingHorizontal: paddingStyle1 as unknown as 'string' | 'number',
       paddingVertical: paddingStyle2 as unknown as 'string' | 'number',
-    },
+    } as ViewStyle,
   };
 
   const onPress = () => {
@@ -142,7 +142,7 @@ const SuccessProtocol: React.FC<SuccessProtocolProps> = ({
   }, [successProtocol, allActionsFinished]);
 
   return (
-    <Animated.View style={[styles.outerContainer]}>
+    <Animated.View style={styles.outerContainer}>
       <Pressable onPress={onPress}>
         <Animated.View style={styles.innerContainer}>
           {animatedIcons.map(animatedIcon => (

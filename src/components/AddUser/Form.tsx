@@ -38,11 +38,10 @@ const Form: React.FC<FormProps> = ({
   const ref_input5 = useRef<TextInput>(null);
 
   function kuratorCheck() {
-    if (!checkboxStateKurator) {
-      userPropToAdd.kurator = true;
-    } else {
-      userPropToAdd.kurator = false;
-    }
+    !checkboxStateKurator
+      ? (userPropToAdd.kurator = true)
+      : (userPropToAdd.kurator = false);
+    setCheckboxStateKurator(!checkboxStateKurator);
     setUserPropToAdd({...userPropToAdd, kurator});
   }
 
@@ -50,6 +49,7 @@ const Form: React.FC<FormProps> = ({
     !checkboxStateAdmin
       ? (userPropToAdd.admin = true)
       : (userPropToAdd.admin = false);
+    setCheckboxStateAdmin(!checkboxStateAdmin);
     setUserPropToAdd({...userPropToAdd, admin});
   }
 
@@ -146,7 +146,6 @@ const Form: React.FC<FormProps> = ({
             textDecorationLine: 'none',
           }}
           onPress={() => {
-            setCheckboxStateKurator(!checkboxStateKurator);
             kuratorCheck();
           }}
           keys={'kurator'}
@@ -169,7 +168,6 @@ const Form: React.FC<FormProps> = ({
             textDecorationLine: 'none',
           }}
           onPress={() => {
-            setCheckboxStateAdmin(!checkboxStateAdmin);
             adminCheck();
           }}
           keys={'admin'}

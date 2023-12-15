@@ -1,4 +1,4 @@
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import createRoom from '../../firebase/UserManagement/createRoom';
 import createUser from '../../firebase/UserManagement/createUser';
@@ -7,7 +7,7 @@ import {
   useGeneralErrorHandling,
 } from '../../ErrorHandling/errorHandling';
 import addPersonalDetails from '../../firebase/UserManagement/addPersonalDetails';
-import { ActionStates, UserPropToAdd } from './AddUserScreen';
+import {ActionStates, UserPropToAdd} from './AddUserScreen';
 import React from 'react';
 
 type AddUserProps = {
@@ -17,8 +17,8 @@ type AddUserProps = {
   checkboxStateAdmin: boolean;
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
   setActionStates: React.Dispatch<React.SetStateAction<ActionStates>>;
-  setSuccessProtocol: React.Dispatch<React.SetStateAction<boolean>>; 
-}
+  setSuccessProtocol: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const addUser = ({
   userPropToAdd,
@@ -40,9 +40,9 @@ const addUser = ({
   if (!userPropToAdd.trimmedFirstName) {
     showMessage({
       message: 'Varning!',
-      description: 'Namn saknas!',
+      description: 'Förnamn saknas!',
       type: 'danger',
-      duration: 2500,
+      autoHide: false,
     });
     return;
   }
@@ -51,7 +51,7 @@ const addUser = ({
       message: 'Varning!',
       description: 'Efternamn saknas!',
       type: 'danger',
-      duration: 2500,
+      autoHide: false,
     });
     return;
   }
@@ -60,7 +60,7 @@ const addUser = ({
       message: 'Varning!',
       description: 'Mejl saknas!',
       type: 'danger',
-      duration: 2500,
+      autoHide: false,
     });
     return;
   }
@@ -69,7 +69,7 @@ const addUser = ({
       message: 'Varning!',
       description: 'Lösenord saknas!',
       type: 'danger',
-      duration: 2500,
+      autoHide: false,
     });
     return;
   }
@@ -78,7 +78,7 @@ const addUser = ({
       message: 'Varning!',
       description: 'Personnummer saknas!',
       type: 'danger',
-      duration: 2500,
+      autoHide: false,
     });
     return;
   }
@@ -88,7 +88,16 @@ const addUser = ({
       description:
         'Personnummret måste innehålla 12 siffror, utan bindestreck!',
       type: 'danger',
-      duration: 3500,
+      autoHide: false,
+    });
+    return;
+  }
+  if (checkboxStateAdmin && !checkboxStateKurator) {
+    showMessage({
+      message: 'Varning!',
+      description: 'En "Admin" måste också ha "Utökad behörighet" (Kurator)!',
+      type: 'danger',
+      autoHide: false,
     });
     return;
   }

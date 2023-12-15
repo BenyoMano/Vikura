@@ -39,8 +39,8 @@ const App = () => {
             initialRouteName="HomeScreen"
             screenOptions={{headerShown: false}}>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="NewClientScreen" component={NewClientScreen} />
             <Stack.Screen name="KuratorScreen" component={KuratorScreen} />
+            <Stack.Screen name="NewClientScreen" component={NewClientScreen} />
             <Stack.Screen
               name="NewKuratorScreen"
               component={NewKuratorScreen}

@@ -47,7 +47,7 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
   const [submitted, setSubmitted] = useState(false);
   const [successProtocol, setSuccessProtocol] = useState(false);
   const [allDone, setAllDone] = useState(false);
-  const userId = auth().currentUser?.uid;
+  const user = auth().currentUser;
 
   const action1 = {
     status: 'initial',
@@ -86,8 +86,8 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    if (allDone) {
-      navigation.navigate('ChatScreen', {clientUserId: userId});
+    if (allDone && user?.uid) {
+      navigation.navigate('ChatScreen', {id: user?.uid});
       setTimeout(() => {
         showMessage({
           message: 'Välkommen!',
@@ -99,7 +99,7 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
         });
       }, 1500);
     }
-  }, [allDone]);
+  }, [allDone, user]);
 
   return (
     <MyKeyboardAvoidingView>
@@ -182,12 +182,10 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
             title="Bekräfta"
             onPress={() => {
               newDetailsElev({
-                navigation,
                 password,
                 rePassword,
                 alias,
                 setSubmitted,
-                actionStates,
                 setActionStates,
                 setSuccessProtocol,
               });

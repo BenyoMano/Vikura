@@ -8,11 +8,13 @@ import {
   TextStyle,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import firestore from '@react-native-firebase/firestore';
 import {DeleteUserModal} from './DeleteUser/DeleteUserModal';
 import {useContext} from 'react';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {RoomData} from './useRoomsData';
+import {StackParamList} from '../../..';
 
 type LatestMessage = {
   timestamp: number;
@@ -92,7 +94,7 @@ const ConversationRoom: React.FC<RoomData> = ({
     return () => unsubscribeFromLastMessage();
   }, []);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
   if (latestMessage === undefined) return null;
 
   return (

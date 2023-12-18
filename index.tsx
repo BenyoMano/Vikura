@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, Platform, StatusBar} from 'react-native';
+import {AppRegistry, StatusBar} from 'react-native';
 import HomeScreen from './src/components/Login/HomeScreen';
 import NewClientScreen from './src/components/NewDetails/NewClientScreen';
 import KuratorScreen from './src/components/KuratorOffice/KuratorScreen';
@@ -55,7 +55,7 @@ const App = () => {
         </NavigationContainer>
         <FlashMessage
           position="top"
-          floating={Platform.OS === 'ios' ? true : false}
+          floating={true}
         />
       </SafeAreaProvider>
     </IsCurrentUserKuratorProvider>

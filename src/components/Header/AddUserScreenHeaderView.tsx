@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, Platform} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
@@ -21,8 +21,15 @@ const AddUserScreenHeaderView: React.FC<AddUserScreenHeaderViewProps> = ({
     navigation.goBack();
   };
 
+  const platformStyle =
+    Platform.OS === 'android'
+      ? {
+          marginTop: '12%',
+        }
+      : {marginTop: '15%'};
+
   return (
-    <View style={styles.viewStyle}>
+    <View style={[styles.viewStyle, platformStyle]}>
       <SmallLogo />
       <StylingContainer>
         {!auth().currentUser ? (

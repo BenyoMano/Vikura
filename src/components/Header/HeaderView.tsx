@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, Platform} from 'react-native';
 import SmallLogo from './SmallLogo';
 import BackButton from './BackButton';
 import AddUserButton from './AddUserButton';
@@ -28,8 +28,15 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
   const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
   const isCurrentUserAdmin = contextValue?.isCurrentUserAdmin;
 
+  const platformStyle =
+    Platform.OS === 'android'
+      ? {
+          marginTop: '12%',
+        }
+      : {marginTop: '15%'};
+
   return (
-    <View style={styles.viewStyle}>
+    <View style={[styles.viewStyle, platformStyle]}>
       <SmallLogo />
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
@@ -114,7 +121,8 @@ const styles = StyleSheet.create({
     width: '88%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '12%',
+    // marginTop: '12%',
+    zIndex: 10,
   } as ViewStyle,
   adjustSize: {
     flexDirection: 'row',

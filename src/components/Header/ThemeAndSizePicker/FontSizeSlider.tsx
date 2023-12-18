@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useFontSize} from './FontSizeContext';
 import {Slider} from '@miblanchard/react-native-slider';
-import {CustomTrackIndicator, CustomTrackMark} from '../CustomTrackMark';
+import {CustomTrackIndicator, CustomTrackMark} from '../ThemeAndSizePicker/CustomTrackMark';
 import {Icon} from 'react-native-elements';
 import {
   animatedValue2,

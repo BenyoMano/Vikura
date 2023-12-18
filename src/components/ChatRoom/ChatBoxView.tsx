@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 12,
     backgroundColor: 'white',
+    zIndex: 1,
   } as ViewStyle,
   activityIndicatorStyle: {
     width: '100%',

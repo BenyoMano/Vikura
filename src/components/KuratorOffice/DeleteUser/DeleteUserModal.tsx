@@ -7,6 +7,7 @@ import {
   Animated,
   ViewStyle,
   TextStyle,
+  Platform,
 } from 'react-native';
 import DeleteUserButton from './DeleteButton/DeleteUserButton';
 import CancelButton from './CancelButton';
@@ -66,6 +67,12 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
     opacity: modalOpacity,
   };
 
+  const platformStyle = Platform.OS === 'android' ? {
+    marginTop: 10
+  } : {
+    marginTop: 40,
+  }
+
   return (
     <Modal
       transparent={true}
@@ -73,7 +80,7 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
       onRequestClose={() => {
         setModalVisible(!modalVisible);
       }}>
-      <Animated.View style={[styles.viewStyle, animatedTranslateStyle]}>
+      <Animated.View style={[styles.viewStyle, animatedTranslateStyle, platformStyle]}>
         <View style={styles.info}>
           <Text style={styles.textStyle}>
             Delete user profile and linked rooms (not account)?
@@ -105,7 +112,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     position: 'relative',
     width: 340,
-    margin: 10,
     alignSelf: 'center',
     alignItems: 'center',
     borderRadius: 10,

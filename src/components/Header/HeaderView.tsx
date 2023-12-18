@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     width: '88%',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginTop: '12%',
     zIndex: 10,
   } as ViewStyle,
   adjustSize: {

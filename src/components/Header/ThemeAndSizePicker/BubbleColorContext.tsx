@@ -65,8 +65,8 @@ export const BubbleColorProvider: React.FC<BubbleColorProvider> = ({
       receive: '#EB95C5',
     },
     colorCode3: {
-      send: '#EC9BB4',
-      receive: '#9BECD3',
+      send: '#F5B9B9',
+      receive: '#9DE3BC',
     },
   };
 

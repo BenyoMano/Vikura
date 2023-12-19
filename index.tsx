@@ -53,10 +53,7 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
-        <FlashMessage
-          position="top"
-          floating={true}
-        />
+        <FlashMessage position="top" floating={true} />
       </SafeAreaProvider>
     </IsCurrentUserKuratorProvider>
   );

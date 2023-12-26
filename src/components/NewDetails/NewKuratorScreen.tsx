@@ -15,7 +15,8 @@ import {HeaderView} from '../Header/HeaderView';
 import newDetailsKurator from '../../firebase/newDetailsKurator';
 import {DotsLoader} from 'react-native-indicator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 import {NewDetailsProps} from './NewClientScreen';
 
 type NewKuratorScreenNavigationProp = NativeStackNavigationProp<

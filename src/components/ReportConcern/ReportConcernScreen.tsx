@@ -9,7 +9,8 @@ import useUserPersonalDetails from '../../firebase/userDetails';
 import ClipboardHandler from './ClipboardHandler';
 import SendMailButton from './SendMailButton';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 import {RouteProp} from '@react-navigation/native';
 
 type ReportConcernNavigationProp = NativeStackNavigationProp<

@@ -15,7 +15,8 @@ import MainText from '../../atoms/MainText';
 import LoginForm from './LoginForm';
 import {MotiView} from 'moti';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,

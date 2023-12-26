@@ -9,7 +9,8 @@ import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorCo
 import {useRoomId} from '../../firebase/useRoomId';
 import {FontSizeProvider} from '../Header/ThemeAndSizePicker/FontSizeContext';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 import {RouteProp} from '@react-navigation/native';
 import {BubbleColorProvider} from '../Header/ThemeAndSizePicker/BubbleColorContext';
 

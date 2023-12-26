@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import HomeScreen from './src/components/Login/HomeScreen';
 import NewClientScreen from './src/components/NewDetails/NewClientScreen';
 import KuratorScreen from './src/components/KuratorOffice/KuratorScreen';
@@ -59,4 +59,4 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent('Omnitalk', () => App);
+export default App;

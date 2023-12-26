@@ -17,7 +17,8 @@ import SuccessProtocol from '../AddUser/SuccessProtocol/SuccessProtocol';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 
 type NewClientScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,

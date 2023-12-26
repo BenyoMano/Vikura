@@ -14,7 +14,8 @@ import {DeleteUserModal} from './DeleteUser/DeleteUserModal';
 import {useContext} from 'react';
 import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {RoomData} from './useRoomsData';
-import {StackParamList} from '../../..';
+// import {StackParamList} from '../../..';
+import {StackParamList} from '../../../App';
 
 type LatestMessage = {
   timestamp: number;

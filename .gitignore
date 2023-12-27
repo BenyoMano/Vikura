@@ -32,6 +32,12 @@ build/
 local.properties
 *.iml
 *.hprof
+android/app/release/output-metadata.json
+android/app/release/app-release.apk
+android/app/release/app-release.aab
+/release/
+/build/
+debug.keystore
 
 # node.js
 #

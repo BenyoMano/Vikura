@@ -24,7 +24,7 @@ Chat app designed to facilitate conversations between clients and School Welfare
 
 <table>
   <tr>
-    <td><img src="./src/assets/images/Vikura-chat.png" width="250px"></td>
+    <td><img src="./src/assets/images/Animation1.gif" width="250px"></td>
     <td><img src="./src/assets/images/Animation.gif" 
     width="250px"></td>
   </tr>

@@ -22,7 +22,7 @@ const InputBarChatt: React.FC<InputBarChattProps> = ({
         autoFocus={true}
         multiline
         placeholder="Skriv något..."
-        placeholderTextColor="grey"
+        placeholderTextColor="#4F4F4F"
         textBreakStrategy="simple"
         underlineColorAndroid="transparent"
         pointerEvents="none"

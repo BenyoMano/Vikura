@@ -1,18 +1,28 @@
-import React from 'react';
-import {TextInput, View} from 'react-native';
+import React, {ForwardedRef} from 'react';
+import {TextInput, TextInputProps, View, ViewStyle} from 'react-native';
+import {LoginDetailsProps} from './HomeScreen';
 
-const InputBarLogIn = React.forwardRef(
+interface InputBarLogInProps extends TextInputProps {
+  title: string;
+  keys: 'mejl' | 'password';
+  loginDetails: LoginDetailsProps;
+  setLoginDetails: React.Dispatch<React.SetStateAction<LoginDetailsProps>>;
+  submitted: boolean;
+  ref?: ForwardedRef<TextInput>;
+}
+
+const InputBarLogIn: React.FC<InputBarLogInProps> = React.forwardRef(
   (
     {
+      title,
       autoFocus,
       blurOnSubmit,
-      title,
       keys,
       value,
       loginDetails,
       setLoginDetails,
-      security,
-      keyType,
+      secureTextEntry,
+      keyboardType,
       returnKeyType,
       onSubmitEditing,
       submitted,
@@ -30,15 +40,15 @@ const InputBarLogIn = React.forwardRef(
           blurOnSubmit={blurOnSubmit}
           autoCorrect={false}
           autoCapitalize="none"
-          keyboardType={keyType}
+          keyboardType={keyboardType}
           returnKeyType={returnKeyType}
-          secureTextEntry={security}
+          secureTextEntry={secureTextEntry}
           ref={ref}
           onSubmitEditing={onSubmitEditing}
           onChangeText={v => setLoginDetails({...loginDetails, [keys]: v})}
           value={value}
           placeholder={title}
-          placeholderTextColor={'#575757'}
+          placeholderTextColor={'#4F4F4F'}
         />
       </View>
     );
@@ -51,7 +61,7 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     marginTop: 15,
-  },
+  } as ViewStyle,
   barStyle: {
     paddingLeft: 10,
     height: 52,

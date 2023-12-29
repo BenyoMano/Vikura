@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useRef} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import InputBarLogIn from './InputBarLogIn';
 
 const LoginForm = ({
@@ -11,7 +10,7 @@ const LoginForm = ({
   submitted,
   handleLogin,
 }) => {
-  const ref_input2 = useRef();
+  const ref_input2 = useRef<TextInput>(null);
 
   return (
     <View style={styles.logincontainer}>
@@ -19,18 +18,18 @@ const LoginForm = ({
         autoFocus={false}
         blurOnSubmit={false}
         title="E-postadress"
-        keyType="email-address"
+        keyboardType="email-address"
         returnKeyType="next"
         keys={'mejl'}
         value={mejl}
-        onSubmitEditing={() => ref_input2.current.focus()}
+        onSubmitEditing={() => ref_input2.current?.focus()}
         loginDetails={loginDetails}
         setLoginDetails={setLoginDetails}
         submitted={submitted}
       />
       <InputBarLogIn
         title="Lösenord"
-        security={true}
+        secureTextEntry={true}
         returnKeyType="done"
         keys={'password'}
         value={password}

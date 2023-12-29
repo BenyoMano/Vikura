@@ -15,7 +15,6 @@ import AddUserModal from './AddUserModal';
 import AddUserScreenHeaderView from '../Header/AddUserScreenHeaderView';
 import SuccessProtocol from './SuccessProtocol/SuccessProtocol';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-// import {StackParamList} from '../../..';
 import {StackParamList} from '../../../App';
 
 export type Action = {

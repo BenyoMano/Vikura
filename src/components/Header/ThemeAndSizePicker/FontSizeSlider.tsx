@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 import {useFontSize} from './FontSizeContext';
 import {Slider} from '@miblanchard/react-native-slider';
-import {CustomTrackIndicator, CustomTrackMark} from '../ThemeAndSizePicker/CustomTrackMark';
+import {
+  CustomTrackIndicator,
+  CustomTrackMark,
+} from '../ThemeAndSizePicker/CustomTrackMark';
 import {Icon} from 'react-native-elements';
 import {
   animatedValue2,
@@ -120,30 +123,3 @@ export const FontSizeSlider: React.FC<FontSizeSliderProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  constainer: {
-    position: 'absolute',
-    right: 0,
-    top: '100%',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    borderWidth: 1,
-    borderRadius: 12,
-    width: 170,
-    padding: 10,
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 30,
-    zIndex: 3,
-  } as ViewStyle,
-  textStyle: {
-    fontSize: 14,
-  } as TextStyle,
-});

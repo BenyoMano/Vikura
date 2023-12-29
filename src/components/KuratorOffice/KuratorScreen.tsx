@@ -3,7 +3,6 @@ import {View, StyleSheet, ViewStyle} from 'react-native';
 import ConversationView from './ConversationView';
 import {HeaderView} from '../Header/HeaderView';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-// import {StackParamList} from '../../..';
 import {StackParamList} from '../../../App';
 
 type KuratorScreenNavigationProp = NativeStackNavigationProp<

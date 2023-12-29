@@ -1,4 +1,4 @@
-import React, {ForwardedRef, RefObject} from 'react';
+import React, {ForwardedRef} from 'react';
 import {TextInput, View, ViewStyle, TextInputProps} from 'react-native';
 import {NewDetailsProps} from './NewClientScreen';
 
@@ -7,6 +7,7 @@ interface InputBarNewDetailsProps extends TextInputProps {
   newDetails: NewDetailsProps;
   setNewDetails: React.Dispatch<React.SetStateAction<NewDetailsProps>>;
   submitted: boolean;
+  ref?: ForwardedRef<TextInput>;
 }
 
 const InputBarNewDetails: React.FC<InputBarNewDetailsProps> = React.forwardRef(
@@ -25,7 +26,7 @@ const InputBarNewDetails: React.FC<InputBarNewDetailsProps> = React.forwardRef(
       onSubmitEditing,
       submitted,
     },
-    ref: ForwardedRef<TextInput>,
+    ref,
   ) => {
     const {viewStyle, barStyle, redBarStyle} = styles;
     const empty = !value && submitted;
@@ -45,7 +46,7 @@ const InputBarNewDetails: React.FC<InputBarNewDetailsProps> = React.forwardRef(
           onChangeText={v => setNewDetails({...newDetails, [keys]: v})}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor={'#575757'}
+          placeholderTextColor={'#4F4F4F'}
         />
       </View>
     );

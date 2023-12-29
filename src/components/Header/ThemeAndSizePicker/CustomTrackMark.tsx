@@ -8,7 +8,7 @@ type CustomTrackMarkProps = {
 export const CustomTrackMark: React.FC<CustomTrackMarkProps> = () => {
   return (
     <View
-      style={{width: 3, height: 13, left: 18, backgroundColor: '#b3b3b3'}}
+      style={{width: 3, height: 13, left: 18, backgroundColor: '#757575'}}
     />
   );
 };
@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   textStyle: {
     fontSize: 10,
-    color: 'grey',
+    color: '#757575',
   } as TextStyle,
 });

@@ -53,9 +53,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = memo(
         />
         <View
           style={
-            id === user?.uid
-              ? styles.bubbleSend.timestamp
-              : styles.bubbleRecieve.timestamp
+            id === user?.uid ? styles.timestampSend : styles.timestampReceive
           }>
           <Text style={authorText}>
             {isSameDay
@@ -90,9 +88,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = memo(
         />
         <View
           style={
-            id === clientUserId
-              ? styles.bubbleRecieve.timestamp
-              : styles.bubbleSend.timestamp
+            id === clientUserId ? styles.timestampReceive : styles.timestampSend
           }>
           <Text style={authorText}>
             {isSameDay
@@ -123,23 +119,27 @@ const styles = StyleSheet.create({
   bubbleSend: {
     flexDirection: 'row-reverse',
     alignSelf: 'flex-end',
-    timestamp: {
-      justifyContent: 'center',
-      alignSelf: 'flex-end',
-      marginBottom: 8,
-      marginRight: 10,
-    } as ViewStyle,
-  },
+  } as ViewStyle,
+  timestampSend: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignSelf: 'flex-end',
+    marginBottom: 8,
+    marginRight: 10,
+  } as ViewStyle,
   bubbleRecieve: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    timestamp: {
-      justifyContent: 'center',
-      alignSelf: 'flex-end',
-      marginBottom: 8,
-      marginLeft: 10,
-    } as ViewStyle,
-  },
+  } as ViewStyle,
+  timestampReceive: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignSelf: 'flex-end',
+    marginBottom: 8,
+    marginLeft: 10,
+  } as ViewStyle,
 });
 
 export default ChatBubble;

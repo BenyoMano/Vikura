@@ -9,15 +9,15 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 
-type AddUserButtonProps = {
+type RequestDeleteButtonProps = {
   onPress: () => void;
 };
 
-const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
-  const {btnContainerStyle} = styles;
+const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({onPress}) => {
+  const {buttonContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
-  const rotateAnimation = animatedValue.interpolate({
-    inputRange: [0, 0.25, 1],
+  const buttonRotate = animatedValue.interpolate({
+    inputRange: [0, 0.5, 1],
     outputRange: ['0deg', '-20deg', '20deg'],
   });
 
@@ -39,23 +39,19 @@ const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
     }).start();
   };
 
-  const rotateAnimationStyle = {
-    transform: [{rotateZ: rotateAnimation}],
+  const animatedRotateStyle = {
+    transform: [{rotateZ: buttonRotate}],
   };
 
   return (
-    <View
-      style={{
-        borderRadius: 10,
-        overflow: 'hidden',
-      }}>
+    <View style={{borderRadius: 10, overflow: 'hidden'}}>
       <Pressable
         onPress={onPress}
         onPressIn={handlePressInAnimation}
         onPressOut={handlePressOutAnimation}
-        style={btnContainerStyle}>
-        <Animated.View style={[rotateAnimationStyle]}>
-          <Icon name="adduser" type="antdesign" color="black" size={30} />
+        style={buttonContainerStyle}>
+        <Animated.View style={[animatedRotateStyle]}>
+          <Icon name="inbox" type="octicon" color="black" size={24} />
         </Animated.View>
       </Pressable>
     </View>
@@ -63,14 +59,15 @@ const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
 };
 
 const styles = StyleSheet.create({
-  btnContainerStyle: {
-    width: 56,
-    height: 50,
+  buttonContainerStyle: {
+    width: 40,
+    height: 40,
     borderWidth: 1.5,
     borderRadius: 10,
-    borderColor: '#166C1B',
+    borderColor: 'black',
     justifyContent: 'center',
+    marginRight: 15,
   } as ViewStyle,
 });
 
-export default AddUserButton;
+export default RequestDeleteButton;

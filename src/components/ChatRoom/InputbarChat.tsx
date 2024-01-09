@@ -15,7 +15,6 @@ const InputBarChatt: React.FC<InputBarChattProps> = ({
   return (
     <View style={viewStyle}>
       <TextInput
-        testID="inputbarChat"
         style={barStyle}
         onChangeText={messageToSend => setMessageToSend(messageToSend)}
         value={messageToSend}

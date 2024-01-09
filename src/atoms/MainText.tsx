@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TextStyle, ViewStyle} from 'react-native';
+import {Text, View, TextStyle, ViewStyle, Animated, Easing} from 'react-native';
 
 type MainTextProps = {
   title: string;
@@ -8,10 +8,11 @@ type MainTextProps = {
 
 const MainText: React.FC<MainTextProps> = props => {
   const {textStyling, viewStyle} = styles;
+
   return (
-    <View style={viewStyle}>
+    <Animated.View style={viewStyle}>
       <Text style={[props.style, textStyling]}>{props.title}</Text>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -11,6 +11,8 @@ import LogoutButton from './LogoutButton';
 import StylingContainer from './StylingContainer';
 import AdjustSizeButton from './AdjustSizeButton/AdjustSizeButton';
 import {ThemeAndSizePicker} from './ThemeAndSizePicker/ThemeAndSizePicker';
+import RequestDeleteButton from '../KuratorOffice/DeleteUser/RequestDeleteButton';
+import SettingsButton from './SettingsButton';
 
 type HeaderViewProps = {
   navigation: any;
@@ -47,10 +49,19 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
             }}
           />
           {isCurrentUserAdmin ? (
-            <AddUserButton
-              onPress={() => navigation.navigate('AddUserScreen')}
-            />
+            <View style={styles.directionStyle}>
+              <RequestDeleteButton
+                onPress={() => navigation.navigate('DeleteUserScreen')}
+              />
+              <AddUserButton
+                onPress={() => navigation.navigate('AddUserScreen')}
+              />
+            </View>
           ) : null}
+        </StylingContainer>
+      ) : route.name === 'DeleteUserScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
         </StylingContainer>
       ) : route.name === 'NewKuratorScreen' ? (
         <StylingContainer>
@@ -67,7 +78,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
       ) : route.name === 'ChatScreen' && isCurrentUserKurator ? (
         <StylingContainer>
           <BackButton onPress={() => navigation.goBack()} />
-          <View style={styles.adjustSize}>
+          <View style={styles.directionStyle}>
             <ReportConcernButton
               onPress={() =>
                 navigation.navigate('ReportConcernScreen', {
@@ -96,7 +107,12 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
               navigation.navigate('HomeScreen');
             }}
           />
-          <View style={styles.adjustSize}>
+          <View style={styles.directionStyle}>
+            <SettingsButton
+              onPress={() => {
+                navigation.navigate('UserSettingsScreen');
+              }}
+            />
             <AdjustSizeButton
               isToggled={isToggled}
               setIsToggled={setIsToggled}
@@ -109,6 +125,26 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
               />
             )}
           </View>
+        </StylingContainer>
+      ) : route.name === 'UserSettingsScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'EulaAndPolicyScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'HelpcenterScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'RequestDeleteScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
+        </StylingContainer>
+      ) : route.name === 'ChangeAliasPasswordScreen' ? (
+        <StylingContainer>
+          <BackButton onPress={() => navigation.goBack()} />
         </StylingContainer>
       ) : null}
     </View>
@@ -123,10 +159,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 10,
   } as ViewStyle,
-  adjustSize: {
+  directionStyle: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
     zIndex: 3,
   } as ViewStyle,
 });

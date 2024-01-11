@@ -1,18 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  Animated,
-  Easing,
-  ActivityIndicator,
-} from 'react-native';
+import {View, StyleSheet, ViewStyle, Animated, Easing} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {HeaderView} from '../../Header/HeaderView';
-import MainText from '../../../atoms/MainText';
-import {StackParamList} from '../../../../App';
+import {HeaderView} from '../../../Header/HeaderView';
+import MainText from '../../../../atoms/MainText';
+import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
-import WebView from 'react-native-webview';
+import DocumentView from './DocumentView';
 
 type EulaAndPolicyScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -41,7 +34,7 @@ const EulaAndPolicyScreen: React.FC<EulaAndPolicyScreenProps> = ({
     };
     return translations[level];
   };
-  const [isLoading, setLoading] = useState(false);
+
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
 
   const fadeInAnim = Animated.timing(animatedValue1, {
@@ -83,43 +76,7 @@ const EulaAndPolicyScreen: React.FC<EulaAndPolicyScreenProps> = ({
           }}
         />
       </Animated.View>
-      <View style={styles.boxContainer}>
-        {settingsChoice === 'eula' ? (
-          <View style={{flex: 1}}>
-            <WebView
-              onLoadProgress={({nativeEvent}) => {
-                console.log('NativeEvent', nativeEvent.progress);
-                if (nativeEvent.progress !== 1 && !isLoading) {
-                  setLoading(true);
-                } else if (nativeEvent.progress === 1) {
-                  setLoading(false);
-                }
-              }}
-              source={{
-                uri: 'https://www.termsfeed.com/live/2e00e7ce-8224-416e-ae6e-5adf222ceabe?fbclid=IwAR1YLW9rKtqYT2zFuOK805WS82VnqRSKSr9RKKq2FOzhLFztDpCpZjpbdxg',
-              }}
-            />
-            {isLoading && <ActivityIndicator size={'large'} />}
-          </View>
-        ) : (
-          <View style={{flex: 1}}>
-            <WebView
-              onLoadProgress={({nativeEvent}) => {
-                console.log('NativeEvent', nativeEvent.progress);
-                if (nativeEvent.progress !== 1 && !isLoading) {
-                  setLoading(true);
-                } else if (nativeEvent.progress === 1) {
-                  setLoading(false);
-                }
-              }}
-              source={{
-                uri: 'https://www.termsfeed.com/live/60db37d2-737a-4190-8e1c-d2cb382e32ae?fbclid=IwAR3KBnwlGaMl5rxQK7EGA2B_TdKRhyiOvrVbfYf7CXnFgUSZ0N90NIG6D8c',
-              }}
-            />
-            {isLoading && <ActivityIndicator size={'large'} />}
-          </View>
-        )}
-      </View>
+      <DocumentView settingsChoice={settingsChoice} />
     </View>
   );
 };
@@ -130,17 +87,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
-  } as ViewStyle,
-  boxContainer: {
-    flex: 1,
-    width: '88%',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    marginTop: 10,
-    marginBottom: 40,
-    borderWidth: 2,
-    borderColor: 'gray',
-    borderRadius: 12,
   } as ViewStyle,
   textContainer: {
     height: '5%',

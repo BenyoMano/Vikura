@@ -10,7 +10,7 @@ const signIn = async ({
   setLoading,
   setSubmitted,
 }) => {
-  if (!loginDetails.mejl) {
+  if (!loginDetails.mail) {
     showMessage({
       message: 'Varning!',
       description: 'Mejl saknas!',
@@ -25,18 +25,18 @@ const signIn = async ({
     });
   }
 
-  if (loginDetails.mejl && loginDetails.password) {
+  if (loginDetails.mail && loginDetails.password) {
     setLoading(true);
 
     try {
       await auth().signInWithEmailAndPassword(
-        loginDetails.mejl,
+        loginDetails.mail,
         loginDetails.password,
       );
 
       navigateAfterSignIn({navigation});
       setLoginDetails({
-        mejl: '',
+        mail: '',
         password: '',
       });
 

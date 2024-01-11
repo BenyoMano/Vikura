@@ -45,7 +45,7 @@ const AddUserModal: React.FC<AddUserModalProos> = ({
           userProp={userPropToAdd.firstName + ' ' + userPropToAdd.secondName}
         />
         <Label labelTitle={'Mejl:'} />
-        <UserPropInfo userProp={userPropToAdd.mejl} />
+        <UserPropInfo userProp={userPropToAdd.mail} />
         <Label labelTitle={'Lösenord:'} />
         <UserPropInfo userProp={userPropToAdd.password} />
         <Label labelTitle={'Personnummer:'} />

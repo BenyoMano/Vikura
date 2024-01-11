@@ -7,12 +7,26 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import {HCSettingsChoice} from './HelpcenterScreen';
+import {reportProblem} from '../../../../firebase/UserManagement/Problem/reportProblem';
+import useUserPersonalDetails from '../../../../firebase/userDetails';
+import auth from '@react-native-firebase/auth';
 
 type SendProblemButtonProps = {
   title: string;
+  settingsChoice: HCSettingsChoice;
+  messageToSend: string;
+  setMessageToSend: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SendProblemButton: React.FC<SendProblemButtonProps> = ({title}) => {
+const SendProblemButton: React.FC<SendProblemButtonProps> = ({
+  title,
+  settingsChoice,
+  messageToSend,
+  setMessageToSend,
+}) => {
+  const clientUserId = auth().currentUser?.uid;
+  const userDetails = useUserPersonalDetails({clientUserId});
   const {btnTextStyle, btnContainerStyle} = styles;
   const animated = new Animated.Value(1);
 
@@ -33,7 +47,13 @@ const SendProblemButton: React.FC<SendProblemButtonProps> = ({title}) => {
   };
 
   const onPress = () => {
-    // firestore
+    reportProblem({
+      settingsChoice,
+      messageToSend,
+      setMessageToSend,
+      userDetails,
+      clientUserId,
+    });
   };
 
   return (

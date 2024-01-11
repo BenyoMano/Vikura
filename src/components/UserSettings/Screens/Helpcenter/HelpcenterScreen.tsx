@@ -15,8 +15,8 @@ import {HeaderView} from '../../../Header/HeaderView';
 import MainText from '../../../../atoms/MainText';
 import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
-import Button from '../../../../atoms/Button';
 import SendProblemButton from './SendProblemButton';
+import {reportProblem} from '../../../../firebase/UserManagement/Problem/reportProblem';
 
 type HelpcenterScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -37,7 +37,6 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
   route,
 }) => {
   const settingsChoice = route.params.settingsChoice;
-  console.log('recieved:', settingsChoice);
   const translateSettingsChoice = (level: HCSettingsChoice): string => {
     const translations = {
       problem: 'Hjälpcenter',
@@ -129,7 +128,12 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
             pointerEvents="none"
           />
         </View>
-        <SendProblemButton title="Skicka" />
+        <SendProblemButton
+          title="Skicka"
+          settingsChoice={settingsChoice}
+          messageToSend={messageToSend}
+          setMessageToSend={setMessageToSend}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

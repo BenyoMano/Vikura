@@ -7,14 +7,21 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import {requestDelete} from '../../../../firebase/UserManagement/DeleteUser/requestDelete';
+import auth from '@react-native-firebase/auth';
+import useUserPersonalDetails from '../../../../firebase/userDetails';
 
 type RequestDeleteButtonProps = {
-  title: string;
+  hasRequested: boolean;
 };
 
-const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({title}) => {
+const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({
+  hasRequested,
+}) => {
   const {btnContainerStyle, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
+  const clientUserId = auth().currentUser?.uid;
+  const userDetails = useUserPersonalDetails({clientUserId});
 
   const fadeIn = () => {
     Animated.timing(animated, {
@@ -33,7 +40,14 @@ const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({title}) => {
   };
 
   const onPress = () => {
-    //firestore grej
+    requestDelete({clientUserId, userDetails});
+  };
+
+  const variableContainerStyle = {
+    borderColor: !hasRequested ? 'red' : 'grey',
+  };
+  const variableTextStyle = {
+    color: !hasRequested ? 'red' : 'grey',
   };
 
   return (
@@ -44,8 +58,11 @@ const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({title}) => {
           {
             opacity: animated,
           },
+          variableContainerStyle,
         ]}>
-        <Text style={btnTextStyle}>{title}</Text>
+        <Text style={[btnTextStyle, variableTextStyle]}>
+          {!hasRequested ? 'Skicka Begäran' : 'Begäran Skickad'}
+        </Text>
       </Animated.View>
     </Pressable>
   );
@@ -55,12 +72,10 @@ export const styles = StyleSheet.create({
   btnContainerStyle: {
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'red',
     paddingHorizontal: 20,
     paddingVertical: 15,
   } as ViewStyle,
   btnTextStyle: {
-    color: 'red',
     fontSize: 18,
     textAlign: 'center',
     fontFamily: 'NunitoSans-Regular',

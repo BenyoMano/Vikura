@@ -30,7 +30,7 @@ const Form: React.FC<FormProps> = ({
   submitted,
 }) => {
   const [calculatedHeight, setCalculatedHeight] = useState<number | null>(null);
-  const {firstName, secondName, mejl, password, personnummer, kurator, admin} =
+  const {firstName, secondName, mail, password, personnummer, kurator, admin} =
     userPropToAdd;
   const ref_input2 = useRef<TextInput>(null);
   const ref_input3 = useRef<TextInput>(null);
@@ -98,8 +98,8 @@ const Form: React.FC<FormProps> = ({
         keyType="email-address"
         returnKeyType="next"
         capitalize="none"
-        keys={'mejl'}
-        value={mejl}
+        keys={'mail'}
+        value={mail}
         ref={ref_input3}
         onSubmitEditing={() => ref_input4.current?.focus()}
         userPropToAdd={userPropToAdd}

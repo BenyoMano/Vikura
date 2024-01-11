@@ -16,7 +16,7 @@ type DeleteUserButtonProps = {
   setClosingModal: React.Dispatch<React.SetStateAction<boolean>>;
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  clientId: string;
+  clientUserId: string;
 };
 
 export type ActionState = 'initial' | 'success' | 'failed';
@@ -26,7 +26,7 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
   setClosingModal,
   modalVisible,
   setModalVisible,
-  clientId,
+  clientUserId,
 }) => {
   const [actionFinished, setActionFinished] = useState<ActionState>('initial');
   const [clipboardString, setClipboardString] = useClipboard();
@@ -59,10 +59,10 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
 
   const handlePress = async () => {
     setIsRunning(true);
-    setClipboardString(clientId);
+    setClipboardString(clientUserId);
     const fetchRoomName = await firestore()
       .collection('rooms')
-      .where('users.client.id', '==', clientId)
+      .where('users.client.id', '==', clientUserId)
       .get();
 
     const docID = fetchRoomName.docs[0].id;
@@ -80,7 +80,7 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
         let subject = 'meddelanden';
         useDynamicDeleteUserErrorHandling({
           error,
-          clientId,
+          clientUserId,
           subject,
           setActionFinished,
         });
@@ -93,20 +93,20 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
         let subject = 'chatt-rummet';
         useDynamicDeleteUserErrorHandling({
           error,
-          clientId,
+          clientUserId,
           subject,
           setActionFinished,
         });
         return;
       }
       try {
-        await firestore().collection('Users').doc(clientId).delete();
+        await firestore().collection('Users').doc(clientUserId).delete();
         operationsCount.current += 1;
       } catch (error) {
         let subject = 'användarprofilen';
         useDynamicDeleteUserErrorHandling({
           error,
-          clientId,
+          clientUserId,
           subject,
           setActionFinished,
         });

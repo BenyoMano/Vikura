@@ -13,10 +13,10 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AddUserScreen from './src/components/AddUser/AddUserScreen';
 import FlashMessage from 'react-native-flash-message';
 import {IsCurrentUserKuratorProvider} from './src/firebase/isCurrentUserKuratorContext';
-import UserSettingsScreen from './src/components/UserSettings/UserSettingsScreen';
+import UserSettingsScreen from './src/components/UserSettings/Menu/UserSettingsScreen';
 import EulaAndPolicyScreen, {
   EAPSettingsChoice,
-} from './src/components/UserSettings/Screens/EulaAndPolicyScreen';
+} from './src/components/UserSettings/Screens/EulaAndPolicy/EulaAndPolicyScreen';
 import HelpcenterScreen, {
   HCSettingsChoice,
 } from './src/components/UserSettings/Screens/Helpcenter/HelpcenterScreen';

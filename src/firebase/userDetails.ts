@@ -2,33 +2,47 @@ import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
 import {useEffect, useState} from 'react';
+import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
 
 export type UserDetails = {
+  alias: FirebaseFirestoreTypes.DocumentFieldType;
   firstName: FirebaseFirestoreTypes.DocumentFieldType;
   secondName: FirebaseFirestoreTypes.DocumentFieldType;
   mail: FirebaseFirestoreTypes.DocumentFieldType;
   personNummer: FirebaseFirestoreTypes.DocumentFieldType;
 };
 
-const useUserPersonalDetails = ({clientUserId}: {clientUserId: string}) => {
+const useUserPersonalDetails = ({
+  clientUserId,
+}: {
+  clientUserId: string | undefined;
+}) => {
   const [userDetails, setUserDetails] = useState<UserDetails>();
 
   useEffect(() => {
     const getUserDetails = async () => {
-      const getDetail = await firestore()
-        .collection('Users')
-        .doc(clientUserId)
-        .get();
+      try {
+        if (clientUserId === undefined) {
+          throw new Error('clientUserId is undefined');
+        }
+        const getDetail = await firestore()
+          .collection('Users')
+          .doc(clientUserId)
+          .get();
 
-      const firstName = getDetail.get('firstName');
-      const secondName = getDetail.get('secondName');
-      const mail = getDetail.get('mejl');
-      const personNummer = getDetail.get('personNummer');
+        const alias = getDetail.get('alias');
+        const firstName = getDetail.get('firstName');
+        const secondName = getDetail.get('secondName');
+        const mail = getDetail.get('mail');
+        const personNummer = getDetail.get('personNummer');
 
-      setUserDetails({firstName, secondName, mail, personNummer});
+        setUserDetails({alias, firstName, secondName, mail, personNummer});
+      } catch (error) {
+        useGeneralErrorHandling({error, position: 'top'});
+      }
     };
     getUserDetails();
-  }, []);
+  }, [clientUserId]);
   return userDetails;
 };
 

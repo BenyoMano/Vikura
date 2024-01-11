@@ -7,6 +7,8 @@ import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
 import RequestDeleteButton from './RequestDeleteButton';
+import {useHasRequested} from '../../../../firebase/UserManagement/DeleteUser/useHasRequested';
+import auth from '@react-native-firebase/auth';
 
 type RequestDeleteScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -24,6 +26,8 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
   navigation,
 }) => {
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
+  const clientUserId = auth().currentUser?.uid;
+  const hasRequested = useHasRequested({clientUserId});
 
   const fadeInAnim = Animated.timing(animatedValue1, {
     toValue: 1,
@@ -46,8 +50,17 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
     };
   }, []);
 
+  const variableScreenStyle = {
+    backgroundColor: !hasRequested ? 'white' : 'lightgrey',
+  };
+
   return (
-    <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
+    <View
+      style={[
+        styles.screenContainer,
+        variableScreenStyle,
+        {flexDirection: 'column'},
+      ]}>
       <HeaderView navigation={navigation} />
       <Animated.View
         style={[
@@ -68,7 +81,7 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
         <Icon
           name="delete-forever"
           type="material-icons"
-          color="red"
+          color={!hasRequested ? 'red' : 'grey'}
           size={40}
         />
         <MainText
@@ -86,9 +99,13 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
         />
         <MainText
           title="Denna handling är permanent och kan inte ångras när väl kontot är raderat."
-          style={{fontSize: 20, color: 'red', textAlign: 'center'}}
+          style={
+            !hasRequested
+              ? {fontSize: 20, color: 'red', textAlign: 'center'}
+              : {fontSize: 20, color: 'grey', textAlign: 'center'}
+          }
         />
-        <RequestDeleteButton title="Skicka Begäran" />
+        <RequestDeleteButton hasRequested={hasRequested} />
       </View>
     </View>
   );
@@ -99,7 +116,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: 'white',
   } as ViewStyle,
   mainContainer: {
     flex: 1,

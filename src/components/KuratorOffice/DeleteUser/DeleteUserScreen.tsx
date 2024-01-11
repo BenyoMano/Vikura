@@ -5,8 +5,8 @@ import {HeaderView} from '../../Header/HeaderView';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../../../../App';
 import MainText from '../../../atoms/MainText';
-import {Button} from 'react-native-elements';
 import TabButton from '../../../atoms/TabButton';
+import IssueView from './IssueView';
 
 type DeleteUserScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -57,7 +57,7 @@ const DeleteUserScreen: React.FC<DeleteUserScreenProps> = ({navigation}) => {
         />
       </View>
       <View style={{flex: 1}}>
-        <ConversationView />
+        <IssueView />
       </View>
     </View>
   );

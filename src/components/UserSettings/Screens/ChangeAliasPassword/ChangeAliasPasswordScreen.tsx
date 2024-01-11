@@ -18,6 +18,10 @@ import MainText from '../../../../atoms/MainText';
 import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
 import ConfirmButton from './ConfirmButton';
+import {updateAlias} from '../../../../firebase/UserManagement/ChangeAliasPassword/updateAlias';
+import auth from '@react-native-firebase/auth';
+import {useAlias} from '../../../../firebase/UserManagement/ChangeAliasPassword/useAlias';
+import {updatePassword} from '../../../../firebase/UserManagement/ChangeAliasPassword/updatePassword';
 
 type ChangeAliasScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -38,7 +42,12 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
   navigation,
 }) => {
   const [newAlias, setNewAlias] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
+  const user = auth().currentUser;
+  const clientUserId = user?.uid;
+  const alias = useAlias({clientUserId});
 
   const fadeInAnim = Animated.timing(animatedValue1, {
     toValue: 1,
@@ -60,6 +69,17 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
       animatedValue1.setValue(0);
     };
   }, []);
+
+  const handleAlias = async () => {
+    await updateAlias({newAlias, clientUserId});
+    setNewAlias('');
+  };
+
+  const handlePassword = async () => {
+    await updatePassword({user, password, rePassword});
+    setPassword('');
+    setRePassword('');
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -99,8 +119,12 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 Nuvarande alias:
               </Text>
               <View style={{paddingLeft: 20}}>
-                <Text style={{fontFamily: 'NunitoSans-Italic', fontSize: 16}}>
-                  Abbe
+                <Text
+                  style={{
+                    fontFamily: 'NunitoSans-Italic',
+                    fontSize: 16,
+                  }}>
+                  {alias}
                 </Text>
               </View>
             </View>
@@ -126,7 +150,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 pointerEvents="none"
               />
             </View>
-            <ConfirmButton title="Ändra Alias" />
+            <ConfirmButton title="Ändra Alias" onPress={handleAlias} />
             <View
               style={{
                 borderBottomWidth: StyleSheet.hairlineWidth,
@@ -155,9 +179,10 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
             </View>
             <View style={styles.inputContainer}>
               <TextInput
+                secureTextEntry
                 style={styles.inputStyle}
-                onChangeText={newAlias => setNewAlias(newAlias)}
-                value={newAlias}
+                onChangeText={password => setPassword(password)}
+                value={password}
                 autoFocus={false}
                 placeholder="Nytt lösenord"
                 placeholderTextColor="#4F4F4F"
@@ -169,9 +194,10 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
             </View>
             <View style={styles.inputContainer}>
               <TextInput
+                secureTextEntry
                 style={styles.inputStyle}
-                onChangeText={newAlias => setNewAlias(newAlias)}
-                value={newAlias}
+                onChangeText={rePassword => setRePassword(rePassword)}
+                value={rePassword}
                 autoFocus={false}
                 placeholder="Bekräfta lösenord"
                 placeholderTextColor="#4F4F4F"
@@ -181,7 +207,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 pointerEvents="none"
               />
             </View>
-            <ConfirmButton title="Ändra lösenord" />
+            <ConfirmButton title="Ändra lösenord" onPress={handlePassword} />
           </ScrollView>
         </View>
       </View>

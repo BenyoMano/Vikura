@@ -27,17 +27,17 @@ type HomeScreenProps = {
 };
 
 export type LoginDetailsProps = {
-  mejl: string;
+  mail: string;
   password: string;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [loginDetails, setLoginDetails] = useState<LoginDetailsProps>({
-    mejl: '',
+    mail: '',
     password: '',
   });
-  const {mejl, password} = loginDetails;
+  const {mail, password} = loginDetails;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -92,7 +92,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               />
             </MotiView>
             <LoginForm
-              mejl={mejl}
+              mail={mail}
               password={password}
               loginDetails={loginDetails}
               setLoginDetails={setLoginDetails}

@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
 import {SettingsLevel} from './UserSettingsScreen';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../../../App';
 
 type SettingsBlockProps = {
   name: string;
@@ -23,7 +25,7 @@ export const useSettingsMenu = ({
     SettingsBlockProps[] | null
   >(null);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
 
   const createLevelSettings = [
     {

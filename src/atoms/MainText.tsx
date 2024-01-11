@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View, TextStyle, ViewStyle, Animated, Easing} from 'react-native';
+import {Text, View, TextStyle, ViewStyle, Animated} from 'react-native';
 
 type MainTextProps = {
   title: string;
-  style?: TextStyle;
+  style?: TextStyle | object;
 };
 
 const MainText: React.FC<MainTextProps> = props => {

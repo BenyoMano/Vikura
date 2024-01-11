@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, ViewStyle, Animated, Easing} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {HeaderView} from '../Header/HeaderView';
-import MainText from '../../atoms/MainText';
-import {StackParamList} from '../../../App';
+import {HeaderView} from '../../Header/HeaderView';
+import MainText from '../../../atoms/MainText';
+import {StackParamList} from '../../../../App';
 import SettingsMenu from './SettingsMenu';
 
 type UserSettingsScreenNavigationProp = NativeStackNavigationProp<

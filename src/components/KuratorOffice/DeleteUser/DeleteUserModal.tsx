@@ -15,13 +15,13 @@ import CancelButton from './CancelButton';
 type DeleteUserModalProps = {
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  clientId: string;
+  clientUserId: string;
 };
 
 export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
   modalVisible,
   setModalVisible,
-  clientId,
+  clientUserId,
 }) => {
   const [closingModal, setClosingModal] = useState(false);
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
@@ -67,11 +67,14 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
     opacity: modalOpacity,
   };
 
-  const platformStyle = Platform.OS === 'android' ? {
-    marginTop: 10
-  } : {
-    marginTop: 40,
-  }
+  const platformStyle =
+    Platform.OS === 'android'
+      ? {
+          marginTop: 10,
+        }
+      : {
+          marginTop: 40,
+        };
 
   return (
     <Modal
@@ -80,7 +83,8 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
       onRequestClose={() => {
         setModalVisible(!modalVisible);
       }}>
-      <Animated.View style={[styles.viewStyle, animatedTranslateStyle, platformStyle]}>
+      <Animated.View
+        style={[styles.viewStyle, animatedTranslateStyle, platformStyle]}>
         <View style={styles.info}>
           <Text style={styles.textStyle}>
             Delete user profile and linked rooms (not account)?
@@ -90,7 +94,7 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
           <DeleteUserButton
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            clientId={clientId}
+            clientUserId={clientUserId}
             closingModal={closingModal}
             setClosingModal={setClosingModal}
           />

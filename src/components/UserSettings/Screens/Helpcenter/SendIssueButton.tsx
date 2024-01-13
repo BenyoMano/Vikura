@@ -8,18 +8,18 @@ import {
   TextStyle,
 } from 'react-native';
 import {HCSettingsChoice} from './HelpcenterScreen';
-import {reportProblem} from '../../../../firebase/UserManagement/Problem/reportProblem';
+import {reportIssue} from '../../../../firebase/UserManagement/Issue/reportIssue';
 import useUserPersonalDetails from '../../../../firebase/userDetails';
 import auth from '@react-native-firebase/auth';
 
-type SendProblemButtonProps = {
+type SendIssueButtonProps = {
   title: string;
   settingsChoice: HCSettingsChoice;
   messageToSend: string;
   setMessageToSend: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SendProblemButton: React.FC<SendProblemButtonProps> = ({
+const SendIssueButton: React.FC<SendIssueButtonProps> = ({
   title,
   settingsChoice,
   messageToSend,
@@ -47,7 +47,7 @@ const SendProblemButton: React.FC<SendProblemButtonProps> = ({
   };
 
   const onPress = () => {
-    reportProblem({
+    reportIssue({
       settingsChoice,
       messageToSend,
       setMessageToSend,
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   } as TextStyle,
 });
 
-export default SendProblemButton;
+export default SendIssueButton;

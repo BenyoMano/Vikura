@@ -15,8 +15,7 @@ import {HeaderView} from '../../../Header/HeaderView';
 import MainText from '../../../../atoms/MainText';
 import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
-import SendProblemButton from './SendProblemButton';
-import {reportProblem} from '../../../../firebase/UserManagement/Problem/reportProblem';
+import SendIssueButton from './SendIssueButton';
 
 type HelpcenterScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -128,7 +127,7 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
             pointerEvents="none"
           />
         </View>
-        <SendProblemButton
+        <SendIssueButton
           title="Skicka"
           settingsChoice={settingsChoice}
           messageToSend={messageToSend}

@@ -6,7 +6,7 @@ interface ErrorHandlingProps {
   position?: 'top' | 'bottom' | 'center';
   subject?: string;
   userId?: string;
-  clientId?: string;
+  clientUserId?: string;
   setActionFinished?: React.Dispatch<React.SetStateAction<ActionState>>;
 }
 
@@ -30,14 +30,14 @@ export const useDynamicAddUserErrorHandling = ({
 
 export const useDynamicDeleteUserErrorHandling = ({
   error,
-  clientId,
+  clientUserId,
   subject,
   setActionFinished,
 }: ErrorHandlingProps) => {
   showMessage({
     message: 'Ojdå! Något gick fel :(',
     description: String(
-      `När ${subject} för klient-ID ${clientId} skulle raderas: \n` + error,
+      `När ${subject} för klient-ID ${clientUserId} skulle raderas: \n` + error,
     ),
     type: 'danger',
     autoHide: false,

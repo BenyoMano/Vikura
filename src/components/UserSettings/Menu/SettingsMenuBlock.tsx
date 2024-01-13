@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '100%',
-    zIndex: 30,
-    elevation: 30,
+    paddingVertical: 5,
+    alignItems: 'center',
   } as ViewStyle,
   iconStyle: {
     width: 40,
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   titleStyle: {
     width: '70%',
-    height: 40,
     justifyContent: 'center',
     paddingLeft: 10,
   } as ViewStyle,

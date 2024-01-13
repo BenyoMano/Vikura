@@ -83,7 +83,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
+      <View style={styles.screenContainer}>
         <HeaderView navigation={navigation} />
         <Animated.View
           style={[
@@ -101,15 +101,9 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
           />
         </Animated.View>
         <View style={styles.mainContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <ScrollView>
             <MainText title="Alias" style={{fontSize: 18, color: 'black'}} />
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-                marginTop: 20,
-                marginBottom: 10,
-              }}>
+            <View style={styles.headerStyle}>
               <Text
                 style={{
                   fontFamily: 'NunitoSans-Regular',
@@ -123,6 +117,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                   style={{
                     fontFamily: 'NunitoSans-Italic',
                     fontSize: 16,
+                    color: 'black',
                   }}>
                   {alias}
                 </Text>
@@ -161,13 +156,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
               }}
             />
             <MainText title="Lösenord" style={{fontSize: 18, color: 'black'}} />
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-                marginTop: 20,
-                marginBottom: 10,
-              }}>
+            <View style={styles.headerStyle}>
               <Text
                 style={{
                   fontFamily: 'NunitoSans-Regular',
@@ -218,6 +207,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -228,22 +218,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginBottom: 20,
   } as ViewStyle,
-  scrollContainer: {
-    // flex: 1,
-    // justifyContent: 'space-around',
+  headerStyle: {
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: 20,
+    marginBottom: 10,
   } as ViewStyle,
   textContainer: {
     height: '5%',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
-    marginBottom: 10,
+    marginBottom: 30,
   } as ViewStyle,
   inputContainer: {
-    // flex: 1,
     width: '100%',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
   } as ViewStyle,

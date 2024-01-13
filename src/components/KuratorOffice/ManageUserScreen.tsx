@@ -1,35 +1,30 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
-import ConversationView from '../ConversationView';
-import {HeaderView} from '../../Header/HeaderView';
+import {HeaderView} from '../Header/HeaderView';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackParamList} from '../../../../App';
-import MainText from '../../../atoms/MainText';
-import TabButton from '../../../atoms/TabButton';
-import IssueView from './IssueView';
+import {StackParamList} from '../../../App';
+import MainText from '../../atoms/MainText';
+import TabButton from '../../atoms/TabButton';
+import ManageView from './ManageView';
 
-type DeleteUserScreenNavigationProp = NativeStackNavigationProp<
+type ManageUserScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
-  'DeleteUserScreen'
+  'ManageUserScreen'
 >;
 
-type DeleteUserScreenProps = {
-  navigation: DeleteUserScreenNavigationProp;
+type ManageUserScreenProps = {
+  navigation: ManageUserScreenNavigationProp;
 };
 
-const DeleteUserScreen: React.FC<DeleteUserScreenProps> = ({navigation}) => {
-  const [selectedTab, setSelectedTab] = useState<'delete' | 'problem'>(
-    'delete',
-  );
+export type SelectedTab = 'delete' | 'problem' | 'feedback';
+
+const ManageUserScreen: React.FC<ManageUserScreenProps> = ({navigation}) => {
+  const [selectedTab, setSelectedTab] = useState<SelectedTab>('delete');
 
   return (
     <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
       <HeaderView navigation={navigation} />
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingTop: 20,
-        }}>
+      <View style={styles.tabStyle}>
         <TabButton
           title="Radering"
           selectedTab={selectedTab}
@@ -42,13 +37,23 @@ const DeleteUserScreen: React.FC<DeleteUserScreenProps> = ({navigation}) => {
           id="problem"
           onPress={() => setSelectedTab('problem')}
         />
+        <TabButton
+          title="Feedback"
+          selectedTab={selectedTab}
+          id="feedback"
+          onPress={() => setSelectedTab('feedback')}
+        />
       </View>
       <View style={styles.textContainer}>
         <MainText
           title={
             selectedTab === 'delete'
               ? 'Begäran om konto-radering'
-              : 'Användarsupport'
+              : selectedTab === 'problem'
+              ? 'Användarsupport'
+              : selectedTab === 'feedback'
+              ? 'Synpunkter'
+              : ''
           }
           style={{
             fontSize: 22,
@@ -56,8 +61,8 @@ const DeleteUserScreen: React.FC<DeleteUserScreenProps> = ({navigation}) => {
           }}
         />
       </View>
-      <View style={{flex: 1}}>
-        <IssueView />
+      <View style={styles.deleteStyle}>
+        <ManageView selectedTab={selectedTab} />
       </View>
     </View>
   );
@@ -66,9 +71,16 @@ const DeleteUserScreen: React.FC<DeleteUserScreenProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    width: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
+  } as ViewStyle,
+  tabStyle: {
+    width: '88%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 20,
   } as ViewStyle,
   textContainer: {
     height: '5%',
@@ -77,6 +89,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   } as ViewStyle,
+  deleteStyle: {
+    flex: 1,
+    width: '88%',
+  } as ViewStyle,
 });
 
-export default DeleteUserScreen;
+export default ManageUserScreen;

@@ -2,8 +2,8 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import HomeScreen from './src/components/Login/HomeScreen';
 import NewClientScreen from './src/components/NewDetails/NewClientScreen';
-import KuratorScreen from './src/components/KuratorOffice/KuratorScreen';
-import DeleteUserScreen from './src/components/KuratorOffice/DeleteUser/DeleteUserScreen';
+import KuratorScreen from './src/components/KuratorOffice/Chat/KuratorScreen';
+import ManageUserScreen from './src/components/KuratorOffice/ManageUserScreen';
 import NewKuratorScreen from './src/components/NewDetails/NewKuratorScreen';
 import ChatScreen from './src/components/ChatRoom/ChatScreen';
 import ReportConcernScreen from './src/components/ReportConcern/ReportConcernScreen';
@@ -31,7 +31,7 @@ export type StackParamList = {
   ChatScreen: {id: string};
   AddUserScreen: any;
   ReportConcernScreen: {clientUserId: string};
-  DeleteUserScreen: any;
+  ManageUserScreen: any;
   UserSettingsScreen: any;
   EulaAndPolicyScreen: {settingsChoice: EAPSettingsChoice};
   HelpcenterScreen: {settingsChoice: HCSettingsChoice};
@@ -57,8 +57,8 @@ const App = () => {
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="KuratorScreen" component={KuratorScreen} />
             <Stack.Screen
-              name="DeleteUserScreen"
-              component={DeleteUserScreen}
+              name="ManageUserScreen"
+              component={ManageUserScreen}
             />
             <Stack.Screen name="NewClientScreen" component={NewClientScreen} />
             <Stack.Screen

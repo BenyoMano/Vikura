@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {Pressable, Animated, Easing} from 'react-native';
+import auth from '@react-native-firebase/auth';
+import {Pressable, Animated} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {useSpinAnimation} from './useSpinAnimation';
 import {useClipboard} from '@react-native-clipboard/clipboard';
@@ -10,6 +11,7 @@ import {
   useDynamicDeleteUserErrorHandling,
   useGeneralErrorHandling,
 } from '../../../../ErrorHandling/errorHandling';
+import {updateReqeust} from '../../../../firebase/UserManagement/DeleteUser/updateRequest';
 
 type DeleteUserButtonProps = {
   closingModal: boolean;
@@ -31,6 +33,7 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
   const [actionFinished, setActionFinished] = useState<ActionState>('initial');
   const [clipboardString, setClipboardString] = useClipboard();
   const operationsCount = useRef(0);
+  const user = auth().currentUser;
   const [isRunning, setIsRunning] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const {animatedRotateStylePressIn} = useSpinAnimation({
@@ -112,7 +115,21 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
         });
         return;
       }
-      if (operationsCount.current === 3) {
+      try {
+        await user?.delete();
+        operationsCount.current += 1;
+      } catch (error) {
+        let subject = 'användarkontot';
+        useDynamicDeleteUserErrorHandling({
+          error,
+          clientUserId,
+          subject,
+          setActionFinished,
+        });
+        return;
+      }
+      if (operationsCount.current === 4) {
+        updateReqeust({clientUserId});
         setActionFinished('success');
       } else {
         setTimeout(() => {

@@ -9,6 +9,7 @@ import {Icon} from 'react-native-elements';
 import RequestDeleteButton from './RequestDeleteButton';
 import {useHasRequested} from '../../../../firebase/UserManagement/DeleteUser/useHasRequested';
 import auth from '@react-native-firebase/auth';
+import DeleteUserButton from '../../../KuratorOffice/DeleteUser/DeleteButton/DeleteUserButton';
 
 type RequestDeleteScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -106,6 +107,7 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
           }
         />
         <RequestDeleteButton hasRequested={hasRequested} />
+        <DeleteUserButton clientUserId={clientUserId} />
       </View>
     </View>
   );

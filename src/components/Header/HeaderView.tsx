@@ -51,7 +51,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
           {isCurrentUserAdmin ? (
             <View style={styles.directionStyle}>
               <RequestDeleteButton
-                onPress={() => navigation.navigate('DeleteUserScreen')}
+                onPress={() => navigation.navigate('ManageUserScreen')}
               />
               <AddUserButton
                 onPress={() => navigation.navigate('AddUserScreen')}
@@ -59,7 +59,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
             </View>
           ) : null}
         </StylingContainer>
-      ) : route.name === 'DeleteUserScreen' ? (
+      ) : route.name === 'ManageUserScreen' ? (
         <StylingContainer>
           <BackButton onPress={() => navigation.goBack()} />
         </StylingContainer>

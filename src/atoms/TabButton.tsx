@@ -11,8 +11,8 @@ import {
 
 type TabButtonProps = {
   title: string;
-  selectedTab: 'delete' | 'problem';
-  id: 'delete' | 'problem';
+  selectedTab: 'delete' | 'problem' | 'feedback';
+  id: 'delete' | 'problem' | 'feedback';
   onPress: () => void;
 };
 
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
   } as ViewStyle,
   btnTextStyle: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     fontFamily: 'NunitoSans-Regular',
   } as TextStyle,

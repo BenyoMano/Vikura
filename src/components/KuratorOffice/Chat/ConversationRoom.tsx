@@ -10,11 +10,8 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import firestore from '@react-native-firebase/firestore';
-import {DeleteUserModal} from './DeleteUser/DeleteUserModal';
-import {useContext} from 'react';
-import {IsCurrentUserKuratorContext} from '../../firebase/isCurrentUserKuratorContext';
 import {RoomData} from './useRoomsData';
-import {StackParamList} from '../../../App';
+import {StackParamList} from '../../../../App';
 
 type LatestMessage = {
   timestamp: number;
@@ -33,15 +30,6 @@ const ConversationRoom: React.FC<RoomData> = ({
   const [latestMessage, setLatestMessage] = useState<LatestMessage | undefined>(
     undefined,
   );
-  const [modalVisible, setModalVisible] = useState(false);
-  const contextValue = useContext(IsCurrentUserKuratorContext);
-  const isCurrentUserAdmin = contextValue?.isCurrentUserAdmin;
-
-  const modalStyle = {
-    backgroundColor: modalVisible ? 'lightgrey' : '#EEEEEE',
-    borderBottomWidth: modalVisible ? 2 : 1,
-    borderTopColor: modalVisible ? 'black' : null,
-  } as ViewStyle;
 
   const opacityAnimation = new Animated.Value(1);
   const fadeIn = () => {
@@ -105,27 +93,14 @@ const ConversationRoom: React.FC<RoomData> = ({
         })
       }
       onPressIn={fadeIn}
-      onPressOut={fadeOut}
-      onLongPress={() => {
-        if (isCurrentUserAdmin) {
-          setModalVisible(!modalVisible);
-        }
-      }}>
+      onPressOut={fadeOut}>
       <Animated.View
         style={[
           styles.conversationRoom.item,
-          modalStyle,
           {
             opacity: opacityAnimation,
           },
         ]}>
-        {modalVisible && (
-          <DeleteUserModal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            clientId={clientId}
-          />
-        )}
         <View style={styles.header}>
           <Text style={styles.title}>{latestMessage.alias}</Text>
           <Text style={styles.timestamp}>

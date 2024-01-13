@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import roomName from '../../firebase/roomName';
+import roomName from '../../../firebase/roomName';
 
 type MessagesProps = {
   setRoomId: React.Dispatch<React.SetStateAction<string>>;

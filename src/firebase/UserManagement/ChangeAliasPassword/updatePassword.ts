@@ -1,6 +1,4 @@
-import firestore from '@react-native-firebase/firestore';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import updateRoomAlias from '../../updateRoomAlias';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {useGeneralErrorHandling} from '../../../ErrorHandling/errorHandling';
 import {showMessage} from 'react-native-flash-message';
 
@@ -15,7 +13,10 @@ export const updatePassword = async ({
   password,
   rePassword,
 }: UpdatePasswordProps) => {
-  if (!password) {
+  const trimmedPassword = password.trim();
+  const trimmedRePassword = rePassword.trim();
+
+  if (!trimmedPassword) {
     showMessage({
       message: 'Varning!',
       description: 'Du måste ange ett nytt lösenord!',
@@ -23,7 +24,7 @@ export const updatePassword = async ({
     });
     return;
   }
-  if (!rePassword) {
+  if (!trimmedRePassword) {
     showMessage({
       message: 'Varning!',
       description: 'Du måste repetera ditt lösenord!',
@@ -31,7 +32,7 @@ export const updatePassword = async ({
     });
     return;
   }
-  if (rePassword !== password) {
+  if (trimmedRePassword !== trimmedPassword) {
     showMessage({
       message: 'Varning!',
       description: 'Lösenord matchar inte!',
@@ -41,9 +42,9 @@ export const updatePassword = async ({
     return;
   }
 
-  if (rePassword === password) {
+  if (trimmedRePassword === trimmedPassword) {
     try {
-      await user?.updatePassword(password);
+      await user?.updatePassword(trimmedPassword);
       showMessage({
         message: 'Lyckades!',
         description: 'Du bytte lösenord.',

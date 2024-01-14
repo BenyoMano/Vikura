@@ -47,7 +47,6 @@ const ConversationRoom: React.FC<RoomData> = ({
       useNativeDriver: true,
     }).start();
   };
-
   useEffect(() => {
     let unsubscribeFromLastMessage: () => void;
     const subscribeToLastMessage = async () => {
@@ -80,7 +79,7 @@ const ConversationRoom: React.FC<RoomData> = ({
 
     subscribeToLastMessage();
     return () => unsubscribeFromLastMessage();
-  }, []);
+  }, [clientAlias, clientId, roomId]);
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
   if (latestMessage === undefined) return null;

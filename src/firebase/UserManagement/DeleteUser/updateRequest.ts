@@ -2,7 +2,7 @@ import {showMessage} from 'react-native-flash-message';
 import firestore from '@react-native-firebase/firestore';
 
 type UpdateRequestProps = {
-  clientUserId: string;
+  clientUserId: string | undefined;
 };
 
 export const updateReqeust = ({clientUserId}: UpdateRequestProps) => {
@@ -10,13 +10,6 @@ export const updateReqeust = ({clientUserId}: UpdateRequestProps) => {
     try {
       await firestore().collection('delete-requests').doc(clientUserId).update({
         deleted: true,
-      });
-      showMessage({
-        message: 'Uppdaterades!',
-        type: 'success',
-        icon: 'success',
-        duration: 4000,
-        position: 'center',
       });
     } catch (error) {
       showMessage({

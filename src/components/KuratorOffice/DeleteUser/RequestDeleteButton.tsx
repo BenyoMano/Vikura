@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
+import {useIndicator} from '../useIndicator';
 
 type RequestDeleteButtonProps = {
   onPress: () => void;
@@ -16,6 +17,8 @@ type RequestDeleteButtonProps = {
 const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({onPress}) => {
   const {buttonContainerStyle} = styles;
   const animatedValue = new Animated.Value(0);
+  const {anyIndicator} = useIndicator();
+
   const buttonRotate = animatedValue.interpolate({
     inputRange: [0, 0.5, 1],
     outputRange: ['0deg', '-20deg', '20deg'],
@@ -44,7 +47,8 @@ const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({onPress}) => {
   };
 
   return (
-    <View style={{borderRadius: 10, overflow: 'hidden'}}>
+    <View style={styles.viewStyle}>
+      {anyIndicator && <View style={styles.indicatorStyle} />}
       <Pressable
         onPress={onPress}
         onPressIn={handlePressInAnimation}
@@ -59,6 +63,12 @@ const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({onPress}) => {
 };
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    borderRadius: 10,
+    overflow: 'visible',
+    width: 40,
+    marginRight: 15,
+  },
   buttonContainerStyle: {
     width: 40,
     height: 40,
@@ -67,6 +77,17 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     justifyContent: 'center',
     marginRight: 15,
+  } as ViewStyle,
+  indicatorStyle: {
+    position: 'absolute',
+    right: -3,
+    top: -3,
+    width: 12,
+    height: 12,
+    borderRadius: 30,
+    backgroundColor: '#CC2020',
+    zIndex: 1,
+    elevation: 1,
   } as ViewStyle,
 });
 

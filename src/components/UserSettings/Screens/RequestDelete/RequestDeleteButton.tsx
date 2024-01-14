@@ -13,10 +13,12 @@ import useUserPersonalDetails from '../../../../firebase/userDetails';
 
 type RequestDeleteButtonProps = {
   hasRequested: boolean;
+  setHasRequested: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({
   hasRequested,
+  setHasRequested,
 }) => {
   const {btnContainerStyle, btnTextStyle} = styles;
   const animated = new Animated.Value(1);
@@ -40,7 +42,7 @@ const RequestDeleteButton: React.FC<RequestDeleteButtonProps> = ({
   };
 
   const onPress = () => {
-    requestDelete({clientUserId, userDetails});
+    requestDelete({clientUserId, userDetails, setHasRequested});
   };
 
   const variableContainerStyle = {

@@ -7,9 +7,6 @@ import {StackParamList} from '../../../../../App';
 import {RouteProp} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
 import RequestDeleteButton from './RequestDeleteButton';
-import {useHasRequested} from '../../../../firebase/UserManagement/DeleteUser/useHasRequested';
-import auth from '@react-native-firebase/auth';
-import DeleteUserButton from '../../../KuratorOffice/DeleteUser/DeleteButton/DeleteUserButton';
 
 type RequestDeleteScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -27,8 +24,7 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
   navigation,
 }) => {
   const [animatedValue1, setAnimatedValue1] = useState(new Animated.Value(0));
-  const clientUserId = auth().currentUser?.uid;
-  const hasRequested = useHasRequested({clientUserId});
+  const [hasRequested, setHasRequested] = useState(false);
 
   const fadeInAnim = Animated.timing(animatedValue1, {
     toValue: 1,
@@ -43,13 +39,19 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
   });
 
   useEffect(() => {
-    fadeInAnim.start(() => {});
+    fadeInAnim.start();
 
     return () => {
       fadeInAnim.stop();
       animatedValue1.setValue(0);
     };
   }, []);
+
+  useEffect(() => {
+    if (hasRequested) {
+      navigation.navigate('HomeScreen');
+    }
+  }, [hasRequested]);
 
   const variableScreenStyle = {
     backgroundColor: !hasRequested ? 'white' : 'lightgrey',
@@ -106,8 +108,10 @@ const RequestDeleteScreen: React.FC<RequestDeleteScreenProps> = ({
               : {fontSize: 20, color: 'grey', textAlign: 'center'}
           }
         />
-        <RequestDeleteButton hasRequested={hasRequested} />
-        <DeleteUserButton clientUserId={clientUserId} />
+        <RequestDeleteButton
+          hasRequested={hasRequested}
+          setHasRequested={setHasRequested}
+        />
       </View>
     </View>
   );

@@ -10,7 +10,7 @@ export type DeleteData = {
 };
 
 type UseDeleteDataProps = {
-  setIsLoaded: React.Dispatch<SetStateAction<boolean>>;
+  setIsLoaded?: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export const useDeleteData = ({
@@ -39,7 +39,9 @@ export const useDeleteData = ({
               console.error('onSnapshot:', error);
             },
           );
-        setIsLoaded(true);
+        if (setIsLoaded) {
+          setIsLoaded(true);
+        }
       };
       fetchRequests();
 

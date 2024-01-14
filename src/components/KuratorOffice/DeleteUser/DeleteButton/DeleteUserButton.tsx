@@ -115,20 +115,7 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({
         });
         return;
       }
-      try {
-        await user?.delete();
-        operationsCount.current += 1;
-      } catch (error) {
-        let subject = 'användarkontot';
-        useDynamicDeleteUserErrorHandling({
-          error,
-          clientUserId,
-          subject,
-          setActionFinished,
-        });
-        return;
-      }
-      if (operationsCount.current === 4) {
+      if (operationsCount.current === 3) {
         updateReqeust({clientUserId});
         setActionFinished('success');
       } else {

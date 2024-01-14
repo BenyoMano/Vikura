@@ -21,24 +21,23 @@ const useUserPersonalDetails = ({
 
   useEffect(() => {
     const getUserDetails = async () => {
-      try {
-        if (clientUserId === undefined) {
-          throw new Error('clientUserId is undefined');
+      if (clientUserId !== undefined) {
+        try {
+          const getDetail = await firestore()
+            .collection('Users')
+            .doc(clientUserId)
+            .get();
+
+          const alias = getDetail.get('alias');
+          const firstName = getDetail.get('firstName');
+          const secondName = getDetail.get('secondName');
+          const mail = getDetail.get('mail');
+          const personNummer = getDetail.get('personNummer');
+
+          setUserDetails({alias, firstName, secondName, mail, personNummer});
+        } catch (error) {
+          useGeneralErrorHandling({error, position: 'top'});
         }
-        const getDetail = await firestore()
-          .collection('Users')
-          .doc(clientUserId)
-          .get();
-
-        const alias = getDetail.get('alias');
-        const firstName = getDetail.get('firstName');
-        const secondName = getDetail.get('secondName');
-        const mail = getDetail.get('mail');
-        const personNummer = getDetail.get('personNummer');
-
-        setUserDetails({alias, firstName, secondName, mail, personNummer});
-      } catch (error) {
-        useGeneralErrorHandling({error, position: 'top'});
       }
     };
     getUserDetails();

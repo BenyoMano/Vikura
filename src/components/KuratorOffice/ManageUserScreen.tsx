@@ -6,6 +6,7 @@ import {StackParamList} from '../../../App';
 import MainText from '../../atoms/MainText';
 import TabButton from '../../atoms/TabButton';
 import ManageView from './ManageView';
+import {useIndicator} from './useIndicator';
 
 type ManageUserScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -20,6 +21,7 @@ export type SelectedTab = 'delete' | 'problem' | 'feedback';
 
 const ManageUserScreen: React.FC<ManageUserScreenProps> = ({navigation}) => {
   const [selectedTab, setSelectedTab] = useState<SelectedTab>('delete');
+  const {deleteIndicator, problemIndicator, feedbackIndicator} = useIndicator();
 
   return (
     <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
@@ -29,18 +31,21 @@ const ManageUserScreen: React.FC<ManageUserScreenProps> = ({navigation}) => {
           title="Radering"
           selectedTab={selectedTab}
           id="delete"
+          deleteIndicator={deleteIndicator}
           onPress={() => setSelectedTab('delete')}
         />
         <TabButton
           title="Problem"
           selectedTab={selectedTab}
           id="problem"
+          problemIndicator={problemIndicator}
           onPress={() => setSelectedTab('problem')}
         />
         <TabButton
           title="Feedback"
           selectedTab={selectedTab}
           id="feedback"
+          feedbackIndicator={feedbackIndicator}
           onPress={() => setSelectedTab('feedback')}
         />
       </View>

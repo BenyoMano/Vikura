@@ -6,7 +6,7 @@ import {SelectedTab} from '../ManageUserScreen';
 export type IssueData = {
   clientUserId: string;
   mail: string;
-  category: 'problem' | 'opinion';
+  category: 'problem' | 'opinion' | null;
   timestamp: Date;
   message: string;
   fixed: boolean;
@@ -14,8 +14,8 @@ export type IssueData = {
 };
 
 type UseIssueDataProps = {
-  setIsLoaded: React.Dispatch<SetStateAction<boolean>>;
-  selectedTab: SelectedTab;
+  setIsLoaded?: React.Dispatch<SetStateAction<boolean>>;
+  selectedTab?: SelectedTab;
 };
 
 export const useIssueData = ({
@@ -23,42 +23,51 @@ export const useIssueData = ({
   selectedTab,
 }: UseIssueDataProps): IssueData[] => {
   const [issues, setIssues] = useState<IssueData[]>([]);
-  const category = selectedTab === 'problem' ? 'problem' : 'opinion';
+  const category =
+    selectedTab === 'problem'
+      ? 'problem'
+      : selectedTab === 'feedback'
+      ? 'opinion'
+      : null;
+
+  let query = firestore().collection('issues');
+  if (category !== null) {
+    query = query.where('category', '==', category);
+  }
 
   useFocusEffect(
     useCallback(() => {
       let unsubscribeFromIssues: () => void;
       const fetchIssues = async () => {
-        unsubscribeFromIssues = firestore()
-          .collection('issues')
-          .where('category', '==', category)
-          .onSnapshot(
-            onSnapshot => {
-              const newIssues = onSnapshot.docs.map(requestDoc => {
-                const clientUserId = requestDoc.data().id;
-                const mail = requestDoc.data().mail;
-                const category = requestDoc.data().category;
-                const timestamp: any = requestDoc.data().timestamp.toDate();
-                const message = requestDoc.data().issue;
-                const fixed = requestDoc.data().fixed;
-                const docId = requestDoc.id;
-                return {
-                  clientUserId,
-                  mail,
-                  category,
-                  timestamp,
-                  message,
-                  fixed,
-                  docId,
-                };
-              });
-              setIssues(newIssues);
-            },
-            error => {
-              console.error('onSnapshot:', error);
-            },
-          );
-        setIsLoaded(true);
+        unsubscribeFromIssues = query.onSnapshot(
+          onSnapshot => {
+            const newIssues = onSnapshot.docs.map(requestDoc => {
+              const clientUserId = requestDoc.data().id;
+              const mail = requestDoc.data().mail;
+              const category = requestDoc.data().category;
+              const timestamp: any = requestDoc.data().timestamp.toDate();
+              const message = requestDoc.data().issue;
+              const fixed = requestDoc.data().fixed;
+              const docId = requestDoc.id;
+              return {
+                clientUserId,
+                mail,
+                category,
+                timestamp,
+                message,
+                fixed,
+                docId,
+              };
+            });
+            setIssues(newIssues);
+          },
+          error => {
+            console.error('onSnapshot:', error);
+          },
+        );
+        if (setIsLoaded) {
+          setIsLoaded(true);
+        }
       };
       fetchIssues();
 

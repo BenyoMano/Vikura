@@ -7,7 +7,6 @@ export type Message = {
   id: string;
   text: string;
   author: string;
-  isRead: boolean;
   timestamp: number;
   displayTimestamp: Date;
 };
@@ -28,21 +27,24 @@ const useOpenChat = ({
 }: UseOpenChatProps): UseOpenChatResult => {
   const contextValue = useContext(IsCurrentUserKuratorContext);
   const isCurrentUserKurator = contextValue?.isCurrentUserKurator;
-  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const roomId = useRoomId(clientUserId);
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const sortedMessages = (messages: Message[]) => {
+    return messages.sort((a, b) => a.timestamp - b.timestamp);
+  };
 
   const handleSnapshot = (messageDetails: any) => {
     const newMessages = messageDetails.docs.map((documentSnapshot: any) => ({
       id: documentSnapshot.data().id,
       text: documentSnapshot.data().msg,
       author: documentSnapshot.data().author,
-      isRead: documentSnapshot.data().isRead,
       timestamp: documentSnapshot.data().timestamp.toMillis(),
       displayTimestamp: documentSnapshot.data().timestamp.toDate(),
     }));
 
-    setMessages(newMessages);
+    setMessages(sortedMessages(newMessages));
     setIsLoading(false);
   };
 
@@ -57,12 +59,10 @@ const useOpenChat = ({
       return;
     }
 
-    const pathToMessages = firestore()
-      .collection('rooms')
-      .doc(roomId)
-      .collection('messages');
+    const pathToMessages = firestore().collection('rooms').doc(roomId);
 
     const unsubscribe = pathToMessages
+      .collection('messages')
       .orderBy('timestamp', 'desc')
       .limit(30 + messageLimit)
       .onSnapshot(handleSnapshot, error => {
@@ -70,16 +70,9 @@ const useOpenChat = ({
       });
 
     if (isCurrentUserKurator) {
-      pathToMessages
-        .where('isRead', '==', false)
-        .get()
-        .then(a => {
-          a.forEach(doc => {
-            doc.ref.update({
-              isRead: true,
-            });
-          });
-        });
+      pathToMessages.update({
+        'latestMessage.isRead': true,
+      });
     }
 
     return unsubscribe;

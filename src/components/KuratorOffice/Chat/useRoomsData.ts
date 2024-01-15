@@ -6,7 +6,9 @@ export type RoomData = {
   roomId: string;
   clientAlias: string;
   clientId: string;
-  latestTimestamp?: any;
+  isRead?: boolean;
+  text?: string;
+  timestamp?: any;
 };
 
 type useRoomsDataProps = {
@@ -15,6 +17,10 @@ type useRoomsDataProps = {
 
 export const useRoomsData = ({setIsLoaded}: useRoomsDataProps): RoomData[] => {
   const [rooms, setRooms] = useState<RoomData[]>([]);
+
+  const sortRooms = (rooms: RoomData[]) => {
+    return rooms.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -29,11 +35,24 @@ export const useRoomsData = ({setIsLoaded}: useRoomsDataProps): RoomData[] => {
                 const {alias, id} = roomDoc.data().users.client;
                 const clientAlias: string = alias;
                 const clientId: string = id;
-                const latestTimestamp: any = roomDoc.data().latestTimestamp;
                 const roomId = roomDoc.id;
-                return {roomId, clientAlias, clientId, latestTimestamp};
+                const latestMessage = roomDoc.data().latestMessage;
+                let timestamp, isRead, text;
+                if (latestMessage) {
+                  isRead = latestMessage.isRead;
+                  text = latestMessage.text;
+                  timestamp = latestMessage.timestamp.toDate();
+                }
+                return {
+                  roomId,
+                  clientAlias,
+                  clientId,
+                  isRead,
+                  text,
+                  timestamp,
+                };
               });
-              setRooms(newRooms);
+              setRooms(sortRooms(newRooms));
             },
             error => {
               console.error('roomNames:', error);

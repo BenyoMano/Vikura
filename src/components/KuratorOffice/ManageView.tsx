@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, FlatList, ViewStyle} from 'react-native';
 import {DeleteData, useDeleteData} from './DeleteUser/useDeleteData';
 import IssueLoader from './DeleteUser/IssueLoader';
@@ -15,8 +15,12 @@ const ManageView: React.FC<ManageViewProps> = ({selectedTab}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const requests = useDeleteData({setIsLoaded});
   const issues = useIssueData({setIsLoaded, selectedTab});
-  const sortedRequests = requests.sort((a, b) => b.timestamp - a.timestamp);
-  const sortedIssues = issues.sort((a, b) => b.timestamp - a.timestamp);
+  const sortedRequests = requests.sort(
+    (a, b) => b.timestamp.getTime() - a.timestamp.getTime(),
+  );
+  const sortedIssues = issues.sort(
+    (a, b) => b.timestamp.getTime() - a.timestamp.getTime(),
+  );
 
   const ItemDelete = ({item}: {item: DeleteData}) => (
     <DeleteItem

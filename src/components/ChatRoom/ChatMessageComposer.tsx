@@ -46,19 +46,20 @@ const ChatMessageComposer: React.FC<ChatMessageComposerProps> = ({
             author: getUserData.get('alias'),
             kurator: getUserData.get('kurator'),
             msg: trimmedMessageToSend,
-            isRead: isCurrentUserKurator ? true : false,
             timestamp: timestamp,
             id: user?.uid,
           });
 
-        const updateLatestTimestamp = await firestore()
+        const updateLatestMessage = await firestore()
           .collection('rooms')
           .doc(roomId)
           .update({
-            latestTimestamp: timestamp,
+            'latestMessage.timestamp': timestamp,
+            'latestMessage.text': trimmedMessageToSend,
+            'latestMessage.isRead': isCurrentUserKurator ? true : false,
           });
 
-        await Promise.all([addMessageData, updateLatestTimestamp]);
+        await Promise.all([addMessageData, updateLatestMessage]);
       } catch (error) {
         useGeneralErrorHandling({error, position: 'top'});
       }

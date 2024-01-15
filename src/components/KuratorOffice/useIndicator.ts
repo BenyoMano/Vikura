@@ -14,7 +14,6 @@ export const useIndicator = (): IndicatorData => {
   const [feedbackIndicator, setFeedbackIndicator] = useState<boolean>(false);
   const [deleteIndicator, setDeleteIndicator] = useState<boolean>(false);
   const [anyIndicator, setAnyIndicator] = useState<boolean>(false);
-  console.log('feed', feedbackIndicator);
 
   useEffect(() => {
     if (problemIndicator || feedbackIndicator || deleteIndicator) {

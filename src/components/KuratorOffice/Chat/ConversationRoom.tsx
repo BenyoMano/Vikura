@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,28 +9,17 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import firestore from '@react-native-firebase/firestore';
 import {RoomData} from './useRoomsData';
 import {StackParamList} from '../../../../App';
-
-type LatestMessage = {
-  timestamp: number;
-  displayTimestamp: Date;
-  text: string;
-  isRead: boolean;
-  alias: string;
-  id: string;
-};
 
 const ConversationRoom: React.FC<RoomData> = ({
   roomId,
   clientAlias,
   clientId,
+  isRead,
+  text,
+  timestamp,
 }) => {
-  const [latestMessage, setLatestMessage] = useState<LatestMessage | undefined>(
-    undefined,
-  );
-
   const opacityAnimation = new Animated.Value(1);
   const fadeIn = () => {
     Animated.timing(opacityAnimation, {
@@ -47,48 +36,16 @@ const ConversationRoom: React.FC<RoomData> = ({
       useNativeDriver: true,
     }).start();
   };
-  useEffect(() => {
-    let unsubscribeFromLastMessage: () => void;
-    const subscribeToLastMessage = async () => {
-      const pathToMessages = firestore()
-        .collection('rooms')
-        .doc(roomId)
-        .collection('messages');
-
-      unsubscribeFromLastMessage = pathToMessages
-        .orderBy('timestamp', 'desc')
-        .limit(1)
-        .onSnapshot(
-          lastMessage => {
-            lastMessage.docs.forEach(lastMessageDetails => {
-              setLatestMessage({
-                timestamp: lastMessageDetails.data().timestamp.toMillis(),
-                displayTimestamp: lastMessageDetails.data().timestamp.toDate(),
-                text: lastMessageDetails.data().msg,
-                isRead: lastMessageDetails.data().isRead,
-                alias: clientAlias,
-                id: clientId,
-              });
-            });
-          },
-          error => {
-            console.error('lastMessage:', error);
-          },
-        );
-    };
-
-    subscribeToLastMessage();
-    return () => unsubscribeFromLastMessage();
-  }, [clientAlias, clientId, roomId]);
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
-  if (latestMessage === undefined) return null;
+  if (timestamp === undefined || isRead === undefined || text === undefined)
+    return null;
 
   return (
     <Pressable
       onPress={() =>
         navigation.navigate('ChatScreen', {
-          id: latestMessage.id,
+          id: clientId,
         })
       }
       onPressIn={fadeIn}
@@ -101,19 +58,12 @@ const ConversationRoom: React.FC<RoomData> = ({
           },
         ]}>
         <View style={styles.header}>
-          <Text style={styles.title}>{latestMessage.alias}</Text>
-          <Text style={styles.timestamp}>
-            {latestMessage.displayTimestamp.toLocaleString()}
-          </Text>
+          <Text style={styles.title}>{clientAlias}</Text>
+          <Text style={styles.timestamp}>{timestamp.toLocaleString()}</Text>
         </View>
         <View>
-          <Text
-            style={
-              latestMessage.isRead ? styles.isRead.text : styles.notIsRead.text
-            }>
-            {latestMessage.text.length < 100
-              ? latestMessage.text
-              : latestMessage.text.substring(0, 100) + '...'}
+          <Text style={isRead ? styles.isRead.text : styles.notIsRead.text}>
+            {text.length < 100 ? text : text.substring(0, 100) + '...'}
           </Text>
         </View>
       </Animated.View>

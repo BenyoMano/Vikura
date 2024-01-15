@@ -48,8 +48,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   useEffect(() => {
     if (mustUpdate) {
       setModalVisible(true);
-    }
-    if (shouldUpdate) {
+    } else if (shouldUpdate) {
       setModalVisible(true);
     }
   }, [shouldUpdate, mustUpdate]);

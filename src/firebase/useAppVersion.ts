@@ -26,7 +26,8 @@ export const useAppVersion = (): UseAppVersion => {
       } else {
         setMustUpdate(false);
       }
-    } else if (typeof versionFieldValue === 'number') {
+    }
+    if (typeof versionFieldValue === 'number') {
       if (versionFieldValue > localVersion) {
         setShouldUpdate(true);
       } else {

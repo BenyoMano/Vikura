@@ -15,7 +15,6 @@ const InputBarChatt: React.FC<InputBarChattProps> = ({
   return (
     <View style={viewStyle}>
       <TextInput
-        testID="inputbarChat"
         style={barStyle}
         onChangeText={messageToSend => setMessageToSend(messageToSend)}
         value={messageToSend}
@@ -25,7 +24,6 @@ const InputBarChatt: React.FC<InputBarChattProps> = ({
         placeholderTextColor="#4F4F4F"
         textBreakStrategy="simple"
         underlineColorAndroid="transparent"
-        pointerEvents="none"
       />
     </View>
   );

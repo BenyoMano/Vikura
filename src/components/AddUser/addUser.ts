@@ -1,12 +1,12 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
-import createRoom from '../../firebase/UserManagement/createRoom';
-import createUser from '../../firebase/UserManagement/createUser';
+import createRoom from '../../firebase/UserManagement/Add User/createRoom';
+import createUser from '../../firebase/UserManagement/Add User/createUser';
 import {
   useDynamicAddUserErrorHandling,
   useGeneralErrorHandling,
 } from '../../ErrorHandling/errorHandling';
-import addPersonalDetails from '../../firebase/UserManagement/addPersonalDetails';
+import addPersonalDetails from '../../firebase/UserManagement/Add User/addPersonalDetails';
 import {ActionStates, UserPropToAdd} from './AddUserScreen';
 import React from 'react';
 
@@ -31,7 +31,7 @@ const addUser = ({
 }: AddUserProps) => {
   userPropToAdd.trimmedFirstName = userPropToAdd.firstName.trim();
   userPropToAdd.trimmedSecondName = userPropToAdd.secondName.trim();
-  userPropToAdd.trimmedMejl = userPropToAdd.mejl.trim();
+  userPropToAdd.trimmedMejl = userPropToAdd.mail.trim();
   userPropToAdd.trimmedPassword = userPropToAdd.password.trim();
   userPropToAdd.trimmedPersonnummer = userPropToAdd.personnummer.trim();
   let user: FirebaseAuthTypes.User | null;
@@ -230,7 +230,7 @@ const addUser = ({
         setUserPropToAdd({
           firstName: '',
           secondName: '',
-          mejl: '',
+          mail: '',
           password: '',
           personnummer: '',
           firstLogin: true,

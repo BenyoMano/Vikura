@@ -16,6 +16,8 @@ import LoginForm from './LoginForm';
 import {MotiView} from 'moti';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../../../App';
+import {useAppVersion} from '../../firebase/useAppVersion';
+import UpdateModal from './UpdateModal';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   StackParamList,
@@ -27,19 +29,29 @@ type HomeScreenProps = {
 };
 
 export type LoginDetailsProps = {
-  mejl: string;
+  mail: string;
   password: string;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [loginDetails, setLoginDetails] = useState<LoginDetailsProps>({
-    mejl: '',
+    mail: '',
     password: '',
   });
-  const {mejl, password} = loginDetails;
+  const {mail, password} = loginDetails;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const {shouldUpdate, mustUpdate} = useAppVersion();
+
+  useEffect(() => {
+    if (mustUpdate) {
+      setModalVisible(true);
+    } else if (shouldUpdate) {
+      setModalVisible(true);
+    }
+  }, [shouldUpdate, mustUpdate]);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -76,6 +88,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     <MyKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainContainer} testID="homescreen">
+          {modalVisible && (
+            <UpdateModal
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              mustUpdate={mustUpdate}
+            />
+          )}
           <MainLogo />
           <View style={styles.contentContainer}>
             <MotiView
@@ -92,7 +111,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               />
             </MotiView>
             <LoginForm
-              mejl={mejl}
+              mail={mail}
               password={password}
               loginDetails={loginDetails}
               setLoginDetails={setLoginDetails}

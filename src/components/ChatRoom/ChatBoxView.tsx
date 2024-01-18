@@ -37,11 +37,6 @@ const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
     [isCurrentUserKurator, user, clientUserId],
   );
 
-  const sortedMessages = useMemo(
-    () => messages.sort((a, b) => a.timestamp - b.timestamp),
-    [messages],
-  );
-
   return (
     <View style={styles.flatListStyle}>
       <PressableKeyboardDismissOverlay />
@@ -51,7 +46,7 @@ const ChatBoxView: React.FC<ChatBoxViewProps> = ({clientUserId}) => {
       <AutoScrollFlatList
         horizontal={false}
         numColumns={1}
-        data={sortedMessages}
+        data={messages}
         renderItem={renderItem}
         keyExtractor={item => String(item.timestamp)}
         scrollEnabled={true}

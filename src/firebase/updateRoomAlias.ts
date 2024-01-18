@@ -1,6 +1,11 @@
 import firestore from '@react-native-firebase/firestore';
 
-const updateRoomAlias = async ({alias, userId}) => {
+type UpdateRoomAliasProps = {
+  alias: string;
+  userId: string | undefined;
+};
+
+const updateRoomAlias = async ({alias, userId}: UpdateRoomAliasProps) => {
   const room = await firestore()
     .collection('rooms')
     .where('users.client.id', '==', userId)

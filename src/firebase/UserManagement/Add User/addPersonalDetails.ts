@@ -10,7 +10,7 @@ const addPersonalDetails = async ({
   await refUID.set({
     firstName: userPropToAdd.trimmedFirstName,
     secondName: userPropToAdd.trimmedSecondName,
-    mejl: userPropToAdd.trimmedMejl,
+    mail: userPropToAdd.trimmedMejl,
     personNummer: userPropToAdd.trimmedPersonnummer,
     alias: '',
     firstLogin: true,

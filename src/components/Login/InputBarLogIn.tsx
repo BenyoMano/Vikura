@@ -4,7 +4,7 @@ import {LoginDetailsProps} from './HomeScreen';
 
 interface InputBarLogInProps extends TextInputProps {
   title: string;
-  keys: 'mejl' | 'password';
+  keys: 'mail' | 'password';
   loginDetails: LoginDetailsProps;
   setLoginDetails: React.Dispatch<React.SetStateAction<LoginDetailsProps>>;
   submitted: boolean;

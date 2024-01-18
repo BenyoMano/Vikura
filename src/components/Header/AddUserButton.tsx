@@ -55,7 +55,7 @@ const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
         onPressOut={handlePressOutAnimation}
         style={btnContainerStyle}>
         <Animated.View style={[rotateAnimationStyle]}>
-          <Icon name="adduser" type="antdesign" color="black" size={35} />
+          <Icon name="adduser" type="antdesign" color="black" size={30} />
         </Animated.View>
       </Pressable>
     </View>
@@ -64,8 +64,8 @@ const AddUserButton: React.FC<AddUserButtonProps> = ({onPress}) => {
 
 const styles = StyleSheet.create({
   btnContainerStyle: {
-    width: 65,
-    height: 59,
+    width: 56,
+    height: 50,
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: '#166C1B',

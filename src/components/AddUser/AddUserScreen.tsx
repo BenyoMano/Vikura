@@ -33,7 +33,7 @@ export type ActionStates = {
 export type UserPropToAdd = {
   firstName: string;
   secondName: string;
-  mejl: string;
+  mail: string;
   password: string;
   personnummer: string;
   firstLogin: boolean;
@@ -64,7 +64,7 @@ const AddUserScreen: React.FC<AddUSerScreenProps> = ({navigation}) => {
   const [userPropToAdd, setUserPropToAdd] = useState<UserPropToAdd>({
     firstName: '',
     secondName: '',
-    mejl: '',
+    mail: '',
     password: '',
     personnummer: '',
     firstLogin: true,

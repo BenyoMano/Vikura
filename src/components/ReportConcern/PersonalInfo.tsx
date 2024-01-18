@@ -28,7 +28,7 @@ const PersonalInfo = ({userDetails}: {userDetails: UserDetails}) => {
         </Text>
       </View>
       <View style={viewStyle.label}>
-        <Text style={textStyling.label}>Mail:</Text>
+        <Text style={textStyling.label}>Mejl:</Text>
       </View>
       <View style={viewStyle.info}>
         <Text style={textStyling.info}>{String(userDetails.mail)}</Text>

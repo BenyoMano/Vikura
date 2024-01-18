@@ -138,6 +138,7 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
 
             <View style={styles.loginContainer}>
               <InputBarNewDetails
+                autoCapitalize="none"
                 autoFocus={false}
                 blurOnSubmit={false}
                 placeholder="Ange nytt lösenord:"
@@ -151,6 +152,7 @@ const NewClientScreen: React.FC<NewClientScreenProps> = ({navigation}) => {
                 submitted={submitted}
               />
               <InputBarNewDetails
+                autoCapitalize="none"
                 autoFocus={false}
                 blurOnSubmit={false}
                 placeholder="Repetera lösenord:"

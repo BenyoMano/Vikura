@@ -8,15 +8,14 @@ const ConversationView = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const rooms = useRoomsData({setIsLoaded});
 
-  const sortedRooms = rooms.sort(
-    (a, b) => b.latestTimestamp - a.latestTimestamp,
-  );
-
   const renderItem = ({item}: {item: RoomData}) => (
     <ConversationRoom
       roomId={item.roomId}
       clientAlias={item.clientAlias}
       clientId={item.clientId}
+      text={item.text}
+      isRead={item.isRead}
+      timestamp={item.timestamp}
     />
   );
 
@@ -28,8 +27,9 @@ const ConversationView = () => {
         <FlatList
           horizontal={false}
           numColumns={1}
-          data={sortedRooms}
+          data={rooms}
           renderItem={renderItem}
+          keyExtractor={item => item.roomId}
         />
       )}
     </View>

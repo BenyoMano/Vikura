@@ -3,7 +3,7 @@ import {View, StyleSheet, TextInput} from 'react-native';
 import InputBarLogIn from './InputBarLogIn';
 
 const LoginForm = ({
-  mejl,
+  mail,
   password,
   loginDetails,
   setLoginDetails,
@@ -20,8 +20,8 @@ const LoginForm = ({
         title="E-postadress"
         keyboardType="email-address"
         returnKeyType="next"
-        keys={'mejl'}
-        value={mejl}
+        keys={'mail'}
+        value={mail}
         onSubmitEditing={() => ref_input2.current?.focus()}
         loginDetails={loginDetails}
         setLoginDetails={setLoginDetails}

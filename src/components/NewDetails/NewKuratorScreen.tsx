@@ -87,6 +87,7 @@ const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
 
             <View style={styles.loginContainer}>
               <InputBarNewDetails
+                autoCapitalize="none"
                 autoFocus={false}
                 blurOnSubmit={false}
                 placeholder="Ange nytt lösenord:"
@@ -100,6 +101,7 @@ const NewKuratorScreen: React.FC<NewKuratorScreenProps> = ({navigation}) => {
                 submitted={submitted}
               />
               <InputBarNewDetails
+                autoCapitalize="none"
                 autoFocus={false}
                 blurOnSubmit={true}
                 placeholder="Repetera lösenord:"

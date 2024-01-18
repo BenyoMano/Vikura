@@ -59,7 +59,7 @@ const EulaAndPolicyScreen: React.FC<EulaAndPolicyScreenProps> = ({
   }, [settingsChoice]);
 
   return (
-    <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
+    <View style={styles.screenContainer}>
       <HeaderView navigation={navigation} />
       <Animated.View
         style={[
@@ -84,6 +84,7 @@ const EulaAndPolicyScreen: React.FC<EulaAndPolicyScreenProps> = ({
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',

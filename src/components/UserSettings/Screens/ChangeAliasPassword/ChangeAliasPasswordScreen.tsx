@@ -98,7 +98,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
               fontSize: 22,
               color: 'black',
             }}
-          />
+            />
         </Animated.View>
         <View style={styles.mainContainer}>
           <ScrollView>
@@ -130,20 +130,20 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 width: '100%',
                 marginBottom: 10,
               }}
-            />
+              />
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.inputStyle}
                 onChangeText={newAlias => setNewAlias(newAlias)}
                 value={newAlias}
                 autoFocus={false}
+                autoCapitalize="words"
                 placeholder="Nytt alias"
                 placeholderTextColor="#4F4F4F"
                 multiline={false}
                 textBreakStrategy="simple"
                 underlineColorAndroid="transparent"
-                pointerEvents="none"
-              />
+                />
             </View>
             <ConfirmButton title="Ändra Alias" onPress={handleAlias} />
             <View
@@ -154,7 +154,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 marginTop: 20,
                 marginBottom: 20,
               }}
-            />
+              />
             <MainText title="Lösenord" style={{fontSize: 18, color: 'black'}} />
             <View style={styles.headerStyle}>
               <Text
@@ -178,8 +178,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 multiline={false}
                 textBreakStrategy="simple"
                 underlineColorAndroid="transparent"
-                pointerEvents="none"
-              />
+                />
             </View>
             <View style={styles.inputContainer}>
               <TextInput
@@ -193,8 +192,7 @@ const ChangeAliasPasswordScreen: React.FC<ChangeAliasScreenProps> = ({
                 multiline={false}
                 textBreakStrategy="simple"
                 underlineColorAndroid="transparent"
-                pointerEvents="none"
-              />
+                />
             </View>
             <ConfirmButton title="Ändra lösenord" onPress={handlePassword} />
           </ScrollView>
@@ -238,6 +236,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   inputStyle: {
     width: '100%',
+    height: 52,
     color: 'black',
     borderColor: 'gray',
     borderWidth: 2,

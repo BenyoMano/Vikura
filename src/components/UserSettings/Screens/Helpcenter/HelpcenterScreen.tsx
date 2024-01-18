@@ -70,7 +70,7 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={[styles.screenContainer, {flexDirection: 'column'}]}>
+      <View style={styles.screenContainer}>
         <HeaderView navigation={navigation} />
         <Animated.View
           style={[
@@ -124,7 +124,6 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
             placeholderTextColor="#4F4F4F"
             textBreakStrategy="simple"
             underlineColorAndroid="transparent"
-            pointerEvents="none"
           />
         </View>
         <SendIssueButton
@@ -141,6 +140,7 @@ const HelpcenterScreen: React.FC<HelpcenterScreenProps> = ({
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',

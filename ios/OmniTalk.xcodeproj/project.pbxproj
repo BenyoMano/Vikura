@@ -616,7 +616,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2952WGB8L7;
+				DEVELOPMENT_TEAM = 53G2FADK64;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Omnitalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vikura;
@@ -651,7 +651,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2952WGB8L7;
+				DEVELOPMENT_TEAM = 53G2FADK64;
 				INFOPLIST_FILE = Omnitalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vikura;
 				LD_RUNPATH_SEARCH_PATHS = (

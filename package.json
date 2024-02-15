@@ -44,7 +44,8 @@
     "react-native-svg": "^13.9.0",
     "react-native-variable-list": "^0.1.3",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-webview": "^13.6.4"
+    "react-native-webview": "^11.26.1",
+    "rvm": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

@@ -21,7 +21,7 @@
     "@react-native-firebase/auth": "^18.1.0",
     "@react-native-firebase/firestore": "^18.1.0",
     "@react-native/polyfills": "^2.0.0",
-    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.8",
     "@rneui/themed": "^4.0.0-rc.8",
     "@vitejs/plugin-react": "^4.0.1",

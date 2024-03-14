@@ -2,6 +2,10 @@ import auth from '@react-native-firebase/auth';
 import navigateAfterSignIn from './navigateAfterSignIn';
 import {showMessage} from 'react-native-flash-message';
 import {useGeneralErrorHandling} from '../ErrorHandling/errorHandling';
+import firestore from '@react-native-firebase/firestore';
+import { requestPushPermission } from './requestPushPermission';
+import messaging from '@react-native-firebase/messaging';
+
 
 const signIn = async ({
   navigation,
@@ -29,10 +33,19 @@ const signIn = async ({
     setLoading(true);
 
     try {
-      await auth().signInWithEmailAndPassword(
+      const { user } = await auth().signInWithEmailAndPassword(
         loginDetails.mail,
         loginDetails.password,
       );
+
+      // Ask user for permission to send push.
+      await requestPushPermission();
+
+      // Store device token in Firestore
+      const token = await messaging().getToken();
+        firestore().collection('Users').doc(user.uid).update({
+          deviceToken: token
+        });
 
       navigateAfterSignIn({navigation});
       setLoginDetails({

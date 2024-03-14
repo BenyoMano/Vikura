@@ -13,6 +13,7 @@ import AdjustSizeButton from './AdjustSizeButton/AdjustSizeButton';
 import {ThemeAndSizePicker} from './ThemeAndSizePicker/ThemeAndSizePicker';
 import RequestDeleteButton from '../KuratorOffice/DeleteUser/RequestDeleteButton';
 import SettingsButton from './SettingsButton';
+import NotificationsButton from './NotificationsButton';
 
 type HeaderViewProps = {
   navigation: any;
@@ -42,12 +43,15 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
       <SmallLogo />
       {route.name === 'KuratorScreen' ? (
         <StylingContainer>
-          <LogoutButton
-            onPress={() => {
-              signOut();
-              navigation.navigate('HomeScreen');
-            }}
-          />
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <LogoutButton
+              onPress={() => {
+                signOut();
+                navigation.navigate('HomeScreen');
+              }}
+            />
+            <NotificationsButton />
+          </View>
           {isCurrentUserAdmin ? (
             <View style={styles.directionStyle}>
               <RequestDeleteButton

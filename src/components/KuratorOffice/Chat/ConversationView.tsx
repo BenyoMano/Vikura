@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import {View, FlatList, ViewStyle} from 'react-native';
+import {View, FlatList, ViewStyle, TextInput} from 'react-native';
 import ConvoLoader from './ConvoLoader';
 import {RoomData, useRoomsData} from './useRoomsData';
 import ConversationRoom from './ConversationRoom';
+import MainText from '../../../atoms/MainText';
 
 const ConversationView = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const rooms = useRoomsData({setIsLoaded});
+  const [searchString, setSearchString] = useState('');
+
+  const rooms = useRoomsData({setIsLoaded, searchString});
 
   const renderItem = ({item}: {item: RoomData}) => (
     <ConversationRoom
@@ -20,19 +23,29 @@ const ConversationView = () => {
   );
 
   return (
+    <>
+      <TextInput
+        style={styles.textInput}
+        onChangeText={text => setSearchString(text)}
+        value={searchString}
+        placeholder="Sök efter elev..."
+        placeholderTextColor="#4F4F4F"
+        underlineColorAndroid="transparent"
+    />
     <View style={styles.container}>
       {!isLoaded ? (
         <ConvoLoader />
-      ) : (
+        ) :  rooms.length ? (
         <FlatList
           horizontal={false}
           numColumns={1}
           data={rooms}
           renderItem={renderItem}
           keyExtractor={item => item.roomId}
-        />
-      )}
+          />
+      ):  <MainText title="Inga elever funna" style={{fontSize: 22, color: 'black'}} />}
     </View>
+      </>
   );
 };
 
@@ -47,6 +60,18 @@ const styles = {
     overflow: 'hidden',
     position: 'relative',
     zIndex: 1,
+  } as ViewStyle,
+  textInput: {
+    maxHeight: 250,
+    width: 'auto',
+    color: 'black',
+    backgroundColor: '#EEEEEE',
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 12,
+    padding: 10,
+    fontFamily: 'NunitoSans-Regular',
+    marginHorizontal: 8,
   } as ViewStyle,
 };
 

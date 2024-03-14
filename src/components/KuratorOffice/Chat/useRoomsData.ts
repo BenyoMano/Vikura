@@ -13,9 +13,10 @@ export type RoomData = {
 
 type useRoomsDataProps = {
   setIsLoaded: React.Dispatch<SetStateAction<boolean>>;
+  searchString: string;
 };
 
-export const useRoomsData = ({setIsLoaded}: useRoomsDataProps): RoomData[] => {
+export const useRoomsData = ({setIsLoaded, searchString}: useRoomsDataProps): RoomData[] => {
   const [rooms, setRooms] = useState<RoomData[]>([]);
 
   const sortRooms = (rooms: RoomData[]) => {
@@ -28,7 +29,8 @@ export const useRoomsData = ({setIsLoaded}: useRoomsDataProps): RoomData[] => {
       const fetchRooms = async () => {
         unsubscribeFromAllRoomNames = firestore()
           .collection('rooms')
-          .where('users.client.id', '!=', '')
+          .where('users.client.alias', '>=', searchString)
+          .where('users.client.alias', '<=', searchString + '\uf8ff')
           .onSnapshot(
             roomNames => {
               const newRooms = roomNames.docs.map(roomDoc => {
@@ -65,7 +67,7 @@ export const useRoomsData = ({setIsLoaded}: useRoomsDataProps): RoomData[] => {
       return () => {
         unsubscribeFromAllRoomNames();
       };
-    }, []),
+    }, [searchString]),
   );
 
   return rooms;

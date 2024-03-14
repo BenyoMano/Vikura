@@ -19,7 +19,7 @@ const KuratorScreen: React.FC<KuratorScreenProps> = ({navigation}) => {
   return (
     <View style={[styles.KuratorContainer, {flexDirection: 'column'}]}>
       <HeaderView navigation={navigation} />
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, width: "100%"}}>
         <View style={styles.textContainer}>
           <MainText title="Chattar" style={{fontSize: 22, color: 'black'}} />
         </View>
@@ -32,9 +32,10 @@ const KuratorScreen: React.FC<KuratorScreenProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   KuratorContainer: {
     flex: 1,
-    justifyContent: 'space-evenly',
+   justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'white',
+    width: '100%',
   } as ViewStyle,
   textContainer: {
     height: '5%',
